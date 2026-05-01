@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import MagneticButton from "@/components/safe-global/MagneticButton";
 import {
   Select,
   SelectContent,
@@ -491,24 +492,26 @@ export default function ContactSection() {
                     />
                   </div>
 
-                  <Button
-                    type="submit"
-                    size="lg"
-                    disabled={formState === "submitting"}
-                    className="w-full bg-safeglobal hover:bg-safeglobal-dark text-white shadow-xl shadow-safeglobal/25 hover:shadow-safeglobal/40 transition-all gap-2 h-13"
-                  >
-                    {formState === "submitting" ? (
-                      <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                        Submitting...
-                      </>
-                    ) : (
-                      <>
-                        Request Demo & Free Audit
-                        <Send className="w-4 h-4" />
-                      </>
-                    )}
-                  </Button>
+                  <MagneticButton strength={0.3} distance={150} className="w-full">
+                    <Button
+                      type="submit"
+                      size="lg"
+                      disabled={formState === "submitting"}
+                      className="w-full bg-safeglobal hover:bg-safeglobal-dark text-white shadow-xl shadow-safeglobal/25 hover:shadow-safeglobal/40 transition-all gap-2 h-13"
+                    >
+                      {formState === "submitting" ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          Submitting...
+                        </>
+                      ) : (
+                        <>
+                          Request Demo & Free Audit
+                          <Send className="w-4 h-4" />
+                        </>
+                      )}
+                    </Button>
+                  </MagneticButton>
 
                   {/* Response Time Indicator */}
                   <div className="flex items-center justify-center gap-1.5 -mt-2">

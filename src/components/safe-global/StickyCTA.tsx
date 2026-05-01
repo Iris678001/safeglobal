@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import MagneticButton from "@/components/safe-global/MagneticButton";
 import { X, ChevronRight, Shield } from "lucide-react";
 
 export default function StickyCTA() {
@@ -37,17 +38,19 @@ export default function StickyCTA() {
             </div>
           </div>
           <div className="flex items-center gap-2 flex-shrink-0">
-            <Button
-              size="sm"
-              className="bg-safeglobal hover:bg-safeglobal-dark text-white shadow-lg shadow-safeglobal/25 gap-1 h-9"
-              onClick={() => {
-                const el = document.getElementById("contact");
-                if (el) el.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              Request Demo
-              <ChevronRight className="w-3.5 h-3.5" />
-            </Button>
+            <MagneticButton strength={0.3} distance={120}>
+              <Button
+                size="sm"
+                className="bg-safeglobal hover:bg-safeglobal-dark text-white shadow-lg shadow-safeglobal/25 gap-1 h-9"
+                onClick={() => {
+                  const el = document.getElementById("contact");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                Request Demo
+                <ChevronRight className="w-3.5 h-3.5" />
+              </Button>
+            </MagneticButton>
             <button
               onClick={() => setDismissed(true)}
               className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import MagneticButton from "@/components/safe-global/MagneticButton";
 import {
   ChevronRight,
   Play,
@@ -358,14 +359,16 @@ export default function HeroSection() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <Button
-                size="lg"
-                className="bg-safeglobal hover:bg-safeglobal-dark text-white shadow-xl shadow-safeglobal/25 hover:shadow-safeglobal/40 transition-all text-base px-8 h-13 gap-2"
-                onClick={() => handleScrollTo("contact")}
-              >
-                Request Demo
-                <ChevronRight className="w-4 h-4" />
-              </Button>
+              <MagneticButton strength={0.3} distance={150}>
+                <Button
+                  size="lg"
+                  className="bg-safeglobal hover:bg-safeglobal-dark text-white shadow-xl shadow-safeglobal/25 hover:shadow-safeglobal/40 transition-all text-base px-8 h-13 gap-2"
+                  onClick={() => handleScrollTo("contact")}
+                >
+                  Request Demo
+                  <ChevronRight className="w-4 h-4" />
+                </Button>
+              </MagneticButton>
               <Button
                 variant="outline"
                 size="lg"

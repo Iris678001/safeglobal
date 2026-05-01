@@ -13,6 +13,8 @@ import {
   Mail,
   Award,
   Lock,
+  Globe,
+  MapPin,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -48,6 +50,12 @@ const footerLinks = {
   ],
 };
 
+const officeLocations = [
+  { name: "San Francisco", shortName: "SF", x: "14%", y: "38%" },
+  { name: "London", shortName: "LDN", x: "46%", y: "28%" },
+  { name: "Singapore", shortName: "SG", x: "74%", y: "58%" },
+];
+
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
@@ -69,6 +77,9 @@ export default function Footer() {
 
   return (
     <footer className="relative border-t border-border bg-card/30">
+      {/* Animated gradient line at top */}
+      <div className="divider-animated h-0" />
+
       {/* Newsletter Bar */}
       <div className="border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -135,16 +146,191 @@ export default function Footer() {
               AI-powered workplace safety intelligence. Protecting 500,000+
               workers across 30+ countries with zero compromise.
             </p>
+
+            {/* Decorative SVG World Map */}
+            <div className="relative w-full h-20 rounded-lg overflow-hidden bg-background/30 border border-border/50">
+              <svg
+                viewBox="0 0 400 100"
+                className="w-full h-full"
+                preserveAspectRatio="xMidYMid slice"
+              >
+                {/* Subtle grid lines */}
+                <defs>
+                  <pattern
+                    id="footerGrid"
+                    width="20"
+                    height="20"
+                    patternUnits="userSpaceOnUse"
+                  >
+                    <path
+                      d="M 20 0 L 0 0 0 20"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="0.3"
+                      className="text-safeglobal/10"
+                    />
+                  </pattern>
+                </defs>
+                <rect width="400" height="100" fill="url(#footerGrid)" />
+
+                {/* Simplified continent outlines */}
+                {/* North America */}
+                <path
+                  d="M 40 20 Q 55 15 70 20 Q 80 25 75 35 Q 70 50 60 55 Q 50 50 45 40 Q 38 30 40 20 Z"
+                  fill="currentColor"
+                  className="text-safeglobal/8"
+                  stroke="currentColor"
+                  strokeWidth="0.5"
+                />
+                {/* South America */}
+                <path
+                  d="M 65 55 Q 72 50 78 55 Q 82 65 78 78 Q 72 85 68 80 Q 63 70 65 55 Z"
+                  fill="currentColor"
+                  className="text-safeglobal/8"
+                  stroke="currentColor"
+                  strokeWidth="0.5"
+                />
+                {/* Europe */}
+                <path
+                  d="M 170 18 Q 185 15 195 20 Q 200 28 195 32 Q 185 35 178 30 Q 172 25 170 18 Z"
+                  fill="currentColor"
+                  className="text-safeglobal/8"
+                  stroke="currentColor"
+                  strokeWidth="0.5"
+                />
+                {/* Africa */}
+                <path
+                  d="M 175 35 Q 185 32 195 38 Q 198 50 192 65 Q 185 72 180 68 Q 173 55 175 35 Z"
+                  fill="currentColor"
+                  className="text-safeglobal/8"
+                  stroke="currentColor"
+                  strokeWidth="0.5"
+                />
+                {/* Asia */}
+                <path
+                  d="M 210 15 Q 240 10 280 18 Q 310 25 320 35 Q 315 45 290 50 Q 260 48 240 42 Q 220 35 210 25 Z"
+                  fill="currentColor"
+                  className="text-safeglobal/8"
+                  stroke="currentColor"
+                  strokeWidth="0.5"
+                />
+                {/* Australia */}
+                <path
+                  d="M 300 60 Q 315 55 330 60 Q 335 68 325 72 Q 310 72 300 65 Z"
+                  fill="currentColor"
+                  className="text-safeglobal/8"
+                  stroke="currentColor"
+                  strokeWidth="0.5"
+                />
+
+                {/* Office location dots */}
+                {officeLocations.map((loc) => (
+                  <g key={loc.name}>
+                    {/* Pulsing ring */}
+                    <circle
+                      cx={loc.x}
+                      cy={loc.y}
+                      r="5"
+                      fill="none"
+                      stroke="#10b981"
+                      strokeWidth="0.5"
+                      opacity="0.4"
+                    >
+                      <animate
+                        attributeName="r"
+                        values="3;8;3"
+                        dur="3s"
+                        repeatCount="indefinite"
+                      />
+                      <animate
+                        attributeName="opacity"
+                        values="0.4;0;0.4"
+                        dur="3s"
+                        repeatCount="indefinite"
+                      />
+                    </circle>
+                    {/* Dot */}
+                    <circle
+                      cx={loc.x}
+                      cy={loc.y}
+                      r="2.5"
+                      fill="#10b981"
+                      opacity="0.9"
+                    />
+                    {/* Label */}
+                    <text
+                      x={loc.x}
+                      y={Number(loc.y.replace("%", "")) + 12}
+                      textAnchor="middle"
+                      fill="currentColor"
+                      className="text-safeglobal/50"
+                      fontSize="5"
+                      fontWeight="500"
+                    >
+                      {loc.shortName}
+                    </text>
+                  </g>
+                ))}
+
+                {/* Connecting lines between offices */}
+                <line
+                  x1="14%"
+                  y1="38%"
+                  x2="46%"
+                  y2="28%"
+                  stroke="#10b981"
+                  strokeWidth="0.4"
+                  strokeDasharray="4 4"
+                  opacity="0.2"
+                />
+                <line
+                  x1="46%"
+                  y1="28%"
+                  x2="74%"
+                  y2="58%"
+                  stroke="#10b981"
+                  strokeWidth="0.4"
+                  strokeDasharray="4 4"
+                  opacity="0.2"
+                />
+              </svg>
+            </div>
+
+            {/* Office Locations */}
+            <div>
+              <p className="text-[10px] uppercase tracking-widest text-muted-foreground/50 mb-1.5 font-medium">
+                Office Locations
+              </p>
+              <div className="flex items-center gap-3">
+                {officeLocations.map((loc) => (
+                  <span
+                    key={loc.name}
+                    className="flex items-center gap-1 text-[11px] text-muted-foreground/70"
+                  >
+                    <MapPin className="w-2.5 h-2.5 text-safeglobal/60" />
+                    {loc.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Social Buttons - slightly larger with hover scale */}
             <div className="flex items-center gap-3">
               {[Linkedin, Twitter, Youtube].map((Icon, idx) => (
                 <button
                   key={idx}
-                  className="w-9 h-9 rounded-lg border border-border flex items-center justify-center text-muted-foreground hover:text-safeglobal hover:border-safeglobal/30 transition-all cursor-pointer"
+                  className="w-10 h-10 rounded-lg border border-border flex items-center justify-center text-muted-foreground hover:text-safeglobal hover:border-safeglobal/30 hover:scale-110 transition-all cursor-pointer"
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon className="w-4.5 h-4.5" />
                 </button>
               ))}
             </div>
+
+            {/* Backed by */}
+            <p className="text-[10px] text-muted-foreground/40 leading-relaxed">
+              Backed by <span className="text-muted-foreground/60 font-medium">Y Combinator</span>,{" "}
+              <span className="text-muted-foreground/60 font-medium">Sequoia Capital</span>
+            </p>
           </div>
 
           {/* Link Columns */}
@@ -168,6 +354,20 @@ export default function Footer() {
               </ul>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Trusted by row */}
+      <div className="border-t border-border/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground/60">
+            <Globe className="w-3.5 h-3.5 text-safeglobal/50" />
+            <span>
+              Trusted by{" "}
+              <span className="text-safeglobal font-semibold">200+</span>{" "}
+              enterprises worldwide
+            </span>
+          </div>
         </div>
       </div>
 

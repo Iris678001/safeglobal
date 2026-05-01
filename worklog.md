@@ -861,3 +861,227 @@ Priority Recommendations for Next Phase:
 - Add video embeds in Testimonials
 - Add more micro-interactions (cursor effects, magnetic buttons)
 - Consider adding internationalization (i18n)
+
+---
+Task ID: 7
+Agent: Main Agent (Phase 7)
+Task: QA, improve styling, add features, and continue development
+
+Work Log:
+- Read worklog.md to understand 6 completed phases with 33+ components
+- Verified lint clean (0 errors) and dev server running (HTTP 200)
+- Used agent-browser for QA across all 20 sections
+- Used VLM to analyze hero (all 5 checks passed ✓), awards, and global impact sections
+- QA Result: No critical bugs. All sections rendering correctly.
+
+NEW COMPONENTS ADDED (3):
+1. GlobalImpact.tsx - Interactive SVG world map with 8 office location dots
+   - Simplified continent outlines, grid pattern overlay, safeglobal borders
+   - 8 dots: SF (HQ, pulsing), NY, London, Frankfurt, Dubai, Singapore, Tokyo, Sydney
+   - 3 connecting arcs from HQ with animated traveling dots
+   - Hover tooltips with city name + worker count
+   - 6 stat cards: Countries, Workers, Continents, Monitoring, Data Centers, Uptime
+   - Animated counters with IntersectionObserver, glass-card styling
+
+2. EventCountdown.tsx - Live countdown timer for Safety Intelligence Summit 2025
+   - Targeting March 15, 2026 10:00 AM UTC, updates every second
+   - 4 countdown boxes (Days/Hours/Minutes/Seconds), amber/gold accent
+   - Hydration-safe with useSyncExternalStore
+   - 3 feature cards: Keynote, Workshop, Live Demo
+   - "Reserve Your Spot" + "View Full Agenda" CTA buttons
+
+3. MagneticButton.tsx - Reusable magnetic CTA button wrapper
+   - Tracks cursor position, applies translate3d toward cursor (max ~8px)
+   - Smooth return on mouse leave (0.4s cubic-bezier)
+   - GPU-accelerated with willChange: transform
+   - Applied to: Hero "Request Demo", StickyCTA button, Contact submit button
+
+ENHANCED EXISTING COMPONENTS (3):
+- HowItWorks.tsx: Complete redesign with interactive step selector
+   - Active step with animated icon (rotate/pulse), detail panel with AnimatePresence
+   - Step detail: large icon, title, description, 4 bullet points, "See it in action" button
+   - Animated connecting line that fills based on active step
+   - Deployment timeline: 4-phase color-coded progress bar
+   - Bottom stats row
+
+- Footer.tsx: Premium enhancements
+   - SVG world map with 3 office dots and pulsing rings
+   - Office Locations section with MapPin icons
+   - Animated gradient line at top (divider-animated class)
+   - "Backed by Y Combinator, Sequoia Capital" credibility text
+   - "Trusted by 200+ enterprises worldwide" row
+   - Social buttons enlarged (w-10 h-10) with hover:scale-110
+
+- globals.css: Added .cursor-glow utility class
+- layout.tsx: Added cursor glow Script (desktop-only, safeglobal green, 4% opacity)
+
+PAGE ASSEMBLY:
+- GlobalImpact between Partners and Services
+- EventCountdown between FAQ and Blog
+- Current: ScrollProgress → Header → Hero → LiveMetrics → Trust → Partners → GlobalImpact → Services → HowItWorks → About → Team → Industries → Awards → Security → AIDemo → AnimatedStats → SafetyNews → SafetyScore → CaseStudies → Testimonials → Pricing → FAQ → Event → Blog → ResourceLibrary → Contact → Footer + ChatBot + StickyCTA + CookieConsent + BackToTop
+
+VERIFICATION:
+- Lint: 0 errors (clean)
+- Dev server: HTTP 200, compiles successfully
+- VLM QA: Global Impact confirmed with world map + stats
+- VLM QA: Event Countdown confirmed with summit details
+- All 20 sections rendering, total page height: ~26K+ pixels
+
+Stage Summary:
+- 3 new components: GlobalImpact, EventCountdown, MagneticButton
+- 3 enhanced: HowItWorks (interactive steps), Footer (world map + credibility), globals.css (cursor glow)
+- Magnetic CTA buttons on 3 key conversion points
+- Interactive world map with 8 global office locations
+- Live countdown timer for virtual summit
+- Cursor glow effect for premium feel
+- Total component count: 36+
+
+Unresolved Issues:
+- Dev server may be killed by sandbox periodically (not a code issue)
+- Page is very long (~26K px) — could benefit from lazy loading/dynamic imports
+
+Priority Recommendations for Next Phase:
+- Implement lazy loading with dynamic() for offscreen sections
+- Add video testimonial embeds
+- Consider adding a SafetyTools interactive calculators section
+- Add scroll-triggered section reveal animations
+- Optimize performance with code splitting
+
+---
+Task ID: 5b
+Agent: MagneticButton & Cursor Glow Agent
+Task: Create a MagneticButton wrapper and apply it to key CTA buttons
+
+Work Log:
+- Read worklog.md to understand previous progress (6+ phases, 30+ components)
+- Read HeroSection.tsx, StickyCTA.tsx, ContactSection.tsx, globals.css, and layout.tsx before making changes
+- Verified dev server compiles and serves pages (HTTP 200)
+
+NEW COMPONENT CREATED:
+1. MagneticButton.tsx - Reusable magnetic button wrapper component
+   - "use client" directive for client-side interactivity
+   - Props: children (ReactNode), className (string), strength (number, default 0.3), distance (number, default 150)
+   - Uses onMouseMove on a wrapper div to track cursor position relative to center
+   - Calculates offset from center and applies translate3d transform toward cursor
+   - Button moves toward cursor by strength factor of distance (max ~8px movement for subtlety)
+   - On mouse leave: smoothly transitions back with 0.4s cubic-bezier(0.23, 1, 0.32, 1) easing
+   - While hovering: responsive 0.15s ease-out for snappy follow
+   - Uses useRef for bounding rect, useState for offset tracking
+   - willChange: transform for GPU acceleration
+   - Works with any child content (buttons, links, etc.)
+
+ENHANCED EXISTING COMPONENTS (3):
+- HeroSection.tsx: Wrapped "Request Demo" button with MagneticButton (strength 0.3, distance 150)
+- StickyCTA.tsx: Wrapped CTA button with MagneticButton (strength 0.3, distance 120 - tighter for compact bar)
+- ContactSection.tsx: Wrapped submit button with MagneticButton (strength 0.3, distance 150, className="w-full")
+
+CSS ADDITIONS:
+- globals.css: Added .cursor-glow utility class
+  - Position relative wrapper with ::after pseudo-element
+  - 400x400px radial gradient glow (rgba(16,185,129,0.04) to transparent)
+  - Fixed position, pointer-events: none, z-index: 9999
+  - Smooth transitions (0.3s ease) for left/top positioning
+
+LAYOUT ENHANCEMENT:
+- layout.tsx: Added cursor glow inline script via next/script
+  - Creates a floating div that follows the mouse cursor
+  - 400x400px radial gradient (safeglobal green, 4% opacity)
+  - Desktop only (checks window.innerWidth > 768)
+  - Fixed position with translate(-50%, -50%) centering
+  - Smooth 0.3s ease transitions for natural following effect
+  - Initially positioned off-screen (-500px) until first mousemove
+
+VERIFICATION:
+- Lint: 0 errors (clean)
+- Dev server: Compiles and serves (HTTP 200)
+- All existing functionality preserved
+- MagneticButton works with both inline and full-width button layouts
+
+Stage Summary:
+- 1 new component: MagneticButton (reusable magnetic cursor-following wrapper)
+- 3 enhanced components: HeroSection, StickyCTA, ContactSection
+- Cursor glow effect added via inline script + CSS utility class
+- Premium interactive feel on key CTA buttons across the site
+- Desktop-only cursor glow respects mobile performance
+- Total component count: 31+
+
+---
+Task ID: 5+7
+Agent: HowItWorks & Footer Enhancement Agent
+Task: Enhance HowItWorks with animated step transitions and Footer with animated world map and office locations
+
+Work Log:
+- Read worklog.md to understand previous progress (6+ phases, 33+ components)
+- Read current HowItWorks.tsx and Footer.tsx to understand existing implementation
+- Reviewed globals.css for existing animation classes (divider-animated, gradient-shift, pulse-glow)
+- Verified dev server compiles and serves pages (HTTP 200)
+
+ENHANCED COMPONENTS (2):
+
+1. HowItWorks.tsx - Major interactive enhancement with animated step transitions:
+   - Added useState for activeStep (defaults to 0, first step active)
+   - Interactive step selector: clicking a step number/tab highlights that step and shows its detail content
+   - Step numbers are now larger and more prominent (w-12 h-12 text-xl) with gradient background when active
+   - Active step icon animates with rotation/pulse using Framer Motion (rotate: [0, 5, -5, 0], scale: [1, 1.1, 1])
+   - Pulse ring animation on active step icons (scale [1, 1.4], opacity [0.4, 0])
+   - Animated ring around active step number (scale + opacity cycle)
+   - Step detail panel below with AnimatePresence transitions (mode="wait"):
+     * Large icon (w-20 h-20 lg:w-24 lg:h-24) with gradient background (from-safeglobal to-emerald-600, etc.)
+     * Step title in text-2xl lg:text-3xl font-bold
+     * Long description (2-3 sentences per step) about the process
+     * 4 bullet points per step with CheckCircle2 icons and staggered entrance animations
+     * "See it in action" button with Play + ArrowRight icons, gradient matching step color, scrolls to #ai-demo
+     * Background gradient accent blob (top-right, blur-3xl)
+   - Connecting line between steps now animates with gradient fill:
+     * Base track: h-1 rounded-full bg-muted/50
+     * Animated fill: bg-gradient-to-r from-safeglobal via-cyan-500 via-amber-500 to-violet-500
+     * Width dynamically animates based on activeStep: ((activeStep + 1) / 4) * 100%
+     * Uses Framer Motion with 0.6s easeOut transition
+   - Phase indicator per step (Clock icon + "Week 1-2", "Week 2-3", etc.)
+   - Deployment timeline panel below steps:
+     * "Average deployment: 4-6 weeks" header with Clock icon
+     * "First insights in 48 hours / Full ROI in 90 days" subtitle
+     * Horizontal progress bar with 4 color-coded phases:
+       - Assessment (25%, safeglobal), Integration (25%, cyan), Deployment (25%, amber), Optimization (25%, violet)
+     * Each phase has hover tooltip showing phase name
+     * Framer Motion scaleX entrance animation per phase
+     * Phase labels below the bar
+     * Bottom stats row: "2M+ data points/day", "73% avg risk reduction", "200+ standards tracked"
+   - Added imports: useState, AnimatePresence, Button, CheckCircle2, Play, Clock, Database, BarChart3, Shield
+
+2. Footer.tsx - Enhanced with animated world map, office locations, and credibility additions:
+   - Added animated gradient line at very top of footer using divider-animated CSS class
+     * Flowing gradient from safeglobal to cyan, continuous animation via divider-flow keyframe
+   - Added decorative SVG world map in brand column:
+     * Simplified continent outlines (North America, South America, Europe, Africa, Asia, Australia)
+     * Subtle fill (text-safeglobal/8) with stroke borders
+     * Grid pattern background (url(#footerGrid))
+     * 3 office location dots with SVG animate pulsing rings:
+       - San Francisco (14%, 38%) with "SF" label
+       - London (46%, 28%) with "LDN" label
+       - Singapore (74%, 58%) with "SG" label
+     * Dashed connecting lines between offices (strokeDasharray="4 4", opacity 0.2)
+     * Map container: w-full h-20 rounded-lg, bg-background/30 border border-border/50
+   - Added "Office Locations" section below map:
+     * Tiny uppercase label "OFFICE LOCATIONS" (text-[10px] tracking-widest)
+     * 3 cities listed with MapPin icons in tiny text (text-[11px])
+   - Made social media buttons slightly larger (w-10 h-10) with hover:scale-110 effect
+   - Added "Backed by Y Combinator, Sequoia Capital" small text line (text-[10px]) below social buttons
+   - Added "Trusted by" row above copyright bar:
+     * Globe icon (text-safeglobal/50)
+     * "Trusted by 200+ enterprises worldwide" text
+     * Centered layout with border-t border-border/50
+   - Added Globe and MapPin icon imports
+
+VERIFICATION:
+- Lint: 0 errors in both HowItWorks.tsx and Footer.tsx (clean)
+- Dev server: Compiles and serves (HTTP 200)
+- All existing functionality preserved
+- Pre-existing EventCountdown.tsx lint error unrelated to this task
+
+Stage Summary:
+- Enhanced 2 existing components with major interactive and visual upgrades
+- HowItWorks: interactive step selector with Framer Motion AnimatePresence, animated connecting line, step detail panel with CheckCircle2 bullets, deployment timeline progress bar, animated icons
+- Footer: SVG world map with 3 office locations, animated gradient top line, office locations list, larger social buttons with scale hover, "Backed by" text, "Trusted by" row
+- All animations use existing SafeGlobal design patterns and CSS utilities
+- Total component count: 33+ (unchanged, both were enhancements)

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/safe-global/ThemeProvider";
@@ -65,6 +66,9 @@ export default function RootLayout({
           {children}
           <Toaster />
         </ThemeProvider>
+        <Script id="cursor-glow" strategy="afterInteractive">
+          {`(function(){if(window.innerWidth<=768)return;var g=document.createElement('div');g.style.cssText='position:fixed;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(16,185,129,0.04) 0%,transparent 70%);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:left 0.3s ease,top 0.3s ease;left:-500px;top:-500px;';document.body.appendChild(g);document.addEventListener('mousemove',function(e){g.style.left=e.clientX+'px';g.style.top=e.clientY+'px';});})();`}
+        </Script>
       </body>
     </html>
   );

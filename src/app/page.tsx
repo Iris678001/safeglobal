@@ -30,6 +30,8 @@ import SafetyNewsTicker from "@/components/safe-global/SafetyNewsTicker";
 import BackToTop from "@/components/safe-global/BackToTop";
 import ParallaxSection from "@/components/safe-global/ParallaxSection";
 import AwardsSection from "@/components/safe-global/AwardsSection";
+import GlobalImpact from "@/components/safe-global/GlobalImpact";
+import EventCountdown from "@/components/safe-global/EventCountdown";
 
 export default function Home() {
   return (
@@ -41,6 +43,7 @@ export default function Home() {
         <LiveMetricsBanner />
         <TrustIndicators />
         <PartnersSection />
+        <GlobalImpact />
         <ServicesSection />
         <HowItWorks />
         <ParallaxSection speed={0.08}>
@@ -62,6 +65,7 @@ export default function Home() {
         <TestimonialsSection />
         <PricingSection />
         <FAQSection />
+        <EventCountdown />
         <BlogSection />
         <ResourceLibrary />
         <ContactSection />
