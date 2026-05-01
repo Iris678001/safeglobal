@@ -1443,3 +1443,200 @@ Priority Recommendations for Next Phase:
 - Consider adding drag-and-drop zone configuration in AI Demo
 - Add keyboard navigation shortcuts
 - Implement form validation with real-time feedback on contact form
+
+---
+Task ID: 12
+Agent: Comparison Section Agent
+Task: Create premium "Before vs After SafeGlobal" Comparison component
+
+Work Log:
+- Read worklog.md to understand previous progress (10+ phases, 30+ components)
+- Analyzed existing component styling patterns (IndustriesSection, CaseStudiesSection, Badge usage)
+- Reviewed globals.css for text-gradient, safeglobal color definitions, and utility classes
+- Verified Badge component API from @/components/ui/badge
+
+NEW COMPONENT CREATED:
+1. ComparisonSection.tsx - Premium "Before vs After SafeGlobal" comparison section
+   - Section id="comparison" with dark gradient background (bg-gradient-to-b from-background via-card/30 to-background)
+   - Ambient glow orbs (safeglobal + cyan) for depth
+   - Badge: "THE DIFFERENCE" with BarChart3 icon, safeglobal styling
+   - Title: "Before vs After <text-gradient>SafeGlobal</text-gradient>"
+   - Subtitle: "Measurable impact across every safety metric that matters."
+
+   Interactive Toggle:
+   - "Traditional Safety" / "With SafeGlobal" toggle switch
+   - Spring-animated thumb (stiffness: 500, damping: 30)
+   - Green (safeglobal) when SafeGlobal is active, slate when Traditional
+   - Accessible: aria-label dynamically describes toggle state
+   - Focus-visible ring styling
+
+   5 Comparison Metrics in responsive grid (sm:2 cols, lg:3 cols):
+   1. "Incident Detection Time" - Before: "4-8 hours" / After: "45ms" - +99.9% improvement - Zap icon - safeglobal color
+   2. "Compliance Accuracy" - Before: "72%" / After: "98.5%" - +36.8% improvement - Shield icon - cyan color
+   3. "Annual Incident Rate" - Before: "12.4 per 100" / After: "3.1 per 100" - -75% reduction - TrendingDown icon - emerald color
+   4. "Safety Audit Time" - Before: "3-6 weeks" / After: "2 hours" - 98% faster - Clock icon - amber color
+   5. "Worker Safety Score" - Before: "62/100" / After: "94/100" - +51.6% improvement - BarChart3 icon - violet color
+
+   Each metric card features:
+   - Icon in colored circle (color-matched bg with 15% opacity)
+   - Metric name (font-semibold)
+   - "Before" value in muted/strikethrough styling (text-muted-foreground line-through)
+   - "After" value in bold color-matched text (text-2xl font-bold)
+   - After value animates with AnimatePresence when toggle switches (slide + fade)
+   - Improvement percentage badge (color-matched outline badge)
+   - Animated progress bar (whileInView, 1.2s easeOut, 0.3s delay)
+   - Card: bg-card/50, rounded-2xl, border-border
+   - Hover: border-safeglobal/20, -translate-y-1 lift, color-matched shadow glow
+
+   Bottom Summary:
+   - "Average ROI: 340% in first year" card with TrendingDown icon, safeglobal color, gradient bg
+   - "Payback period: 3-6 months" card with Clock icon, cyan color, gradient bg
+   - Both cards in responsive 2-column grid (sm:grid-cols-2)
+
+   CTA Button:
+   - "Calculate Your ROI" with ArrowRight icon
+   - safeglobal bg with shadow-lg and hover effects
+   - Scrolls to #safety-score on click
+
+   Animations:
+   - Framer Motion staggered entrance (containerVariants + cardVariants, 0.1s stagger, 0.5s easeOut)
+   - Toggle switch spring animation
+   - AnimatePresence on "After" value (slide + fade on toggle)
+   - Progress bar whileInView width animation
+   - Section header + toggle + summary all have whileInView entrance animations
+
+PAGE ASSEMBLY:
+- Added ComparisonSection import to page.tsx
+- Placed between IndustriesSection and AwardsSection (between Industries and Security as requested):
+  ... → Industries → Comparison → Awards → Security → AIDemo → ...
+
+VERIFICATION:
+- Lint: 0 errors (clean)
+- Dev server compiled successfully before sandbox process termination (known issue)
+
+Stage Summary:
+- 1 new component: ComparisonSection with 5 metric cards, interactive toggle, ROI summary, CTA
+- Color-coded metrics with animated progress bars and toggle-based AnimatePresence
+- Consistent with existing SafeGlobal design language (text-gradient, safeglobal colors, badge styling)
+- Total component count: 31+
+
+---
+Task ID: 11
+Agent: Safety Timeline Agent
+Task: Create a premium Safety Incident Timeline component
+
+Work Log:
+- Read worklog.md to understand previous progress (10+ phases, 30+ components)
+- Read existing components (AnimatedStatsSection, AIDemoSection) and globals.css to match styling patterns
+- Verified dev server compiles and serves pages (HTTP 200)
+
+NEW COMPONENT CREATED:
+1. SafetyTimeline.tsx - Premium AI incident response timeline section
+   - Section id="safety-timeline" with section-divider class
+   - Dark gradient background with bg-dot-pattern and bg-noise overlay
+   - Badge: "SAFETY TIMELINE" with Clock icon
+   - Title: "AI Incident <text-gradient>Response Timeline</text-gradient>"
+   - 8 timeline entries with alternating left/right layout (desktop) and left-aligned (mobile)
+   - Color-coded dots with type badges: DETECT (cyan), ANALYZE (violet), ALERT (amber), ACTION (safeglobal), RESOLVE (cyan/safeglobal), COMPLETE (safeglobal)
+   - Pulsing dot animation for ACTION entries
+   - Central vertical line with gradient (cyan to safeglobal)
+   - Summary card: "5 min 15 sec" total response time with count-up animations
+   - "99.2% faster than industry average" comparison badge
+   - Bottom CTA: "See it in action" scrolling to #contact
+   - Framer Motion staggered entrance animations
+
+PAGE ASSEMBLY:
+- Placed between AIDemoSection and AnimatedStatsSection
+
+VERIFICATION:
+- Lint: 0 errors (clean)
+- Dev server: Compiles and serves (HTTP 200)
+
+---
+Task ID: 11
+Agent: Main Agent
+Task: QA, improve styling, add features, update worklog
+
+Work Log:
+- Read worklog.md to understand previous progress (10 phases, 38+ components)
+- Verified lint passes with zero errors
+- Started dev server (HTTP 200) - 608KB+ page output
+- Agent-browser QA not possible due to sandbox network isolation (consistent with all previous phases)
+- Confirmed all components compile correctly via lint and server response
+
+STYLING IMPROVEMENTS (3):
+1. IndustriesSection.tsx - Premium enhancements:
+   - Added background effects (bg-dot-pattern opacity-20, safeglobal and cyan gradient orbs)
+   - Enhanced Key Stat card with animated border wrapper (p-[1px] gradient background)
+   - Added backdrop-blur-sm and shadow-lg to stat icon
+   - Improved comparison grid hover effects (hover:border-safeglobal/15, transition-all duration-300)
+
+2. AboutSection.tsx - Premium micro-interactions:
+   - Values cards: Added overflow-hidden for gradient line containment
+   - Added hover gradient line at top of each card (via-safeglobal/30, opacity transition)
+   - Icon containers: Added group-hover:scale-110 for interactive feedback
+   - Differentiator dots: Added hover scale-150 and shadow-lg shadow-safeglobal/30
+   - Differentiator labels: Added group-hover:text-safeglobal transition-colors
+
+3. IndustriesSection.tsx - Additional comparison grid refinement:
+   - Changed transition-colors to transition-all duration-300
+   - Added hover:border-safeglobal/15 for subtle border highlight
+
+NEW COMPONENTS ADDED (2 via subagents):
+1. SafetyTimeline.tsx - AI Incident Response Timeline
+   - 8 alternating left/right timeline entries with color-coded type badges
+   - Types: DETECT (cyan), ANALYZE (violet), ALERT (amber), ACTION (safeglobal), RESOLVE (cyan/safeglobal), COMPLETE (safeglobal)
+   - Central vertical line with cyan → safeglobal gradient
+   - Pulsing dot animation for ACTION entries
+   - Monospace timestamps (00:00:00 format)
+   - Glass morphism card styling
+   - Summary card: "5 min 15 sec" response time, "99.2% faster than industry average"
+   - 3-column count-up grid (Detection 5s / Response 8s / Resolution 315s)
+   - Bottom CTA: "See it in action" scrolling to #contact
+   - Section id="safety-timeline"
+   - Placed between AIDemoSection and AnimatedStatsSection
+
+2. ComparisonSection.tsx - Before vs After SafeGlobal
+   - Interactive toggle: "Traditional Safety" ↔ "With SafeGlobal" with spring animation
+   - 5 comparison metrics in responsive grid (2-col mobile, 3-col desktop)
+   - Incident Detection Time: 4-8 hours → 45ms (+99.9%)
+   - Compliance Accuracy: 72% → 98.5% (+36.8%)
+   - Annual Incident Rate: 12.4 → 3.1 per 100 (-75%)
+   - Safety Audit Time: 3-6 weeks → 2 hours (98% faster)
+   - Worker Safety Score: 62/100 → 94/100 (+51.6%)
+   - Strikethrough "Before" values with bold colored "After" values
+   - Animated progress bars and improvement badges per card
+   - Bottom summary: "340% Average ROI" and "3-6 months Payback"
+   - CTA: "Calculate Your ROI" scrolling to #safety-score
+   - Section id="comparison"
+   - Placed between IndustriesSection and AwardsSection
+
+PAGE ASSEMBLY:
+- Updated page.tsx with all components in optimal order:
+  ScrollProgress → Header → Hero → LiveMetricsBanner → Trust → Partners → GlobalImpact → Services → HowItWorks → About → Team → Industries → Comparison → Awards → Security → AIDemo → SafetyTimeline → AnimatedStats → SafetyNewsTicker → SafetyScore → CaseStudies → Testimonials → TestimonialSlider → Pricing → FAQ → SafetyChecklist → EventCountdown → Blog → ResourceLibrary → Contact → Footer + ChatBot + StickyCTA + CookieConsent + BackToTop + NotificationToast
+
+VERIFICATION:
+- Lint: 0 errors (clean)
+- Dev server: HTTP 200, 608KB+ page output
+- Total component count: 42+
+
+Stage Summary:
+- 3 styling improvements: Industries (background, stat card, grid), About (gradient lines, hover effects), Industries grid refinement
+- 2 new components: SafetyTimeline, ComparisonSection
+- Total component count: 42+
+- Lint clean, dev server HTTP 200
+- 608KB+ page output (up from 556KB)
+
+Unresolved Issues:
+- Dev server process killed periodically by sandbox (not a code issue)
+- Agent-browser cannot connect to dev server (sandbox network isolation - consistent)
+- Recommended: Visual QA through Preview Panel
+
+Priority Recommendations for Next Phase:
+- Add loading skeletons for async content
+- Add video embeds in Testimonials section
+- Optimize performance with lazy loading for offscreen sections
+- Add keyboard navigation shortcuts
+- Implement form validation with real-time feedback on contact form
+- Add more parallax effects to key sections
+- Consider adding drag-and-drop zone configuration in AI Demo

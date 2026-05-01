@@ -247,12 +247,14 @@ export default function AboutSection() {
             What Drives Us
           </h3>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((value) => (
+            {values.map((value, idx) => (
               <div
                 key={value.title}
-                className="group p-6 rounded-xl border border-border bg-card/30 hover:border-safeglobal/30 hover:bg-safeglobal/5 transition-all duration-300"
+                className="group relative p-6 rounded-xl border border-border bg-card/30 hover:border-safeglobal/30 hover:bg-safeglobal/5 transition-all duration-300 overflow-hidden"
               >
-                <div className="w-12 h-12 rounded-xl bg-safeglobal/10 flex items-center justify-center mb-4 group-hover:bg-safeglobal/20 transition-colors">
+                {/* Gradient line at top */}
+                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-safeglobal/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="w-12 h-12 rounded-xl bg-safeglobal/10 flex items-center justify-center mb-4 group-hover:bg-safeglobal/20 group-hover:scale-110 transition-all duration-300">
                   <value.icon className="w-6 h-6 text-safeglobal" />
                 </div>
                 <h4 className="font-semibold mb-2 group-hover:text-safeglobal transition-colors">
@@ -284,10 +286,10 @@ export default function AboutSection() {
           </h3>
           <div className="grid sm:grid-cols-2 gap-6">
             {differentiators.map((d) => (
-              <div key={d.label} className="flex gap-4">
-                <div className="w-2 h-2 rounded-full bg-safeglobal mt-2 flex-shrink-0" />
+              <div key={d.label} className="flex gap-4 group">
+                <div className="w-2 h-2 rounded-full bg-safeglobal mt-2.5 flex-shrink-0 group-hover:scale-150 group-hover:shadow-lg group-hover:shadow-safeglobal/30 transition-all duration-300" />
                 <div>
-                  <h4 className="font-semibold mb-1">{d.label}</h4>
+                  <h4 className="font-semibold mb-1 group-hover:text-safeglobal transition-colors">{d.label}</h4>
                   <p className="text-sm text-muted-foreground">{d.desc}</p>
                 </div>
               </div>

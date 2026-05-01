@@ -164,6 +164,11 @@ export default function IndustriesSection() {
     <section id="industries" className="relative py-20 lg:py-28">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
+      {/* Background effects */}
+      <div className="absolute inset-0 bg-dot-pattern opacity-20" />
+      <div className="absolute top-1/3 -right-32 w-72 h-72 bg-safeglobal/3 rounded-full blur-[120px]" />
+      <div className="absolute bottom-1/4 -left-32 w-64 h-64 bg-cyan-500/3 rounded-full blur-[100px]" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -256,11 +261,13 @@ export default function IndustriesSection() {
                   </p>
                 </div>
 
-                {/* Key Stat - Prominent */}
-                <div className="flex items-center gap-4 p-5 rounded-xl bg-card/80 border border-border">
-                  <div
-                    className={`w-14 h-14 rounded-xl bg-gradient-to-br ${activeIndustry.color} flex items-center justify-center`}
-                  >
+                {/* Key Stat - Prominent with animated border */}
+                <div className="relative p-[1px] rounded-xl overflow-hidden">
+                  <div className={`absolute inset-0 bg-gradient-to-r ${activeIndustry.gradientBg} opacity-50`} />
+                  <div className="relative flex items-center gap-4 p-5 rounded-xl bg-card/90 backdrop-blur-sm border border-border">
+                    <div
+                      className={`w-14 h-14 rounded-xl bg-gradient-to-br ${activeIndustry.color} flex items-center justify-center shadow-lg`}
+                    >
                     <Shield className={`w-7 h-7 ${activeIndustry.accent}`} />
                   </div>
                   <div>
@@ -271,6 +278,7 @@ export default function IndustriesSection() {
                       {activeIndustry.statLabel}
                     </div>
                   </div>
+                </div>
                 </div>
 
                 {/* CTA Button */}
@@ -331,7 +339,7 @@ export default function IndustriesSection() {
                   {activeIndustry.risks.map((risk, idx) => (
                     <div
                       key={risk}
-                      className="group p-4 rounded-xl border border-border bg-card/30 hover:bg-card/60 transition-colors"
+                      className="group p-4 rounded-xl border border-border bg-card/30 hover:bg-card/60 hover:border-safeglobal/15 transition-all duration-300"
                     >
                       <div className="flex items-start gap-3">
                         <div className="mt-0.5 w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center flex-shrink-0">

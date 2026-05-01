@@ -25,6 +25,7 @@ import ChatBot from "@/components/safe-global/ChatBot";
 import StickyCTA from "@/components/safe-global/StickyCTA";
 import ScrollProgress from "@/components/safe-global/ScrollProgress";
 import CookieConsent from "@/components/safe-global/CookieConsent";
+import SafetyTimeline from "@/components/safe-global/SafetyTimeline";
 import AnimatedStatsSection from "@/components/safe-global/AnimatedStatsSection";
 import SafetyNewsTicker from "@/components/safe-global/SafetyNewsTicker";
 import BackToTop from "@/components/safe-global/BackToTop";
@@ -35,6 +36,7 @@ import GlobalImpact from "@/components/safe-global/GlobalImpact";
 import EventCountdown from "@/components/safe-global/EventCountdown";
 import SafetyChecklist from "@/components/safe-global/SafetyChecklist";
 import TestimonialSlider from "@/components/safe-global/TestimonialSlider";
+import ComparisonSection from "@/components/safe-global/ComparisonSection";
 
 export default function Home() {
   return (
@@ -58,9 +60,11 @@ export default function Home() {
         <ParallaxSection speed={0.08}>
           <IndustriesSection />
         </ParallaxSection>
+        <ComparisonSection />
         <AwardsSection />
         <SecurityCompliance />
         <AIDemoSection />
+        <SafetyTimeline />
         <AnimatedStatsSection />
         <SafetyNewsTicker />
         <SafetyScoreCalculator />
