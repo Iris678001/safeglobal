@@ -26,7 +26,10 @@ import StickyCTA from "@/components/safe-global/StickyCTA";
 import ScrollProgress from "@/components/safe-global/ScrollProgress";
 import CookieConsent from "@/components/safe-global/CookieConsent";
 import AnimatedStatsSection from "@/components/safe-global/AnimatedStatsSection";
+import SafetyNewsTicker from "@/components/safe-global/SafetyNewsTicker";
 import BackToTop from "@/components/safe-global/BackToTop";
+import ParallaxSection from "@/components/safe-global/ParallaxSection";
+import AwardsSection from "@/components/safe-global/AwardsSection";
 
 export default function Home() {
   return (
@@ -40,12 +43,20 @@ export default function Home() {
         <PartnersSection />
         <ServicesSection />
         <HowItWorks />
-        <AboutSection />
-        <TeamSection />
-        <IndustriesSection />
+        <ParallaxSection speed={0.08}>
+          <AboutSection />
+        </ParallaxSection>
+        <ParallaxSection speed={0.08}>
+          <TeamSection />
+        </ParallaxSection>
+        <ParallaxSection speed={0.08}>
+          <IndustriesSection />
+        </ParallaxSection>
+        <AwardsSection />
         <SecurityCompliance />
         <AIDemoSection />
         <AnimatedStatsSection />
+        <SafetyNewsTicker />
         <SafetyScoreCalculator />
         <CaseStudiesSection />
         <TestimonialsSection />

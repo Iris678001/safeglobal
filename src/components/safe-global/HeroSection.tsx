@@ -76,16 +76,22 @@ function AnimatedGrid() {
       vy: number;
       size: number;
       opacity: number;
+      baseOpacity: number;
+      pulseOffset: number;
     }[] = [];
 
-    for (let i = 0; i < 60; i++) {
+    // Increased from 60 to 80 particles for richer visual
+    for (let i = 0; i < 80; i++) {
+      const baseOpacity = Math.random() * 0.5 + 0.15;
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         vx: (Math.random() - 0.5) * 0.3,
         vy: (Math.random() - 0.5) * 0.3,
-        size: Math.random() * 2 + 0.5,
-        opacity: Math.random() * 0.5 + 0.1,
+        size: Math.random() * 2.5 + 1, // Slightly larger particles
+        opacity: baseOpacity,
+        baseOpacity,
+        pulseOffset: Math.random() * Math.PI * 2, // Random offset for pulse
       });
     }
 
@@ -118,35 +124,63 @@ function AnimatedGrid() {
         ctx.stroke();
       }
 
-      // Draw particles
-      particles.forEach((p) => {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(16, 185, 129, ${p.opacity})`;
-        ctx.fill();
-      });
-
-      // Draw connections
+      // Draw constellation lines between nearby particles with gradient colors
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < 150) {
+            const alpha = 0.12 * (1 - dist / 150);
+
+            // Create gradient line from safeglobal to cyan
+            const gradient = ctx.createLinearGradient(
+              particles[i].x,
+              particles[i].y,
+              particles[j].x,
+              particles[j].y
+            );
+            gradient.addColorStop(0, `rgba(16, 185, 129, ${alpha})`);
+            gradient.addColorStop(0.5, `rgba(6, 182, 212, ${alpha * 1.2})`);
+            gradient.addColorStop(1, `rgba(16, 185, 129, ${alpha})`);
+
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(16, 185, 129, ${0.06 * (1 - dist / 150)})`;
-            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = 0.7;
             ctx.stroke();
           }
         }
       }
+
+      // Draw particles with glow and pulse effect
+      particles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        // Pulse effect: periodically brighten
+        const pulse = Math.sin(time * 4 + p.pulseOffset) * 0.3 + 0.7; // oscillates between 0.4 and 1.0
+        p.opacity = p.baseOpacity * pulse;
+
+        // Glow effect using shadowBlur
+        ctx.save();
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = `rgba(16, 185, 129, ${p.opacity * 0.6})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(16, 185, 129, ${p.opacity})`;
+        ctx.fill();
+        ctx.restore();
+
+        // Inner bright core
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size * 0.4, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(52, 211, 153, ${p.opacity * 0.8})`;
+        ctx.fill();
+      });
 
       animationId = requestAnimationFrame(animate);
     };
@@ -218,6 +252,44 @@ function AnimatedCounter({
 }
 
 export default function HeroSection() {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
+  const [glarePos, setGlarePos] = useState({ x: 50, y: 50 });
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    // Normalized position from -1 to 1
+    const normalizedX = (e.clientX - centerX) / (rect.width / 2);
+    const normalizedY = (e.clientY - centerY) / (rect.height / 2);
+
+    // Max rotation: 8 degrees
+    const maxRotation = 8;
+    const rotateY = normalizedX * maxRotation;
+    const rotateX = -normalizedY * maxRotation; // Inverted for natural tilt feel
+
+    setTilt({ rotateX, rotateY });
+
+    // Glare position (0-100% for CSS)
+    const glareX = ((e.clientX - rect.left) / rect.width) * 100;
+    const glareY = ((e.clientY - rect.top) / rect.height) * 100;
+    setGlarePos({ x: glareX, y: glareY });
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setIsHovering(false);
+    setTilt({ rotateX: 0, rotateY: 0 });
+    setGlarePos({ x: 50, y: 50 });
+  }, []);
+
+  const handleMouseEnter = useCallback(() => {
+    setIsHovering(true);
+  }, []);
+
   const handleScrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -349,16 +421,52 @@ export default function HeroSection() {
             </motion.div>
           </div>
 
-          {/* Right - Dashboard Preview */}
+          {/* Right - Dashboard Preview with 3D Tilt */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative lg:ml-8"
+            className="relative lg:ml-8 perspective-[1000px]"
           >
             <div className="relative">
-              {/* Main Dashboard Card */}
-              <div className="relative rounded-2xl overflow-hidden border border-border bg-card/80 backdrop-blur-sm shadow-2xl shadow-black/30 glow-emerald">
+              {/* Main Dashboard Card - 3D Tilt */}
+              <div
+                ref={cardRef}
+                className="relative rounded-2xl overflow-hidden border border-border bg-card/80 backdrop-blur-sm shadow-2xl shadow-black/30 glow-emerald"
+                style={{
+                  transform: `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
+                  transformStyle: "preserve-3d",
+                  transition: isHovering
+                    ? "transform 0.1s ease-out"
+                    : "transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)",
+                }}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+                onMouseEnter={handleMouseEnter}
+              >
+                {/* Holographic Shine/Glare Overlay */}
+                <div
+                  className="absolute inset-0 z-10 pointer-events-none rounded-2xl"
+                  style={{
+                    background: isHovering
+                      ? `radial-gradient(circle at ${glarePos.x}% ${glarePos.y}%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 20%, transparent 60%)`
+                      : "transparent",
+                    transition: isHovering ? "background 0.1s ease-out" : "background 0.6s ease-out",
+                    mixBlendMode: "overlay",
+                  }}
+                />
+
+                {/* Secondary rainbow/holographic glare layer */}
+                <div
+                  className="absolute inset-0 z-10 pointer-events-none rounded-2xl"
+                  style={{
+                    background: isHovering
+                      ? `radial-gradient(ellipse at ${glarePos.x}% ${glarePos.y}%, rgba(16,185,129,0.08) 0%, rgba(6,182,212,0.06) 25%, transparent 55%)`
+                      : "transparent",
+                    transition: isHovering ? "background 0.1s ease-out" : "background 0.6s ease-out",
+                  }}
+                />
+
                 <div className="bg-gradient-to-br from-safeglobal/10 to-cyan-500/5 p-6">
                   {/* Dashboard Header */}
                   <div className="flex items-center justify-between mb-6">

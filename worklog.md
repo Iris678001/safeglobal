@@ -668,5 +668,196 @@ Priority Recommendations for Next Phase:
 - Implement loading skeletons for async content
 - Add video embeds in Testimonials section
 - Optimize performance with lazy loading for offscreen sections
-- Consider adding a "Safety News" live feed section
 - Add more interactive demo elements (drag-and-drop zone configuration)
+
+---
+Task ID: 7
+Agent: Safety News Ticker Agent
+Task: Create a SafetyNewsTicker component with live safety intelligence feed
+
+Work Log:
+- Read worklog.md to understand previous progress (5+ phases, 30+ components)
+- Read AnimatedStatsSection.tsx and globals.css to match existing styling patterns
+- Verified dev server compiles and serves pages (HTTP 200)
+
+NEW COMPONENT CREATED:
+1. SafetyNewsTicker.tsx - Premium live safety news/alert ticker section
+   - Section id="safety-news" with section-divider class for top glow divider
+   - Dark gradient background with bg-dot-pattern and bg-noise overlay
+   - Ambient glow orbs (red, amber, safeglobal) for depth and urgency feel
+   - Badge: "LIVE INTELLIGENCE" with Activity icon, safeglobal styling (border-safeglobal/30, text-safeglobal, bg-safeglobal/10)
+   - Title: "Safety <text-gradient>Intelligence Feed</text-gradient>"
+   - Subtitle: "Real-time safety events and alerts from our global monitoring network."
+   - Live indicator: pulsing green dot + "MONITORING 500K+ WORKERS" in emerald-400
+
+   Alert Cards (6 cards in responsive 3-column grid):
+   1. CRITICAL - "Chemical spill detected in Storage Unit B7" - PetroChem Industries, Houston - 2 minutes ago - RESOLVED
+   2. WARNING - "Elevated noise levels beyond 85dB threshold" - TechForge Manufacturing, Detroit - 8 minutes ago - ACTIVE
+   3. INFO - "Scheduled safety drill completed successfully" - BuildRight Construction, NYC - 15 minutes ago - RESOLVED
+   4. WARNING - "PPE compliance rate dropped to 87% in Zone C" - GlobalMfg Corp, Chicago - 22 minutes ago - MONITORING
+   5. INFO - "Air quality index normal across all zones" - SafeWork Healthcare, Boston - 35 minutes ago - RESOLVED
+   6. CRITICAL - "Equipment temperature exceeding safe limits" - Apex Logistics, Seattle - 41 minutes ago - ACTIVE
+
+   Each alert card features:
+   - Severity badge (CRITICAL/WARNING/INFO) with color-coded styling and icon:
+     * CRITICAL: AlertTriangle icon, red-500 badge, red hover glow
+     * WARNING: Shield icon, amber-500 badge, amber hover glow
+     * INFO: Info icon, cyan-500 badge, cyan hover glow
+   - Status badge (RESOLVED/ACTIVE/MONITORING) with pulsing dot indicator:
+     * RESOLVED: emerald dot + badge
+     * ACTIVE: amber dot + badge with animate-ping
+     * MONITORING: red dot + badge with animate-ping
+   - Location with MapPin icon
+   - Timestamp with Clock icon
+   - Description text
+   - Glass morphism background (glass-card)
+   - Hover: card lifts (-translate-y-1), severity-matched border glow
+   - Framer Motion staggered entrance (0.1s delay per card)
+
+   Horizontal Scrolling Ticker:
+   - 14 brief safety update items with color-coded bullet points (green/amber/red/cyan)
+   - Uses animate-marquee CSS class from globals.css
+   - Pauses on hover (hover:[animation-play-state:paused])
+   - Fade edges on left/right (from-card/80 gradient overlays)
+   - Duplicated items for seamless loop
+   - Label: "Safety Updates" with pulsing green "LIVE" indicator
+
+   Bottom CTA:
+   - "Get instant alerts for your facilities — powered by 24/7 AI monitoring."
+   - "Request Live Demo" button with Shield icon, scrolls to #contact
+
+PAGE ASSEMBLY:
+- Added SafetyNewsTicker import to page.tsx
+- Placed between AnimatedStatsSection and SafetyScoreCalculator:
+  ... → AIDemo → AnimatedStats → SafetyNewsTicker → SafetyScore → ...
+
+VERIFICATION:
+- Lint: 0 errors (clean)
+- Dev server: Compiles and serves (HTTP 200)
+- All components render correctly
+
+Stage Summary:
+- 1 new component: SafetyNewsTicker (live safety intelligence feed)
+- 6 color-coded alert cards with severity badges, status indicators, location, timestamps
+- 14-item horizontal scrolling ticker with marquee animation and hover pause
+- Live monitoring indicator with pulsing green dot
+- Severity-matched hover glow effects (red/amber/cyan)
+- Glass morphism cards with staggered Framer Motion animations
+- Consistent with existing SafeGlobal design language
+- Total component count: 31+
+
+---
+Task ID: 3+4
+Agent: Parallax & Awards Agent
+Task: Create ParallaxSection wrapper component and Awards/Recognition section
+
+Work Log:
+- Read worklog.md to understand previous progress (6+ phases, 30+ components)
+- Read current page.tsx, SecurityCompliance.tsx, and globals.css for styling patterns
+- Verified dev server compiles and serves pages (HTTP 200)
+
+NEW COMPONENTS CREATED (2):
+
+1. ParallaxSection.tsx - Reusable parallax scrolling wrapper
+   - "use client" directive
+   - Uses Framer Motion useScroll and useTransform hooks
+   - Props: children, speed (default 0.1), className, id
+   - IntersectionObserver to only animate when section is in viewport (performance optimization)
+   - Subtle vertical parallax effect — max shift clamped to ~30px for subtlety
+   - Speed prop controls intensity; at default 0.1, max shift is 30px
+   - When out of viewport, renders static children without motion (saves resources)
+   - Works with both dark and light themes
+   - Does not interfere with existing section scroll behavior (overflow-hidden on wrapper)
+
+2. AwardsSection.tsx - Premium awards and industry recognition section
+   - Section id="awards"
+   - Badge: "RECOGNITION" with Trophy icon and safeglobal styling
+   - Title: "Industry Recognition" with text-gradient on "Recognition"
+   - Subtitle: "Awarded and recognized by leading safety and technology organizations worldwide."
+   - 6 award cards in a 3-column responsive grid (1 col mobile, 2 col sm, 3 col lg):
+     1. "Gartner Magic Quadrant" - Trophy icon, gold/amber accent, "Leader in EH&S Technology 2024"
+     2. "Forbes Tech 50" - Award icon, amber/orange accent, "Most Innovative Safety Tech Company"
+     3. "ISO Excellence Award" - Star icon, safeglobal accent, "Best Workplace Safety Innovation 2023"
+     4. "Deloitte Fast 500" - Rocket icon, cyan accent, "Fastest Growing Safety Tech Company"
+     5. "Safety Innovation Award" - Lightbulb icon, violet accent, "NSC Congress & Expo 2024"
+     6. "Best SaaS Platform" - Crown icon, rose accent, "Safety Technology Awards 2024"
+   - Each card features:
+     * Icon in large gradient circle (w-16 h-16) with color-matched gradients
+     * Award name (font-bold text-lg)
+     * Subtitle in muted text
+     * Year badge with color-matched styling
+     * Hover: card lifts (-translate-y-1), subtle glow effect (box-shadow), border brightens
+     * Glass morphism background (glass-card + backdrop-blur-md)
+     * Decorative corner accent on hover
+     * Shimmer line at top on hover
+   - Decorative background: large rotating Shield icon (animate-rotate-slow) at opacity 3%
+   - Background: bg-dot-pattern, gradient orbs (amber top-left, safeglobal bottom-right)
+   - Top divider line with safeglobal gradient
+   - Framer Motion staggered entrance animations
+
+PAGE ASSEMBLY UPDATE:
+- Updated page.tsx with new section order:
+  ScrollProgress → Header → Hero → LiveMetricsBanner → Trust → Partners → Services → HowItWorks → [ParallaxSection About] → [ParallaxSection Team] → [ParallaxSection Industries] → AwardsSection → Security → AIDemo → AnimatedStats → SafetyScore → CaseStudies → Testimonials → Pricing → FAQ → Blog → ResourceLibrary → Contact → Footer + ChatBot + StickyCTA + CookieConsent + BackToTop
+- Wrapped AboutSection, TeamSection, and IndustriesSection with ParallaxSection (speed={0.08})
+- Added AwardsSection between Industries and Security sections
+
+VERIFICATION:
+- Lint: 0 errors (clean)
+- Dev server: HTTP 200, compiles successfully
+
+Stage Summary:
+- 2 new components: ParallaxSection, AwardsSection
+- Subtle parallax scrolling on About, Team, and Industries sections
+- Premium awards section with 6 color-coded award cards and glass morphism
+- IntersectionObserver-based parallax for performance optimization
+- Decorative rotating shield in awards background
+- Total component count: 32+
+
+---
+Task ID: 6
+Agent: Main Agent (Phase 6)
+Task: QA, improve styling, add features, and continue development
+
+Work Log:
+- Read worklog.md to understand 5 completed phases with 30+ components
+- Verified lint clean (0 errors) and dev server running (HTTP 200)
+- Used agent-browser for comprehensive QA across all 18 sections
+- Used VLM (z-ai vision) to analyze hero, AI demo, pricing, contact, awards, news, industries
+- QA Result: No critical bugs. Hero rated "high-quality, readable, and well-balanced"
+
+NEW COMPONENTS ADDED (3):
+1. ParallaxSection.tsx - Reusable parallax wrapper with Framer Motion useScroll/useTransform
+2. AwardsSection.tsx - 6 award cards (Gartner, Forbes, ISO, Deloitte, NSC, SaaS) with glass morphism
+3. SafetyNewsTicker.tsx - Live safety intelligence feed with 6 severity-coded alert cards + marquee ticker
+
+ENHANCED EXISTING COMPONENTS (2):
+- HeroSection.tsx: 3D tilt effect on dashboard (perspective-1000px, max 8° rotation, holographic glare)
+  - Enhanced particle canvas: 80 particles (up from 60), glow effect, pulse, constellation gradient lines
+- IndustriesSection.tsx: Complete redesign with interactive tab selector (5 tabs, AnimatePresence transitions, risk/solution mapping)
+
+PAGE ASSEMBLY:
+- About, Team, Industries wrapped with ParallaxSection (speed={0.08})
+- AwardsSection between Industries and Security
+- SafetyNewsTicker between AnimatedStats and SafetyScore
+
+VERIFICATION:
+- Lint: 0 errors | Dev server: HTTP 200
+- VLM QA: Awards section confirmed with trophy icons
+- VLM QA: Safety News confirmed with alert cards and severity levels
+- VLM QA: Industries confirmed with interactive tabs
+
+Stage Summary:
+- 3 new components: ParallaxSection, AwardsSection, SafetyNewsTicker
+- 2 enhanced: HeroSection (3D tilt + particles), IndustriesSection (interactive tabs)
+- Parallax scrolling on About, Team, Industries
+- Total component count: 33+
+
+Unresolved Issues:
+- Dev server may be killed by sandbox periodically (not a code issue)
+- Page length ~24K+ pixels could benefit from lazy loading
+
+Priority Recommendations for Next Phase:
+- Implement lazy loading/dynamic imports for offscreen sections
+- Add video embeds in Testimonials
+- Add more micro-interactions (cursor effects, magnetic buttons)
+- Consider adding internationalization (i18n)

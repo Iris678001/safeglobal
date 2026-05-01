@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,111 +13,152 @@ import {
   ArrowRight,
   AlertTriangle,
   CheckCircle2,
+  Shield,
+  ChevronRight,
 } from "lucide-react";
 
 const industries = [
   {
     icon: Factory,
     title: "Manufacturing",
+    description:
+      "Comprehensive safety solutions for manufacturing environments, from assembly lines to chemical processing plants. Our AI monitors equipment, environment, and worker behavior in real-time.",
     risks: [
       "Machine-related injuries",
       "Chemical exposure",
       "Ergonomic hazards",
+      "Noise-induced hearing loss",
     ],
     solutions: [
       "Real-time machine guarding",
       "Chemical spill detection",
       "Posture monitoring & alerts",
+      "Automated lockout/tagout",
     ],
     stat: "68%",
     statLabel: "incident reduction",
     color: "from-safeglobal/20 to-emerald-600/5",
     accent: "text-safeglobal",
     border: "border-safeglobal/20 hover:border-safeglobal/40",
+    gradientBg: "from-safeglobal to-emerald-600",
+    riskBadge: "bg-red-500/10 text-red-400 border-red-500/20",
+    solutionBadge: "bg-safeglobal/10 text-safeglobal border-safeglobal/20",
   },
   {
     icon: HardHat,
     title: "Construction",
+    description:
+      "End-to-end safety monitoring for construction sites of any scale. From high-rise builds to infrastructure projects, we prevent the most common and catastrophic incidents.",
     risks: [
       "Fall hazards",
       "Struck-by incidents",
       "Trenching accidents",
+      "Electrical contact",
     ],
     solutions: [
       "Height safety monitoring",
       "Proximity warning systems",
       "Ground stability analysis",
+      "Electrical isolation alerts",
     ],
     stat: "82%",
     statLabel: "near-miss prevention",
     color: "from-amber-500/20 to-amber-600/5",
     accent: "text-amber-400",
     border: "border-amber-500/20 hover:border-amber-500/40",
+    gradientBg: "from-amber-500 to-amber-600",
+    riskBadge: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+    solutionBadge: "bg-safeglobal/10 text-safeglobal border-safeglobal/20",
   },
   {
     icon: Flame,
     title: "Oil & Gas",
+    description:
+      "Critical safety infrastructure for the world's most hazardous industrial environments. Our platform provides continuous monitoring of explosive atmospheres and toxic gas exposure.",
     risks: [
       "Explosion risks",
       "Toxic gas leaks",
       "Confined space entry",
+      "Hot work hazards",
     ],
     solutions: [
       "Gas detection networks",
       "Hot work monitoring",
       "Confined space tracking",
+      "Permit-to-work automation",
     ],
     stat: "91%",
     statLabel: "compliance improvement",
     color: "from-red-500/20 to-red-600/5",
     accent: "text-red-400",
     border: "border-red-500/20 hover:border-red-500/40",
+    gradientBg: "from-red-500 to-red-600",
+    riskBadge: "bg-red-500/10 text-red-400 border-red-500/20",
+    solutionBadge: "bg-safeglobal/10 text-safeglobal border-safeglobal/20",
   },
   {
     icon: Warehouse,
     title: "Warehousing",
+    description:
+      "Intelligent safety systems for logistics and warehousing operations. Reduce accidents, improve compliance, and protect your workforce in high-traffic distribution environments.",
     risks: [
       "Forklift accidents",
       "Manual handling injuries",
       "Slips, trips & falls",
+      "Racking collapses",
     ],
     solutions: [
       "Forklift collision avoidance",
       "Load monitoring AI",
       "Floor hazard detection",
+      "Structural integrity alerts",
     ],
     stat: "74%",
     statLabel: "injury reduction",
     color: "from-cyan-500/20 to-cyan-600/5",
     accent: "text-cyan-400",
     border: "border-cyan-500/20 hover:border-cyan-500/40",
+    gradientBg: "from-cyan-500 to-cyan-600",
+    riskBadge: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
+    solutionBadge: "bg-safeglobal/10 text-safeglobal border-safeglobal/20",
   },
   {
     icon: HeartPulse,
     title: "Healthcare",
+    description:
+      "Advanced safety and compliance solutions for healthcare facilities. Protect staff and patients with AI-powered monitoring of workplace violence, biohazards, and patient handling risks.",
     risks: [
       "Workplace violence",
       "Sharps & biohazards",
       "Patient handling injuries",
+      "Radiation exposure",
     ],
     solutions: [
       "Behavioral threat detection",
       "Biohazard zone monitoring",
       "Safe lift compliance AI",
+      "Radiation boundary alerts",
     ],
     stat: "56%",
     statLabel: "claim reduction",
     color: "from-pink-500/20 to-pink-600/5",
     accent: "text-pink-400",
     border: "border-pink-500/20 hover:border-pink-500/40",
+    gradientBg: "from-pink-500 to-pink-600",
+    riskBadge: "bg-pink-500/10 text-pink-400 border-pink-500/20",
+    solutionBadge: "bg-safeglobal/10 text-safeglobal border-safeglobal/20",
   },
 ];
 
 export default function IndustriesSection() {
+  const [activeTab, setActiveTab] = useState(0);
+
   const handleScrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
+
+  const activeIndustry = industries[activeTab];
 
   return (
     <section id="industries" className="relative py-20 lg:py-28">
@@ -129,7 +171,7 @@ export default function IndustriesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <Badge
             variant="outline"
@@ -147,97 +189,173 @@ export default function IndustriesSection() {
           </p>
         </motion.div>
 
-        {/* Industries Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {industries.map((industry, idx) => (
-            <motion.div
-              key={industry.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className={`group relative p-6 rounded-2xl border bg-card/50 ${industry.border} transition-all duration-300 hover:shadow-xl hover:shadow-black/20 hover:-translate-y-1`}
-            >
-              {/* Background gradient on hover */}
-              <div
-                className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${industry.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-              />
+        {/* Tab Bar - Scrollable on mobile */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mb-10"
+        >
+          <div className="flex gap-1 overflow-x-auto scrollbar-thin pb-2 border-b border-border">
+            {industries.map((industry, idx) => (
+              <button
+                key={industry.title}
+                onClick={() => setActiveTab(idx)}
+                className={`relative flex items-center gap-2 px-5 py-3 rounded-t-lg text-sm font-medium whitespace-nowrap transition-colors duration-200 cursor-pointer ${
+                  activeTab === idx
+                    ? "text-safeglobal bg-safeglobal/5"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                }`}
+              >
+                <industry.icon className="w-4 h-4 flex-shrink-0" />
+                <span>{industry.title}</span>
+                {/* Active tab underline indicator */}
+                {activeTab === idx && (
+                  <motion.div
+                    layoutId="activeTabIndicator"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-safeglobal rounded-full"
+                    transition={{
+                      type: "spring",
+                      stiffness: 500,
+                      damping: 30,
+                    }}
+                  />
+                )}
+              </button>
+            ))}
+          </div>
+        </motion.div>
 
-              <div className="relative space-y-5">
-                {/* Header */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={`w-11 h-11 rounded-xl bg-gradient-to-br ${industry.color} flex items-center justify-center border border-current/10`}
-                    >
-                      <industry.icon className={`w-5 h-5 ${industry.accent}`} />
-                    </div>
-                    <h3 className="text-lg font-semibold">{industry.title}</h3>
-                  </div>
-                  <div className="text-right">
-                    <div className={`text-xl font-bold ${industry.accent}`}>
-                      {industry.stat}
-                    </div>
-                    <div className="text-[10px] text-muted-foreground uppercase tracking-wider">
-                      {industry.statLabel}
-                    </div>
-                  </div>
+        {/* Tab Content with AnimatePresence */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="relative"
+          >
+            <div className="grid lg:grid-cols-5 gap-8 items-start">
+              {/* Left: Icon & Description */}
+              <div className="lg:col-span-2 space-y-6">
+                {/* Large icon with gradient background */}
+                <div
+                  className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${activeIndustry.gradientBg} flex items-center justify-center shadow-lg`}
+                >
+                  <activeIndustry.icon className="w-10 h-10 text-white" />
                 </div>
 
-                {/* Risks */}
                 <div>
-                  <div className="flex items-center gap-1.5 mb-2">
-                    <AlertTriangle className="w-3.5 h-3.5 text-amber-500" />
-                    <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                      Key Risks
-                    </span>
+                  <h3 className="text-2xl sm:text-3xl font-bold mb-3">
+                    {activeIndustry.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {activeIndustry.description}
+                  </p>
+                </div>
+
+                {/* Key Stat - Prominent */}
+                <div className="flex items-center gap-4 p-5 rounded-xl bg-card/80 border border-border">
+                  <div
+                    className={`w-14 h-14 rounded-xl bg-gradient-to-br ${activeIndustry.color} flex items-center justify-center`}
+                  >
+                    <Shield className={`w-7 h-7 ${activeIndustry.accent}`} />
                   </div>
-                  <div className="space-y-1.5">
-                    {industry.risks.map((risk) => (
-                      <div
-                        key={risk}
-                        className="text-sm text-muted-foreground pl-5"
-                      >
-                        {risk}
-                      </div>
-                    ))}
+                  <div>
+                    <div className={`text-3xl font-bold ${activeIndustry.accent}`}>
+                      {activeIndustry.stat}
+                    </div>
+                    <div className="text-sm text-muted-foreground capitalize">
+                      {activeIndustry.statLabel}
+                    </div>
                   </div>
                 </div>
 
-                {/* Solutions */}
-                <div>
-                  <div className="flex items-center gap-1.5 mb-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-safeglobal" />
-                    <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                      SafeGlobal Solutions
-                    </span>
-                  </div>
-                  <div className="space-y-1.5">
-                    {industry.solutions.map((solution) => (
-                      <div
-                        key={solution}
-                        className="flex items-center gap-2 text-sm"
-                      >
-                        <div className="w-1 h-1 rounded-full bg-safeglobal" />
-                        <span>{solution}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* CTA */}
+                {/* CTA Button */}
                 <Button
-                  variant="ghost"
-                  className={`p-0 h-auto ${industry.accent} hover:bg-transparent gap-1 text-sm font-medium`}
+                  size="lg"
+                  className={`bg-safeglobal hover:bg-safeglobal-dark text-white shadow-lg shadow-safeglobal/20 hover:shadow-safeglobal/30 transition-all gap-2 px-6`}
                   onClick={() => handleScrollTo("contact")}
                 >
                   Explore Solutions
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ChevronRight className="w-4 h-4" />
                 </Button>
               </div>
-            </motion.div>
-          ))}
-        </div>
+
+              {/* Right: Risks & Solutions */}
+              <div className="lg:col-span-3 space-y-6">
+                {/* Key Risks Section */}
+                <div className="p-6 rounded-2xl border border-border bg-card/50">
+                  <div className="flex items-center gap-2 mb-4">
+                    <AlertTriangle className="w-5 h-5 text-red-400" />
+                    <h4 className="text-lg font-semibold">Key Risks</h4>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {activeIndustry.risks.map((risk) => (
+                      <Badge
+                        key={risk}
+                        variant="outline"
+                        className={`px-3 py-1.5 text-sm border ${activeIndustry.riskBadge}`}
+                      >
+                        <AlertTriangle className="w-3 h-3 mr-1.5" />
+                        {risk}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Our Solutions Section */}
+                <div className="p-6 rounded-2xl border border-border bg-card/50">
+                  <div className="flex items-center gap-2 mb-4">
+                    <CheckCircle2 className="w-5 h-5 text-safeglobal" />
+                    <h4 className="text-lg font-semibold">Our Solutions</h4>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {activeIndustry.solutions.map((solution) => (
+                      <Badge
+                        key={solution}
+                        variant="outline"
+                        className={`px-3 py-1.5 text-sm border ${activeIndustry.solutionBadge}`}
+                      >
+                        <CheckCircle2 className="w-3 h-3 mr-1.5" />
+                        {solution}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Detailed comparison grid */}
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {activeIndustry.risks.map((risk, idx) => (
+                    <div
+                      key={risk}
+                      className="group p-4 rounded-xl border border-border bg-card/30 hover:bg-card/60 transition-colors"
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="mt-0.5 w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center flex-shrink-0">
+                          <AlertTriangle className="w-3 h-3 text-red-400" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm font-medium text-red-400 mb-1">
+                            {risk}
+                          </div>
+                          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                            <ArrowRight className="w-3 h-3 text-safeglobal" />
+                            <span className="text-safeglobal">
+                              {activeIndustry.solutions[idx]}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );
