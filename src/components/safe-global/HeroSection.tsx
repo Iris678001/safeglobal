@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -14,6 +14,41 @@ import {
   Users,
   BarChart3,
 } from "lucide-react";
+
+function TypingText({ words, className }: { words: string[]; className?: string }) {
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const word = words[currentWordIndex];
+    const timeout = setTimeout(
+      () => {
+        if (!isDeleting) {
+          setDisplayText(word.substring(0, displayText.length + 1));
+          if (displayText.length === word.length) {
+            setTimeout(() => setIsDeleting(true), 2000);
+          }
+        } else {
+          setDisplayText(word.substring(0, displayText.length - 1));
+          if (displayText.length === 0) {
+            setIsDeleting(false);
+            setCurrentWordIndex((prev) => (prev + 1) % words.length);
+          }
+        }
+      },
+      isDeleting ? 40 : 80
+    );
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, currentWordIndex, words]);
+
+  return (
+    <span className={className}>
+      {displayText}
+      <span className="animate-pulse text-safeglobal">|</span>
+    </span>
+  );
+}
 
 function AnimatedGrid() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -228,9 +263,15 @@ export default function HeroSection() {
                 <br />
                 Compromise.
               </h1>
-              <p className="text-lg sm:text-xl text-muted-foreground max-w-lg leading-relaxed">
-                Enterprise-grade AI that monitors, predicts, and prevents
-                workplace hazards in real-time. Protecting{" "}
+              <div className="text-lg sm:text-xl text-muted-foreground max-w-lg leading-relaxed min-h-[3.5rem]">
+                Enterprise-grade AI that{" "}
+                <TypingText
+                  words={["monitors hazards in real-time", "predicts risks before they occur", "prevents incidents automatically", "automates compliance 24/7"]}
+                  className="text-safeglobal font-semibold"
+                />
+              </div>
+              <p className="text-sm text-muted-foreground max-w-lg">
+                Protecting{" "}
                 <span className="text-safeglobal font-semibold">500,000+</span>{" "}
                 workers across{" "}
                 <span className="text-safeglobal font-semibold">30+</span>{" "}

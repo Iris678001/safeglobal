@@ -8,7 +8,9 @@ import PartnersSection from "@/components/safe-global/PartnersSection";
 import ServicesSection from "@/components/safe-global/ServicesSection";
 import HowItWorks from "@/components/safe-global/HowItWorks";
 import AboutSection from "@/components/safe-global/AboutSection";
+import TeamSection from "@/components/safe-global/TeamSection";
 import IndustriesSection from "@/components/safe-global/IndustriesSection";
+import SecurityCompliance from "@/components/safe-global/SecurityCompliance";
 import AIDemoSection from "@/components/safe-global/AIDemoSection";
 import SafetyScoreCalculator from "@/components/safe-global/SafetyScoreCalculator";
 import CaseStudiesSection from "@/components/safe-global/CaseStudiesSection";
@@ -36,7 +38,9 @@ export default function Home() {
         <ServicesSection />
         <HowItWorks />
         <AboutSection />
+        <TeamSection />
         <IndustriesSection />
+        <SecurityCompliance />
         <AIDemoSection />
         <SafetyScoreCalculator />
         <CaseStudiesSection />
