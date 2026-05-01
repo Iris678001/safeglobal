@@ -41,56 +41,56 @@ export default function CookieConsent() {
   if (isAccepted || locallyDismissed) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 px-4 pb-4">
-      <div
-        className="bg-card/95 backdrop-blur-xl border border-border rounded-2xl shadow-2xl max-w-2xl mx-auto p-6 relative"
-        style={{ animation: "cookie-slide-up 0.5s ease-out forwards" }}
-      >
-        {/* Close button */}
-        <button
-          onClick={handleClose}
-          className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors p-1 rounded-md hover:bg-muted/50 cursor-pointer"
-          aria-label="Close cookie consent"
-        >
-          <X className="w-4 h-4" />
-        </button>
-
-        {/* Content */}
-        <div className="flex items-start gap-4 pr-8">
-          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-safeglobal/10 flex items-center justify-center">
-            <Cookie className="w-5 h-5 text-safeglobal" />
-          </div>
-
-          <div className="flex-1 space-y-4">
-            <div className="space-y-1.5">
-              <div className="flex items-center gap-2">
-                <Shield className="w-4 h-4 text-safeglobal" />
-                <h3 className="text-sm font-semibold">Cookie Preferences</h3>
+    <div
+      className="fixed bottom-0 left-0 right-0 z-50"
+      style={{ animation: "cookie-slide-up 0.5s ease-out forwards" }}
+    >
+      <div className="bg-card/95 backdrop-blur-xl border-t border-border shadow-2xl shadow-black/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            {/* Content */}
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <div className="flex-shrink-0 w-9 h-9 rounded-full bg-safeglobal/10 flex items-center justify-center">
+                <Cookie className="w-4 h-4 text-safeglobal" />
               </div>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                We use cookies to enhance your experience and analyze site
-                usage. By continuing, you agree to our{" "}
-                <span className="text-safeglobal hover:underline cursor-pointer">
-                  Cookie Policy
-                </span>
-                .
-              </p>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-0.5">
+                  <Shield className="w-3.5 h-3.5 text-safeglobal flex-shrink-0" />
+                  <span className="text-sm font-semibold">Cookie Preferences</span>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  We use cookies to enhance your experience and analyze site usage. By continuing, you agree to our{" "}
+                  <span className="text-safeglobal hover:underline cursor-pointer">
+                    Cookie Policy
+                  </span>
+                  .
+                </p>
+              </div>
             </div>
 
             {/* Action buttons */}
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex items-center gap-3 flex-shrink-0">
               <Button
+                variant="outline"
+                size="sm"
+                className="border-border hover:border-safeglobal/50 hover:bg-safeglobal/5 text-xs h-9"
+              >
+                Customize
+              </Button>
+              <Button
+                size="sm"
                 onClick={handleAcceptAll}
-                className="bg-safeglobal hover:bg-safeglobal-dark text-white shadow-md shadow-safeglobal/20 hover:shadow-safeglobal/30 transition-all text-sm"
+                className="bg-safeglobal hover:bg-safeglobal-dark text-white shadow-md shadow-safeglobal/20 hover:shadow-safeglobal/30 transition-all text-xs h-9"
               >
                 Accept All
               </Button>
-              <Button
-                variant="outline"
-                className="border-border hover:border-safeglobal/50 hover:bg-safeglobal/5 text-sm"
+              <button
+                onClick={handleClose}
+                className="text-muted-foreground hover:text-foreground transition-colors p-1.5 rounded-md hover:bg-muted/50 cursor-pointer"
+                aria-label="Close cookie consent"
               >
-                Customize Preferences
-              </Button>
+                <X className="w-4 h-4" />
+              </button>
             </div>
           </div>
         </div>

@@ -21,8 +21,9 @@ import {
   Send,
   CheckCircle2,
   Loader2,
-  Building2,
   Shield,
+  Lock,
+  Zap,
 } from "lucide-react";
 
 const contactInfo = [
@@ -50,6 +51,12 @@ const contactInfo = [
     value: "24/7 AI Monitoring",
     subtext: "Always-on emergency support",
   },
+];
+
+const officeLocations = [
+  { name: "San Francisco HQ", x: 52, y: 42, isHQ: true },
+  { name: "New York Office", x: 80, y: 38, isHQ: false },
+  { name: "London Office", x: 46, y: 28, isHQ: false },
 ];
 
 export default function ContactSection() {
@@ -137,35 +144,39 @@ export default function ContactSection() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-2 space-y-6"
           >
-            {/* Free Audit Card */}
-            <div className="p-6 rounded-2xl border border-safeglobal/30 bg-gradient-to-br from-safeglobal/10 to-transparent glow-emerald">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-safeglobal/20 flex items-center justify-center">
-                  <Shield className="w-5 h-5 text-safeglobal" />
+            {/* Free Audit Card - Enhanced with animated border */}
+            <div className="relative p-[1px] rounded-2xl overflow-hidden">
+              {/* Animated gradient border */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-safeglobal via-emerald-400 to-safeglobal animate-gradient-shift" style={{ backgroundSize: '200% 100%' }} />
+              <div className="relative p-6 rounded-2xl bg-card">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-safeglobal/20 flex items-center justify-center">
+                    <Shield className="w-5 h-5 text-safeglobal" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">Free Safety Audit</h3>
+                    <p className="text-xs text-muted-foreground">
+                      No obligation, real insights
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold">Free Safety Audit</h3>
-                  <p className="text-xs text-muted-foreground">
-                    No obligation, real insights
-                  </p>
-                </div>
+                <ul className="space-y-2">
+                  {[
+                    "Comprehensive risk assessment",
+                    "Compliance gap analysis",
+                    "ROI projection report",
+                    "Custom recommendations",
+                  ].map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-center gap-2 text-sm text-muted-foreground"
+                    >
+                      <CheckCircle2 className="w-4 h-4 text-safeglobal flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul className="space-y-2">
-                {[
-                  "Comprehensive risk assessment",
-                  "Compliance gap analysis",
-                  "ROI projection report",
-                  "Custom recommendations",
-                ].map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-center gap-2 text-sm text-muted-foreground"
-                  >
-                    <CheckCircle2 className="w-4 h-4 text-safeglobal flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
             </div>
 
             {/* Contact Details */}
@@ -188,20 +199,127 @@ export default function ContactSection() {
               ))}
             </div>
 
-            {/* Office Map Placeholder */}
-            <div className="relative h-48 rounded-2xl border border-border bg-card/30 overflow-hidden">
-              <div className="absolute inset-0 bg-grid-pattern" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <Building2 className="w-8 h-8 text-safeglobal/40 mx-auto mb-2" />
-                  <p className="text-sm text-muted-foreground">
-                    San Francisco HQ
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    450 Mission St, Suite 2800
-                  </p>
-                </div>
-              </div>
+            {/* Interactive SVG Map */}
+            <div className="relative h-56 rounded-2xl border border-border bg-card/30 overflow-hidden">
+              <svg
+                viewBox="0 0 100 60"
+                className="w-full h-full"
+                preserveAspectRatio="xMidYMid meet"
+              >
+                {/* Background subtle grid */}
+                <defs>
+                  <pattern id="mapGrid" width="5" height="5" patternUnits="userSpaceOnUse">
+                    <path d="M 5 0 L 0 0 0 5" fill="none" stroke="currentColor" strokeWidth="0.1" opacity="0.08" />
+                  </pattern>
+                  <radialGradient id="dotGlow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stopColor="#10b981" stopOpacity="0.6" />
+                    <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
+                  </radialGradient>
+                </defs>
+                <rect width="100" height="60" fill="url(#mapGrid)" />
+
+                {/* Simplified US outline */}
+                <path
+                  d="M 15 20 L 20 16 L 30 14 L 40 13 L 50 14 L 55 16 L 60 15 L 65 13 L 72 14 L 78 17 L 82 22 L 85 28 L 84 33 L 82 38 L 78 42 L 72 44 L 65 43 L 58 40 L 52 42 L 48 45 L 42 44 L 36 42 L 30 40 L 25 38 L 20 34 L 16 30 L 14 25 Z"
+                  fill="currentColor"
+                  fillOpacity="0.04"
+                  stroke="currentColor"
+                  strokeWidth="0.3"
+                  strokeOpacity="0.15"
+                />
+
+                {/* Simplified UK outline */}
+                <path
+                  d="M 44 24 L 46 22 L 48 23 L 48 27 L 46 28 L 44 27 Z"
+                  fill="currentColor"
+                  fillOpacity="0.04"
+                  stroke="currentColor"
+                  strokeWidth="0.3"
+                  strokeOpacity="0.15"
+                />
+
+                {/* Connecting lines between offices */}
+                <line
+                  x1="52" y1="42" x2="80" y2="38"
+                  stroke="#10b981"
+                  strokeWidth="0.3"
+                  strokeOpacity="0.3"
+                  strokeDasharray="1.5 1"
+                />
+                <line
+                  x1="52" y1="42" x2="46" y2="28"
+                  stroke="#10b981"
+                  strokeWidth="0.3"
+                  strokeOpacity="0.3"
+                  strokeDasharray="1.5 1"
+                />
+                <line
+                  x1="80" y1="38" x2="46" y2="28"
+                  stroke="#10b981"
+                  strokeWidth="0.3"
+                  strokeOpacity="0.2"
+                  strokeDasharray="1.5 1"
+                />
+
+                {/* Office dots */}
+                {officeLocations.map((office) => (
+                  <g key={office.name}>
+                    {/* Glow behind dot */}
+                    <circle
+                      cx={office.x}
+                      cy={office.y}
+                      r={office.isHQ ? 3 : 2}
+                      fill="url(#dotGlow)"
+                    />
+                    {/* Ping animation for HQ */}
+                    {office.isHQ && (
+                      <circle
+                        cx={office.x}
+                        cy={office.y}
+                        r="1.5"
+                        fill="none"
+                        stroke="#10b981"
+                        strokeWidth="0.3"
+                        opacity="0.6"
+                      >
+                        <animate
+                          attributeName="r"
+                          from="1.5"
+                          to="4"
+                          dur="2s"
+                          repeatCount="indefinite"
+                        />
+                        <animate
+                          attributeName="opacity"
+                          from="0.6"
+                          to="0"
+                          dur="2s"
+                          repeatCount="indefinite"
+                        />
+                      </circle>
+                    )}
+                    {/* Solid dot */}
+                    <circle
+                      cx={office.x}
+                      cy={office.y}
+                      r={office.isHQ ? 1.2 : 0.8}
+                      fill="#10b981"
+                    />
+                    {/* Label */}
+                    <text
+                      x={office.x}
+                      y={office.y - 2.5}
+                      textAnchor="middle"
+                      fill="#10b981"
+                      fontSize="1.8"
+                      fontWeight={office.isHQ ? "600" : "400"}
+                      opacity={office.isHQ ? 1 : 0.7}
+                    >
+                      {office.name}
+                    </text>
+                  </g>
+                ))}
+              </svg>
             </div>
           </motion.div>
 
@@ -213,6 +331,25 @@ export default function ContactSection() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-3"
           >
+            {/* Social proof line */}
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <div className="flex -space-x-2">
+                {[0,1,2,3,4].map((i) => (
+                  <div
+                    key={i}
+                    className="w-6 h-6 rounded-full border-2 border-card bg-gradient-to-br from-safeglobal/60 to-emerald-600/60 flex items-center justify-center"
+                  >
+                    <span className="text-[7px] text-white font-bold">
+                      {String.fromCharCode(65 + i * 3)}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <p className="text-sm text-muted-foreground">
+                Trusted by <span className="text-safeglobal font-semibold">200+</span> enterprises
+              </p>
+            </div>
+
             <div className="p-6 lg:p-8 rounded-2xl border border-border bg-card/50">
               {formState === "success" ? (
                 <div className="text-center py-12 space-y-4">
@@ -373,13 +510,40 @@ export default function ContactSection() {
                     )}
                   </Button>
 
-                  <p className="text-xs text-muted-foreground text-center">
+                  {/* Response Time Indicator */}
+                  <div className="flex items-center justify-center gap-1.5 -mt-2">
+                    <Zap className="w-3.5 h-3.5 text-safeglobal" />
+                    <span className="text-xs text-muted-foreground">
+                      Average response: <span className="text-safeglobal font-medium">under 2 hours</span>
+                    </span>
+                  </div>
+
+                  <p className="text-xs text-muted-foreground text-center -mt-1">
                     By submitting, you agree to our Privacy Policy. We&apos;ll
                     never share your data.
                   </p>
                 </form>
               )}
             </div>
+
+            {/* Trust Signals */}
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+              <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <Lock className="w-3.5 h-3.5 text-safeglobal" />
+                <span>SOC 2 Compliant</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <Shield className="w-3.5 h-3.5 text-safeglobal" />
+                <span>GDPR Ready</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <CheckCircle2 className="w-3.5 h-3.5 text-safeglobal" />
+                <span>ISO 27001</span>
+              </div>
+            </div>
+            <p className="text-center text-[11px] text-muted-foreground/60 mt-2">
+              Your data is encrypted and never shared
+            </p>
           </motion.div>
         </div>
       </div>

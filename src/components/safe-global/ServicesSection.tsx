@@ -31,6 +31,9 @@ const services = [
     accentColor: "text-safeglobal",
     borderColor: "border-safeglobal/20",
     hoverBorder: "hover:border-safeglobal/40",
+    gradientLine: "from-safeglobal via-emerald-400 to-cyan-400",
+    glowColor: "bg-safeglobal",
+    pricing: "Starting at $499/mo",
   },
   {
     icon: BarChart3,
@@ -48,6 +51,9 @@ const services = [
     accentColor: "text-cyan-400",
     borderColor: "border-cyan-500/20",
     hoverBorder: "hover:border-cyan-500/40",
+    gradientLine: "from-cyan-400 via-cyan-300 to-blue-400",
+    glowColor: "bg-cyan-400",
+    pricing: "Starting at $799/mo",
   },
   {
     icon: FileCheck,
@@ -65,6 +71,9 @@ const services = [
     accentColor: "text-violet-400",
     borderColor: "border-violet-500/20",
     hoverBorder: "hover:border-violet-500/40",
+    gradientLine: "from-violet-400 via-violet-300 to-purple-400",
+    glowColor: "bg-violet-400",
+    pricing: "Starting at $599/mo",
   },
   {
     icon: GraduationCap,
@@ -82,6 +91,9 @@ const services = [
     accentColor: "text-amber-400",
     borderColor: "border-amber-500/20",
     hoverBorder: "hover:border-amber-500/40",
+    gradientLine: "from-amber-400 via-amber-300 to-yellow-400",
+    glowColor: "bg-amber-400",
+    pricing: "Starting at $349/mo",
   },
   {
     icon: Cpu,
@@ -99,6 +111,9 @@ const services = [
     accentColor: "text-rose-400",
     borderColor: "border-rose-500/20",
     hoverBorder: "hover:border-rose-500/40",
+    gradientLine: "from-rose-400 via-rose-300 to-pink-400",
+    glowColor: "bg-rose-400",
+    pricing: "Starting at $899/mo",
   },
 ];
 
@@ -159,18 +174,34 @@ export default function ServicesSection() {
           viewport={{ once: true }}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {services.map((service) => (
+          {services.map((service, index) => (
             <motion.div key={service.title} variants={item}>
               <Card
-                className={`group relative overflow-hidden bg-card/50 ${service.borderColor} ${service.hoverBorder} transition-all duration-300 hover:shadow-xl hover:shadow-black/20 hover:-translate-y-1 h-full`}
+                className={`group relative overflow-hidden bg-card/50 ${service.borderColor} ${service.hoverBorder} transition-all duration-300 hover:shadow-xl hover:shadow-black/20 hover:-translate-y-1 h-full shimmer`}
               >
+                {/* Background gradient on hover */}
                 <div
                   className={`absolute inset-0 bg-gradient-to-b ${service.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
                 />
-                <CardContent className="relative p-6 space-y-4">
+
+                {/* Animated glow dot in background on hover */}
+                <div className="absolute top-1/4 right-1/4 w-32 h-32 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                  <div
+                    className={`absolute inset-0 ${service.glowColor} rounded-full blur-3xl opacity-10 animate-pulse-glow`}
+                  />
+                </div>
+
+                {/* Card Number - top right */}
+                <div className="absolute top-4 right-4 z-10 select-none pointer-events-none">
+                  <span className="text-6xl font-black text-safeglobal/5 leading-none">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+
+                <CardContent className="relative p-6 space-y-4 z-10">
                   <div className="flex items-start justify-between">
                     <div
-                      className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center border ${service.borderColor}`}
+                      className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center border ${service.borderColor} transition-all duration-300 group-hover:ring-2 group-hover:ring-safeglobal/20`}
                     >
                       <service.icon className={`w-6 h-6 ${service.accentColor}`} />
                     </div>
@@ -204,15 +235,30 @@ export default function ServicesSection() {
                     ))}
                   </div>
 
+                  {/* Pricing hint */}
+                  <div className="pt-1">
+                    <span className="text-xs font-medium text-muted-foreground/60 tracking-wide">
+                      {service.pricing}
+                    </span>
+                  </div>
+
+                  {/* Learn More - more prominent */}
                   <Button
                     variant="ghost"
-                    className={`p-0 h-auto ${service.accentColor} hover:bg-transparent gap-1 text-sm font-medium group/btn`}
+                    className={`p-0 h-auto ${service.accentColor} hover:bg-transparent gap-2 text-sm font-semibold group/btn`}
                     onClick={() => handleScrollTo("contact")}
                   >
                     Learn More
-                    <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1.5" />
                   </Button>
                 </CardContent>
+
+                {/* Animated gradient line at bottom */}
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] overflow-hidden">
+                  <div
+                    className={`h-full bg-gradient-to-r ${service.gradientLine} w-0 group-hover:w-full transition-all duration-700 ease-out`}
+                  />
+                </div>
               </Card>
             </motion.div>
           ))}

@@ -18,12 +18,15 @@ import TestimonialsSection from "@/components/safe-global/TestimonialsSection";
 import PricingSection from "@/components/safe-global/PricingSection";
 import FAQSection from "@/components/safe-global/FAQSection";
 import BlogSection from "@/components/safe-global/BlogSection";
+import ResourceLibrary from "@/components/safe-global/ResourceLibrary";
 import ContactSection from "@/components/safe-global/ContactSection";
 import Footer from "@/components/safe-global/Footer";
 import ChatBot from "@/components/safe-global/ChatBot";
 import StickyCTA from "@/components/safe-global/StickyCTA";
 import ScrollProgress from "@/components/safe-global/ScrollProgress";
 import CookieConsent from "@/components/safe-global/CookieConsent";
+import AnimatedStatsSection from "@/components/safe-global/AnimatedStatsSection";
+import BackToTop from "@/components/safe-global/BackToTop";
 
 export default function Home() {
   return (
@@ -42,18 +45,21 @@ export default function Home() {
         <IndustriesSection />
         <SecurityCompliance />
         <AIDemoSection />
+        <AnimatedStatsSection />
         <SafetyScoreCalculator />
         <CaseStudiesSection />
         <TestimonialsSection />
         <PricingSection />
         <FAQSection />
         <BlogSection />
+        <ResourceLibrary />
         <ContactSection />
       </main>
       <Footer />
       <ChatBot />
       <StickyCTA />
       <CookieConsent />
+      <BackToTop />
     </div>
   );
 }

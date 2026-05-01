@@ -14,6 +14,7 @@ import {
   ChevronRight,
   Phone,
 } from "lucide-react";
+import { ThemeToggle } from "@/components/safe-global/ThemeToggle";
 
 const navLinks = [
   { label: "Home", href: "#hero" },
@@ -108,6 +109,7 @@ export default function Header() {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
+            <ThemeToggle />
             <Button
               variant="ghost"
               size="sm"
@@ -154,6 +156,10 @@ export default function Header() {
                   </button>
                 ))}
                 <div className="border-t border-border mt-4 pt-4 space-y-3">
+                  <div className="flex items-center justify-between px-4 py-2">
+                    <span className="text-sm text-muted-foreground">Appearance</span>
+                    <ThemeToggle />
+                  </div>
                   <Button
                     className="w-full bg-safeglobal hover:bg-safeglobal-dark text-white"
                     onClick={() => handleNavClick("#contact")}
