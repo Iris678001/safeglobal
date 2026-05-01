@@ -332,7 +332,7 @@ export default function HeroSection() {
                 AI-Powered
                 <br />
                 Safety.{" "}
-                <span className="text-gradient">Zero</span>
+                <span className="text-gradient-animated">Zero</span>
                 <br />
                 Compromise.
               </h1>
@@ -372,7 +372,7 @@ export default function HeroSection() {
               <Button
                 variant="outline"
                 size="lg"
-                className="border-border hover:border-safeglobal/50 hover:bg-safeglobal/5 text-base px-8 h-13 gap-2"
+                className="border-border hover:border-safeglobal/50 hover:bg-safeglobal/5 text-base px-8 h-13 gap-2 hover-ring"
                 onClick={() => handleScrollTo("services")}
               >
                 <Play className="w-4 h-4" />
@@ -435,7 +435,7 @@ export default function HeroSection() {
               {/* Main Dashboard Card - 3D Tilt */}
               <div
                 ref={cardRef}
-                className="relative rounded-2xl overflow-hidden border border-border bg-card/80 backdrop-blur-sm shadow-2xl shadow-black/30 glow-emerald"
+                className="relative rounded-2xl overflow-hidden border border-border bg-card/80 backdrop-blur-sm shadow-2xl shadow-black/30 glow-emerald card-premium"
                 style={{
                   transform: `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
                   transformStyle: "preserve-3d",
@@ -615,7 +615,7 @@ export default function HeroSection() {
               </div>
 
               {/* Floating Elements */}
-              <div className="absolute -top-4 -right-4 bg-safeglobal/10 border border-safeglobal/20 rounded-xl p-3 backdrop-blur-sm animate-float shadow-lg shadow-safeglobal/10">
+              <div className="absolute -top-4 -right-4 bg-safeglobal/10 border border-safeglobal/20 rounded-xl p-3 backdrop-blur-sm animate-float shadow-lg shadow-safeglobal/10 hover-ring cursor-default">
                 <div className="flex items-center gap-2">
                   <Shield className="w-4 h-4 text-safeglobal" />
                   <span className="text-xs font-medium text-safeglobal">
@@ -623,7 +623,7 @@ export default function HeroSection() {
                   </span>
                 </div>
               </div>
-              <div className="absolute -bottom-3 -left-3 bg-card border border-border rounded-xl p-3 shadow-xl animate-float [animation-delay:1s]">
+              <div className="absolute -bottom-3 -left-3 bg-card border border-border rounded-xl p-3 shadow-xl animate-float [animation-delay:1s] hover-ring cursor-default">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-safeglobal animate-pulse" />
                   <span className="text-xs font-medium">
@@ -631,7 +631,7 @@ export default function HeroSection() {
                   </span>
                 </div>
               </div>
-              <div className="absolute top-1/2 -right-6 bg-cyan-500/10 border border-cyan-500/20 rounded-xl p-2.5 backdrop-blur-sm animate-float [animation-delay:2s] shadow-lg">
+              <div className="absolute top-1/2 -right-6 bg-cyan-500/10 border border-cyan-500/20 rounded-xl p-2.5 backdrop-blur-sm animate-float [animation-delay:2s] shadow-lg hover-ring cursor-default">
                 <div className="flex items-center gap-2">
                   <Users className="w-3.5 h-3.5 text-cyan-400" />
                   <span className="text-[11px] font-medium text-cyan-400">

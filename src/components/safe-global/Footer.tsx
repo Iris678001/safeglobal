@@ -76,7 +76,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative border-t border-border bg-card/30">
+    <footer className="relative border-t border-border bg-card/30 card-premium">
       {/* Animated gradient line at top */}
       <div className="divider-animated h-0" />
 

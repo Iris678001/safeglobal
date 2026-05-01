@@ -91,12 +91,12 @@ export default function Header() {
           </button>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-0.5">
             {navLinks.map((link) => (
               <button
                 key={link.href}
                 onClick={() => handleNavClick(link.href)}
-                className={`px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 cursor-pointer ${
+                className={`px-3.5 py-2 text-sm font-medium rounded-lg transition-all duration-200 cursor-pointer ${
                   activeSection === link.href.replace("#", "")
                     ? "text-safeglobal bg-safeglobal/10"
                     : "text-muted-foreground hover:text-foreground hover:bg-accent"

@@ -28,10 +28,13 @@ import CookieConsent from "@/components/safe-global/CookieConsent";
 import AnimatedStatsSection from "@/components/safe-global/AnimatedStatsSection";
 import SafetyNewsTicker from "@/components/safe-global/SafetyNewsTicker";
 import BackToTop from "@/components/safe-global/BackToTop";
+import NotificationToast from "@/components/safe-global/NotificationToast";
 import ParallaxSection from "@/components/safe-global/ParallaxSection";
 import AwardsSection from "@/components/safe-global/AwardsSection";
 import GlobalImpact from "@/components/safe-global/GlobalImpact";
 import EventCountdown from "@/components/safe-global/EventCountdown";
+import SafetyChecklist from "@/components/safe-global/SafetyChecklist";
+import TestimonialSlider from "@/components/safe-global/TestimonialSlider";
 
 export default function Home() {
   return (
@@ -63,8 +66,10 @@ export default function Home() {
         <SafetyScoreCalculator />
         <CaseStudiesSection />
         <TestimonialsSection />
+        <TestimonialSlider />
         <PricingSection />
         <FAQSection />
+        <SafetyChecklist />
         <EventCountdown />
         <BlogSection />
         <ResourceLibrary />
@@ -75,6 +80,7 @@ export default function Home() {
       <StickyCTA />
       <CookieConsent />
       <BackToTop />
+      <NotificationToast />
     </div>
   );
 }

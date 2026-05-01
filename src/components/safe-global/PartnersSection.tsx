@@ -49,25 +49,25 @@ export default function PartnersSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex flex-wrap items-center justify-center gap-4"
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 max-w-4xl mx-auto"
         >
           {partners.map((partner) => (
             <div
               key={partner.name}
-              className="group flex items-center gap-2.5 px-5 py-3 rounded-xl border border-border bg-card/30 hover:border-safeglobal/30 hover:bg-safeglobal/5 transition-all duration-300 cursor-default"
+              className="group flex items-center gap-2.5 px-4 py-3 rounded-xl border border-border bg-card/30 hover:border-safeglobal/30 hover:bg-safeglobal/5 transition-all duration-300 cursor-default"
             >
-              <partner.icon className="w-4 h-4 text-muted-foreground group-hover:text-safeglobal transition-colors" />
-              <div>
-                <span className="text-sm font-semibold group-hover:text-safeglobal transition-colors">
+              <partner.icon className="w-4 h-4 text-muted-foreground group-hover:text-safeglobal transition-colors flex-shrink-0" />
+              <div className="flex flex-col min-w-0">
+                <span className="text-sm font-semibold group-hover:text-safeglobal transition-colors truncate">
                   {partner.name}
                 </span>
-                <span className="text-[10px] text-muted-foreground ml-2">
+                <span className="text-[10px] text-muted-foreground truncate">
                   {partner.category}
                 </span>
               </div>
             </div>
           ))}
-          <div className="px-5 py-3 rounded-xl border border-dashed border-border text-sm text-muted-foreground">
+          <div className="flex items-center justify-center px-4 py-3 rounded-xl border border-dashed border-border text-sm text-muted-foreground hover:border-safeglobal/30 hover:text-safeglobal transition-all duration-300">
             +42 more
           </div>
         </motion.div>

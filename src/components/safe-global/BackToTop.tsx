@@ -31,10 +31,10 @@ export default function BackToTop() {
           exit={{ opacity: 0, scale: 0.6 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
           onClick={scrollToTop}
-          className="fixed bottom-24 right-6 z-40 w-11 h-11 rounded-full flex items-center justify-center border border-safeglobal/30 bg-card/70 backdrop-blur-md shadow-lg shadow-safeglobal/10 hover:bg-safeglobal/20 hover:border-safeglobal/50 hover:shadow-safeglobal/20 transition-all cursor-pointer"
+          className="fixed bottom-28 right-8 z-40 w-12 h-12 rounded-full flex items-center justify-center border border-safeglobal/20 bg-card/80 backdrop-blur-lg shadow-lg shadow-black/20 hover:bg-safeglobal/15 hover:border-safeglobal/40 hover:shadow-safeglobal/10 transition-all duration-300 cursor-pointer group"
           aria-label="Scroll back to top"
         >
-          <ArrowUp className="w-4 h-4 text-safeglobal" />
+          <ArrowUp className="w-5 h-5 text-safeglobal/70 group-hover:text-safeglobal transition-colors" />
         </motion.button>
       )}
     </AnimatePresence>
