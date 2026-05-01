@@ -5,6 +5,7 @@ import {
   Shield,
   Linkedin,
   Twitter,
+  Github,
   Youtube,
   ArrowUp,
   Send,
@@ -56,6 +57,15 @@ const officeLocations = [
   { name: "Singapore", shortName: "SG", x: "74%", y: "58%" },
 ];
 
+// Backed by investor/partner logos
+const backedByLogos = [
+  { initials: "YC", name: "Y Combinator", color: "from-orange-500 to-orange-600" },
+  { initials: "SQ", name: "Sequoia Capital", color: "from-red-500 to-red-600" },
+  { initials: "A16Z", name: "Andreessen Horowitz", color: "from-gray-500 to-gray-600" },
+  { initials: "GV", name: "Google Ventures", color: "from-blue-500 to-blue-600" },
+  { initials: "TCV", name: "Technology Crossover Ventures", color: "from-cyan-500 to-teal-500" },
+];
+
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
@@ -76,13 +86,36 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative border-t border-border bg-card/30 card-premium">
+    <footer className="relative border-t border-border bg-card/30 card-premium footer-grid-bg">
       {/* Animated gradient line at top */}
       <div className="divider-animated h-0" />
 
-      {/* Newsletter Bar */}
-      <div className="border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      {/* Backed By Row - above newsletter */}
+      <div className="border-b border-border/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <p className="text-xs text-muted-foreground/60 tracking-wide font-medium">Backed by</p>
+            <div className="flex items-center gap-3">
+              {backedByLogos.map((logo) => (
+                <div
+                  key={logo.initials}
+                  className={`w-9 h-9 rounded-full bg-gradient-to-br ${logo.color} flex items-center justify-center text-white text-[10px] font-bold shadow-md hover:scale-110 transition-transform cursor-default`}
+                  title={logo.name}
+                >
+                  {logo.initials}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Newsletter Bar - with prominent gradient background */}
+      <div className="relative border-b border-border overflow-hidden">
+        {/* Gradient background for newsletter */}
+        <div className="absolute inset-0 bg-gradient-to-r from-safeglobal/10 via-cyan-500/5 to-safeglobal/10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/30 to-background/50" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
             <div className="text-center lg:text-left">
               <h3 className="text-lg font-semibold mb-1">
@@ -174,7 +207,6 @@ export default function Footer() {
                 <rect width="400" height="100" fill="url(#footerGrid)" />
 
                 {/* Simplified continent outlines */}
-                {/* North America */}
                 <path
                   d="M 40 20 Q 55 15 70 20 Q 80 25 75 35 Q 70 50 60 55 Q 50 50 45 40 Q 38 30 40 20 Z"
                   fill="currentColor"
@@ -182,7 +214,6 @@ export default function Footer() {
                   stroke="currentColor"
                   strokeWidth="0.5"
                 />
-                {/* South America */}
                 <path
                   d="M 65 55 Q 72 50 78 55 Q 82 65 78 78 Q 72 85 68 80 Q 63 70 65 55 Z"
                   fill="currentColor"
@@ -190,7 +221,6 @@ export default function Footer() {
                   stroke="currentColor"
                   strokeWidth="0.5"
                 />
-                {/* Europe */}
                 <path
                   d="M 170 18 Q 185 15 195 20 Q 200 28 195 32 Q 185 35 178 30 Q 172 25 170 18 Z"
                   fill="currentColor"
@@ -198,7 +228,6 @@ export default function Footer() {
                   stroke="currentColor"
                   strokeWidth="0.5"
                 />
-                {/* Africa */}
                 <path
                   d="M 175 35 Q 185 32 195 38 Q 198 50 192 65 Q 185 72 180 68 Q 173 55 175 35 Z"
                   fill="currentColor"
@@ -206,7 +235,6 @@ export default function Footer() {
                   stroke="currentColor"
                   strokeWidth="0.5"
                 />
-                {/* Asia */}
                 <path
                   d="M 210 15 Q 240 10 280 18 Q 310 25 320 35 Q 315 45 290 50 Q 260 48 240 42 Q 220 35 210 25 Z"
                   fill="currentColor"
@@ -214,7 +242,6 @@ export default function Footer() {
                   stroke="currentColor"
                   strokeWidth="0.5"
                 />
-                {/* Australia */}
                 <path
                   d="M 300 60 Q 315 55 330 60 Q 335 68 325 72 Q 310 72 300 65 Z"
                   fill="currentColor"
@@ -226,7 +253,6 @@ export default function Footer() {
                 {/* Office location dots */}
                 {officeLocations.map((loc) => (
                   <g key={loc.name}>
-                    {/* Pulsing ring */}
                     <circle
                       cx={loc.x}
                       cy={loc.y}
@@ -249,7 +275,6 @@ export default function Footer() {
                         repeatCount="indefinite"
                       />
                     </circle>
-                    {/* Dot */}
                     <circle
                       cx={loc.x}
                       cy={loc.y}
@@ -257,7 +282,6 @@ export default function Footer() {
                       fill="#10b981"
                       opacity="0.9"
                     />
-                    {/* Label */}
                     <text
                       x={loc.x}
                       y={Number(loc.y.replace("%", "")) + 12}
@@ -314,12 +338,18 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Social Buttons - slightly larger with hover scale */}
+            {/* Social Buttons - with hover effects */}
             <div className="flex items-center gap-3">
-              {[Linkedin, Twitter, Youtube].map((Icon, idx) => (
+              {[
+                { Icon: Twitter, label: "Twitter" },
+                { Icon: Linkedin, label: "LinkedIn" },
+                { Icon: Github, label: "GitHub" },
+                { Icon: Youtube, label: "YouTube" },
+              ].map(({ Icon, label }) => (
                 <button
-                  key={idx}
-                  className="w-10 h-10 rounded-lg border border-border flex items-center justify-center text-muted-foreground hover:text-safeglobal hover:border-safeglobal/30 hover:scale-110 transition-all cursor-pointer"
+                  key={label}
+                  aria-label={label}
+                  className="w-10 h-10 rounded-lg border border-border flex items-center justify-center text-muted-foreground hover:text-safeglobal hover:border-safeglobal/30 hover:bg-safeglobal/5 hover:scale-110 transition-all cursor-pointer"
                 >
                   <Icon className="w-4.5 h-4.5" />
                 </button>
@@ -406,6 +436,34 @@ export default function Footer() {
                   <span>ISO 45001</span>
                 </div>
               </div>
+
+              {/* System Status Indicator */}
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/5">
+                <div className="relative flex items-center justify-center">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                  <div className="absolute w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+                </div>
+                <span className="text-[10px] text-emerald-500 font-medium">All Systems Operational</span>
+              </div>
+
+              {/* Social Icons in bottom bar */}
+              <div className="hidden lg:flex items-center gap-1.5">
+                {[
+                  { Icon: Twitter, label: "Twitter" },
+                  { Icon: Linkedin, label: "LinkedIn" },
+                  { Icon: Github, label: "GitHub" },
+                  { Icon: Youtube, label: "YouTube" },
+                ].map(({ Icon, label }) => (
+                  <button
+                    key={label}
+                    aria-label={label}
+                    className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground/40 hover:text-safeglobal hover:bg-safeglobal/5 transition-all cursor-pointer"
+                  >
+                    <Icon className="w-3.5 h-3.5" />
+                  </button>
+                ))}
+              </div>
+
               <Button
                 variant="ghost"
                 size="sm"

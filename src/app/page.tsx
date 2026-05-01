@@ -37,6 +37,8 @@ import EventCountdown from "@/components/safe-global/EventCountdown";
 import SafetyChecklist from "@/components/safe-global/SafetyChecklist";
 import TestimonialSlider from "@/components/safe-global/TestimonialSlider";
 import ComparisonSection from "@/components/safe-global/ComparisonSection";
+import EmergencyResponseMap from "@/components/safe-global/EmergencyResponseMap";
+import SafetyROIWidget from "@/components/safe-global/SafetyROIWidget";
 
 export default function Home() {
   return (
@@ -63,6 +65,7 @@ export default function Home() {
         <ComparisonSection />
         <AwardsSection />
         <SecurityCompliance />
+        <EmergencyResponseMap />
         <AIDemoSection />
         <SafetyTimeline />
         <AnimatedStatsSection />
@@ -72,6 +75,7 @@ export default function Home() {
         <TestimonialsSection />
         <TestimonialSlider />
         <PricingSection />
+        <SafetyROIWidget />
         <FAQSection />
         <SafetyChecklist />
         <EventCountdown />

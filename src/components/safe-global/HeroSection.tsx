@@ -14,6 +14,7 @@ import {
   Globe,
   Users,
   BarChart3,
+  Sparkles,
 } from "lucide-react";
 
 function TypingText({ words, className }: { words: string[]; className?: string }) {
@@ -89,10 +90,10 @@ function AnimatedGrid() {
         y: Math.random() * canvas.height,
         vx: (Math.random() - 0.5) * 0.3,
         vy: (Math.random() - 0.5) * 0.3,
-        size: Math.random() * 2.5 + 1, // Slightly larger particles
+        size: Math.random() * 2.5 + 1,
         opacity: baseOpacity,
         baseOpacity,
-        pulseOffset: Math.random() * Math.PI * 2, // Random offset for pulse
+        pulseOffset: Math.random() * Math.PI * 2,
       });
     }
 
@@ -134,7 +135,6 @@ function AnimatedGrid() {
           if (dist < 150) {
             const alpha = 0.12 * (1 - dist / 150);
 
-            // Create gradient line from safeglobal to cyan
             const gradient = ctx.createLinearGradient(
               particles[i].x,
               particles[i].y,
@@ -162,11 +162,9 @@ function AnimatedGrid() {
         if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
         if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
 
-        // Pulse effect: periodically brighten
-        const pulse = Math.sin(time * 4 + p.pulseOffset) * 0.3 + 0.7; // oscillates between 0.4 and 1.0
+        const pulse = Math.sin(time * 4 + p.pulseOffset) * 0.3 + 0.7;
         p.opacity = p.baseOpacity * pulse;
 
-        // Glow effect using shadowBlur
         ctx.save();
         ctx.shadowBlur = 12;
         ctx.shadowColor = `rgba(16, 185, 129, ${p.opacity * 0.6})`;
@@ -176,7 +174,6 @@ function AnimatedGrid() {
         ctx.fill();
         ctx.restore();
 
-        // Inner bright core
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size * 0.4, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(52, 211, 153, ${p.opacity * 0.8})`;
@@ -252,11 +249,66 @@ function AnimatedCounter({
   );
 }
 
+// Floating CSS Particles component - small dots rising upward
+function FloatingParticles() {
+  const particlesRef = useRef<Array<{ id: number; left: string; size: number; duration: number; delay: number }>>([]);
+
+  if (particlesRef.current.length === 0) {
+    for (let i = 0; i < 20; i++) {
+      particlesRef.current.push({
+        id: i,
+        left: `${Math.random() * 100}%`,
+        size: Math.random() * 3 + 1.5,
+        duration: Math.random() * 8 + 6,
+        delay: Math.random() * 8,
+      });
+    }
+  }
+
+  return (
+    <div className="particles-container">
+      {particlesRef.current.map((p) => (
+        <div
+          key={p.id}
+          className="particle"
+          style={{
+            left: p.left,
+            bottom: "-10px",
+            width: `${p.size}px`,
+            height: `${p.size}px`,
+            animationDuration: `${p.duration}s`,
+            animationDelay: `${p.delay}s`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+// Trusted by industry leaders logos
+const trustedLogos = [
+  { initials: "3M", color: "from-red-500 to-red-600" },
+  { initials: "GE", color: "from-blue-500 to-blue-600" },
+  { initials: "SI", color: "from-cyan-500 to-teal-500" },
+  { initials: "BA", color: "from-amber-500 to-orange-500" },
+  { initials: "DU", color: "from-violet-500 to-purple-500" },
+];
+
 export default function HeroSection() {
   const cardRef = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
   const [glarePos, setGlarePos] = useState({ x: 50, y: 50 });
   const [isHovering, setIsHovering] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+
+  // Parallax scroll listener for floating badge elements
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -264,18 +316,15 @@ export default function HeroSection() {
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
 
-    // Normalized position from -1 to 1
     const normalizedX = (e.clientX - centerX) / (rect.width / 2);
     const normalizedY = (e.clientY - centerY) / (rect.height / 2);
 
-    // Max rotation: 8 degrees
     const maxRotation = 8;
     const rotateY = normalizedX * maxRotation;
-    const rotateX = -normalizedY * maxRotation; // Inverted for natural tilt feel
+    const rotateX = -normalizedY * maxRotation;
 
     setTilt({ rotateX, rotateY });
 
-    // Glare position (0-100% for CSS)
     const glareX = ((e.clientX - rect.left) / rect.width) * 100;
     const glareY = ((e.clientY - rect.top) / rect.height) * 100;
     setGlarePos({ x: glareX, y: glareY });
@@ -304,6 +353,9 @@ export default function HeroSection() {
       {/* Animated Grid Background */}
       <AnimatedGrid />
 
+      {/* Floating Particles - CSS dots rising upward */}
+      <FloatingParticles />
+
       {/* Gradient Overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background z-[1]" />
       <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-safeglobal/5 rounded-full blur-[120px] z-[1]" />
@@ -329,7 +381,14 @@ export default function HeroSection() {
                 NEXT-GEN AI SAFETY PLATFORM
               </Badge>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1]">
-                AI-Powered
+                <span className="inline-flex items-center gap-2">
+                  AI-Powered
+                  {/* AI-POWERED micro-badge */}
+                  <Badge className="bg-safeglobal/15 text-safeglobal border border-safeglobal/30 text-[10px] px-2 py-0.5 font-semibold tracking-wider gap-1">
+                    <Sparkles className="w-3 h-3" />
+                    AI-POWERED
+                  </Badge>
+                </span>
                 <br />
                 Safety.{" "}
                 <span className="text-gradient-animated">Zero</span>
@@ -378,6 +437,28 @@ export default function HeroSection() {
                 <Play className="w-4 h-4" />
                 See How It Works
               </Button>
+            </motion.div>
+
+            {/* Trusted by industry leaders - company logo circles */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.5 }}
+              className="pt-2"
+            >
+              <p className="text-xs text-muted-foreground/60 mb-3 tracking-wide">Trusted by industry leaders</p>
+              <div className="flex items-center gap-3">
+                {trustedLogos.map((logo) => (
+                  <div
+                    key={logo.initials}
+                    className={`w-10 h-10 rounded-full bg-gradient-to-br ${logo.color} flex items-center justify-center text-white text-[11px] font-bold shadow-lg hover:scale-110 transition-transform cursor-default`}
+                    title={logo.initials}
+                  >
+                    {logo.initials}
+                  </div>
+                ))}
+                <span className="text-xs text-muted-foreground/50 ml-1">+200 more</span>
+              </div>
             </motion.div>
 
             {/* Animated Stats */}
@@ -432,190 +513,196 @@ export default function HeroSection() {
             className="relative lg:ml-8 perspective-[1000px]"
           >
             <div className="relative">
-              {/* Main Dashboard Card - 3D Tilt */}
-              <div
-                ref={cardRef}
-                className="relative rounded-2xl overflow-hidden border border-border bg-card/80 backdrop-blur-sm shadow-2xl shadow-black/30 glow-emerald card-premium"
-                style={{
-                  transform: `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
-                  transformStyle: "preserve-3d",
-                  transition: isHovering
-                    ? "transform 0.1s ease-out"
-                    : "transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)",
-                }}
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
-                onMouseEnter={handleMouseEnter}
-              >
-                {/* Holographic Shine/Glare Overlay */}
+              {/* Animated gradient border wrapper around dashboard card */}
+              <div className="gradient-border-always">
+                {/* Main Dashboard Card - 3D Tilt */}
                 <div
-                  className="absolute inset-0 z-10 pointer-events-none rounded-2xl"
+                  ref={cardRef}
+                  className="relative rounded-2xl overflow-hidden border border-border bg-card/80 backdrop-blur-sm shadow-2xl shadow-black/30 glow-emerald card-premium"
                   style={{
-                    background: isHovering
-                      ? `radial-gradient(circle at ${glarePos.x}% ${glarePos.y}%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 20%, transparent 60%)`
-                      : "transparent",
-                    transition: isHovering ? "background 0.1s ease-out" : "background 0.6s ease-out",
-                    mixBlendMode: "overlay",
+                    transform: `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
+                    transformStyle: "preserve-3d",
+                    transition: isHovering
+                      ? "transform 0.1s ease-out"
+                      : "transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)",
                   }}
-                />
+                  onMouseMove={handleMouseMove}
+                  onMouseLeave={handleMouseLeave}
+                  onMouseEnter={handleMouseEnter}
+                >
+                  {/* Holographic Shine/Glare Overlay */}
+                  <div
+                    className="absolute inset-0 z-10 pointer-events-none rounded-2xl"
+                    style={{
+                      background: isHovering
+                        ? `radial-gradient(circle at ${glarePos.x}% ${glarePos.y}%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 20%, transparent 60%)`
+                        : "transparent",
+                      transition: isHovering ? "background 0.1s ease-out" : "background 0.6s ease-out",
+                      mixBlendMode: "overlay",
+                    }}
+                  />
 
-                {/* Secondary rainbow/holographic glare layer */}
-                <div
-                  className="absolute inset-0 z-10 pointer-events-none rounded-2xl"
-                  style={{
-                    background: isHovering
-                      ? `radial-gradient(ellipse at ${glarePos.x}% ${glarePos.y}%, rgba(16,185,129,0.08) 0%, rgba(6,182,212,0.06) 25%, transparent 55%)`
-                      : "transparent",
-                    transition: isHovering ? "background 0.1s ease-out" : "background 0.6s ease-out",
-                  }}
-                />
+                  {/* Secondary rainbow/holographic glare layer */}
+                  <div
+                    className="absolute inset-0 z-10 pointer-events-none rounded-2xl"
+                    style={{
+                      background: isHovering
+                        ? `radial-gradient(ellipse at ${glarePos.x}% ${glarePos.y}%, rgba(16,185,129,0.08) 0%, rgba(6,182,212,0.06) 25%, transparent 55%)`
+                        : "transparent",
+                      transition: isHovering ? "background 0.1s ease-out" : "background 0.6s ease-out",
+                    }}
+                  />
 
-                <div className="bg-gradient-to-br from-safeglobal/10 to-cyan-500/5 p-6">
-                  {/* Dashboard Header */}
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center gap-2">
-                      <Shield className="w-5 h-5 text-safeglobal" />
-                      <span className="text-sm font-semibold">
-                        SafeGlobal Command Center
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-safeglobal animate-pulse" />
-                      <span className="text-xs text-safeglobal">LIVE</span>
-                    </div>
-                  </div>
-
-                  {/* Safety Score */}
-                  <div className="flex items-center gap-6 mb-6">
-                    <div className="relative w-28 h-28">
-                      <svg
-                        className="w-full h-full -rotate-90"
-                        viewBox="0 0 100 100"
-                      >
-                        <circle
-                          cx="50"
-                          cy="50"
-                          r="42"
-                          fill="none"
-                          stroke="rgba(16,185,129,0.1)"
-                          strokeWidth="8"
-                        />
-                        <circle
-                          cx="50"
-                          cy="50"
-                          r="42"
-                          fill="none"
-                          stroke="#10b981"
-                          strokeWidth="8"
-                          strokeLinecap="round"
-                          strokeDasharray={`${0.94 * 2 * Math.PI * 42} ${2 * Math.PI * 42}`}
-                        />
-                      </svg>
-                      <div className="absolute inset-0 flex flex-col items-center justify-center">
-                        <span className="text-3xl font-bold text-safeglobal">
-                          94
-                        </span>
-                        <span className="text-[10px] text-muted-foreground">
-                          SAFETY SCORE
+                  <div className="bg-gradient-to-br from-safeglobal/10 to-cyan-500/5 p-6">
+                    {/* Dashboard Header */}
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="flex items-center gap-2">
+                        <Shield className="w-5 h-5 text-safeglobal" />
+                        <span className="text-sm font-semibold">
+                          SafeGlobal Command Center
                         </span>
                       </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-safeglobal animate-pulse" />
+                        <span className="text-xs text-safeglobal">LIVE</span>
+                      </div>
                     </div>
-                    <div className="space-y-3 flex-1">
+
+                    {/* Safety Score */}
+                    <div className="flex items-center gap-6 mb-6">
+                      <div className="relative w-28 h-28">
+                        <svg
+                          className="w-full h-full -rotate-90"
+                          viewBox="0 0 100 100"
+                        >
+                          <circle
+                            cx="50"
+                            cy="50"
+                            r="42"
+                            fill="none"
+                            stroke="rgba(16,185,129,0.1)"
+                            strokeWidth="8"
+                          />
+                          <circle
+                            cx="50"
+                            cy="50"
+                            r="42"
+                            fill="none"
+                            stroke="#10b981"
+                            strokeWidth="8"
+                            strokeLinecap="round"
+                            strokeDasharray={`${0.94 * 2 * Math.PI * 42} ${2 * Math.PI * 42}`}
+                          />
+                        </svg>
+                        <div className="absolute inset-0 flex flex-col items-center justify-center">
+                          <span className="text-3xl font-bold text-safeglobal">
+                            94
+                          </span>
+                          <span className="text-[10px] text-muted-foreground">
+                            SAFETY SCORE
+                          </span>
+                        </div>
+                      </div>
+                      <div className="space-y-3 flex-1">
+                        {[
+                          {
+                            label: "Compliance",
+                            value: 98,
+                            color: "bg-safeglobal",
+                          },
+                          {
+                            label: "Risk Level",
+                            value: 12,
+                            color: "bg-cyan-500",
+                          },
+                          {
+                            label: "Incidents",
+                            value: 3,
+                            color: "bg-amber-500",
+                          },
+                        ].map((item) => (
+                          <div key={item.label} className="space-y-1">
+                            <div className="flex justify-between text-xs">
+                              <span className="text-muted-foreground">
+                                {item.label}
+                              </span>
+                              <span className="font-medium">
+                                {item.value}
+                                {item.label === "Risk Level" ? "%" : ""}
+                              </span>
+                            </div>
+                            <div className="h-1.5 bg-muted rounded-full overflow-hidden">
+                              <div
+                                className={`h-full ${item.color} rounded-full transition-all duration-1000`}
+                                style={{
+                                  width:
+                                    item.label === "Risk Level"
+                                      ? `${item.value}%`
+                                      : `${item.value}%`,
+                                }}
+                              />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Alert Feed */}
+                    <div className="space-y-2">
+                      <div className="text-xs font-medium text-muted-foreground mb-2">
+                        RECENT ALERTS
+                      </div>
                       {[
                         {
-                          label: "Compliance",
-                          value: 98,
-                          color: "bg-safeglobal",
+                          icon: AlertTriangle,
+                          text: "Zone B-7: Temperature threshold exceeded",
+                          time: "2m ago",
+                          type: "warning",
                         },
                         {
-                          label: "Risk Level",
-                          value: 12,
-                          color: "bg-cyan-500",
+                          icon: Shield,
+                          text: "PPE compliance verified - Floor 3",
+                          time: "5m ago",
+                          type: "success",
                         },
                         {
-                          label: "Incidents",
-                          value: 3,
-                          color: "bg-amber-500",
+                          icon: Activity,
+                          text: "Risk prediction updated for Assembly Line",
+                          time: "8m ago",
+                          type: "info",
                         },
-                      ].map((item) => (
-                        <div key={item.label} className="space-y-1">
-                          <div className="flex justify-between text-xs">
-                            <span className="text-muted-foreground">
-                              {item.label}
-                            </span>
-                            <span className="font-medium">
-                              {item.value}
-                              {item.label === "Risk Level" ? "%" : ""}
-                            </span>
-                          </div>
-                          <div className="h-1.5 bg-muted rounded-full overflow-hidden">
-                            <div
-                              className={`h-full ${item.color} rounded-full transition-all duration-1000`}
-                              style={{
-                                width:
-                                  item.label === "Risk Level"
-                                    ? `${item.value}%`
-                                    : `${item.value}%`,
-                              }}
-                            />
-                          </div>
+                      ].map((alert, i) => (
+                        <div
+                          key={i}
+                          className="flex items-center gap-3 p-2.5 rounded-lg bg-background/50 border border-border/50"
+                        >
+                          <alert.icon
+                            className={`w-4 h-4 flex-shrink-0 ${
+                              alert.type === "warning"
+                                ? "text-amber-500"
+                                : alert.type === "success"
+                                  ? "text-safeglobal"
+                                  : "text-cyan-500"
+                            }`}
+                          />
+                          <span className="text-xs flex-1 truncate">
+                            {alert.text}
+                          </span>
+                          <span className="text-[10px] text-muted-foreground flex-shrink-0">
+                            {alert.time}
+                          </span>
                         </div>
                       ))}
                     </div>
                   </div>
-
-                  {/* Alert Feed */}
-                  <div className="space-y-2">
-                    <div className="text-xs font-medium text-muted-foreground mb-2">
-                      RECENT ALERTS
-                    </div>
-                    {[
-                      {
-                        icon: AlertTriangle,
-                        text: "Zone B-7: Temperature threshold exceeded",
-                        time: "2m ago",
-                        type: "warning",
-                      },
-                      {
-                        icon: Shield,
-                        text: "PPE compliance verified - Floor 3",
-                        time: "5m ago",
-                        type: "success",
-                      },
-                      {
-                        icon: Activity,
-                        text: "Risk prediction updated for Assembly Line",
-                        time: "8m ago",
-                        type: "info",
-                      },
-                    ].map((alert, i) => (
-                      <div
-                        key={i}
-                        className="flex items-center gap-3 p-2.5 rounded-lg bg-background/50 border border-border/50"
-                      >
-                        <alert.icon
-                          className={`w-4 h-4 flex-shrink-0 ${
-                            alert.type === "warning"
-                              ? "text-amber-500"
-                              : alert.type === "success"
-                                ? "text-safeglobal"
-                                : "text-cyan-500"
-                          }`}
-                        />
-                        <span className="text-xs flex-1 truncate">
-                          {alert.text}
-                        </span>
-                        <span className="text-[10px] text-muted-foreground flex-shrink-0">
-                          {alert.time}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
                 </div>
               </div>
 
-              {/* Floating Elements */}
-              <div className="absolute -top-4 -right-4 bg-safeglobal/10 border border-safeglobal/20 rounded-xl p-3 backdrop-blur-sm animate-float shadow-lg shadow-safeglobal/10 hover-ring cursor-default">
+              {/* Floating Elements with parallax scroll effect */}
+              <div
+                className="absolute -top-4 -right-4 bg-safeglobal/10 border border-safeglobal/20 rounded-xl p-3 backdrop-blur-sm animate-float shadow-lg shadow-safeglobal/10 hover-ring cursor-default"
+                style={{ transform: `translateY(${scrollY * 0.08}px)` }}
+              >
                 <div className="flex items-center gap-2">
                   <Shield className="w-4 h-4 text-safeglobal" />
                   <span className="text-xs font-medium text-safeglobal">
@@ -623,7 +710,10 @@ export default function HeroSection() {
                   </span>
                 </div>
               </div>
-              <div className="absolute -bottom-3 -left-3 bg-card border border-border rounded-xl p-3 shadow-xl animate-float [animation-delay:1s] hover-ring cursor-default">
+              <div
+                className="absolute -bottom-3 -left-3 bg-card border border-border rounded-xl p-3 shadow-xl animate-float [animation-delay:1s] hover-ring cursor-default"
+                style={{ transform: `translateY(${scrollY * 0.05}px)` }}
+              >
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-safeglobal animate-pulse" />
                   <span className="text-xs font-medium">
@@ -631,7 +721,10 @@ export default function HeroSection() {
                   </span>
                 </div>
               </div>
-              <div className="absolute top-1/2 -right-6 bg-cyan-500/10 border border-cyan-500/20 rounded-xl p-2.5 backdrop-blur-sm animate-float [animation-delay:2s] shadow-lg hover-ring cursor-default">
+              <div
+                className="absolute top-1/2 -right-6 bg-cyan-500/10 border border-cyan-500/20 rounded-xl p-2.5 backdrop-blur-sm animate-float [animation-delay:2s] shadow-lg hover-ring cursor-default"
+                style={{ transform: `translateY(${scrollY * 0.12}px)` }}
+              >
                 <div className="flex items-center gap-2">
                   <Users className="w-3.5 h-3.5 text-cyan-400" />
                   <span className="text-[11px] font-medium text-cyan-400">

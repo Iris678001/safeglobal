@@ -564,6 +564,53 @@
   to { transform: translateX(0); opacity: 1; }
 }
 
+/* Floating particles - small dots rising upward */
+@keyframes particle-rise {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(20px);
+    opacity: 0;
+  }
+}
+
+/* Animated gradient border spin */
+@keyframes border-spin {
+  0% { --border-angle: 0deg; }
+  100% { --border-angle: 360deg; }
+}
+
+/* Gradient border rotation for cards */
+@keyframes gradient-border-rotate {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Subtle image shift on hover for blog posts */
+@keyframes image-shift {
+  0%, 100% {
+    transform: scale(1) translateX(0);
+  }
+  50% {
+    transform: scale(1.05) translateX(3px);
+  }
+}
+
 @layer utilities {
   .animate-section-enter {
     animation: section-enter 0.7s ease-out forwards;
@@ -616,4 +663,164 @@
     background-size: 200% 100%;
     animation: shimmer 2s ease-in-out infinite;
   }
+
+  /* Floating particles container */
+  .particles-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(16, 185, 129, 0.4);
+    animation: particle-rise linear infinite;
+  }
+  :is(.dark .particle) {
+    background: rgba(16, 185, 129, 0.3);
+  }
+
+  /* Animated gradient border wrapper - always visible */
+  .gradient-border-always {
+    position: relative;
+    border-radius: 1rem;
+  }
+  .gradient-border-always::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(135deg, rgba(16,185,129,0.5), rgba(6,182,212,0.3), rgba(16,185,129,0.1), rgba(6,182,212,0.5));
+    background-size: 300% 300%;
+    animation: gradient-border-rotate 4s ease infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Footer grid pattern background */
+  .footer-grid-bg {
+    background-image:
+      linear-gradient(rgba(16, 185, 129, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(16, 185, 129, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  :is(.dark .footer-grid-bg) {
+    background-image:
+      linear-gradient(rgba(16, 185, 129, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(16, 185, 129, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Diagonal stripe background for premium accents */
+  .bg-diagonal-stripes {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 10px,
+      rgba(16, 185, 129, 0.03) 10px,
+      rgba(16, 185, 129, 0.03) 20px
+    );
+  }
+  :is(.dark .bg-diagonal-stripes) {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 10px,
+      rgba(16, 185, 129, 0.015) 10px,
+      rgba(16, 185, 129, 0.015) 20px
+    );
+  }
+
+  /* Hexagon pattern for tech feel */
+  .bg-hex-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='70' viewBox='0 0 60 70' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l25.98 15v30L30 60 4.02 45V15z' fill='none' stroke='rgba(16,185,129,0.05)' stroke-width='0.5'/%3E%3C/svg%3E");
+    background-size: 60px 70px;
+  }
+  :is(.dark .bg-hex-pattern) {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='70' viewBox='0 0 60 70' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l25.98 15v30L30 60 4.02 45V15z' fill='none' stroke='rgba(16,185,129,0.03)' stroke-width='0.5'/%3E%3C/svg%3E");
+  }
+
+  /* Animated counter text with gradient */
+  .counter-gradient {
+    background: linear-gradient(135deg, #10b981 0%, #06b6d4 50%, #10b981 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 4s ease infinite;
+  }
+
+  /* Pulsing ring for status indicators */
+  .pulse-ring {
+    position: relative;
+  }
+  .pulse-ring::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid rgba(16, 185, 129, 0.3);
+    animation: ring-expand 2s ease-out infinite;
+  }
+
+  /* Premium tooltip style */
+  .tooltip-premium {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #10b981;
+    backdrop-filter: blur(10px);
+  }
+
+  /* Animated underline for links */
+  .animated-underline {
+    position: relative;
+  }
+  .animated-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, #10b981, #06b6d4);
+    transition: width 0.3s ease;
+  }
+  .animated-underline:hover::after {
+    width: 100%;
+  }
+
+  /* Badge pulse for live indicators */
+  .badge-pulse {
+    animation: badge-glow 2s ease-in-out infinite;
+  }
+
+  /* Staggered grid entrance */
+  .stagger-grid > *:nth-child(1) { animation-delay: 0ms; }
+  .stagger-grid > *:nth-child(2) { animation-delay: 80ms; }
+  .stagger-grid > *:nth-child(3) { animation-delay: 160ms; }
+  .stagger-grid > *:nth-child(4) { animation-delay: 240ms; }
+  .stagger-grid > *:nth-child(5) { animation-delay: 320ms; }
+  .stagger-grid > *:nth-child(6) { animation-delay: 400ms; }
+}
+
+/* Pulsing ring expand animation */
+@keyframes ring-expand {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* Badge glow animation */
+@keyframes badge-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.2); }
+  50% { box-shadow: 0 0 12px 2px rgba(16, 185, 129, 0.15); }
 }

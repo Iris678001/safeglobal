@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,9 @@ import {
   CheckCircle2,
   Shield,
   ChevronRight,
+  Users,
+  TrendingUp,
+  Globe,
 } from "lucide-react";
 
 const industries = [
@@ -152,6 +155,8 @@ const industries = [
 
 export default function IndustriesSection() {
   const [activeTab, setActiveTab] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
   const handleScrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -160,14 +165,34 @@ export default function IndustriesSection() {
 
   const activeIndustry = industries[activeTab];
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setIsVisible(true);
+      },
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  // Industry-specific metrics for the floating stat cards
+  const industryMetrics = [
+    { icon: Users, label: "Workers Protected", value: "2.4M+", color: "text-safeglobal" },
+    { icon: TrendingUp, label: "Avg Risk Reduction", value: "73%", color: "text-cyan-400" },
+    { icon: Globe, label: "Countries Active", value: "42+", color: "text-amber-400" },
+  ];
+
   return (
-    <section id="industries" className="relative py-20 lg:py-28">
+    <section id="industries" ref={sectionRef} className="relative py-20 lg:py-28 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
       {/* Background effects */}
       <div className="absolute inset-0 bg-dot-pattern opacity-20" />
       <div className="absolute top-1/3 -right-32 w-72 h-72 bg-safeglobal/3 rounded-full blur-[120px]" />
       <div className="absolute bottom-1/4 -left-32 w-64 h-64 bg-cyan-500/3 rounded-full blur-[100px]" />
+      {/* New: Ambient animated gradient orb */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-r from-safeglobal/5 via-cyan-500/5 to-amber-500/5 rounded-full blur-[100px] animate-breathe" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -232,6 +257,30 @@ export default function IndustriesSection() {
           </div>
         </motion.div>
 
+        {/* Industry Metrics Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mb-10 grid grid-cols-3 gap-4"
+        >
+          {industryMetrics.map((metric) => (
+            <div
+              key={metric.label}
+              className="flex items-center gap-3 p-4 rounded-xl bg-card/50 border border-border/50"
+            >
+              <div className="w-10 h-10 rounded-lg bg-safeglobal/10 flex items-center justify-center">
+                <metric.icon className={`w-5 h-5 ${metric.color}`} />
+              </div>
+              <div>
+                <div className={`text-xl font-bold ${metric.color}`}>{metric.value}</div>
+                <div className="text-xs text-muted-foreground">{metric.label}</div>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+
         {/* Tab Content with AnimatePresence */}
         <AnimatePresence mode="wait">
           <motion.div
@@ -242,6 +291,8 @@ export default function IndustriesSection() {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="relative"
           >
+            {/* Animated background glow matching active industry */}
+            <div className={`absolute -top-20 -right-20 w-80 h-80 bg-gradient-to-br ${activeIndustry.gradientBg} rounded-full blur-[100px] opacity-20 transition-opacity duration-500`} />
             <div className="grid lg:grid-cols-5 gap-8 items-start">
               {/* Left: Icon & Description */}
               <div className="lg:col-span-2 space-y-6">
@@ -284,52 +335,99 @@ export default function IndustriesSection() {
                 {/* CTA Button */}
                 <Button
                   size="lg"
-                  className={`bg-safeglobal hover:bg-safeglobal-dark text-white shadow-lg shadow-safeglobal/20 hover:shadow-safeglobal/30 transition-all gap-2 px-6`}
+                  className={`bg-safeglobal hover:bg-safeglobal-dark text-white shadow-lg shadow-safeglobal/20 hover:shadow-safeglobal/30 transition-all gap-2 px-6 group`}
                   onClick={() => handleScrollTo("contact")}
                 >
                   Explore Solutions
-                  <ChevronRight className="w-4 h-4" />
+                  <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </Button>
+
+                {/* Industry comparison mini-chart */}
+                <div className="p-4 rounded-xl border border-border/50 bg-card/30">
+                  <div className="text-xs text-muted-foreground mb-3 font-medium">Risk Reduction Comparison</div>
+                  <div className="flex items-end gap-2 h-20">
+                    <div className="flex-1 flex flex-col items-center gap-1">
+                      <motion.div
+                        initial={{ height: 0 }}
+                        animate={{ height: isVisible ? "40%" : "0%" }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="w-full bg-red-500/30 rounded-t-md"
+                      />
+                      <span className="text-[10px] text-muted-foreground">Before</span>
+                    </div>
+                    <div className="flex-1 flex flex-col items-center gap-1">
+                      <motion.div
+                        initial={{ height: 0 }}
+                        animate={{ height: isVisible ? "90%" : "0%" }}
+                        transition={{ duration: 0.8, delay: 0.4 }}
+                        className="w-full bg-gradient-to-t from-safeglobal/50 to-safeglobal/80 rounded-t-md"
+                      />
+                      <span className="text-[10px] text-safeglobal font-medium">After</span>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Right: Risks & Solutions */}
               <div className="lg:col-span-3 space-y-6">
-                {/* Key Risks Section */}
-                <div className="p-6 rounded-2xl border border-border bg-card/50">
-                  <div className="flex items-center gap-2 mb-4">
-                    <AlertTriangle className="w-5 h-5 text-red-400" />
-                    <h4 className="text-lg font-semibold">Key Risks</h4>
+                {/* Key Risks Section - enhanced with severity indicator */}
+                <div className="p-6 rounded-2xl border border-border bg-card/50 hover:border-red-500/20 transition-colors duration-300">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2">
+                      <AlertTriangle className="w-5 h-5 text-red-400" />
+                      <h4 className="text-lg font-semibold">Key Risks</h4>
+                    </div>
+                    <Badge variant="outline" className="text-[10px] bg-red-500/10 text-red-400 border-red-500/20">
+                      HIGH PRIORITY
+                    </Badge>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {activeIndustry.risks.map((risk) => (
-                      <Badge
+                    {activeIndustry.risks.map((risk, idx) => (
+                      <motion.div
                         key={risk}
-                        variant="outline"
-                        className={`px-3 py-1.5 text-sm border ${activeIndustry.riskBadge}`}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: idx * 0.05, duration: 0.2 }}
                       >
-                        <AlertTriangle className="w-3 h-3 mr-1.5" />
-                        {risk}
-                      </Badge>
+                        <Badge
+                          variant="outline"
+                          className={`px-3 py-1.5 text-sm border ${activeIndustry.riskBadge} hover:scale-105 transition-transform cursor-default`}
+                        >
+                          <AlertTriangle className="w-3 h-3 mr-1.5" />
+                          {risk}
+                        </Badge>
+                      </motion.div>
                     ))}
                   </div>
                 </div>
 
-                {/* Our Solutions Section */}
-                <div className="p-6 rounded-2xl border border-border bg-card/50">
-                  <div className="flex items-center gap-2 mb-4">
-                    <CheckCircle2 className="w-5 h-5 text-safeglobal" />
-                    <h4 className="text-lg font-semibold">Our Solutions</h4>
+                {/* Our Solutions Section - enhanced with checkmark animation */}
+                <div className="p-6 rounded-2xl border border-border bg-card/50 hover:border-safeglobal/20 transition-colors duration-300">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-safeglobal" />
+                      <h4 className="text-lg font-semibold">Our Solutions</h4>
+                    </div>
+                    <Badge variant="outline" className="text-[10px] bg-safeglobal/10 text-safeglobal border-safeglobal/20">
+                      AI-POWERED
+                    </Badge>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {activeIndustry.solutions.map((solution) => (
-                      <Badge
+                    {activeIndustry.solutions.map((solution, idx) => (
+                      <motion.div
                         key={solution}
-                        variant="outline"
-                        className={`px-3 py-1.5 text-sm border ${activeIndustry.solutionBadge}`}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: idx * 0.05 + 0.1, duration: 0.2 }}
                       >
-                        <CheckCircle2 className="w-3 h-3 mr-1.5" />
-                        {solution}
-                      </Badge>
+                        <Badge
+                          variant="outline"
+                          className={`px-3 py-1.5 text-sm border ${activeIndustry.solutionBadge} hover:scale-105 transition-transform cursor-default`}
+                        >
+                          <CheckCircle2 className="w-3 h-3 mr-1.5" />
+                          {solution}
+                        </Badge>
+                      </motion.div>
                     ))}
                   </div>
                 </div>

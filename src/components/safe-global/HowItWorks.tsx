@@ -349,14 +349,49 @@ export default function HowItWorks() {
           </motion.div>
         </AnimatePresence>
 
+        {/* Success Metrics - New section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-4"
+        >
+          {[
+            { value: "99.7%", label: "Detection Rate", icon: Shield, color: "text-safeglobal" },
+            { value: "45ms", label: "Alert Speed", icon: Zap, color: "text-cyan-400" },
+            { value: "73%", label: "Risk Reduction", icon: BarChart3, color: "text-amber-400" },
+            { value: "4-6 wk", label: "Deployment Time", icon: Clock, color: "text-violet-400" },
+          ].map((metric, idx) => (
+            <motion.div
+              key={metric.label}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 + idx * 0.1, duration: 0.4 }}
+              className="flex items-center gap-3 p-4 rounded-xl bg-card/40 border border-border/50 hover:border-safeglobal/20 transition-colors"
+            >
+              <div className="w-10 h-10 rounded-lg bg-safeglobal/10 flex items-center justify-center flex-shrink-0">
+                <metric.icon className={`w-5 h-5 ${metric.color}`} />
+              </div>
+              <div>
+                <div className={`text-lg font-bold ${metric.color}`}>{metric.value}</div>
+                <div className="text-[11px] text-muted-foreground">{metric.label}</div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
         {/* Deployment Timeline */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-12 rounded-2xl border bg-card/30 p-6"
+          className="mt-12 rounded-2xl border bg-card/30 p-6 relative overflow-hidden"
         >
+          {/* Background shimmer line */}
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-safeglobal/20 to-transparent" />
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4">
             <div className="flex items-center gap-2">
               <Clock className="w-5 h-5 text-safeglobal" />
