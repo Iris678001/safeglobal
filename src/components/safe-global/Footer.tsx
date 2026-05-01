@@ -11,6 +11,8 @@ import {
   CheckCircle2,
   Loader2,
   Mail,
+  Award,
+  Lock,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -34,8 +36,8 @@ const footerLinks = {
     { label: "Case Studies", href: "#case-studies" },
     { label: "Blog & Insights", href: "#blog" },
     { label: "Safety Reports", href: "#blog" },
-    { label: "Documentation", href: "#services" },
-    { label: "API Reference", href: "#services" },
+    { label: "FAQ", href: "#faq" },
+    { label: "Pricing", href: "#pricing" },
   ],
   Company: [
     { label: "About Us", href: "#about" },
@@ -171,31 +173,50 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
-            <span>
-              &copy; {new Date().getFullYear()} SafeGlobal. All rights
-              reserved.
-            </span>
-            <button className="hover:text-safeglobal transition-colors cursor-pointer">
-              Privacy Policy
-            </button>
-            <button className="hover:text-safeglobal transition-colors cursor-pointer">
-              Terms of Service
-            </button>
-            <button className="hover:text-safeglobal transition-colors cursor-pointer">
-              Cookie Policy
-            </button>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
+              <span>
+                &copy; {new Date().getFullYear()} SafeGlobal. All rights
+                reserved.
+              </span>
+              <button className="hover:text-safeglobal transition-colors cursor-pointer">
+                Privacy Policy
+              </button>
+              <button className="hover:text-safeglobal transition-colors cursor-pointer">
+                Terms of Service
+              </button>
+              <button className="hover:text-safeglobal transition-colors cursor-pointer">
+                Cookie Policy
+              </button>
+            </div>
+            <div className="flex items-center gap-3">
+              {/* Security Badges */}
+              <div className="flex items-center gap-2 text-xs text-muted-foreground/60">
+                <div className="flex items-center gap-1 px-2 py-1 rounded border border-border/50">
+                  <Lock className="w-3 h-3 text-safeglobal/60" />
+                  <span>ISO 27001</span>
+                </div>
+                <div className="flex items-center gap-1 px-2 py-1 rounded border border-border/50">
+                  <Shield className="w-3 h-3 text-safeglobal/60" />
+                  <span>SOC 2</span>
+                </div>
+                <div className="flex items-center gap-1 px-2 py-1 rounded border border-border/50">
+                  <Award className="w-3 h-3 text-safeglobal/60" />
+                  <span>ISO 45001</span>
+                </div>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={scrollToTop}
+                className="text-muted-foreground hover:text-safeglobal gap-1"
+              >
+                Back to top
+                <ArrowUp className="w-3.5 h-3.5" />
+              </Button>
+            </div>
           </div>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={scrollToTop}
-            className="text-muted-foreground hover:text-safeglobal gap-1"
-          >
-            Back to top
-            <ArrowUp className="w-3.5 h-3.5" />
-          </Button>
         </div>
       </div>
     </footer>

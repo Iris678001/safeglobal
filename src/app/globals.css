@@ -106,6 +106,13 @@
     background-clip: text;
   }
 
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
   .bg-gradient-radial {
     background: radial-gradient(ellipse at center, var(--tw-gradient-from), var(--tw-gradient-to));
   }
@@ -123,7 +130,7 @@
   }
 
   .bg-grid-pattern {
-    background-image: 
+    background-image:
       linear-gradient(rgba(16, 185, 129, 0.03) 1px, transparent 1px),
       linear-gradient(90deg, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
     background-size: 60px 60px;
@@ -132,6 +139,89 @@
   .bg-dot-pattern {
     background-image: radial-gradient(rgba(16, 185, 129, 0.08) 1px, transparent 1px);
     background-size: 24px 24px;
+  }
+
+  /* Noise texture overlay for premium depth */
+  .bg-noise {
+    position: relative;
+  }
+  .bg-noise::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.015;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Glass morphism card */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* Section divider with glow */
+  .section-divider {
+    position: relative;
+  }
+  .section-divider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.3), transparent);
+  }
+
+  /* Animated gradient border */
+  .animated-border {
+    position: relative;
+    background-clip: padding-box;
+  }
+  .animated-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(16,185,129,0.3), transparent 40%, transparent 60%, rgba(6,182,212,0.3));
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .animated-border:hover::before {
+    opacity: 1;
+  }
+
+  /* Shimmer effect for highlighted elements */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .shimmer::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(16, 185, 129, 0.05) 50%,
+      transparent 70%
+    );
+    animation: shimmer 8s ease-in-out infinite;
+  }
+
+  /* Marquee animation for ticker banners */
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
   }
 
   .animate-float {
@@ -148,6 +238,17 @@
 
   .animate-fade-in {
     animation: fade-in 0.8s ease-out forwards;
+  }
+
+  /* Smooth scroll reveal */
+  .reveal-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .reveal-up.revealed {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .scrollbar-thin {
@@ -167,6 +268,11 @@
     background-color: rgba(16, 185, 129, 0.3);
     border-radius: 3px;
   }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 @keyframes float {
@@ -197,4 +303,20 @@
 @keyframes scan-line {
   0% { transform: translateY(-100%); }
   100% { transform: translateY(100vh); }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+  100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes cookie-slide-up {
+  0% { transform: translateY(100%); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
 }

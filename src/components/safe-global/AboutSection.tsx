@@ -11,6 +11,10 @@ import {
   Users,
   TrendingUp,
   ArrowRight,
+  Rocket,
+  Globe2,
+  Award,
+  Star,
 } from "lucide-react";
 
 const values = [
@@ -56,6 +60,45 @@ const differentiators = [
   {
     label: "Enterprise Integration",
     desc: "Native integrations with SAP, Oracle, ServiceNow, and 50+ enterprise platforms for seamless deployment.",
+  },
+];
+
+const milestones = [
+  {
+    year: "2019",
+    title: "Founded in San Francisco",
+    desc: "SafeGlobal was born from a vision to use AI to prevent workplace injuries.",
+    icon: Rocket,
+    color: "text-safeglobal",
+    bg: "bg-safeglobal/10",
+    border: "border-safeglobal/30",
+  },
+  {
+    year: "2020",
+    title: "First Enterprise Deployment",
+    desc: "Launched AI Safety Monitoring with our first Fortune 500 manufacturing client.",
+    icon: Star,
+    color: "text-cyan-400",
+    bg: "bg-cyan-500/10",
+    border: "border-cyan-500/30",
+  },
+  {
+    year: "2022",
+    title: "Global Expansion",
+    desc: "Expanded to 15+ countries, reached 100,000 workers protected worldwide.",
+    icon: Globe2,
+    color: "text-amber-400",
+    bg: "bg-amber-500/10",
+    border: "border-amber-500/30",
+  },
+  {
+    year: "2024",
+    title: "Industry Leadership",
+    desc: "500K+ workers protected, 30+ countries, $2.1B in client savings, ISO 45001 certified.",
+    icon: Award,
+    color: "text-violet-400",
+    bg: "bg-violet-500/10",
+    border: "border-violet-500/30",
   },
 ];
 
@@ -143,6 +186,54 @@ export default function AboutSection() {
             </p>
           </motion.div>
         </div>
+
+        {/* Company Timeline */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-16"
+        >
+          <h3 className="text-2xl font-bold text-center mb-10">
+            Our <span className="text-gradient">Journey</span>
+          </h3>
+          <div className="relative">
+            {/* Timeline line */}
+            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-safeglobal/30 via-cyan-500/30 via-amber-500/30 to-violet-500/30 -translate-y-1/2" />
+
+            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
+              {milestones.map((milestone, idx) => (
+                <motion.div
+                  key={milestone.year}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.15 }}
+                  className="relative"
+                >
+                  <div className={`group p-6 rounded-2xl border bg-card/50 ${milestone.border} hover:shadow-xl hover:shadow-black/20 hover:-translate-y-1 transition-all duration-300`}>
+                    {/* Year badge */}
+                    <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full ${milestone.bg} ${milestone.color} text-xs font-bold mb-3`}>
+                      <milestone.icon className="w-3.5 h-3.5" />
+                      {milestone.year}
+                    </div>
+                    <h4 className="text-base font-semibold mb-2 group-hover:text-safeglobal transition-colors">
+                      {milestone.title}
+                    </h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {milestone.desc}
+                    </p>
+                    {/* Dot on timeline */}
+                    <div className="hidden md:block absolute -bottom-3 left-1/2 -translate-x-1/2">
+                      <div className={`w-3 h-3 rounded-full ${milestone.bg} border-2 border-background`} />
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
 
         {/* Values */}
         <motion.div

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -12,6 +12,7 @@ import {
   User,
   Loader2,
   Shield,
+  Sparkles,
 } from "lucide-react";
 
 interface Message {
@@ -28,12 +29,13 @@ const quickReplies = [
   "Pricing information",
 ];
 
-const botResponses: Record<string, string> = {
+// Fallback responses when LLM API is unavailable
+const fallbackResponses: Record<string, string> = {
   default:
     "Thank you for your interest in SafeGlobal! I can help you learn about our AI-powered safety solutions, request a demo, or connect you with our team. What would you like to know?",
   demo: "Great choice! Our team would love to show you how SafeGlobal can transform your safety operations. Please fill out the contact form below, or I can connect you with our sales team directly. Would you like me to help schedule a demo?",
   pricing:
-    "SafeGlobal offers flexible enterprise pricing based on your organization's size, industry, and specific needs. We provide customized quotes to ensure you get the best value. Would you like to schedule a consultation to discuss pricing for your organization?",
+    "SafeGlobal offers flexible enterprise pricing: Starter ($499/mo), Professional ($1,299/mo), and Enterprise (Custom). All plans include a 14-day free trial. Would you like to schedule a consultation for a custom quote?",
   monitoring:
     "Our AI Safety Monitoring uses advanced computer vision and sensor networks to detect workplace hazards in real-time. The system processes millions of data points per second with sub-second alert latency, covering PPE compliance, zone monitoring, and hazard detection 24/7.",
   what:
@@ -44,21 +46,21 @@ const botResponses: Record<string, string> = {
     "Our Compliance Automation engine tracks 200+ global safety standards and automatically updates as regulations change. It handles documentation, gap analysis, audit preparation, and continuous monitoring — saving our clients 200+ hours per quarter on compliance tasks.",
 };
 
-function getBotResponse(input: string): string {
+function getFallbackResponse(input: string): string {
   const lower = input.toLowerCase();
   if (lower.includes("demo") || lower.includes("request"))
-    return botResponses.demo;
+    return fallbackResponses.demo;
   if (lower.includes("price") || lower.includes("cost") || lower.includes("pricing"))
-    return botResponses.pricing;
+    return fallbackResponses.pricing;
   if (lower.includes("monitor") || lower.includes("detect"))
-    return botResponses.monitoring;
+    return fallbackResponses.monitoring;
   if (lower.includes("what") || lower.includes("who") || lower.includes("about"))
-    return botResponses.what;
+    return fallbackResponses.what;
   if (lower.includes("predict") || lower.includes("risk"))
-    return botResponses.predictive;
+    return fallbackResponses.predictive;
   if (lower.includes("compliance") || lower.includes("regulation"))
-    return botResponses.compliance;
-  return botResponses.default;
+    return fallbackResponses.compliance;
+  return fallbackResponses.default;
 }
 
 export default function ChatBot() {
@@ -68,12 +70,14 @@ export default function ChatBot() {
       id: "1",
       role: "assistant",
       content:
-        "Hello! I'm SafeGlobal's AI assistant. I can help you learn about our safety solutions, request a demo, or answer any questions. How can I help you today?",
+        "Hello! I'm SafeGlobal's AI assistant powered by real AI. I can help you learn about our safety solutions, request a demo, or answer any questions. How can I help you today?",
       timestamp: new Date(),
     },
   ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [sessionId] = useState(() => `session-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`);
+  const [useLLM, setUseLLM] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -84,30 +88,71 @@ export default function ChatBot() {
     scrollToBottom();
   }, [messages]);
 
-  const sendMessage = (text: string) => {
-    if (!text.trim()) return;
+  const sendMessage = useCallback(
+    async (text: string) => {
+      if (!text.trim()) return;
 
-    const userMsg: Message = {
-      id: Date.now().toString(),
-      role: "user",
-      content: text.trim(),
-      timestamp: new Date(),
-    };
-    setMessages((prev) => [...prev, userMsg]);
-    setInput("");
-    setIsTyping(true);
-
-    setTimeout(() => {
-      const botMsg: Message = {
-        id: (Date.now() + 1).toString(),
-        role: "assistant",
-        content: getBotResponse(text),
+      const userMsg: Message = {
+        id: Date.now().toString(),
+        role: "user",
+        content: text.trim(),
         timestamp: new Date(),
       };
-      setMessages((prev) => [...prev, botMsg]);
-      setIsTyping(false);
-    }, 800 + Math.random() * 1000);
-  };
+      setMessages((prev) => [...prev, userMsg]);
+      setInput("");
+      setIsTyping(true);
+
+      if (useLLM) {
+        try {
+          const res = await fetch("/api/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ sessionId, message: text.trim() }),
+          });
+
+          if (res.ok) {
+            const data = await res.json();
+            if (data.success && data.response) {
+              const botMsg: Message = {
+                id: (Date.now() + 1).toString(),
+                role: "assistant",
+                content: data.response,
+                timestamp: new Date(),
+              };
+              setMessages((prev) => [...prev, botMsg]);
+              setIsTyping(false);
+              return;
+            }
+          }
+          // Fallback to predefined responses
+          throw new Error("LLM API unavailable");
+        } catch {
+          // Use fallback
+          const botMsg: Message = {
+            id: (Date.now() + 1).toString(),
+            role: "assistant",
+            content: getFallbackResponse(text),
+            timestamp: new Date(),
+          };
+          setMessages((prev) => [...prev, botMsg]);
+          setIsTyping(false);
+        }
+      } else {
+        // Use fallback predefined responses
+        setTimeout(() => {
+          const botMsg: Message = {
+            id: (Date.now() + 1).toString(),
+            role: "assistant",
+            content: getFallbackResponse(text),
+            timestamp: new Date(),
+          };
+          setMessages((prev) => [...prev, botMsg]);
+          setIsTyping(false);
+        }, 800 + Math.random() * 1000);
+      }
+    },
+    [sessionId, useLLM]
+  );
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -137,7 +182,7 @@ export default function ChatBot() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-50 w-[380px] max-w-[calc(100vw-3rem)] h-[500px] max-h-[70vh] rounded-2xl border border-border bg-card shadow-2xl shadow-black/30 flex flex-col overflow-hidden animate-slide-up">
+        <div className="fixed bottom-24 right-6 z-50 w-[400px] max-w-[calc(100vw-3rem)] h-[520px] max-h-[70vh] rounded-2xl border border-border bg-card shadow-2xl shadow-black/30 flex flex-col overflow-hidden animate-slide-up">
           {/* Header */}
           <div className="p-4 border-b border-border bg-gradient-to-r from-safeglobal/10 to-cyan-500/5">
             <div className="flex items-center justify-between">
@@ -149,16 +194,28 @@ export default function ChatBot() {
                   <h4 className="text-sm font-semibold">SafeGlobal AI</h4>
                   <div className="flex items-center gap-1.5">
                     <div className="w-1.5 h-1.5 rounded-full bg-safeglobal animate-pulse" />
-                    <span className="text-[10px] text-safeglobal">Online</span>
+                    <span className="text-[10px] text-safeglobal">
+                      {useLLM ? "AI-Powered" : "Quick Responses"}
+                    </span>
                   </div>
                 </div>
               </div>
-              <Badge
-                variant="secondary"
-                className="text-[9px] bg-safeglobal/10 text-safeglobal"
-              >
-                AI Assistant
-              </Badge>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setUseLLM(!useLLM)}
+                  className="flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-medium border border-border hover:border-safeglobal/30 hover:bg-safeglobal/5 transition-all cursor-pointer"
+                  title={useLLM ? "Switch to quick responses" : "Switch to AI-powered responses"}
+                >
+                  <Sparkles className={`w-3 h-3 ${useLLM ? "text-safeglobal" : "text-muted-foreground"}`} />
+                  {useLLM ? "AI" : "Quick"}
+                </button>
+                <Badge
+                  variant="secondary"
+                  className="text-[9px] bg-safeglobal/10 text-safeglobal"
+                >
+                  Assistant
+                </Badge>
+              </div>
             </div>
           </div>
 
