@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -9,7 +10,9 @@ import {
   Shield,
   Activity,
   AlertTriangle,
-  ArrowRight,
+  Globe,
+  Users,
+  BarChart3,
 } from "lucide-react";
 
 function AnimatedGrid() {
@@ -129,6 +132,56 @@ function AnimatedGrid() {
   );
 }
 
+function AnimatedCounter({
+  target,
+  suffix = "",
+  prefix = "",
+  duration = 2000,
+}: {
+  target: number;
+  suffix?: string;
+  prefix?: string;
+  duration?: number;
+}) {
+  const [current, setCurrent] = useState(0);
+  const [started, setStarted] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started) {
+          setStarted(true);
+        }
+      },
+      { threshold: 0.5 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [started]);
+
+  useEffect(() => {
+    if (!started) return;
+    const start = Date.now();
+    const animate = () => {
+      const elapsed = Date.now() - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCurrent(Math.floor(eased * target));
+      if (progress < 1) requestAnimationFrame(animate);
+    };
+    requestAnimationFrame(animate);
+  }, [started, target, duration]);
+
+  return (
+    <div ref={ref}>
+      {prefix}
+      {current.toLocaleString()}
+      {suffix}
+    </div>
+  );
+}
+
 export default function HeroSection() {
   const handleScrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -147,13 +200,19 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background z-[1]" />
       <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-safeglobal/5 rounded-full blur-[120px] z-[1]" />
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-[100px] z-[1]" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-safeglobal/3 rounded-full blur-[150px] z-[1]" />
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-40">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left - Text Content */}
           <div className="space-y-8">
-            <div className="space-y-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              className="space-y-4"
+            >
               <Badge
                 variant="outline"
                 className="border-safeglobal/30 text-safeglobal bg-safeglobal/10 px-4 py-1.5 text-xs font-medium tracking-wide"
@@ -177,10 +236,15 @@ export default function HeroSection() {
                 <span className="text-safeglobal font-semibold">30+</span>{" "}
                 countries.
               </p>
-            </div>
+            </motion.div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="flex flex-col sm:flex-row gap-4"
+            >
               <Button
                 size="lg"
                 className="bg-safeglobal hover:bg-safeglobal-dark text-white shadow-xl shadow-safeglobal/25 hover:shadow-safeglobal/40 transition-all text-base px-8 h-13 gap-2"
@@ -198,32 +262,62 @@ export default function HeroSection() {
                 <Play className="w-4 h-4" />
                 See How It Works
               </Button>
-            </div>
+            </motion.div>
 
-            {/* Quick Stats */}
-            <div className="flex flex-wrap gap-8 pt-4">
+            {/* Animated Stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="flex flex-wrap gap-8 pt-4"
+            >
               {[
-                { value: "99.7%", label: "Detection Rate" },
-                { value: "73%", label: "Risk Reduction" },
-                { value: "2.4M", label: "Hours Saved" },
+                {
+                  icon: Shield,
+                  value: 99.7,
+                  suffix: "%",
+                  label: "Detection Rate",
+                },
+                {
+                  icon: BarChart3,
+                  value: 73,
+                  suffix: "%",
+                  label: "Risk Reduction",
+                },
+                {
+                  icon: Globe,
+                  value: 30,
+                  suffix: "+",
+                  label: "Countries",
+                },
               ].map((stat) => (
                 <div key={stat.label} className="space-y-1">
+                  <stat.icon className="w-4 h-4 text-safeglobal/60 mb-1" />
                   <div className="text-2xl sm:text-3xl font-bold text-safeglobal">
-                    {stat.value}
+                    <AnimatedCounter
+                      target={stat.value}
+                      suffix={stat.suffix}
+                      duration={2000}
+                    />
                   </div>
                   <div className="text-xs text-muted-foreground uppercase tracking-wider">
                     {stat.label}
                   </div>
                 </div>
               ))}
-            </div>
+            </motion.div>
           </div>
 
           {/* Right - Dashboard Preview */}
-          <div className="relative lg:ml-8">
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="relative lg:ml-8"
+          >
             <div className="relative">
               {/* Main Dashboard Card */}
-              <div className="relative rounded-2xl overflow-hidden border border-border bg-card/80 backdrop-blur-sm shadow-2xl shadow-black/30">
+              <div className="relative rounded-2xl overflow-hidden border border-border bg-card/80 backdrop-blur-sm shadow-2xl shadow-black/30 glow-emerald">
                 <div className="bg-gradient-to-br from-safeglobal/10 to-cyan-500/5 p-6">
                   {/* Dashboard Header */}
                   <div className="flex items-center justify-between mb-6">
@@ -369,7 +463,7 @@ export default function HeroSection() {
               </div>
 
               {/* Floating Elements */}
-              <div className="absolute -top-4 -right-4 bg-safeglobal/10 border border-safeglobal/20 rounded-xl p-3 backdrop-blur-sm animate-float">
+              <div className="absolute -top-4 -right-4 bg-safeglobal/10 border border-safeglobal/20 rounded-xl p-3 backdrop-blur-sm animate-float shadow-lg shadow-safeglobal/10">
                 <div className="flex items-center gap-2">
                   <Shield className="w-4 h-4 text-safeglobal" />
                   <span className="text-xs font-medium text-safeglobal">
@@ -385,13 +479,26 @@ export default function HeroSection() {
                   </span>
                 </div>
               </div>
+              <div className="absolute top-1/2 -right-6 bg-cyan-500/10 border border-cyan-500/20 rounded-xl p-2.5 backdrop-blur-sm animate-float [animation-delay:2s] shadow-lg">
+                <div className="flex items-center gap-2">
+                  <Users className="w-3.5 h-3.5 text-cyan-400" />
+                  <span className="text-[11px] font-medium text-cyan-400">
+                    285 Workers Online
+                  </span>
+                </div>
+              </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
+      >
         <span className="text-[10px] text-muted-foreground tracking-widest uppercase">
           Explore
         </span>
@@ -401,7 +508,7 @@ export default function HeroSection() {
         >
           <div className="w-1 h-2.5 bg-safeglobal rounded-full animate-bounce" />
         </button>
-      </div>
+      </motion.div>
     </section>
   );
 }

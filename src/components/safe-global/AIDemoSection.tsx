@@ -1,8 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 import {
   Shield,
   Activity,
@@ -11,7 +19,6 @@ import {
   TrendingDown,
   Users,
   Zap,
-  BarChart3,
 } from "lucide-react";
 
 function AnimatedCounter({
@@ -42,6 +49,74 @@ function AnimatedCounter({
       {current}
       {suffix}
     </span>
+  );
+}
+
+const riskData = [
+  { hour: "00:00", risk: 12, predicted: 14 },
+  { hour: "01:00", risk: 10, predicted: 11 },
+  { hour: "02:00", risk: 8, predicted: 9 },
+  { hour: "03:00", risk: 7, predicted: 8 },
+  { hour: "04:00", risk: 9, predicted: 10 },
+  { hour: "05:00", risk: 14, predicted: 16 },
+  { hour: "06:00", risk: 22, predicted: 25 },
+  { hour: "07:00", risk: 35, predicted: 38 },
+  { hour: "08:00", risk: 48, predicted: 52 },
+  { hour: "09:00", risk: 55, predicted: 58 },
+  { hour: "10:00", risk: 62, predicted: 65 },
+  { hour: "11:00", risk: 58, predicted: 61 },
+  { hour: "12:00", risk: 45, predicted: 48 },
+  { hour: "13:00", risk: 52, predicted: 56 },
+  { hour: "14:00", risk: 68, predicted: 72 },
+  { hour: "15:00", risk: 72, predicted: 78 },
+  { hour: "16:00", risk: 58, predicted: 62 },
+  { hour: "17:00", risk: 42, predicted: 45 },
+  { hour: "18:00", risk: 28, predicted: 30 },
+  { hour: "19:00", risk: 18, predicted: 20 },
+  { hour: "20:00", risk: 15, predicted: 17 },
+  { hour: "21:00", risk: 12, predicted: 14 },
+  { hour: "22:00", risk: 10, predicted: 12 },
+  { hour: "23:00", risk: 9, predicted: 11 },
+];
+
+const zoneRiskData: Record<string, typeof riskData> = {
+  "Assembly Line A": riskData.map((d) => ({ ...d, risk: Math.max(5, d.risk - 20), predicted: Math.max(5, d.predicted - 18) })),
+  "Chemical Storage B": riskData.map((d) => ({ ...d, risk: d.risk + 5, predicted: d.predicted + 8 })),
+  "Loading Dock C": riskData.map((d) => ({ ...d, risk: d.risk + 15, predicted: d.predicted + 20 })),
+  "Office Block D": riskData.map((d) => ({ ...d, risk: Math.max(2, d.risk - 40), predicted: Math.max(2, d.predicted - 38) })),
+};
+
+const zonePredictions: Record<string, string> = {
+  "Assembly Line A": "All systems nominal. Next scheduled maintenance window at 22:00. No elevated risk predicted in the next 8 hours.",
+  "Chemical Storage B": "Slight risk elevation predicted at 14:00-15:00 due to scheduled chemical transfer. Recommended: Activate additional ventilation monitoring.",
+  "Loading Dock C": "Elevated risk predicted 14:00-16:00 due to scheduled heavy machinery operation. Recommended: Deploy additional spotters and activate proximity sensors.",
+  "Office Block D": "Minimal risk environment. All access control systems functioning normally. Next fire drill scheduled for Thursday.",
+};
+
+interface CustomTooltipProps {
+  active?: boolean;
+  payload?: Array<{ value: number; dataKey: string; color: string }>;
+  label?: string;
+}
+
+function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
+  if (!active || !payload) return null;
+  return (
+    <div className="bg-card border border-border rounded-lg p-3 shadow-xl text-xs">
+      <p className="font-medium mb-1">{label}</p>
+      {payload.map((entry, idx) => (
+        <div key={idx} className="flex items-center gap-2">
+          <div
+            className="w-2 h-2 rounded-full"
+            style={{ backgroundColor: entry.color }}
+          />
+          <span className="text-muted-foreground capitalize">
+            {entry.dataKey}:
+          </span>
+          <span className="font-medium">{entry.value}%</span>
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -86,11 +161,12 @@ export default function AIDemoSection() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveZone((prev) => (prev + 1) % zones.length);
-    }, 3000);
+    }, 4000);
     return () => clearInterval(interval);
   }, [zones.length]);
 
   const currentZone = zones[activeZone];
+  const currentChartData = zoneRiskData[currentZone.name] || riskData;
 
   return (
     <section id="ai-demo" className="relative py-20 lg:py-28 overflow-hidden">
@@ -130,7 +206,7 @@ export default function AIDemoSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative rounded-2xl border border-border bg-card/80 backdrop-blur-sm shadow-2xl shadow-black/20 overflow-hidden"
+          className="relative rounded-2xl border border-border bg-card/80 backdrop-blur-sm shadow-2xl shadow-black/20 overflow-hidden glow-emerald"
         >
           {/* Dashboard Top Bar */}
           <div className="flex items-center justify-between px-6 py-3 border-b border-border bg-card/50">
@@ -194,6 +270,31 @@ export default function AIDemoSection() {
                     </div>
                   </button>
                 ))}
+
+                {/* Overall Stats */}
+                <div className="p-4 rounded-xl border border-border bg-background/50 space-y-3">
+                  <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                    Facility Overview
+                  </h4>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <div className="text-lg font-bold text-safeglobal">235</div>
+                      <div className="text-[10px] text-muted-foreground">Total Workers</div>
+                    </div>
+                    <div>
+                      <div className="text-lg font-bold text-amber-400">4</div>
+                      <div className="text-[10px] text-muted-foreground">Open Alerts</div>
+                    </div>
+                    <div>
+                      <div className="text-lg font-bold text-cyan-400">92%</div>
+                      <div className="text-[10px] text-muted-foreground">Compliance</div>
+                    </div>
+                    <div>
+                      <div className="text-lg font-bold text-safeglobal">4/4</div>
+                      <div className="text-[10px] text-muted-foreground">Zones Online</div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Center - Main Display */}
@@ -297,46 +398,68 @@ export default function AIDemoSection() {
                   </div>
                 </div>
 
-                {/* Risk Analysis Timeline */}
+                {/* Risk Analysis Chart with Recharts */}
                 <div className="p-6 rounded-xl border border-border bg-background/50">
                   <div className="flex items-center justify-between mb-4">
                     <h4 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
                       Risk Analysis Timeline (24h)
                     </h4>
-                    <Badge
-                      variant="secondary"
-                      className="text-[10px] bg-safeglobal/10 text-safeglobal"
-                    >
-                      AI Predicted
-                    </Badge>
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-2.5 h-2.5 rounded-full bg-safeglobal" />
+                        <span className="text-[10px] text-muted-foreground">Actual</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
+                        <span className="text-[10px] text-muted-foreground">AI Predicted</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="h-24 flex items-end gap-1">
-                    {Array.from({ length: 24 }, (_, i) => {
-                      const height = Math.max(
-                        10,
-                        Math.random() * 60 + (i > 8 && i < 17 ? 30 : 0)
-                      );
-                      const isHigh = height > 60;
-                      return (
-                        <div
-                          key={i}
-                          className="flex-1 rounded-t-sm transition-all duration-500"
-                          style={{
-                            height: `${height}%`,
-                            backgroundColor: isHigh
-                              ? "rgba(239, 68, 68, 0.6)"
-                              : "rgba(16, 185, 129, 0.4)",
-                          }}
+                  <div className="h-48">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <AreaChart data={currentChartData}>
+                        <defs>
+                          <linearGradient id="riskGradient" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="5%" stopColor="#10b981" stopOpacity={0.3} />
+                            <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
+                          </linearGradient>
+                          <linearGradient id="predictedGradient" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.15} />
+                            <stop offset="95%" stopColor="#f59e0b" stopOpacity={0} />
+                          </linearGradient>
+                        </defs>
+                        <XAxis
+                          dataKey="hour"
+                          axisLine={false}
+                          tickLine={false}
+                          tick={{ fontSize: 10, fill: "rgba(255,255,255,0.4)" }}
+                          interval={3}
                         />
-                      );
-                    })}
-                  </div>
-                  <div className="flex justify-between mt-2 text-[10px] text-muted-foreground">
-                    <span>00:00</span>
-                    <span>06:00</span>
-                    <span>12:00</span>
-                    <span>18:00</span>
-                    <span>24:00</span>
+                        <YAxis
+                          axisLine={false}
+                          tickLine={false}
+                          tick={{ fontSize: 10, fill: "rgba(255,255,255,0.4)" }}
+                          domain={[0, 100]}
+                          tickCount={5}
+                        />
+                        <Tooltip content={<CustomTooltip />} />
+                        <Area
+                          type="monotone"
+                          dataKey="predicted"
+                          stroke="#f59e0b"
+                          strokeWidth={2}
+                          strokeDasharray="5 5"
+                          fill="url(#predictedGradient)"
+                        />
+                        <Area
+                          type="monotone"
+                          dataKey="risk"
+                          stroke="#10b981"
+                          strokeWidth={2}
+                          fill="url(#riskGradient)"
+                        />
+                      </AreaChart>
+                    </ResponsiveContainer>
                   </div>
                 </div>
 
@@ -349,10 +472,7 @@ export default function AIDemoSection() {
                         AI Safety Prediction
                       </h4>
                       <p className="text-sm text-muted-foreground">
-                        Based on current trends, Zone C may experience elevated
-                        risk levels between 14:00-16:00 due to scheduled heavy
-                        machinery operation. Recommended: Deploy additional
-                        spotters and activate proximity sensors.
+                        {zonePredictions[currentZone.name]}
                       </p>
                     </div>
                   </div>

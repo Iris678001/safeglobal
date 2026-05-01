@@ -10,6 +10,8 @@ const nextConfig: NextConfig = {
     ".space-z.ai",
     "0.0.0.0",
     "localhost",
+    "21.0.3.85",
+    "127.0.0.1",
   ],
 };
 
