@@ -1,0 +1,407 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  ChevronRight,
+  Play,
+  Shield,
+  Activity,
+  AlertTriangle,
+  ArrowRight,
+} from "lucide-react";
+
+function AnimatedGrid() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let animationId: number;
+    let time = 0;
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resize();
+    window.addEventListener("resize", resize);
+
+    const particles: {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      size: number;
+      opacity: number;
+    }[] = [];
+
+    for (let i = 0; i < 60; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        size: Math.random() * 2 + 0.5,
+        opacity: Math.random() * 0.5 + 0.1,
+      });
+    }
+
+    const animate = () => {
+      time += 0.005;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw grid lines
+      ctx.strokeStyle = "rgba(16, 185, 129, 0.03)";
+      ctx.lineWidth = 0.5;
+      const gridSize = 60;
+      for (
+        let x = (time * 10) % gridSize;
+        x < canvas.width;
+        x += gridSize
+      ) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+      }
+      for (
+        let y = (time * 10) % gridSize;
+        y < canvas.height;
+        y += gridSize
+      ) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+      }
+
+      // Draw particles
+      particles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(16, 185, 129, ${p.opacity})`;
+        ctx.fill();
+      });
+
+      // Draw connections
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 150) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(16, 185, 129, ${0.06 * (1 - dist / 150)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+
+      animationId = requestAnimationFrame(animate);
+    };
+    animate();
+
+    return () => {
+      cancelAnimationFrame(animationId);
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 z-0"
+      style={{ pointerEvents: "none" }}
+    />
+  );
+}
+
+export default function HeroSection() {
+  const handleScrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
+      {/* Animated Grid Background */}
+      <AnimatedGrid />
+
+      {/* Gradient Overlays */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background z-[1]" />
+      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-safeglobal/5 rounded-full blur-[120px] z-[1]" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-[100px] z-[1]" />
+
+      {/* Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-40">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left - Text Content */}
+          <div className="space-y-8">
+            <div className="space-y-4">
+              <Badge
+                variant="outline"
+                className="border-safeglobal/30 text-safeglobal bg-safeglobal/10 px-4 py-1.5 text-xs font-medium tracking-wide"
+              >
+                <Activity className="w-3 h-3 mr-1.5" />
+                NEXT-GEN AI SAFETY PLATFORM
+              </Badge>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1]">
+                AI-Powered
+                <br />
+                Safety.{" "}
+                <span className="text-gradient">Zero</span>
+                <br />
+                Compromise.
+              </h1>
+              <p className="text-lg sm:text-xl text-muted-foreground max-w-lg leading-relaxed">
+                Enterprise-grade AI that monitors, predicts, and prevents
+                workplace hazards in real-time. Protecting{" "}
+                <span className="text-safeglobal font-semibold">500,000+</span>{" "}
+                workers across{" "}
+                <span className="text-safeglobal font-semibold">30+</span>{" "}
+                countries.
+              </p>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button
+                size="lg"
+                className="bg-safeglobal hover:bg-safeglobal-dark text-white shadow-xl shadow-safeglobal/25 hover:shadow-safeglobal/40 transition-all text-base px-8 h-13 gap-2"
+                onClick={() => handleScrollTo("contact")}
+              >
+                Request Demo
+                <ChevronRight className="w-4 h-4" />
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-border hover:border-safeglobal/50 hover:bg-safeglobal/5 text-base px-8 h-13 gap-2"
+                onClick={() => handleScrollTo("services")}
+              >
+                <Play className="w-4 h-4" />
+                See How It Works
+              </Button>
+            </div>
+
+            {/* Quick Stats */}
+            <div className="flex flex-wrap gap-8 pt-4">
+              {[
+                { value: "99.7%", label: "Detection Rate" },
+                { value: "73%", label: "Risk Reduction" },
+                { value: "2.4M", label: "Hours Saved" },
+              ].map((stat) => (
+                <div key={stat.label} className="space-y-1">
+                  <div className="text-2xl sm:text-3xl font-bold text-safeglobal">
+                    {stat.value}
+                  </div>
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right - Dashboard Preview */}
+          <div className="relative lg:ml-8">
+            <div className="relative">
+              {/* Main Dashboard Card */}
+              <div className="relative rounded-2xl overflow-hidden border border-border bg-card/80 backdrop-blur-sm shadow-2xl shadow-black/30">
+                <div className="bg-gradient-to-br from-safeglobal/10 to-cyan-500/5 p-6">
+                  {/* Dashboard Header */}
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center gap-2">
+                      <Shield className="w-5 h-5 text-safeglobal" />
+                      <span className="text-sm font-semibold">
+                        SafeGlobal Command Center
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-safeglobal animate-pulse" />
+                      <span className="text-xs text-safeglobal">LIVE</span>
+                    </div>
+                  </div>
+
+                  {/* Safety Score */}
+                  <div className="flex items-center gap-6 mb-6">
+                    <div className="relative w-28 h-28">
+                      <svg
+                        className="w-full h-full -rotate-90"
+                        viewBox="0 0 100 100"
+                      >
+                        <circle
+                          cx="50"
+                          cy="50"
+                          r="42"
+                          fill="none"
+                          stroke="rgba(16,185,129,0.1)"
+                          strokeWidth="8"
+                        />
+                        <circle
+                          cx="50"
+                          cy="50"
+                          r="42"
+                          fill="none"
+                          stroke="#10b981"
+                          strokeWidth="8"
+                          strokeLinecap="round"
+                          strokeDasharray={`${0.94 * 2 * Math.PI * 42} ${2 * Math.PI * 42}`}
+                        />
+                      </svg>
+                      <div className="absolute inset-0 flex flex-col items-center justify-center">
+                        <span className="text-3xl font-bold text-safeglobal">
+                          94
+                        </span>
+                        <span className="text-[10px] text-muted-foreground">
+                          SAFETY SCORE
+                        </span>
+                      </div>
+                    </div>
+                    <div className="space-y-3 flex-1">
+                      {[
+                        {
+                          label: "Compliance",
+                          value: 98,
+                          color: "bg-safeglobal",
+                        },
+                        {
+                          label: "Risk Level",
+                          value: 12,
+                          color: "bg-cyan-500",
+                        },
+                        {
+                          label: "Incidents",
+                          value: 3,
+                          color: "bg-amber-500",
+                        },
+                      ].map((item) => (
+                        <div key={item.label} className="space-y-1">
+                          <div className="flex justify-between text-xs">
+                            <span className="text-muted-foreground">
+                              {item.label}
+                            </span>
+                            <span className="font-medium">
+                              {item.value}
+                              {item.label === "Risk Level" ? "%" : ""}
+                            </span>
+                          </div>
+                          <div className="h-1.5 bg-muted rounded-full overflow-hidden">
+                            <div
+                              className={`h-full ${item.color} rounded-full transition-all duration-1000`}
+                              style={{
+                                width:
+                                  item.label === "Risk Level"
+                                    ? `${item.value}%`
+                                    : `${item.value}%`,
+                              }}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Alert Feed */}
+                  <div className="space-y-2">
+                    <div className="text-xs font-medium text-muted-foreground mb-2">
+                      RECENT ALERTS
+                    </div>
+                    {[
+                      {
+                        icon: AlertTriangle,
+                        text: "Zone B-7: Temperature threshold exceeded",
+                        time: "2m ago",
+                        type: "warning",
+                      },
+                      {
+                        icon: Shield,
+                        text: "PPE compliance verified - Floor 3",
+                        time: "5m ago",
+                        type: "success",
+                      },
+                      {
+                        icon: Activity,
+                        text: "Risk prediction updated for Assembly Line",
+                        time: "8m ago",
+                        type: "info",
+                      },
+                    ].map((alert, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center gap-3 p-2.5 rounded-lg bg-background/50 border border-border/50"
+                      >
+                        <alert.icon
+                          className={`w-4 h-4 flex-shrink-0 ${
+                            alert.type === "warning"
+                              ? "text-amber-500"
+                              : alert.type === "success"
+                                ? "text-safeglobal"
+                                : "text-cyan-500"
+                          }`}
+                        />
+                        <span className="text-xs flex-1 truncate">
+                          {alert.text}
+                        </span>
+                        <span className="text-[10px] text-muted-foreground flex-shrink-0">
+                          {alert.time}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating Elements */}
+              <div className="absolute -top-4 -right-4 bg-safeglobal/10 border border-safeglobal/20 rounded-xl p-3 backdrop-blur-sm animate-float">
+                <div className="flex items-center gap-2">
+                  <Shield className="w-4 h-4 text-safeglobal" />
+                  <span className="text-xs font-medium text-safeglobal">
+                    0 Incidents Today
+                  </span>
+                </div>
+              </div>
+              <div className="absolute -bottom-3 -left-3 bg-card border border-border rounded-xl p-3 shadow-xl animate-float [animation-delay:1s]">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-safeglobal animate-pulse" />
+                  <span className="text-xs font-medium">
+                    AI Model v4.2 Active
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
+        <span className="text-[10px] text-muted-foreground tracking-widest uppercase">
+          Explore
+        </span>
+        <button
+          onClick={() => handleScrollTo("trust")}
+          className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center p-1.5 hover:border-safeglobal/50 transition-colors cursor-pointer"
+        >
+          <div className="w-1 h-2.5 bg-safeglobal rounded-full animate-bounce" />
+        </button>
+      </div>
+    </section>
+  );
+}
