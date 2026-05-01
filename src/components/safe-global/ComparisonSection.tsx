@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,9 @@ import {
   TrendingDown,
   Clock,
   ArrowRight,
+  Trophy,
+  CheckCircle2,
+  XCircle,
 } from "lucide-react";
 
 const metrics = [
@@ -116,6 +119,19 @@ const metrics = [
   },
 ];
 
+// Feature comparison data for the comparison table
+const comparisonFeatures = [
+  { feature: "AI-Powered Hazard Detection", safeglobal: true, competitors: false },
+  { feature: "Real-Time Monitoring", safeglobal: true, competitors: false },
+  { feature: "Predictive Risk Analytics", safeglobal: true, competitors: false },
+  { feature: "Automated Compliance Reports", safeglobal: true, competitors: false },
+  { feature: "24/7 Dedicated Support", safeglobal: true, competitors: false },
+  { feature: "On-Premise Deployment", safeglobal: true, competitors: false },
+  { feature: "Custom Integrations", safeglobal: true, competitors: false },
+  { feature: "Sub-Second Alert Latency", safeglobal: true, competitors: false },
+  { feature: "SLA Guarantees", safeglobal: true, competitors: false },
+];
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -135,8 +151,67 @@ const cardVariants = {
   },
 };
 
+function AnimatedBar({
+  percent,
+  colorClass,
+  delay = 0,
+}: {
+  percent: number;
+  colorClass: string;
+  delay?: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [isVisible]);
+
+  return (
+    <div
+      ref={ref}
+      className={`w-full h-2 rounded-full bg-muted/50 overflow-hidden`}
+    >
+      <motion.div
+        className={`h-full rounded-full ${colorClass}`}
+        initial={{ width: 0 }}
+        animate={isVisible ? { width: `${percent}%` } : { width: 0 }}
+        transition={{
+          duration: 1.2,
+          ease: "easeOut",
+          delay,
+        }}
+      />
+    </div>
+  );
+}
+
 export default function ComparisonSection() {
   const [showSafeGlobal, setShowSafeGlobal] = useState(true);
+  const [tableVisible, setTableVisible] = useState(false);
+  const tableRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !tableVisible) {
+          setTableVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    if (tableRef.current) observer.observe(tableRef.current);
+    return () => observer.disconnect();
+  }, [tableVisible]);
 
   const handleScrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -230,7 +305,7 @@ export default function ComparisonSection() {
           </span>
         </motion.div>
 
-        {/* Metrics Grid */}
+        {/* Metrics Grid with Animated Bars */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -298,26 +373,89 @@ export default function ComparisonSection() {
                 {metric.improvement}
               </Badge>
 
-              {/* Animated Progress Bar */}
-              <div
-                className={`w-full h-2 rounded-full ${metric.colorClasses.progressBg} overflow-hidden`}
-              >
-                <motion.div
-                  className={`h-full rounded-full ${metric.colorClasses.progressFill}`}
-                  initial={{ width: 0 }}
-                  whileInView={{
-                    width: `${metric.progressPercent}%`,
-                  }}
-                  viewport={{ once: true }}
-                  transition={{
-                    duration: 1.2,
-                    ease: "easeOut",
-                    delay: 0.3,
-                  }}
-                />
-              </div>
+              {/* Animated Progress Bar using IntersectionObserver */}
+              <AnimatedBar
+                percent={metric.progressPercent}
+                colorClass={metric.colorClasses.progressFill}
+                delay={0.3}
+              />
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* Feature Comparison Table */}
+        <motion.div
+          ref={tableRef}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-14"
+        >
+          <h3 className="text-xl sm:text-2xl font-bold text-center mb-6">
+            Feature <span className="text-gradient">Comparison</span>
+          </h3>
+          <div className="rounded-2xl border border-border overflow-hidden bg-card/50">
+            {/* Table Header */}
+            <div className="grid grid-cols-3 border-b border-border bg-muted/30">
+              <div className="p-4 sm:p-5 text-sm font-semibold text-foreground">
+                Feature
+              </div>
+              <div className="p-4 sm:p-5 text-sm font-semibold text-center relative">
+                <div className="flex flex-col items-center gap-1.5">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-safeglobal">SafeGlobal</span>
+                    {/* Winner badge */}
+                    <Badge className="bg-safeglobal/15 text-safeglobal border border-safeglobal/30 text-[9px] px-1.5 py-0.5 font-bold tracking-wider gap-0.5">
+                      <Trophy className="w-2.5 h-2.5" />
+                      BEST
+                    </Badge>
+                  </div>
+                </div>
+              </div>
+              <div className="p-4 sm:p-5 text-sm font-semibold text-center text-muted-foreground">
+                Competitors
+              </div>
+            </div>
+
+            {/* Table Rows */}
+            {comparisonFeatures.map((row, index) => (
+              <motion.div
+                key={row.feature}
+                initial={{ opacity: 0, x: -10 }}
+                animate={
+                  tableVisible
+                    ? { opacity: 1, x: 0 }
+                    : { opacity: 0, x: -10 }
+                }
+                transition={{
+                  duration: 0.3,
+                  delay: index * 0.06,
+                }}
+                className={`grid grid-cols-3 border-b border-border/50 last:border-b-0 hover:bg-safeglobal/5 transition-colors duration-200 ${
+                  index % 2 === 0 ? "bg-transparent" : "bg-muted/10"
+                }`}
+              >
+                <div className="p-3 sm:p-4 text-sm text-muted-foreground">
+                  {row.feature}
+                </div>
+                <div className="p-3 sm:p-4 flex items-center justify-center">
+                  {row.safeglobal ? (
+                    <CheckCircle2 className="w-5 h-5 text-safeglobal" />
+                  ) : (
+                    <XCircle className="w-5 h-5 text-red-400/60" />
+                  )}
+                </div>
+                <div className="p-3 sm:p-4 flex items-center justify-center">
+                  {row.competitors ? (
+                    <CheckCircle2 className="w-5 h-5 text-safeglobal" />
+                  ) : (
+                    <XCircle className="w-5 h-5 text-red-400/60" />
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
         {/* Bottom Summary - ROI Stats */}

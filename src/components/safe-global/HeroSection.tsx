@@ -382,7 +382,7 @@ export default function HeroSection() {
               </Badge>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1]">
                 <span className="inline-flex items-center gap-2">
-                  AI-Powered
+                  <span className="text-gradient">AI-Powered</span>
                   {/* AI-POWERED micro-badge */}
                   <Badge className="bg-safeglobal/15 text-safeglobal border border-safeglobal/30 text-[10px] px-2 py-0.5 font-semibold tracking-wider gap-1">
                     <Sparkles className="w-3 h-3" />
@@ -419,14 +419,22 @@ export default function HeroSection() {
               className="flex flex-col sm:flex-row gap-4"
             >
               <MagneticButton strength={0.3} distance={150}>
-                <Button
-                  size="lg"
-                  className="bg-safeglobal hover:bg-safeglobal-dark text-white shadow-xl shadow-safeglobal/25 hover:shadow-safeglobal/40 transition-all text-base px-8 h-13 gap-2"
-                  onClick={() => handleScrollTo("contact")}
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="relative"
                 >
-                  Request Demo
-                  <ChevronRight className="w-4 h-4" />
-                </Button>
+                  {/* Glow ring on hover */}
+                  <div className="absolute inset-0 rounded-md bg-safeglobal/0 group-hover:bg-safeglobal/10 transition-all duration-300 -m-2" />
+                  <Button
+                    size="lg"
+                    className="bg-safeglobal hover:bg-safeglobal-dark text-white shadow-xl shadow-safeglobal/25 hover:shadow-[0_0_30px_rgba(16,185,129,0.35)] transition-all text-base px-8 h-13 gap-2 relative"
+                    onClick={() => handleScrollTo("contact")}
+                  >
+                    Request Demo
+                    <ChevronRight className="w-4 h-4" />
+                  </Button>
+                </motion.div>
               </MagneticButton>
               <Button
                 variant="outline"
@@ -489,7 +497,14 @@ export default function HeroSection() {
                 },
               ].map((stat) => (
                 <div key={stat.label} className="space-y-1">
-                  <stat.icon className="w-4 h-4 text-safeglobal/60 mb-1" />
+                  <div className="flex items-center gap-1.5">
+                    <stat.icon className="w-4 h-4 text-safeglobal/60" />
+                    {/* LIVE pulsing green dot */}
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-safeglobal opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-safeglobal" />
+                    </span>
+                  </div>
                   <div className="text-2xl sm:text-3xl font-bold text-safeglobal">
                     <AnimatedCounter
                       target={stat.value}
@@ -698,10 +713,12 @@ export default function HeroSection() {
                 </div>
               </div>
 
-              {/* Floating Elements with parallax scroll effect */}
-              <div
-                className="absolute -top-4 -right-4 bg-safeglobal/10 border border-safeglobal/20 rounded-xl p-3 backdrop-blur-sm animate-float shadow-lg shadow-safeglobal/10 hover-ring cursor-default"
-                style={{ transform: `translateY(${scrollY * 0.08}px)` }}
+              {/* Floating Elements with parallax scroll effect and bobbing animation */}
+              <motion.div
+                className="absolute -top-4 -right-4 bg-safeglobal/10 border border-safeglobal/20 rounded-xl p-3 backdrop-blur-sm shadow-lg shadow-safeglobal/10 hover-ring cursor-default z-20"
+                animate={{ y: [0, -8, 0], rotate: [0, 1, -1, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                style={{ marginTop: scrollY * 0.08 }}
               >
                 <div className="flex items-center gap-2">
                   <Shield className="w-4 h-4 text-safeglobal" />
@@ -709,10 +726,12 @@ export default function HeroSection() {
                     0 Incidents Today
                   </span>
                 </div>
-              </div>
-              <div
-                className="absolute -bottom-3 -left-3 bg-card border border-border rounded-xl p-3 shadow-xl animate-float [animation-delay:1s] hover-ring cursor-default"
-                style={{ transform: `translateY(${scrollY * 0.05}px)` }}
+              </motion.div>
+              <motion.div
+                className="absolute -bottom-3 -left-3 bg-card border border-border rounded-xl p-3 shadow-xl hover-ring cursor-default z-20"
+                animate={{ y: [0, -6, 0], rotate: [0, -1, 1, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                style={{ marginTop: scrollY * 0.05 }}
               >
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-safeglobal animate-pulse" />
@@ -720,10 +739,12 @@ export default function HeroSection() {
                     AI Model v4.2 Active
                   </span>
                 </div>
-              </div>
-              <div
-                className="absolute top-1/2 -right-6 bg-cyan-500/10 border border-cyan-500/20 rounded-xl p-2.5 backdrop-blur-sm animate-float [animation-delay:2s] shadow-lg hover-ring cursor-default"
-                style={{ transform: `translateY(${scrollY * 0.12}px)` }}
+              </motion.div>
+              <motion.div
+                className="absolute top-1/2 -right-6 bg-cyan-500/10 border border-cyan-500/20 rounded-xl p-2.5 backdrop-blur-sm shadow-lg hover-ring cursor-default z-20"
+                animate={{ y: [0, -10, 0], rotate: [0, 1, -1, 0] }}
+                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                style={{ marginTop: scrollY * 0.12 }}
               >
                 <div className="flex items-center gap-2">
                   <Users className="w-3.5 h-3.5 text-cyan-400" />
@@ -731,7 +752,7 @@ export default function HeroSection() {
                     285 Workers Online
                   </span>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>

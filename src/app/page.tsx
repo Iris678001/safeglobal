@@ -1,44 +1,213 @@
 "use client";
 
+import dynamic from "next/dynamic";
+import ScrollProgress from "@/components/safe-global/ScrollProgress";
 import Header from "@/components/safe-global/Header";
 import HeroSection from "@/components/safe-global/HeroSection";
 import LiveMetricsBanner from "@/components/safe-global/LiveMetricsBanner";
 import TrustIndicators from "@/components/safe-global/TrustIndicators";
 import PartnersSection from "@/components/safe-global/PartnersSection";
-import ServicesSection from "@/components/safe-global/ServicesSection";
-import HowItWorks from "@/components/safe-global/HowItWorks";
-import AboutSection from "@/components/safe-global/AboutSection";
-import TeamSection from "@/components/safe-global/TeamSection";
-import IndustriesSection from "@/components/safe-global/IndustriesSection";
-import SecurityCompliance from "@/components/safe-global/SecurityCompliance";
-import AIDemoSection from "@/components/safe-global/AIDemoSection";
-import SafetyScoreCalculator from "@/components/safe-global/SafetyScoreCalculator";
-import CaseStudiesSection from "@/components/safe-global/CaseStudiesSection";
-import TestimonialsSection from "@/components/safe-global/TestimonialsSection";
-import PricingSection from "@/components/safe-global/PricingSection";
-import FAQSection from "@/components/safe-global/FAQSection";
-import BlogSection from "@/components/safe-global/BlogSection";
-import ResourceLibrary from "@/components/safe-global/ResourceLibrary";
-import ContactSection from "@/components/safe-global/ContactSection";
-import Footer from "@/components/safe-global/Footer";
-import ChatBot from "@/components/safe-global/ChatBot";
-import StickyCTA from "@/components/safe-global/StickyCTA";
-import ScrollProgress from "@/components/safe-global/ScrollProgress";
-import CookieConsent from "@/components/safe-global/CookieConsent";
-import SafetyTimeline from "@/components/safe-global/SafetyTimeline";
-import AnimatedStatsSection from "@/components/safe-global/AnimatedStatsSection";
-import SafetyNewsTicker from "@/components/safe-global/SafetyNewsTicker";
-import BackToTop from "@/components/safe-global/BackToTop";
-import NotificationToast from "@/components/safe-global/NotificationToast";
-import ParallaxSection from "@/components/safe-global/ParallaxSection";
-import AwardsSection from "@/components/safe-global/AwardsSection";
-import GlobalImpact from "@/components/safe-global/GlobalImpact";
-import EventCountdown from "@/components/safe-global/EventCountdown";
-import SafetyChecklist from "@/components/safe-global/SafetyChecklist";
-import TestimonialSlider from "@/components/safe-global/TestimonialSlider";
-import ComparisonSection from "@/components/safe-global/ComparisonSection";
-import EmergencyResponseMap from "@/components/safe-global/EmergencyResponseMap";
-import SafetyROIWidget from "@/components/safe-global/SafetyROIWidget";
+
+// Reusable skeleton placeholder for dynamically loaded sections
+function SectionSkeleton() {
+  return (
+    <div className="w-full py-16 px-4">
+      <div className="max-w-7xl mx-auto">
+        <div className="animate-pulse rounded-2xl bg-muted/50 h-96 p-6 space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="h-3 w-20 rounded-full bg-muted-foreground/15" />
+            <div className="h-6 w-48 rounded-full bg-muted-foreground/10" />
+          </div>
+          <div className="space-y-3">
+            <div className="h-4 w-3/4 rounded-full bg-muted-foreground/10" />
+            <div className="h-4 w-1/2 rounded-full bg-muted-foreground/8" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-4">
+            <div className="h-40 rounded-xl bg-muted-foreground/8" />
+            <div className="h-40 rounded-xl bg-muted-foreground/8" />
+            <div className="h-40 rounded-xl bg-muted-foreground/8" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Dynamic imports for below-fold sections (SSR enabled for SEO)
+const GlobalImpact = dynamic(
+  () => import("@/components/safe-global/GlobalImpact"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const ServicesSection = dynamic(
+  () => import("@/components/safe-global/ServicesSection"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const HowItWorks = dynamic(
+  () => import("@/components/safe-global/HowItWorks"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const ParallaxSection = dynamic(
+  () => import("@/components/safe-global/ParallaxSection"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const AboutSection = dynamic(
+  () => import("@/components/safe-global/AboutSection"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const TeamSection = dynamic(
+  () => import("@/components/safe-global/TeamSection"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const IndustriesSection = dynamic(
+  () => import("@/components/safe-global/IndustriesSection"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const ComparisonSection = dynamic(
+  () => import("@/components/safe-global/ComparisonSection"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const AwardsSection = dynamic(
+  () => import("@/components/safe-global/AwardsSection"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const SecurityCompliance = dynamic(
+  () => import("@/components/safe-global/SecurityCompliance"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const EmergencyResponseMap = dynamic(
+  () => import("@/components/safe-global/EmergencyResponseMap"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const AIDemoSection = dynamic(
+  () => import("@/components/safe-global/AIDemoSection"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const VideoShowcase = dynamic(
+  () => import("@/components/safe-global/VideoShowcase"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const SafetyTimeline = dynamic(
+  () => import("@/components/safe-global/SafetyTimeline"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const AnimatedStatsSection = dynamic(
+  () => import("@/components/safe-global/AnimatedStatsSection"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const SafetyNewsTicker = dynamic(
+  () => import("@/components/safe-global/SafetyNewsTicker"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const SafetyScoreCalculator = dynamic(
+  () => import("@/components/safe-global/SafetyScoreCalculator"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const CaseStudiesSection = dynamic(
+  () => import("@/components/safe-global/CaseStudiesSection"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const TestimonialsSection = dynamic(
+  () => import("@/components/safe-global/TestimonialsSection"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const TestimonialSlider = dynamic(
+  () => import("@/components/safe-global/TestimonialSlider"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const PricingSection = dynamic(
+  () => import("@/components/safe-global/PricingSection"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const SafetyROIWidget = dynamic(
+  () => import("@/components/safe-global/SafetyROIWidget"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const FAQSection = dynamic(
+  () => import("@/components/safe-global/FAQSection"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const SafetyChecklist = dynamic(
+  () => import("@/components/safe-global/SafetyChecklist"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const SafetyCultureQuiz = dynamic(
+  () => import("@/components/safe-global/SafetyCultureQuiz"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const EventCountdown = dynamic(
+  () => import("@/components/safe-global/EventCountdown"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const BlogSection = dynamic(
+  () => import("@/components/safe-global/BlogSection"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const ResourceLibrary = dynamic(
+  () => import("@/components/safe-global/ResourceLibrary"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const ContactSection = dynamic(
+  () => import("@/components/safe-global/ContactSection"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const Footer = dynamic(
+  () => import("@/components/safe-global/Footer"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const ChatBot = dynamic(
+  () => import("@/components/safe-global/ChatBot"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const StickyCTA = dynamic(
+  () => import("@/components/safe-global/StickyCTA"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const CookieConsent = dynamic(
+  () => import("@/components/safe-global/CookieConsent"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const BackToTop = dynamic(
+  () => import("@/components/safe-global/BackToTop"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
+
+const NotificationToast = dynamic(
+  () => import("@/components/safe-global/NotificationToast"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+);
 
 export default function Home() {
   return (
@@ -67,6 +236,7 @@ export default function Home() {
         <SecurityCompliance />
         <EmergencyResponseMap />
         <AIDemoSection />
+        <VideoShowcase />
         <SafetyTimeline />
         <AnimatedStatsSection />
         <SafetyNewsTicker />
@@ -78,6 +248,7 @@ export default function Home() {
         <SafetyROIWidget />
         <FAQSection />
         <SafetyChecklist />
+        <SafetyCultureQuiz />
         <EventCountdown />
         <BlogSection />
         <ResourceLibrary />
