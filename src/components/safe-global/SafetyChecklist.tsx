@@ -213,6 +213,7 @@ export default function SafetyChecklist() {
                   strokeWidth="8"
                   strokeLinecap="round"
                   strokeDasharray={circumference}
+                  initial={{ strokeDashoffset: circumference }}
                   animate={{ strokeDashoffset: scoreOffset }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
                 />

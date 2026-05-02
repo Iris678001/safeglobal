@@ -250,33 +250,43 @@ function AnimatedCounter({
 }
 
 // Floating CSS Particles component - small dots rising upward
+// Uses hardcoded values to avoid SSR/client hydration mismatch
+const PARTICLE_DATA = [
+  { left: 12, size: 2.5, dur: 8, delay: 0.5 },
+  { left: 28, size: 1.8, dur: 10, delay: 2.1 },
+  { left: 45, size: 3.2, dur: 7, delay: 1.3 },
+  { left: 63, size: 2.1, dur: 9, delay: 3.7 },
+  { left: 78, size: 2.8, dur: 11, delay: 0.8 },
+  { left: 91, size: 1.6, dur: 8, delay: 4.2 },
+  { left: 5, size: 3.5, dur: 12, delay: 2.5 },
+  { left: 35, size: 2.3, dur: 7, delay: 5.1 },
+  { left: 52, size: 1.9, dur: 10, delay: 1.7 },
+  { left: 68, size: 2.7, dur: 9, delay: 3.3 },
+  { left: 82, size: 3.1, dur: 8, delay: 0.2 },
+  { left: 18, size: 2.0, dur: 11, delay: 4.8 },
+  { left: 41, size: 2.6, dur: 7, delay: 6.2 },
+  { left: 57, size: 1.7, dur: 13, delay: 1.1 },
+  { left: 74, size: 3.3, dur: 9, delay: 2.9 },
+  { left: 88, size: 2.2, dur: 10, delay: 5.5 },
+  { left: 9, size: 2.9, dur: 8, delay: 3.6 },
+  { left: 23, size: 1.5, dur: 12, delay: 0.7 },
+  { left: 48, size: 3.0, dur: 7, delay: 4.4 },
+  { left: 95, size: 2.4, dur: 11, delay: 1.9 },
+];
+
 function FloatingParticles() {
-  const particlesRef = useRef<Array<{ id: number; left: string; size: number; duration: number; delay: number }>>([]);
-
-  if (particlesRef.current.length === 0) {
-    for (let i = 0; i < 20; i++) {
-      particlesRef.current.push({
-        id: i,
-        left: `${Math.random() * 100}%`,
-        size: Math.random() * 3 + 1.5,
-        duration: Math.random() * 8 + 6,
-        delay: Math.random() * 8,
-      });
-    }
-  }
-
   return (
     <div className="particles-container">
-      {particlesRef.current.map((p) => (
+      {PARTICLE_DATA.map((p, i) => (
         <div
-          key={p.id}
+          key={i}
           className="particle"
           style={{
-            left: p.left,
+            left: `${p.left}%`,
             bottom: "-10px",
             width: `${p.size}px`,
             height: `${p.size}px`,
-            animationDuration: `${p.duration}s`,
+            animationDuration: `${p.dur}s`,
             animationDelay: `${p.delay}s`,
           }}
         />

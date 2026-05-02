@@ -211,10 +211,10 @@ const NotificationToast = dynamic(
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col relative">
       <ScrollProgress />
       <Header />
-      <main className="flex-1">
+      <main className="flex-1 relative">
         <HeroSection />
         <LiveMetricsBanner />
         <TrustIndicators />

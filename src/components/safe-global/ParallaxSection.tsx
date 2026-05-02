@@ -16,6 +16,7 @@ export default function ParallaxSection({
   className = "",
   id,
 }: ParallaxSectionProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
 
@@ -40,6 +41,7 @@ export default function ParallaxSection({
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
+    container: containerRef,
     offset: ["start end", "end start"],
   });
 
@@ -55,14 +57,16 @@ export default function ParallaxSection({
   );
 
   return (
-    <div ref={sectionRef} id={id} className={`relative overflow-hidden ${className}`}>
-      {isInView ? (
-        <motion.div style={{ y }} className="relative">
-          {children}
-        </motion.div>
-      ) : (
-        <div className="relative">{children}</div>
-      )}
+    <div ref={containerRef} className="relative">
+      <section ref={sectionRef} id={id} className={`relative overflow-hidden ${className}`}>
+        {isInView ? (
+          <motion.div style={{ y }} className="relative">
+            {children}
+          </motion.div>
+        ) : (
+          <div className="relative">{children}</div>
+        )}
+      </section>
     </div>
   );
 }

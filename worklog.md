@@ -2455,3 +2455,45 @@ Priority Recommendations for Next Phase:
 - Add accessibility improvements (ARIA labels, keyboard navigation for quiz)
 - Consider adding a "Safety Maturity Model" visualization component
 - Optimize component bundle size with further code splitting
+
+---
+Task ID: 12b
+Agent: Main Agent (Phase 12 - Console Error Fixes)
+Task: Fix all console errors and warnings
+
+Work Log:
+- Opened page in agent-browser and captured all console errors/warnings
+- Identified 3 issues:
+  1. Hydration mismatch in FloatingParticles (Math.random() producing different values on server vs client)
+  2. Framer Motion strokeDashoffset animation from undefined (missing initial value in SafetyChecklist)
+  3. Scroll container position warning from Framer Motion useScroll
+
+FIXES:
+1. FloatingParticles hydration mismatch (HeroSection.tsx):
+   - Replaced Math.random()-based particle generation with hardcoded PARTICLE_DATA array
+   - 20 particles with fixed left, size, duration, and delay values
+   - Completely eliminates SSR/client mismatch — identical output on both sides
+
+2. SafetyChecklist.tsx strokeDashoffset animation:
+   - Added `initial={{ strokeDashoffset: circumference }}` to motion.circle
+   - Framer Motion now has a proper starting value instead of undefined
+
+3. Framer Motion scroll container warning (ParallaxSection.tsx):
+   - Added `container: containerRef` to useScroll() options
+   - Wrapped section in a container div with ref and `relative` positioning
+   - Changed outer element from `<div>` to `<section>` for better semantics
+   - Also added `relative` to body element in layout.tsx and page wrapper in page.tsx
+
+VERIFICATION:
+- Lint: 0 errors (clean)
+- Dev server: HTTP 200
+- agent-browser console: Only shows React DevTools info and HMR connected — zero errors, zero warnings
+- Scrolled entire page length — no errors appear during dynamic section loading
+- Screenshot confirms page renders correctly
+
+Stage Summary:
+- Fixed hydration mismatch error (the biggest console error)
+- Fixed Framer Motion strokeDashoffset animation warning
+- Fixed Framer Motion scroll container position warning
+- Console is now completely clean: 0 errors, 0 warnings
+- All 44+ components render correctly without any console issues
