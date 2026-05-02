@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Shield,
@@ -25,7 +27,7 @@ import { navLinks, colorMap, type NavLink, type MegaMenuCategory } from "./navCo
 
 // ─── MegaMenuDropdown (Desktop) ─────────────────────────────────────────────
 
-function MegaMenuDropdown({ category }: { category: MegaMenuCategory }) {
+function MegaMenuDropdown({ category, onNavigate }: { category: MegaMenuCategory; onNavigate: () => void }) {
   return (
     <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 z-50 w-[90vw] max-w-5xl">
       <motion.div
@@ -35,14 +37,12 @@ function MegaMenuDropdown({ category }: { category: MegaMenuCategory }) {
         transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
         className="bg-background/95 backdrop-blur-2xl border border-border rounded-2xl shadow-2xl shadow-black/20 dark:shadow-black/40 overflow-hidden"
       >
-        {/* Top gradient accent line */}
         <div className="h-[2px] bg-gradient-to-r from-transparent via-safeglobal to-transparent" />
 
         <div className="p-6 lg:p-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {category.columns.map((column, colIdx) => (
               <div key={colIdx}>
-                {/* Column header */}
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-1 h-4 rounded-full bg-gradient-to-b from-safeglobal to-cyan-500" />
                   <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider">
@@ -50,18 +50,17 @@ function MegaMenuDropdown({ category }: { category: MegaMenuCategory }) {
                   </h3>
                 </div>
 
-                {/* Column items */}
                 <div className="space-y-1">
                   {column.items.map((item, itemIdx) => {
                     const colors = colorMap[item.color || "safeglobal"];
                     const Icon = item.icon;
                     return (
-                      <a
+                      <Link
                         key={itemIdx}
                         href={item.href}
+                        onClick={onNavigate}
                         className="group flex items-start gap-3 p-2.5 rounded-xl transition-all duration-200 hover:bg-accent/50 relative"
                       >
-                        {/* Icon */}
                         {Icon && (
                           <div
                             className={`flex-shrink-0 w-9 h-9 rounded-lg ${colors.bg} ${colors.border} border flex items-center justify-center transition-all duration-200 group-hover:scale-110`}
@@ -69,8 +68,6 @@ function MegaMenuDropdown({ category }: { category: MegaMenuCategory }) {
                             <Icon className={`w-4 h-4 ${colors.text}`} />
                           </div>
                         )}
-
-                        {/* Text */}
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2">
                             <span className="text-sm font-medium text-foreground group-hover:text-safeglobal transition-colors">
@@ -100,10 +97,8 @@ function MegaMenuDropdown({ category }: { category: MegaMenuCategory }) {
                             </p>
                           )}
                         </div>
-
-                        {/* Arrow on hover */}
                         <ArrowRight className="w-3.5 h-3.5 text-transparent group-hover:text-safeglobal group-hover:translate-x-0.5 transition-all duration-200 mt-1 flex-shrink-0" />
-                      </a>
+                      </Link>
                     );
                   })}
                 </div>
@@ -111,13 +106,12 @@ function MegaMenuDropdown({ category }: { category: MegaMenuCategory }) {
             ))}
           </div>
 
-          {/* Featured + CTA bar */}
           {(category.featured || category.cta) && (
             <div className="mt-6 pt-5 border-t border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              {/* Featured item */}
               {category.featured && (
-                <a
+                <Link
                   href={category.featured.href}
+                  onClick={onNavigate}
                   className="group flex items-start gap-3 p-3 rounded-xl bg-gradient-to-r from-safeglobal/5 via-cyan-500/5 to-safeglobal/5 border border-safeglobal/10 hover:border-safeglobal/25 transition-all duration-300 flex-1"
                 >
                   <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-safeglobal/20 to-cyan-500/20 flex items-center justify-center">
@@ -139,18 +133,18 @@ function MegaMenuDropdown({ category }: { category: MegaMenuCategory }) {
                     </p>
                   </div>
                   <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-safeglobal transition-colors flex-shrink-0 mt-0.5" />
-                </a>
+                </Link>
               )}
 
-              {/* CTA button */}
               {category.cta && (
-                <a
+                <Link
                   href={category.cta.href}
+                  onClick={onNavigate}
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-safeglobal hover:bg-safeglobal-dark text-white text-sm font-semibold shadow-lg shadow-safeglobal/25 hover:shadow-safeglobal/40 transition-all duration-200 flex-shrink-0"
                 >
                   {category.cta.label}
                   <ArrowRight className="w-4 h-4" />
-                </a>
+                </Link>
               )}
             </div>
           )}
@@ -166,41 +160,39 @@ function MobileAccordionItem({
   link,
   isOpen,
   onToggle,
-  onNavClick,
 }: {
   link: NavLink;
   isOpen: boolean;
   onToggle: () => void;
-  onNavClick: (href: string) => void;
 }) {
   return (
     <div>
-      <button
-        onClick={() => {
-          if (link.megaMenu) {
-            onToggle();
-          } else {
-            onNavClick(link.href);
-          }
-        }}
-        className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all text-left cursor-pointer ${
-          isOpen
-            ? "text-safeglobal bg-safeglobal/10"
-            : "text-muted-foreground hover:text-foreground hover:bg-accent"
-        }`}
-      >
-        <span>{link.label}</span>
-        {link.megaMenu && (
+      {link.megaMenu ? (
+        <button
+          onClick={onToggle}
+          className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all text-left cursor-pointer ${
+            isOpen
+              ? "text-safeglobal bg-safeglobal/10"
+              : "text-muted-foreground hover:text-foreground hover:bg-accent"
+          }`}
+        >
+          <span>{link.label}</span>
           <motion.div
             animate={{ rotate: isOpen ? 180 : 0 }}
             transition={{ duration: 0.2 }}
           >
             <ChevronDown className="w-4 h-4" />
           </motion.div>
-        )}
-      </button>
+        </button>
+      ) : (
+        <Link
+          href={link.href}
+          className="block px-4 py-3 text-sm font-medium rounded-lg transition-all text-muted-foreground hover:text-foreground hover:bg-accent"
+        >
+          {link.label}
+        </Link>
+      )}
 
-      {/* Accordion content */}
       <AnimatePresence>
         {isOpen && link.megaMenu && (
           <motion.div
@@ -224,10 +216,10 @@ function MobileAccordionItem({
                       const colors = colorMap[item.color || "safeglobal"];
                       const Icon = item.icon;
                       return (
-                        <button
+                        <Link
                           key={itemIdx}
-                          onClick={() => onNavClick(item.href)}
-                          className="w-full flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-accent/50 transition-all text-left cursor-pointer"
+                          href={item.href}
+                          className="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-accent/50 transition-all text-left"
                         >
                           {Icon && (
                             <div
@@ -261,18 +253,17 @@ function MobileAccordionItem({
                               </p>
                             )}
                           </div>
-                        </button>
+                        </Link>
                       );
                     })}
                   </div>
                 </div>
               ))}
 
-              {/* Mobile featured */}
               {link.megaMenu.featured && (
-                <button
-                  onClick={() => onNavClick(link.megaMenu!.featured!.href)}
-                  className="w-full flex items-center gap-3 p-3 mt-2 rounded-xl bg-gradient-to-r from-safeglobal/5 to-cyan-500/5 border border-safeglobal/15 text-left cursor-pointer"
+                <Link
+                  href={link.megaMenu.featured.href}
+                  className="flex items-center gap-3 p-3 mt-2 rounded-xl bg-gradient-to-r from-safeglobal/5 to-cyan-500/5 border border-safeglobal/15"
                 >
                   <Sparkles className="w-4 h-4 text-safeglobal flex-shrink-0" />
                   <div className="flex-1 min-w-0">
@@ -283,18 +274,17 @@ function MobileAccordionItem({
                       {link.megaMenu.featured.description}
                     </p>
                   </div>
-                </button>
+                </Link>
               )}
 
-              {/* Mobile CTA */}
               {link.megaMenu.cta && (
-                <button
-                  onClick={() => onNavClick(link.megaMenu!.cta!.href)}
-                  className="w-full flex items-center justify-center gap-2 mt-2 px-4 py-2.5 rounded-xl bg-safeglobal hover:bg-safeglobal-dark text-white text-xs font-semibold transition-all cursor-pointer"
+                <Link
+                  href={link.megaMenu.cta.href}
+                  className="flex items-center justify-center gap-2 mt-2 px-4 py-2.5 rounded-xl bg-safeglobal hover:bg-safeglobal-dark text-white text-xs font-semibold transition-all"
                 >
                   {link.megaMenu.cta.label}
                   <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+                </Link>
               )}
             </div>
           </motion.div>
@@ -307,30 +297,18 @@ function MobileAccordionItem({
 // ─── Main Header Component ──────────────────────────────────────────────────
 
 export default function Header() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("hero");
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const menuTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const headerRef = useRef<HTMLElement>(null);
   const [mobileAccordion, setMobileAccordion] = useState<string | null>(null);
 
-  // Scroll tracking
+  // Scroll tracking for background blur
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
-
-      const sections = navLinks.map((l) => l.href.replace("#", ""));
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i]);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 120) {
-            setActiveSection(sections[i]);
-            break;
-          }
-        }
-      }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -356,15 +334,22 @@ export default function Header() {
     return () => document.removeEventListener("keydown", handleEscape);
   }, []);
 
-  const handleNavClick = useCallback((href: string) => {
+  // Track pathname for closing mobile menu
+  const [prevPath, setPrevPath] = useState(pathname);
+  if (pathname !== prevPath) {
+    setPrevPath(pathname);
     setMobileOpen(false);
     setOpenMenu(null);
     setMobileAccordion(null);
-    const el = document.querySelector(href);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-  }, []);
+  }
+
+  const isActiveRoute = useCallback(
+    (href: string) => {
+      if (href === "/") return pathname === "/";
+      return pathname === href || pathname.startsWith(href + "/");
+    },
+    [pathname]
+  );
 
   const handleMenuEnter = useCallback((label: string) => {
     if (menuTimeoutRef.current) {
@@ -380,6 +365,10 @@ export default function Header() {
     }, 150);
   }, []);
 
+  const closeMegaMenu = useCallback(() => {
+    setOpenMenu(null);
+  }, []);
+
   return (
     <header
       ref={headerRef}
@@ -392,10 +381,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <button
-            onClick={() => handleNavClick("#hero")}
-            className="flex items-center gap-2.5 group cursor-pointer"
-          >
+          <Link href="/" className="flex items-center gap-2.5 group">
             <div className="relative">
               <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-safeglobal to-cyan-500 flex items-center justify-center shadow-lg shadow-safeglobal/20 group-hover:shadow-safeglobal/40 transition-shadow">
                 <Shield className="w-5 h-5 text-white" />
@@ -410,12 +396,12 @@ export default function Header() {
                 AI Safety Intelligence
               </span>
             </div>
-          </button>
+          </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-0.5 relative">
             {navLinks.map((link) => {
-              const isActive = activeSection === link.href.replace("#", "");
+              const isActive = isActiveRoute(link.href);
               const isMenuOpen = openMenu === link.label;
               const hasMegaMenu = !!link.megaMenu;
 
@@ -426,35 +412,39 @@ export default function Header() {
                   onMouseEnter={() => hasMegaMenu && handleMenuEnter(link.label)}
                   onMouseLeave={() => hasMegaMenu && handleMenuLeave()}
                 >
-                  <button
-                    onClick={() => {
-                      if (hasMegaMenu) {
-                        setOpenMenu(isMenuOpen ? null : link.label);
-                      } else {
-                        handleNavClick(link.href);
-                      }
-                    }}
-                    className={`flex items-center gap-1 px-3.5 py-2 text-sm font-medium rounded-lg transition-all duration-200 cursor-pointer ${
-                      isActive || isMenuOpen
-                        ? "text-safeglobal bg-safeglobal/10"
-                        : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                    }`}
-                  >
-                    {link.label}
-                    {hasMegaMenu && (
+                  {hasMegaMenu ? (
+                    <button
+                      onClick={() => setOpenMenu(isMenuOpen ? null : link.label)}
+                      className={`flex items-center gap-1 px-3.5 py-2 text-sm font-medium rounded-lg transition-all duration-200 cursor-pointer ${
+                        isActive || isMenuOpen
+                          ? "text-safeglobal bg-safeglobal/10"
+                          : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                      }`}
+                    >
+                      {link.label}
                       <motion.div
                         animate={{ rotate: isMenuOpen ? 180 : 0 }}
                         transition={{ duration: 0.2 }}
                       >
                         <ChevronDown className="w-3.5 h-3.5 opacity-60" />
                       </motion.div>
-                    )}
-                  </button>
+                    </button>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      className={`flex items-center px-3.5 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+                        isActive
+                          ? "text-safeglobal bg-safeglobal/10"
+                          : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  )}
 
-                  {/* Mega menu dropdown */}
                   <AnimatePresence>
                     {hasMegaMenu && isMenuOpen && link.megaMenu && (
-                      <MegaMenuDropdown category={link.megaMenu} />
+                      <MegaMenuDropdown category={link.megaMenu} onNavigate={closeMegaMenu} />
                     )}
                   </AnimatePresence>
                 </div>
@@ -465,22 +455,21 @@ export default function Header() {
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
             <ThemeToggle />
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-muted-foreground hover:text-foreground gap-1.5"
-              onClick={() => handleNavClick("#contact")}
-            >
-              <Phone className="w-3.5 h-3.5" />
-              <span>Sales</span>
+            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground gap-1.5" asChild>
+              <Link href="/contact">
+                <Phone className="w-3.5 h-3.5" />
+                <span>Sales</span>
+              </Link>
             </Button>
             <Button
               size="sm"
               className="bg-safeglobal hover:bg-safeglobal-dark text-white shadow-lg shadow-safeglobal/25 hover:shadow-safeglobal/40 transition-all gap-1"
-              onClick={() => handleNavClick("#contact")}
+              asChild
             >
-              Request Demo
-              <ChevronRight className="w-3.5 h-3.5" />
+              <Link href="/contact">
+                Request Demo
+                <ChevronRight className="w-3.5 h-3.5" />
+              </Link>
             </Button>
           </div>
 
@@ -491,10 +480,7 @@ export default function Header() {
                 <Menu className="w-5 h-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent
-              side="right"
-              className="bg-background border-border w-80"
-            >
+            <SheetContent side="right" className="bg-background border-border w-80">
               <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
               <div className="flex flex-col gap-1 mt-8 max-h-[calc(100vh-8rem)] overflow-y-auto scrollbar-thin">
                 {navLinks.map((link) => (
@@ -503,33 +489,21 @@ export default function Header() {
                     link={link}
                     isOpen={mobileAccordion === link.label}
                     onToggle={() =>
-                      setMobileAccordion(
-                        mobileAccordion === link.label ? null : link.label
-                      )
+                      setMobileAccordion(mobileAccordion === link.label ? null : link.label)
                     }
-                    onNavClick={handleNavClick}
                   />
                 ))}
 
                 <div className="border-t border-border mt-4 pt-4 space-y-3">
                   <div className="flex items-center justify-between px-4 py-2">
-                    <span className="text-sm text-muted-foreground">
-                      Appearance
-                    </span>
+                    <span className="text-sm text-muted-foreground">Appearance</span>
                     <ThemeToggle />
                   </div>
-                  <Button
-                    className="w-full bg-safeglobal hover:bg-safeglobal-dark text-white"
-                    onClick={() => handleNavClick("#contact")}
-                  >
-                    Request Demo
+                  <Button className="w-full bg-safeglobal hover:bg-safeglobal-dark text-white" asChild>
+                    <Link href="/contact">Request Demo</Link>
                   </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full border-border"
-                    onClick={() => handleNavClick("#contact")}
-                  >
-                    Get Consultation
+                  <Button variant="outline" className="w-full border-border" asChild>
+                    <Link href="/contact">Get Consultation</Link>
                   </Button>
                 </div>
               </div>

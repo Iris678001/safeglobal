@@ -4,6 +4,12 @@ import Script from "next/script";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/safe-global/ThemeProvider";
+import Header from "@/components/safe-global/Header";
+import Footer from "@/components/safe-global/Footer";
+import ScrollProgress from "@/components/safe-global/ScrollProgress";
+import ChatBot from "@/components/safe-global/ChatBot";
+import BackToTop from "@/components/safe-global/BackToTop";
+import CookieConsent from "@/components/safe-global/CookieConsent";
 
 const interSans = Inter({
   variable: "--font-geist-sans",
@@ -63,7 +69,15 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div className="min-h-screen flex flex-col relative">
+            <ScrollProgress />
+            <Header />
+            <main className="flex-1 relative pt-16 lg:pt-20">{children}</main>
+            <Footer />
+            <ChatBot />
+            <BackToTop />
+            <CookieConsent />
+          </div>
           <Toaster />
         </ThemeProvider>
         <Script id="cursor-glow" strategy="afterInteractive">
