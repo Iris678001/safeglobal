@@ -12,6 +12,7 @@ const nextConfig: NextConfig = {
     "localhost",
     "21.0.3.85",
     "127.0.0.1",
+    "preview-chat-",
   ],
 };
 

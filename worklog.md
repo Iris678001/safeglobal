@@ -2497,3 +2497,91 @@ Stage Summary:
 - Fixed Framer Motion scroll container position warning
 - Console is now completely clean: 0 errors, 0 warnings
 - All 44+ components render correctly without any console issues
+
+---
+Task ID: 13
+Agent: Main Agent
+Task: Design and implement a multi-page website navigation system with scalable mega menu dropdown structure
+
+Work Log:
+- Read worklog.md to understand project state (12+ phases completed, 44+ components)
+- Read current Header.tsx (flat nav with 7 simple links, mobile sheet menu)
+- Read page.tsx to understand component assembly and section IDs
+- Checked dev server status (running, HTTP 200)
+- Verified all 44 component files exist for dynamic imports
+- Checked dev.log for existing console errors (Turbopack internal panic, not our code)
+
+NEW FILES CREATED:
+1. navConfig.ts - Data-driven navigation configuration system
+   - TypeScript interfaces: NavLink, MegaMenuCategory, MegaMenuColumn, MegaMenuItem
+   - Complete navigation structure: Home, About, EHS/AI (mega menu), Industries (mega menu), Case Studies, Blog, Contact
+   - EHS/AI mega menu with 3 columns: "AI-Powered Safety" (3 items), "Integration & Intelligence" (3 items), "Advanced Solutions" (6 items including 3 placeholder slots)
+   - Industries mega menu with 3 columns: "Manufacturing" (2 items), "Construction & Energy" (2 items), "Healthcare & Logistics" (4 items including 2 placeholder slots)
+   - Each item has: label, description, href, icon (Lucide), optional featured/badge/color
+   - Featured sections with badges ("Just Released", "Explore")
+   - CTA buttons ("View All Services", "View All Industries")
+   - colorMap for consistent accent colors (safeglobal, cyan, violet, amber, rose, emerald)
+   - Scalability: Adding new items requires only editing the data array, no UI redesign
+
+2. Header.tsx - Complete rewrite with mega menu integration
+   - MegaMenuDropdown component:
+     * Multi-column responsive grid (1/2/3 columns based on breakpoint)
+     * Animated gradient accent line at top
+     * Column headers with gradient bar indicators
+     * Item cards with: icon container (color-coded), label, description (line-clamp-2), badges (New/Popular/AI)
+     * Hover effects: item highlights, arrow slides in, icon scales up
+     * Featured card with Sparkles icon, badge, and external link indicator
+     * CTA button with safeglobal gradient and shadow
+   - MobileAccordionItem component:
+     * Tap to expand/collapse mega menu categories
+     * Animated chevron rotation
+     * Nested column headers and item cards (compact mobile layout)
+     * Mobile featured card and CTA button
+     * AnimatePresence for smooth height transitions
+   - Main Header component:
+     * Scroll tracking for active section highlighting
+     * Hover-triggered mega menu (150ms close delay for usability)
+     * Click to toggle mega menu on desktop
+     * Escape key to close mega menu
+     * Outside click to close mega menu
+     * Passive scroll listener for performance
+     * Mobile Sheet menu with accordion integration
+     * ThemeToggle in both desktop and mobile layouts
+
+UPDATED FILES:
+- next.config.ts: Added "preview-chat-" to allowedDevOrigins for cross-origin fix
+- Footer.tsx: Updated footer links to match new nav structure
+  * "Platform" → "EHS / AI" (6 items: AI Safety Monitoring, Predictive Risk Analytics, Compliance Automation, IoT Safety Integration, Safety Dashboards, Emergency Response AI)
+  * Industries: Added Logistics & Warehousing, Mining & Extraction (6 items total)
+  * Resources: Added Resource Library, updated labels
+  * Company: Added Our Team, Security & Compliance, updated links
+
+VERIFICATION:
+- Lint: 0 errors (clean)
+- Dev server: HTTP 200, compiles successfully
+- Mega menu content renders in HTML output ("EHS / AI" confirmed)
+- All 44+ components load correctly with dynamic imports
+- Turbopack internal panic in dev.log is a known Next.js 16 issue, not our code
+
+Stage Summary:
+- Complete mega menu navigation system with data-driven architecture
+- 2 top-level mega menu categories (EHS/AI with 12 items, Industries with 8 items)
+- Desktop: Multi-column dropdown with featured items, badges, icons, descriptions, CTA
+- Mobile: Accordion-style expandable menu with compact layout
+- Scalable: Adding new items/columns/categories requires only editing navConfig.ts
+- Consistent color system with colorMap for visual hierarchy
+- Smooth Framer Motion animations for open/close, accordion, and hover states
+- Keyboard accessible (Escape to close), click-outside-to-close
+- Footer updated to match new navigation structure
+- Cross-origin warning addressed in next.config.ts
+
+Unresolved Issues:
+- Turbopack internal panic in dev.log (known Next.js 16 issue, not code-related)
+- Dev server process may be killed by sandbox periodically (not a code issue)
+
+Priority Recommendations for Next Phase:
+- Add nested dropdown support (sub-menus within mega menu items)
+- Add search functionality inside mega menu
+- Add keyboard navigation (arrow keys) within mega menu
+- Consider sticky navigation with section progress indicator
+- Add animated page transitions between sections

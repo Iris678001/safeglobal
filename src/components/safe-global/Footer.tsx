@@ -21,32 +21,34 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 const footerLinks = {
-  Platform: [
+  "EHS / AI": [
     { label: "AI Safety Monitoring", href: "#services" },
     { label: "Predictive Risk Analytics", href: "#services" },
     { label: "Compliance Automation", href: "#services" },
-    { label: "Safety Training", href: "#services" },
-    { label: "IoT Integration", href: "#services" },
+    { label: "IoT Safety Integration", href: "#services" },
+    { label: "Safety Dashboards", href: "#services" },
+    { label: "Emergency Response AI", href: "#services" },
   ],
   Industries: [
     { label: "Manufacturing", href: "#industries" },
     { label: "Construction", href: "#industries" },
     { label: "Oil & Gas", href: "#industries" },
-    { label: "Warehousing", href: "#industries" },
     { label: "Healthcare", href: "#industries" },
+    { label: "Logistics & Warehousing", href: "#industries" },
+    { label: "Mining & Extraction", href: "#industries" },
   ],
   Resources: [
     { label: "Case Studies", href: "#case-studies" },
     { label: "Blog & Insights", href: "#blog" },
-    { label: "Safety Reports", href: "#blog" },
+    { label: "Resource Library", href: "#resources" },
     { label: "FAQ", href: "#faq" },
     { label: "Pricing", href: "#pricing" },
   ],
   Company: [
     { label: "About Us", href: "#about" },
-    { label: "Careers", href: "#about" },
+    { label: "Our Team", href: "#team" },
+    { label: "Security & Compliance", href: "#security" },
     { label: "Partners", href: "#about" },
-    { label: "Press", href: "#about" },
     { label: "Contact", href: "#contact" },
   ],
 };
