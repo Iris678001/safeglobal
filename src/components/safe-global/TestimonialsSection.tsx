@@ -10,7 +10,7 @@ const testimonials = [
     role: "VP of Operations",
     company: "GlobalMfg Corp",
     companyInitials: "GM",
-    companyColor: "from-safeglobal/30 to-emerald-500/20",
+    companyColor: "from-safeglobal/30 to-teal-600/20",
     content:
       "SafeGlobal didn't just reduce our incidents — it fundamentally changed how we think about safety. The AI predictions have been remarkably accurate, giving us time to act before hazards become incidents. We've seen a 78% reduction in workplace incidents and our safety culture has completely transformed.",
     rating: 5,
@@ -23,7 +23,7 @@ const testimonials = [
     role: "HSE Director",
     company: "PetroChem Industries",
     companyInitials: "PC",
-    companyColor: "from-cyan-500/30 to-cyan-400/20",
+    companyColor: "from-teal-500/30 to-teal-400/20",
     content:
       "The ROI was undeniable from month one. But the real value? Knowing our people go home safe every single day. SafeGlobal's IoT integration with our existing systems was seamless.",
     rating: 5,

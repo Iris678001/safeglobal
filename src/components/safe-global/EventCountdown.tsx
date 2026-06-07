@@ -54,11 +54,11 @@ const featureCards = [
     title: "Workshop: Compliance Automation",
     description: "Hands-on labs with our platform",
     icon: BookOpen,
-    accentClass: "text-cyan-400",
-    bgClass: "bg-cyan-400/15",
-    ringClass: "ring-cyan-400/30",
-    borderHoverClass: "hover:border-cyan-400/30",
-    glowClass: "group-hover:shadow-[0_0_30px_rgba(6,182,212,0.1)]",
+    accentClass: "text-teal-400",
+    bgClass: "bg-teal-400/15",
+    ringClass: "ring-teal-400/30",
+    borderHoverClass: "hover:border-teal-400/30",
+    glowClass: "group-hover:shadow-[0_0_30px_rgba(91,138,114,0.1)]",
   },
   {
     title: "Live Demo: Real-Time Monitoring",
@@ -68,7 +68,7 @@ const featureCards = [
     bgClass: "bg-safeglobal/15",
     ringClass: "ring-safeglobal/30",
     borderHoverClass: "hover:border-safeglobal/30",
-    glowClass: "group-hover:shadow-[0_0_30px_rgba(16,185,129,0.1)]",
+    glowClass: "group-hover:shadow-[0_0_30px_rgba(45,122,111,0.1)]",
   },
 ];
 

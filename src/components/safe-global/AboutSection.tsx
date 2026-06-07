@@ -6,41 +6,56 @@ import { Button } from "@/components/ui/button";
 import {
   Target,
   Eye,
-  Zap,
   Shield,
+  Zap,
   Users,
   TrendingUp,
   ArrowRight,
-  Rocket,
-  Globe2,
-  Award,
-  Star,
 } from "lucide-react";
+import Link from "next/link";
 
 const values = [
   {
-    icon: Shield,
+    id: "01",
     title: "Safety Without Compromise",
     description:
-      "Every decision, every algorithm, every product is built with one principle: zero tolerance for preventable harm.",
+      "Every decision, every algorithm, every product is built with one principle: zero tolerance for preventable harm. We believe safety is a fundamental human right in the workplace.",
   },
   {
-    icon: Zap,
+    id: "02",
     title: "Innovation at Speed",
     description:
-      "We push the boundaries of AI and IoT to deliver breakthrough safety capabilities faster than the risks evolve.",
+      "We push the boundaries of AI and IoT to deliver breakthrough capabilities faster than the risks evolve. Our engineering moves at the speed of modern industry.",
   },
   {
-    icon: Users,
+    id: "03",
     title: "Human-Centered Design",
     description:
-      "Technology should empower people, not overwhelm them. Our solutions are designed for real workers in real conditions.",
+      "Technology should empower people, not overwhelm them. Our solutions are designed by safety professionals for real workers operating in real, challenging conditions.",
   },
   {
-    icon: TrendingUp,
+    id: "04",
     title: "Measurable Impact",
     description:
-      "Every feature ties back to quantifiable safety improvements. We measure success in lives protected and incidents prevented.",
+      "Every feature ties back to quantifiable safety improvements. We measure our ultimate success not in lines of code, but in lives protected and incidents prevented.",
+  },
+];
+
+const teamMembers = [
+  {
+    name: "Lorem Ipsum",
+    role: "Chief Executive Officer",
+    image: "/images/team_1.png",
+  },
+  {
+    name: "Dolor Sit Amet",
+    role: "Chief Technology Officer",
+    image: "/images/team_2.png",
+  },
+  {
+    name: "Consectetur Adipiscing",
+    role: "Chief Operations Officer",
+    image: "/images/team_3.png",
   },
 ];
 
@@ -57,253 +72,241 @@ const differentiators = [
     label: "Regulatory Intelligence",
     desc: "Built-in compliance engine that tracks 200+ global safety standards and auto-updates as regulations change.",
   },
-  {
-    label: "Enterprise Integration",
-    desc: "Native integrations with SAP, Oracle, ServiceNow, and 50+ enterprise platforms for seamless deployment.",
-  },
-];
-
-const milestones = [
-  {
-    year: "2019",
-    title: "Founded in San Francisco",
-    desc: "SafeGlobal was born from a vision to use AI to prevent workplace injuries.",
-    icon: Rocket,
-    color: "text-safeglobal",
-    bg: "bg-safeglobal/10",
-    border: "border-safeglobal/30",
-  },
-  {
-    year: "2020",
-    title: "First Enterprise Deployment",
-    desc: "Launched AI Safety Monitoring with our first Fortune 500 manufacturing client.",
-    icon: Star,
-    color: "text-cyan-400",
-    bg: "bg-cyan-500/10",
-    border: "border-cyan-500/30",
-  },
-  {
-    year: "2022",
-    title: "Global Expansion",
-    desc: "Expanded to 15+ countries, reached 100,000 workers protected worldwide.",
-    icon: Globe2,
-    color: "text-amber-400",
-    bg: "bg-amber-500/10",
-    border: "border-amber-500/30",
-  },
-  {
-    year: "2024",
-    title: "Industry Leadership",
-    desc: "500K+ workers protected, 30+ countries, $2.1B in client savings, ISO 45001 certified.",
-    icon: Award,
-    color: "text-violet-400",
-    bg: "bg-violet-500/10",
-    border: "border-violet-500/30",
-  },
 ];
 
 export default function AboutSection() {
-  const handleScrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
-    <section id="about" className="relative py-20 lg:py-28 overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-      <div className="absolute top-1/2 -left-32 w-64 h-64 bg-safeglobal/5 rounded-full blur-[100px]" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500/3 rounded-full blur-[120px]" />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <Badge
-            variant="outline"
-            className="border-safeglobal/30 text-safeglobal bg-safeglobal/10 px-4 py-1.5 text-xs font-medium tracking-wide mb-4"
-          >
-            ABOUT SAFEGLOBAL
-          </Badge>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-            Redefining Workplace Safety
-            <br />
-            <span className="text-gradient">with AI Intelligence</span>
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Founded on the belief that every worker deserves to go home safely,
-            SafeGlobal is building the future of industrial risk management.
-          </p>
-        </motion.div>
-
-        {/* Mission & Vision */}
-        <div className="grid md:grid-cols-2 gap-6 mb-16">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative p-8 rounded-2xl border border-border bg-card/50 hover:border-safeglobal/30 transition-all group"
-          >
-            <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-safeglobal to-cyan-500 rounded-l-2xl" />
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-safeglobal/10 flex items-center justify-center">
-                <Target className="w-5 h-5 text-safeglobal" />
+    <section id="about" className="relative pb-24 overflow-hidden">
+      
+      {/* ─── Editorial Hero Section ─── */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 lg:pt-20 mb-24">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          {/* Left Text */}
+          <div className="lg:col-span-5 lg:pr-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="h-px w-12 bg-safeglobal" />
+                <span className="text-sm font-semibold tracking-widest text-safeglobal uppercase">Our Story</span>
               </div>
-              <h3 className="text-xl font-semibold">Our Mission</h3>
-            </div>
-            <p className="text-muted-foreground leading-relaxed">
-              To eliminate preventable workplace injuries and fatalities
-              worldwide by deploying AI-driven safety intelligence that
-              anticipates risks, automates compliance, and empowers every
-              organization to achieve zero-harm operations.
-            </p>
-          </motion.div>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-8 leading-[1.1]">
+                Redefining <br className="hidden lg:block" />
+                Workplace <br className="hidden lg:block" />
+                <span className="text-safeglobal">Safety.</span>
+              </h1>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+                Founded on the belief that every worker deserves to go home safely. We aren't just building software; we are building the future infrastructure of industrial risk management.
+              </p>
+            </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative p-8 rounded-2xl border border-border bg-card/50 hover:border-cyan-500/30 transition-all group"
-          >
-            <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-500 to-safeglobal rounded-l-2xl" />
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center">
-                <Eye className="w-5 h-5 text-cyan-400" />
-              </div>
-              <h3 className="text-xl font-semibold">Our Vision</h3>
-            </div>
-            <p className="text-muted-foreground leading-relaxed">
-              A world where AI-powered safety systems are as fundamental as fire
-              alarms — where every workplace, from construction sites to
-              hospitals, benefits from intelligent risk prevention that makes
-              zero-harm not just a goal, but a reality.
-            </p>
-          </motion.div>
+          {/* Right Image Container (Asymmetrical) */}
+          <div className="lg:col-span-7 relative">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative aspect-[4/3] lg:aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl"
+            >
+              <img
+                src="/images/about_hero.png"
+                alt="AI Command Center"
+                className="w-full h-full object-cover"
+              />
+              {/* Subtle inner shadow, no heavy glowing neon */}
+              <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl" />
+            </motion.div>
+            
+            {/* Minimalist accent block breaking the grid */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="absolute -bottom-8 -left-8 bg-background p-6 lg:p-8 rounded-xl border border-border shadow-xl max-w-xs hidden md:block"
+            >
+              <p className="text-sm font-medium leading-relaxed">
+                "Our technology processes millions of data points per second, but our metric for success is singular: zero preventable incidents."
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* ─── Minimalist Mission & Vision ─── */}
+        <div className="mb-32">
+          <div className="grid md:grid-cols-2 gap-16 lg:gap-24">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
+                <Target className="w-6 h-6 text-safeglobal" />
+                The Mission
+              </h2>
+              <div className="h-0.5 w-12 bg-safeglobal mb-6" />
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                To eliminate preventable workplace injuries and fatalities
+                worldwide by deploying AI-driven safety intelligence that
+                anticipates risks, automates compliance, and empowers every
+                organization to achieve zero-harm operations.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
+                <Eye className="w-6 h-6 text-teal-500" />
+                The Vision
+              </h2>
+              <div className="h-0.5 w-12 bg-teal-500 mb-6" />
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                A world where AI-powered safety systems are as fundamental as fire
+                alarms — where every workplace, from construction sites to
+                hospitals, benefits from intelligent risk prevention that makes
+                zero-harm not just a goal, but a reality.
+              </p>
+            </motion.div>
+          </div>
         </div>
 
-        {/* Company Timeline */}
+        {/* ─── Staggered Team Section ─── */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="mb-32"
+        >
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div className="max-w-2xl">
+              <h2 className="text-4xl font-bold tracking-tight mb-4">
+                Meet the Leadership
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                Decades of combined experience in artificial intelligence, industrial safety, and enterprise scale.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+            {teamMembers.map((member, idx) => (
+              <motion.div
+                key={member.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.15 }}
+                className={`group flex flex-col ${idx === 1 ? 'md:mt-12' : ''}`} // Staggered layout
+              >
+                <div className="aspect-[3/4] overflow-hidden rounded-xl mb-6 bg-muted">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover grayscale opacity-90 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105"
+                  />
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold text-foreground mb-1">
+                    {member.name}
+                  </h4>
+                  <p className="text-muted-foreground font-medium">
+                    {member.role}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* ─── Clean Values List ─── */}
+        <div className="grid lg:grid-cols-12 gap-16 items-start mb-32">
+          <div className="lg:col-span-4 lg:sticky lg:top-32">
+            <h2 className="text-4xl font-bold tracking-tight mb-6">
+              Our Core <br /> Principles.
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              The foundational beliefs that guide our product development, engineering, and company culture.
+            </p>
+          </div>
+
+          <div className="lg:col-span-8 space-y-12">
+            {values.map((value, idx) => (
+              <motion.div
+                key={value.id}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="relative pl-8 md:pl-0"
+              >
+                <div className="flex flex-col md:flex-row md:gap-8 items-start">
+                  <div className="text-4xl font-light text-muted-foreground/30 font-mono mb-4 md:mb-0 md:w-20 shrink-0 absolute left-0 md:relative md:-top-1">
+                    {value.id}
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold mb-3">{value.title}</h3>
+                    <p className="text-lg text-muted-foreground leading-relaxed">
+                      {value.description}
+                    </p>
+                  </div>
+                </div>
+                {idx !== values.length - 1 && (
+                  <div className="h-px w-full bg-border mt-12 hidden md:block" />
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* ─── Grounded "Why Us" Section ─── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-16"
+          className="border-t border-border pt-20"
         >
-          <h3 className="text-2xl font-bold text-center mb-10">
-            Our <span className="text-gradient">Journey</span>
-          </h3>
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-safeglobal/30 via-cyan-500/30 via-amber-500/30 to-violet-500/30 -translate-y-1/2" />
-
-            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
-              {milestones.map((milestone, idx) => (
-                <motion.div
-                  key={milestone.year}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.15 }}
-                  className="relative"
-                >
-                  <div className={`group p-6 rounded-2xl border bg-card/50 ${milestone.border} hover:shadow-xl hover:shadow-black/20 hover:-translate-y-1 transition-all duration-300`}>
-                    {/* Year badge */}
-                    <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full ${milestone.bg} ${milestone.color} text-xs font-bold mb-3`}>
-                      <milestone.icon className="w-3.5 h-3.5" />
-                      {milestone.year}
-                    </div>
-                    <h4 className="text-base font-semibold mb-2 group-hover:text-safeglobal transition-colors">
-                      {milestone.title}
-                    </h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {milestone.desc}
-                    </p>
-                    {/* Dot on timeline */}
-                    <div className="hidden md:block absolute -bottom-3 left-1/2 -translate-x-1/2">
-                      <div className={`w-3 h-3 rounded-full ${milestone.bg} border-2 border-background`} />
-                    </div>
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <h2 className="text-3xl font-bold mb-6">Why SafeGlobal?</h2>
+              <p className="text-lg text-muted-foreground mb-8 max-w-md">
+                We aren't just another safety software wrapper. We provide a comprehensive, AI-native infrastructure designed to protect lives at scale.
+              </p>
+              <Button
+                size="lg"
+                className="bg-foreground text-background hover:bg-foreground/90 gap-2 h-12 px-8"
+                asChild
+              >
+                <Link href="/contact">
+                  See the Difference
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </Button>
+            </div>
+            
+            <div className="space-y-8">
+              {differentiators.map((d) => (
+                <div key={d.label} className="flex gap-4">
+                  <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-safeglobal shrink-0" />
+                  <div>
+                    <h4 className="font-bold text-lg mb-2">{d.label}</h4>
+                    <p className="text-muted-foreground leading-relaxed">{d.desc}</p>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </div>
-        </motion.div>
-
-        {/* Values */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-16"
-        >
-          <h3 className="text-2xl font-bold text-center mb-8">
-            What Drives Us
-          </h3>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((value, idx) => (
-              <div
-                key={value.title}
-                className="group relative p-6 rounded-xl border border-border bg-card/30 hover:border-safeglobal/30 hover:bg-safeglobal/5 transition-all duration-300 overflow-hidden"
-              >
-                {/* Gradient line at top */}
-                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-safeglobal/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="w-12 h-12 rounded-xl bg-safeglobal/10 flex items-center justify-center mb-4 group-hover:bg-safeglobal/20 group-hover:scale-110 transition-all duration-300">
-                  <value.icon className="w-6 h-6 text-safeglobal" />
-                </div>
-                <h4 className="font-semibold mb-2 group-hover:text-safeglobal transition-colors">
-                  {value.title}
-                </h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {value.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Why Different */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative p-8 lg:p-12 rounded-2xl border border-safeglobal/20 bg-gradient-to-br from-safeglobal/5 to-transparent"
-        >
-          <div className="absolute top-4 right-4">
-            <Badge className="bg-safeglobal/20 text-safeglobal border-safeglobal/30">
-              Why SafeGlobal
-            </Badge>
-          </div>
-          <h3 className="text-2xl font-bold mb-8">
-            Why We&apos;re Different
-          </h3>
-          <div className="grid sm:grid-cols-2 gap-6">
-            {differentiators.map((d) => (
-              <div key={d.label} className="flex gap-4 group">
-                <div className="w-2 h-2 rounded-full bg-safeglobal mt-2.5 flex-shrink-0 group-hover:scale-150 group-hover:shadow-lg group-hover:shadow-safeglobal/30 transition-all duration-300" />
-                <div>
-                  <h4 className="font-semibold mb-1 group-hover:text-safeglobal transition-colors">{d.label}</h4>
-                  <p className="text-sm text-muted-foreground">{d.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-8">
-            <Button
-              variant="outline"
-              className="border-safeglobal/30 hover:border-safeglobal/60 hover:bg-safeglobal/5 gap-2"
-              onClick={() => handleScrollTo("contact")}
-            >
-              See the Difference
-              <ArrowRight className="w-4 h-4" />
-            </Button>
           </div>
         </motion.div>
       </div>

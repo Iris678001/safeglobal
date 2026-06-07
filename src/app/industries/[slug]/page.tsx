@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { industriesData, industrySlugs } from "@/data/industries";
+import { industryImages } from "@/data/real-images";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Breadcrumb from "@/components/safe-global/Breadcrumb";
@@ -107,6 +108,7 @@ export default async function IndustryPage({
 
   const colors = colorMap[industry.color] || colorMap.safeglobal;
   const Icon = industry.icon;
+  const heroImage = industryImages[industry.slug];
 
   // Get related industries (all except current)
   const relatedIndustries = industrySlugs
@@ -172,11 +174,33 @@ export default async function IndustryPage({
 
             {/* Right - Icon + Key Stat */}
             <div className="space-y-6">
-              <div
-                className={`w-24 h-24 rounded-2xl bg-gradient-to-br ${colors.gradientBg} flex items-center justify-center shadow-xl`}
-              >
-                <Icon className="w-12 h-12 text-white" />
-              </div>
+              {heroImage ? (
+                <div className="relative h-80 rounded-3xl overflow-hidden border border-border bg-card/50 shadow-2xl shadow-black/10">
+                  <img
+                    src={heroImage.src}
+                    alt={heroImage.alt}
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/20 to-transparent" />
+                  <div className="absolute bottom-5 left-5 right-5 flex items-center gap-3 rounded-2xl border border-white/10 bg-background/75 p-4 backdrop-blur-md">
+                    <div
+                      className={`w-12 h-12 rounded-xl bg-gradient-to-br ${colors.gradientBg} flex items-center justify-center shadow-lg`}
+                    >
+                      <Icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold">{industry.title}</p>
+                      <p className="text-xs text-muted-foreground">{industry.subtitle}</p>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div
+                  className={`w-24 h-24 rounded-2xl bg-gradient-to-br ${colors.gradientBg} flex items-center justify-center shadow-xl`}
+                >
+                  <Icon className="w-12 h-12 text-white" />
+                </div>
+              )}
 
               <div className="grid grid-cols-2 gap-4">
                 {industry.stats.map((stat) => (
@@ -455,6 +479,7 @@ export default async function IndustryPage({
             {relatedIndustries.map((related) => {
               const relatedColors = colorMap[related.color] || colorMap.safeglobal;
               const RelatedIcon = related.icon;
+              const relatedImage = industryImages[related.slug];
 
               return (
                 <Link
@@ -464,9 +489,18 @@ export default async function IndustryPage({
                 >
                   <div className="flex items-center gap-3 mb-3">
                     <div
-                      className={`w-10 h-10 rounded-lg bg-gradient-to-br ${relatedColors.gradientBg} flex items-center justify-center`}
+                      className={`w-10 h-10 rounded-lg bg-gradient-to-br ${relatedColors.gradientBg} flex items-center justify-center overflow-hidden`}
                     >
-                      <RelatedIcon className="w-5 h-5 text-white" />
+                      {relatedImage ? (
+                        <img
+                          src={relatedImage.src}
+                          alt={relatedImage.alt}
+                          loading="lazy"
+                          className="h-full w-full object-cover"
+                        />
+                      ) : (
+                        <RelatedIcon className="w-5 h-5 text-white" />
+                      )}
                     </div>
                     <h3 className="font-semibold group-hover:text-safeglobal transition-colors">
                       {related.title}

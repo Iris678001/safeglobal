@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Breadcrumb from "@/components/safe-global/Breadcrumb";
 import { caseStudies, caseStudySlugs } from "@/data/case-studies";
+import { caseStudyImages } from "@/data/real-images";
 import {
   ArrowRight,
   Building2,
@@ -60,6 +61,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   const relatedStudies = caseStudies
     .filter((s) => s.slug !== study.slug)
     .slice(0, 3);
+  const heroImage = caseStudyImages[study.slug];
 
   return (
     <div className="min-h-screen">
@@ -81,7 +83,15 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             <div
               className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${study.image} flex items-center justify-center flex-shrink-0`}
             >
-              <Building2 className="w-8 h-8 text-safeglobal/40" />
+              {heroImage ? (
+                <img
+                  src={heroImage.src}
+                  alt={heroImage.alt}
+                  className="h-full w-full rounded-2xl object-cover"
+                />
+              ) : (
+                <Building2 className="w-8 h-8 text-safeglobal/40" />
+              )}
             </div>
             <div>
               <div className="flex items-center gap-3 mb-2">
@@ -99,14 +109,24 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             </div>
           </div>
 
-          {/* Hero Image Placeholder */}
+          {/* Hero Image */}
           <div
             className={`relative h-48 sm:h-64 lg:h-80 rounded-2xl bg-gradient-to-br ${study.image} overflow-hidden`}
           >
+            {heroImage && (
+              <img
+                src={heroImage.src}
+                alt={heroImage.alt}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-background/10 to-transparent" />
             <div className="absolute inset-0 bg-grid-pattern opacity-30" />
+            {!heroImage && (
             <div className="absolute inset-0 flex items-center justify-center">
               <Building2 className="w-20 h-20 text-safeglobal/20" />
             </div>
+            )}
           </div>
         </div>
       </section>
@@ -175,7 +195,15 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 </blockquote>
                 <div className="flex items-center gap-3">
                   <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${study.image} flex items-center justify-center`}>
-                    <Building2 className="w-5 h-5 text-safeglobal/50" />
+                    {heroImage ? (
+                      <img
+                        src={heroImage.src}
+                        alt={heroImage.alt}
+                        className="h-full w-full rounded-full object-cover"
+                      />
+                    ) : (
+                      <Building2 className="w-5 h-5 text-safeglobal/50" />
+                    )}
                   </div>
                   <div>
                     <div className="font-semibold">{study.testimonial.author}</div>
@@ -270,11 +298,23 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                       href={`/case-studies/${related.slug}`}
                       className="group block"
                     >
+                      {(() => {
+                        const relatedImage = caseStudyImages[related.slug];
+                        return (
                       <div className="flex gap-3">
                         <div
                           className={`w-14 h-14 rounded-lg bg-gradient-to-br ${related.image} flex-shrink-0 flex items-center justify-center`}
                         >
-                          <Building2 className="w-5 h-5 text-safeglobal/30" />
+                          {relatedImage ? (
+                            <img
+                              src={relatedImage.src}
+                              alt={relatedImage.alt}
+                              loading="lazy"
+                              className="h-full w-full rounded-lg object-cover"
+                            />
+                          ) : (
+                            <Building2 className="w-5 h-5 text-safeglobal/30" />
+                          )}
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-0.5">
@@ -289,6 +329,8 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                           </span>
                         </div>
                       </div>
+                        );
+                      })()}
                     </Link>
                   ))}
                 </div>

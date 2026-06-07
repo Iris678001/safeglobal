@@ -5,14 +5,10 @@ import { motion } from "framer-motion";
 import { Shield, Award, Globe, Users, Activity, TrendingUp, BarChart3, Zap } from "lucide-react";
 
 const clients = [
-  "Siemens",
-  "Bosch",
-  "Honeywell",
-  "ABB",
-  "Schneider Electric",
-  "3M",
-  "DuPont",
-  "GE Digital",
+  { name: "Bosch", src: "/logos/Bosch.png" },
+  { name: "Honeywell", src: "/logos/Honeywell.png" },
+  { name: "ABB", src: "/logos/ABB.png" },
+  { name: "DuPont", src: "/logos/DuPont.png" },
 ];
 
 const certifications = [
@@ -24,10 +20,10 @@ const certifications = [
 
 const stats = [
   { value: 500000, suffix: "+", label: "Workers Protected", icon: Shield, color: "text-safeglobal" },
-  { value: 30, suffix: "+", label: "Countries", icon: Globe, color: "text-cyan-400" },
+  { value: 30, suffix: "+", label: "Countries", icon: Globe, color: "text-teal-400" },
   { value: 99.7, suffix: "%", label: "Detection Accuracy", icon: Activity, color: "text-safeglobal" },
   { value: 73, suffix: "%", label: "Risk Reduction", icon: TrendingUp, color: "text-amber-400" },
-  { value: 2.1, prefix: "$", suffix: "B", label: "Client Savings", icon: BarChart3, color: "text-cyan-400" },
+  { value: 2.1, prefix: "$", suffix: "B", label: "Client Savings", icon: BarChart3, color: "text-teal-400" },
   { value: 24, suffix: "/7", label: "AI Monitoring", icon: Zap, color: "text-safeglobal" },
 ];
 
@@ -100,22 +96,44 @@ export default function TrustIndicators() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <p className="text-sm text-muted-foreground mb-8 uppercase tracking-widest">
-            Trusted by Industry Leaders
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
+          <div className="inline-flex items-center justify-center gap-3 mb-10">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-safeglobal/50" />
+            <p className="text-sm text-muted-foreground uppercase tracking-[0.2em] font-semibold">
+              Our Partners
+            </p>
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-safeglobal/50" />
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-x-12 md:gap-x-24 gap-y-12">
             {clients.map((client, idx) => (
               <motion.div
-                key={client}
-                initial={{ opacity: 0, y: 10 }}
+                key={client.name}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.05 }}
-                className="text-muted-foreground/40 hover:text-muted-foreground/80 transition-all text-lg font-semibold tracking-wide cursor-default hover:scale-105"
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="group flex items-center justify-center relative"
+                title={client.name}
               >
-                {client}
+                <div className="absolute inset-0 bg-safeglobal/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <img
+                  src={client.src}
+                  alt={`${client.name} logo`}
+                  className="relative z-10 max-h-10 md:max-h-12 max-w-[140px] object-contain invert grayscale mix-blend-screen opacity-70 transition-all duration-500 group-hover:opacity-100 group-hover:scale-110"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    target.style.display = 'none';
+                    const fallback = target.nextElementSibling as HTMLElement | null;
+                    if (fallback) fallback.style.display = 'block';
+                  }}
+                />
+                <span
+                  className="relative z-10 text-muted-foreground/60 text-lg md:text-xl font-bold tracking-widest uppercase transition-all duration-500 group-hover:text-foreground group-hover:scale-110"
+                  style={{ display: 'none' }}
+                >
+                  {client.name}
+                </span>
               </motion.div>
             ))}
           </div>
@@ -145,49 +163,7 @@ export default function TrustIndicators() {
           ))}
         </motion.div>
 
-        {/* Stats Grid with Animated Counters */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4"
-        >
-          {stats.map((stat, idx) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 + idx * 0.08 }}
-              className="group relative p-5 rounded-xl border border-border bg-card/50 hover:border-safeglobal/30 hover:bg-safeglobal/5 transition-all duration-300 text-center overflow-hidden"
-            >
-              {/* Icon */}
-              <div className="w-10 h-10 rounded-lg bg-safeglobal/10 flex items-center justify-center mx-auto mb-3 group-hover:bg-safeglobal/20 group-hover:scale-110 transition-all duration-300">
-                <stat.icon className={`w-5 h-5 ${stat.color}`} />
-              </div>
 
-              {/* Animated Value */}
-              <div className={`text-2xl sm:text-3xl font-bold ${stat.color} mb-1`}>
-                <AnimatedCounter
-                  target={stat.value}
-                  suffix={stat.suffix}
-                  prefix={stat.prefix || ""}
-                  duration={2500}
-                  decimals={stat.value % 1 !== 0 ? 1 : 0}
-                />
-              </div>
-
-              {/* Label */}
-              <div className="text-xs text-muted-foreground uppercase tracking-wider">
-                {stat.label}
-              </div>
-
-              {/* Hover gradient overlay */}
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-b from-safeglobal/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            </motion.div>
-          ))}
-        </motion.div>
       </div>
     </section>
   );

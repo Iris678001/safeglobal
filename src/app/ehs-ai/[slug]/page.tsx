@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { servicesData, serviceSlugs } from "@/data/services";
+import { serviceImages } from "@/data/real-images";
 import { colorMap } from "@/components/safe-global/navConfig";
 import Breadcrumb from "@/components/safe-global/Breadcrumb";
 import {
@@ -63,6 +64,7 @@ export default async function ServicePage({
 
   const colors = colorMap[service.color] || colorMap.safeglobal;
   const Icon = service.icon;
+  const heroImage = serviceImages[service.slug];
 
   return (
     <div className="min-h-screen">
@@ -80,6 +82,7 @@ export default async function ServicePage({
             ]}
           />
 
+          <div className="grid lg:grid-cols-[1fr_420px] gap-10 items-center">
           <div className="max-w-3xl">
             <div className="flex items-center gap-3 mb-6">
               <div
@@ -130,6 +133,28 @@ export default async function ServicePage({
                 </Link>
               </Button>
             </div>
+          </div>
+          {heroImage && (
+            <div className="relative hidden lg:block h-[360px] rounded-3xl overflow-hidden border border-safeglobal/20 bg-card/50 shadow-2xl shadow-safeglobal/10">
+              <img
+                src={heroImage.src}
+                alt={heroImage.alt}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/20 to-transparent" />
+              <div className="absolute bottom-5 left-5 right-5 rounded-2xl border border-white/10 bg-background/75 p-4 backdrop-blur-md">
+                <div className="flex items-center gap-3">
+                  <div className={`w-10 h-10 rounded-xl ${colors.bg} flex items-center justify-center`}>
+                    <Icon className={`w-5 h-5 ${colors.text}`} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold">{service.title}</p>
+                    <p className="text-xs text-muted-foreground">{service.subtitle}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
           </div>
         </div>
       </section>

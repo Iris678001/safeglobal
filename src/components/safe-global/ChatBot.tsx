@@ -184,7 +184,7 @@ export default function ChatBot() {
       {isOpen && (
         <div className="fixed bottom-24 right-6 z-50 w-[400px] max-w-[calc(100vw-3rem)] h-[520px] max-h-[70vh] rounded-2xl border border-border bg-card shadow-2xl shadow-black/30 flex flex-col overflow-hidden animate-slide-up">
           {/* Header */}
-          <div className="p-4 border-b border-border bg-gradient-to-r from-safeglobal/10 to-cyan-500/5">
+          <div className="p-4 border-b border-border bg-gradient-to-r from-safeglobal/10 to-teal-500/5">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-lg bg-safeglobal/20 flex items-center justify-center">
@@ -230,13 +230,13 @@ export default function ChatBot() {
                   className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 ${
                     msg.role === "assistant"
                       ? "bg-safeglobal/20"
-                      : "bg-cyan-500/20"
+                      : "bg-teal-500/20"
                   }`}
                 >
                   {msg.role === "assistant" ? (
                     <Bot className="w-4 h-4 text-safeglobal" />
                   ) : (
-                    <User className="w-4 h-4 text-cyan-400" />
+                    <User className="w-4 h-4 text-teal-400" />
                   )}
                 </div>
                 <div

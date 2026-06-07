@@ -21,6 +21,12 @@ import {
   Lock,
   Globe,
   Layers,
+  DollarSign,
+  Package,
+  Users,
+  Wrench,
+  FolderKanban,
+  Settings,
   type LucideIcon,
 } from "lucide-react";
 
@@ -75,10 +81,10 @@ export const navLinks: NavLink[] = [
     href: "/about",
   },
   {
-    label: "EHS / AI",
+    label: "Solutions",
     href: "/ehs-ai",
     megaMenu: {
-      label: "EHS / AI",
+      label: "Solutions",
       href: "/ehs-ai",
       columns: [
         {
@@ -185,6 +191,55 @@ export const navLinks: NavLink[] = [
             },
           ],
         },
+        {
+          title: "Enterprise ERP",
+          items: [
+            {
+              label: "Financial Management",
+              description: "General ledger, AP/AR, budgeting & cost center tracking",
+              href: "/erp#financial-management",
+              icon: DollarSign,
+              featured: true,
+              badge: "New",
+              color: "safeglobal",
+            },
+            {
+              label: "Supply Chain Management",
+              description: "Procurement, inventory, warehouse & logistics optimization",
+              href: "/erp#supply-chain",
+              icon: Package,
+              color: "amber",
+            },
+            {
+              label: "HR & Workforce Management",
+              description: "Payroll, attendance, recruitment & employee lifecycle",
+              href: "/erp#hr-workforce",
+              icon: Users,
+              color: "cyan",
+            },
+            {
+              label: "Asset Management",
+              description: "Fixed asset tracking, depreciation & maintenance planning",
+              href: "/erp#asset-management",
+              icon: Wrench,
+              color: "violet",
+            },
+            {
+              label: "Project Management",
+              description: "Project costing, resource allocation & milestone tracking",
+              href: "/erp#project-management",
+              icon: FolderKanban,
+              color: "rose",
+            },
+            {
+              label: "Manufacturing & Production",
+              description: "BOM management, production planning & shop floor control",
+              href: "/erp#manufacturing",
+              icon: Settings,
+              color: "safeglobal",
+            },
+          ],
+        },
       ],
       featured: {
         title: "AI Safety Platform 2.0",
@@ -221,14 +276,14 @@ export const navLinks: NavLink[] = [
             {
               label: "Chemical Processing",
               description: "Hazardous material tracking and compliance",
-              href: "/industries/manufacturing",
+              href: "/industries/chemical-processing",
               icon: FlaskConical,
               color: "amber",
             },
           ],
         },
         {
-          title: "Construction & Energy",
+          title: "Construction",
           items: [
             {
               label: "Construction Site Safety",
@@ -237,19 +292,10 @@ export const navLinks: NavLink[] = [
               icon: HardHat,
               color: "amber",
             },
-            {
-              label: "Oil & Gas Operations",
-              description: "Remote monitoring and incident prevention",
-              href: "/industries/oil-gas",
-              icon: Building2,
-              featured: true,
-              badge: "New",
-              color: "rose",
-            },
           ],
         },
         {
-          title: "Healthcare & Logistics",
+          title: "Healthcare & Mining",
           items: [
             {
               label: "Healthcare Facility Safety",
@@ -259,18 +305,32 @@ export const navLinks: NavLink[] = [
               color: "cyan",
             },
             {
-              label: "Logistics & Warehousing",
-              description: "Fleet and warehouse risk management",
-              href: "/industries/logistics-warehousing",
-              icon: Truck,
-              color: "violet",
-            },
-            {
               label: "Mining & Extraction",
               description: "Underground and open-pit safety systems",
               href: "/industries/mining-extraction",
               icon: Globe,
               color: "safeglobal",
+            },
+          ],
+        },
+        {
+          title: "Energy & Logistics",
+          items: [
+            {
+              label: "Oil & Gas Operations",
+              description: "Remote monitoring and incident prevention",
+              href: "/industries/oil-gas",
+              icon: Building2,
+              featured: true,
+              badge: "New",
+              color: "rose",
+            },
+            {
+              label: "Logistics & Warehousing",
+              description: "Fleet and warehouse risk management",
+              href: "/industries/logistics-warehousing",
+              icon: Truck,
+              color: "violet",
             },
           ],
         },

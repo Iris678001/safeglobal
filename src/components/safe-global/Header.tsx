@@ -29,7 +29,7 @@ import { navLinks, colorMap, type NavLink, type MegaMenuCategory } from "./navCo
 
 function MegaMenuDropdown({ category, onNavigate }: { category: MegaMenuCategory; onNavigate: () => void }) {
   return (
-    <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 z-50 w-[90vw] max-w-5xl">
+    <div className="fixed left-1/2 -translate-x-1/2 top-16 lg:top-20 pt-2 z-50 w-[90vw] max-w-6xl">
       <motion.div
         initial={{ opacity: 0, y: 8, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -40,11 +40,11 @@ function MegaMenuDropdown({ category, onNavigate }: { category: MegaMenuCategory
         <div className="h-[2px] bg-gradient-to-r from-transparent via-safeglobal to-transparent" />
 
         <div className="p-6 lg:p-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {category.columns.map((column, colIdx) => (
               <div key={colIdx}>
                 <div className="flex items-center gap-2 mb-4">
-                  <div className="w-1 h-4 rounded-full bg-gradient-to-b from-safeglobal to-cyan-500" />
+                  <div className="w-1 h-4 rounded-full bg-gradient-to-b from-safeglobal to-teal-500" />
                   <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider">
                     {column.title}
                   </h3>
@@ -82,7 +82,7 @@ function MegaMenuDropdown({ category, onNavigate }: { category: MegaMenuCategory
                                     ? "bg-violet-500/15 text-violet-500"
                                     : item.badge === "Popular"
                                     ? "bg-amber-500/15 text-amber-500"
-                                    : "bg-cyan-500/15 text-cyan-500"
+                                    : "bg-teal-500/15 text-teal-500"
                                 }`}
                               >
                                 {item.badge === "New" && <Zap className="w-2.5 h-2.5" />}
@@ -112,9 +112,9 @@ function MegaMenuDropdown({ category, onNavigate }: { category: MegaMenuCategory
                 <Link
                   href={category.featured.href}
                   onClick={onNavigate}
-                  className="group flex items-start gap-3 p-3 rounded-xl bg-gradient-to-r from-safeglobal/5 via-cyan-500/5 to-safeglobal/5 border border-safeglobal/10 hover:border-safeglobal/25 transition-all duration-300 flex-1"
+                  className="group flex items-start gap-3 p-3 rounded-xl bg-gradient-to-r from-safeglobal/5 via-teal-500/5 to-safeglobal/5 border border-safeglobal/10 hover:border-safeglobal/25 transition-all duration-300 flex-1"
                 >
-                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-safeglobal/20 to-cyan-500/20 flex items-center justify-center">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-safeglobal/20 to-teal-500/20 flex items-center justify-center">
                     <Sparkles className="w-5 h-5 text-safeglobal" />
                   </div>
                   <div className="flex-1 min-w-0">
@@ -206,7 +206,7 @@ function MobileAccordionItem({
               {link.megaMenu.columns.map((column, colIdx) => (
                 <div key={colIdx}>
                   <div className="flex items-center gap-2 px-4 py-1.5">
-                    <div className="w-0.5 h-3 rounded-full bg-gradient-to-b from-safeglobal to-cyan-500" />
+                    <div className="w-0.5 h-3 rounded-full bg-gradient-to-b from-safeglobal to-teal-500" />
                     <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">
                       {column.title}
                     </span>
@@ -263,7 +263,7 @@ function MobileAccordionItem({
               {link.megaMenu.featured && (
                 <Link
                   href={link.megaMenu.featured.href}
-                  className="flex items-center gap-3 p-3 mt-2 rounded-xl bg-gradient-to-r from-safeglobal/5 to-cyan-500/5 border border-safeglobal/15"
+                  className="flex items-center gap-3 p-3 mt-2 rounded-xl bg-gradient-to-r from-safeglobal/5 to-teal-500/5 border border-safeglobal/15"
                 >
                   <Sparkles className="w-4 h-4 text-safeglobal flex-shrink-0" />
                   <div className="flex-1 min-w-0">
@@ -381,20 +381,26 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group">
+          <Link href="/" className="flex items-center group">
             <div className="relative">
-              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-safeglobal to-cyan-500 flex items-center justify-center shadow-lg shadow-safeglobal/20 group-hover:shadow-safeglobal/40 transition-shadow">
-                <Shield className="w-5 h-5 text-white" />
+              <img
+                src="/logo.png"
+                alt="Company Logo"
+                className="h-16 w-auto object-contain scale-[1.35] origin-left invert grayscale mix-blend-screen opacity-90"
+                onError={(e) => {
+                  // Fallback: hide the broken image and show the placeholder icon
+                  const target = e.currentTarget;
+                  target.style.display = 'none';
+                  const fallback = target.nextElementSibling as HTMLElement | null;
+                  if (fallback) fallback.style.display = 'flex';
+                }}
+              />
+              <div
+                className="w-12 h-12 rounded-lg bg-gradient-to-br from-safeglobal to-teal-500 items-center justify-center shadow-lg shadow-safeglobal/20 group-hover:shadow-safeglobal/40 transition-shadow hidden"
+                style={{ display: 'none' }}
+              >
+                <Shield className="w-6 h-6 text-white" />
               </div>
-              <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-safeglobal rounded-full animate-pulse" />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-lg font-bold tracking-tight text-foreground">
-                Safe<span className="text-safeglobal">Global</span>
-              </span>
-              <span className="text-[10px] tracking-[0.2em] text-muted-foreground uppercase -mt-0.5 hidden sm:block">
-                AI Safety Intelligence
-              </span>
             </div>
           </Link>
 

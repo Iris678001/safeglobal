@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Breadcrumb from "@/components/safe-global/Breadcrumb";
 import { blogPosts, blogSlugs } from "@/data/blog";
+import { blogImages } from "@/data/real-images";
 import {
   Clock,
   Calendar,
@@ -81,6 +82,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     relatedPosts.push(...additional);
   }
 
+  const heroImage = blogImages[post.slug];
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -96,11 +99,20 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             ]}
           />
 
-          {/* Hero Image Placeholder */}
+          {/* Hero Image */}
           <div
             className={`relative h-64 sm:h-80 lg:h-96 rounded-2xl bg-gradient-to-br ${post.image} overflow-hidden mb-8`}
           >
+            {heroImage && (
+              <img
+                src={heroImage.src}
+                alt={heroImage.alt}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
             <div className="absolute inset-0 bg-grid-pattern opacity-30" />
+            {!heroImage && (
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center">
                 <BookOpen className="w-16 h-16 text-safeglobal/30 mx-auto mb-3" />
@@ -109,6 +121,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </span>
               </div>
             </div>
+            )}
             <div className="absolute top-4 left-4">
               <Badge
                 variant="outline"
@@ -211,11 +224,23 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                       href={`/blog/${related.slug}`}
                       className="group block"
                     >
+                      {(() => {
+                        const relatedImage = blogImages[related.slug];
+                        return (
                       <div className="flex gap-3">
                         <div
                           className={`w-16 h-16 rounded-lg bg-gradient-to-br ${related.image} flex-shrink-0 flex items-center justify-center`}
                         >
-                          <TrendingUp className="w-5 h-5 text-safeglobal/30" />
+                          {relatedImage ? (
+                            <img
+                              src={relatedImage.src}
+                              alt={relatedImage.alt}
+                              loading="lazy"
+                              className="h-full w-full rounded-lg object-cover"
+                            />
+                          ) : (
+                            <TrendingUp className="w-5 h-5 text-safeglobal/30" />
+                          )}
                         </div>
                         <div className="flex-1 min-w-0">
                           <h4 className="text-sm font-medium line-clamp-2 group-hover:text-safeglobal transition-colors">
@@ -227,6 +252,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                           </span>
                         </div>
                       </div>
+                        );
+                      })()}
                     </Link>
                   ))}
                 </div>

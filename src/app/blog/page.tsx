@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Breadcrumb from "@/components/safe-global/Breadcrumb";
 import { blogPosts } from "@/data/blog";
+import { blogImages } from "@/data/real-images";
 import { Clock, User, ArrowRight, Mail, TrendingUp } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -91,17 +92,31 @@ export default function BlogPage() {
                 href={`/blog/${post.slug}`}
                 className="group"
               >
+                {(() => {
+                  const image = blogImages[post.slug];
+                  return (
                 <article className="relative h-full rounded-2xl border border-border bg-card/50 hover:border-safeglobal/30 transition-all duration-300 overflow-hidden card-hover-premium">
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-safeglobal/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                  {/* Image Placeholder */}
+                  {/* Article image */}
                   <div
                     className={`relative h-48 bg-gradient-to-br ${post.image} overflow-hidden`}
                   >
+                    {image && (
+                      <img
+                        src={image.src}
+                        alt={image.alt}
+                        loading="lazy"
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-background/10 to-transparent" />
                     <div className="absolute inset-0 bg-grid-pattern opacity-30" />
+                    {!image && (
                     <div className="absolute inset-0 flex items-center justify-center transform transition-transform duration-700 ease-out group-hover:scale-105 group-hover:translate-x-1">
                       <TrendingUp className="w-10 h-10 text-safeglobal/30" />
                     </div>
+                    )}
                     {/* Category Badge */}
                     <div className="absolute top-4 left-4">
                       <Badge
@@ -150,6 +165,8 @@ export default function BlogPage() {
                     </div>
                   </div>
                 </article>
+                  );
+                })()}
               </Link>
             ))}
           </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import {
   Shield,
   Linkedin,
@@ -12,6 +13,7 @@ import {
   CheckCircle2,
   Loader2,
   Mail,
+  Phone,
   Award,
   Lock,
   Globe,
@@ -21,51 +23,49 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 const footerLinks = {
-  "EHS / AI": [
-    { label: "AI Safety Monitoring", href: "#services" },
-    { label: "Predictive Risk Analytics", href: "#services" },
-    { label: "Compliance Automation", href: "#services" },
-    { label: "IoT Safety Integration", href: "#services" },
-    { label: "Safety Dashboards", href: "#services" },
-    { label: "Emergency Response AI", href: "#services" },
+  "Solutions": [
+    { label: "AI Safety Monitoring", href: "/ehs-ai/ai-safety-monitoring" },
+    { label: "Predictive Risk Analytics", href: "/ehs-ai/predictive-risk-analytics" },
+    { label: "Compliance Automation", href: "/ehs-ai/compliance-automation" },
+    { label: "IoT Safety Integration", href: "/ehs-ai/iot-integration" },
+    { label: "Safety Dashboards", href: "/ehs-ai/safety-dashboards" },
+    { label: "Emergency Response AI", href: "/ehs-ai/emergency-response-ai" },
+    { label: "ERP Platform", href: "/erp" },
   ],
   Industries: [
-    { label: "Manufacturing", href: "#industries" },
-    { label: "Construction", href: "#industries" },
-    { label: "Oil & Gas", href: "#industries" },
-    { label: "Healthcare", href: "#industries" },
-    { label: "Logistics & Warehousing", href: "#industries" },
-    { label: "Mining & Extraction", href: "#industries" },
+    { label: "Manufacturing", href: "/industries/manufacturing" },
+    { label: "Construction", href: "/industries/construction" },
+    { label: "Oil & Gas", href: "/industries/oil-gas" },
+    { label: "Healthcare", href: "/industries/healthcare" },
+    { label: "Logistics & Warehousing", href: "/industries/logistics-warehousing" },
+    { label: "Mining & Extraction", href: "/industries/mining-extraction" },
   ],
   Resources: [
-    { label: "Case Studies", href: "#case-studies" },
-    { label: "Blog & Insights", href: "#blog" },
-    { label: "Resource Library", href: "#resources" },
-    { label: "FAQ", href: "#faq" },
-    { label: "Pricing", href: "#pricing" },
+    { label: "Case Studies", href: "/case-studies" },
+    { label: "Blog & Insights", href: "/blog" },
+    { label: "Resource Library", href: "/ehs-ai" },
+    { label: "FAQ", href: "/about" },
+    { label: "Pricing", href: "/contact" },
   ],
   Company: [
-    { label: "About Us", href: "#about" },
-    { label: "Our Team", href: "#team" },
-    { label: "Security & Compliance", href: "#security" },
-    { label: "Partners", href: "#about" },
-    { label: "Contact", href: "#contact" },
+    { label: "About Us", href: "/about" },
+    { label: "Our Team", href: "/about" },
+    { label: "Security & Compliance", href: "/about" },
+    { label: "Partners", href: "/about" },
+    { label: "Contact", href: "/contact" },
   ],
 };
 
 const officeLocations = [
-  { name: "San Francisco", shortName: "SF", x: "14%", y: "38%" },
-  { name: "London", shortName: "LDN", x: "46%", y: "28%" },
-  { name: "Singapore", shortName: "SG", x: "74%", y: "58%" },
+  { name: "Ajman, UAE", shortName: "AJM", x: "56%", y: "45%" },
 ];
 
-// Backed by investor/partner logos
-const backedByLogos = [
-  { initials: "YC", name: "Y Combinator", color: "from-orange-500 to-orange-600" },
-  { initials: "SQ", name: "Sequoia Capital", color: "from-red-500 to-red-600" },
-  { initials: "A16Z", name: "Andreessen Horowitz", color: "from-gray-500 to-gray-600" },
-  { initials: "GV", name: "Google Ventures", color: "from-blue-500 to-blue-600" },
-  { initials: "TCV", name: "Technology Crossover Ventures", color: "from-cyan-500 to-teal-500" },
+// Partner logos
+const partnerLogos = [
+  { name: "Bosch", src: "/logos/Bosch.png" },
+  { name: "Honeywell", src: "/logos/Honeywell.png" },
+  { name: "ABB", src: "/logos/ABB.png" },
+  { name: "DuPont", src: "/logos/DuPont.png" },
 ];
 
 export default function Footer() {
@@ -92,19 +92,35 @@ export default function Footer() {
       {/* Animated gradient line at top */}
       <div className="divider-animated h-0" />
 
-      {/* Backed By Row - above newsletter */}
+      {/* Partners Row - above newsletter */}
       <div className="border-b border-border/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <p className="text-xs text-muted-foreground/60 tracking-wide font-medium">Backed by</p>
-            <div className="flex items-center gap-3">
-              {backedByLogos.map((logo) => (
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <p className="text-xs text-muted-foreground/60 tracking-wide font-medium">Our Partners</p>
+            <div className="flex items-center gap-5">
+              {partnerLogos.map((logo) => (
                 <div
-                  key={logo.initials}
-                  className={`w-9 h-9 rounded-full bg-gradient-to-br ${logo.color} flex items-center justify-center text-white text-[10px] font-bold shadow-md hover:scale-110 transition-transform cursor-default`}
+                  key={logo.name}
+                  className="h-10 w-24 rounded-lg border border-border/50 bg-card/50 flex items-center justify-center hover:border-safeglobal/30 hover:bg-safeglobal/5 transition-all duration-300 cursor-default hover:scale-105 overflow-hidden"
                   title={logo.name}
                 >
-                  {logo.initials}
+                  <img
+                    src={logo.src}
+                    alt={`${logo.name} logo`}
+                    className="max-h-7 max-w-20 object-contain invert grayscale mix-blend-screen opacity-70 hover:opacity-100 transition-all duration-300"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      target.style.display = 'none';
+                      const fallback = target.nextElementSibling as HTMLElement | null;
+                      if (fallback) fallback.style.display = 'block';
+                    }}
+                  />
+                  <span
+                    className="text-muted-foreground/50 text-xs font-semibold tracking-wide"
+                    style={{ display: 'none' }}
+                  >
+                    {logo.name}
+                  </span>
                 </div>
               ))}
             </div>
@@ -115,7 +131,7 @@ export default function Footer() {
       {/* Newsletter Bar - with prominent gradient background */}
       <div className="relative border-b border-border overflow-hidden">
         {/* Gradient background for newsletter */}
-        <div className="absolute inset-0 bg-gradient-to-r from-safeglobal/10 via-cyan-500/5 to-safeglobal/10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-safeglobal/10 via-teal-500/5 to-safeglobal/10" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/30 to-background/50" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
@@ -167,14 +183,23 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
           {/* Brand Column */}
           <div className="col-span-2 space-y-4">
-            <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-safeglobal to-cyan-500 flex items-center justify-center">
-                <Shield className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <span className="text-lg font-bold">
-                  Safe<span className="text-safeglobal">Global</span>
-                </span>
+            <div className="flex items-center">
+              <img
+                src="/logo.png"
+                alt="Company Logo"
+                className="h-16 w-auto object-contain invert grayscale mix-blend-screen opacity-90"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  target.style.display = 'none';
+                  const fallback = target.nextElementSibling as HTMLElement | null;
+                  if (fallback) fallback.style.display = 'flex';
+                }}
+              />
+              <div
+                className="w-12 h-12 rounded-lg bg-gradient-to-br from-safeglobal to-teal-500 items-center justify-center hidden"
+                style={{ display: 'none' }}
+              >
+                <Shield className="w-6 h-6 text-white" />
               </div>
             </div>
             <p className="text-sm text-muted-foreground max-w-xs leading-relaxed">
@@ -260,7 +285,7 @@ export default function Footer() {
                       cy={loc.y}
                       r="5"
                       fill="none"
-                      stroke="#10b981"
+                      stroke="#2d7a6f"
                       strokeWidth="0.5"
                       opacity="0.4"
                     >
@@ -281,7 +306,7 @@ export default function Footer() {
                       cx={loc.x}
                       cy={loc.y}
                       r="2.5"
-                      fill="#10b981"
+                      fill="#2d7a6f"
                       opacity="0.9"
                     />
                     <text
@@ -298,45 +323,28 @@ export default function Footer() {
                   </g>
                 ))}
 
-                {/* Connecting lines between offices */}
-                <line
-                  x1="14%"
-                  y1="38%"
-                  x2="46%"
-                  y2="28%"
-                  stroke="#10b981"
-                  strokeWidth="0.4"
-                  strokeDasharray="4 4"
-                  opacity="0.2"
-                />
-                <line
-                  x1="46%"
-                  y1="28%"
-                  x2="74%"
-                  y2="58%"
-                  stroke="#10b981"
-                  strokeWidth="0.4"
-                  strokeDasharray="4 4"
-                  opacity="0.2"
-                />
+
               </svg>
             </div>
 
-            {/* Office Locations */}
+             {/* Office Locations */}
             <div>
               <p className="text-[10px] uppercase tracking-widest text-muted-foreground/50 mb-1.5 font-medium">
-                Office Locations
+                Office Location
               </p>
-              <div className="flex items-center gap-3">
-                {officeLocations.map((loc) => (
-                  <span
-                    key={loc.name}
-                    className="flex items-center gap-1 text-[11px] text-muted-foreground/70"
-                  >
-                    <MapPin className="w-2.5 h-2.5 text-safeglobal/60" />
-                    {loc.name}
-                  </span>
-                ))}
+              <div className="flex flex-col gap-1.5">
+                <span className="flex items-center gap-1 text-[11px] text-muted-foreground/70">
+                  <MapPin className="w-2.5 h-2.5 text-safeglobal/60" />
+                  Ajman, UAE
+                </span>
+                <span className="flex items-center gap-1 text-[11px] text-muted-foreground/70">
+                  <Mail className="w-2.5 h-2.5 text-safeglobal/60" />
+                  chand.mohamed@safeglobal.world (CBO)
+                </span>
+                <span className="flex items-center gap-1 text-[11px] text-muted-foreground/70">
+                  <Phone className="w-2.5 h-2.5 text-safeglobal/60" />
+                  +971 569 891 213
+                </span>
               </div>
             </div>
 
@@ -358,11 +366,21 @@ export default function Footer() {
               ))}
             </div>
 
-            {/* Backed by */}
-            <p className="text-[10px] text-muted-foreground/40 leading-relaxed">
-              Backed by <span className="text-muted-foreground/60 font-medium">Y Combinator</span>,{" "}
-              <span className="text-muted-foreground/60 font-medium">Sequoia Capital</span>
-            </p>
+            {/* Partners */}
+            <div className="flex items-center gap-3">
+              <span className="text-[10px] text-muted-foreground/40 font-medium">Our Partners</span>
+              <div className="flex items-center gap-2">
+                {partnerLogos.map((logo) => (
+                  <img
+                    key={logo.name}
+                    src={logo.src}
+                    alt={`${logo.name} logo`}
+                    className="h-5 w-auto object-contain invert grayscale mix-blend-screen opacity-70 hover:opacity-100 transition-opacity"
+                    title={logo.name}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Link Columns */}
@@ -372,15 +390,12 @@ export default function Footer() {
               <ul className="space-y-2.5">
                 {links.map((link) => (
                   <li key={link.label}>
-                    <button
-                      onClick={() => {
-                        const el = document.querySelector(link.href);
-                        if (el) el.scrollIntoView({ behavior: "smooth" });
-                      }}
-                      className="text-sm text-muted-foreground hover:text-safeglobal transition-colors cursor-pointer"
+                    <Link
+                      href={link.href}
+                      className="text-sm text-muted-foreground hover:text-safeglobal transition-colors"
                     >
                       {link.label}
-                    </button>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -440,12 +455,12 @@ export default function Footer() {
               </div>
 
               {/* System Status Indicator */}
-              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/5">
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-teal-600/20 bg-teal-600/5">
                 <div className="relative flex items-center justify-center">
-                  <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                  <div className="absolute w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+                  <div className="w-2 h-2 rounded-full bg-teal-600" />
+                  <div className="absolute w-2 h-2 rounded-full bg-teal-600 animate-ping" />
                 </div>
-                <span className="text-[10px] text-emerald-500 font-medium">All Systems Operational</span>
+                <span className="text-[10px] text-teal-600 font-medium">All Systems Operational</span>
               </div>
 
               {/* Social Icons in bottom bar */}

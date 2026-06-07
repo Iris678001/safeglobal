@@ -115,18 +115,18 @@ const statCards = [
     suffix: "K+",
     label: "Workers Protected",
     icon: Users,
-    colorClass: "text-emerald-400",
-    bgClass: "bg-emerald-400/15",
-    ringClass: "ring-emerald-400/30",
+    colorClass: "text-teal-500",
+    bgClass: "bg-teal-500/15",
+    ringClass: "ring-teal-500/30",
   },
   {
     value: 6,
     suffix: "",
     label: "Continents",
     icon: Map,
-    colorClass: "text-cyan-400",
-    bgClass: "bg-cyan-400/15",
-    ringClass: "ring-cyan-400/30",
+    colorClass: "text-teal-400",
+    bgClass: "bg-teal-400/15",
+    ringClass: "ring-teal-400/30",
   },
   {
     value: 24,
@@ -174,9 +174,9 @@ function WorldMap() {
 
   const dotColor = (color: string, isHovered: boolean) => {
     if (color === "cyan") {
-      return isHovered ? "#22d3ee" : "#06b6d4";
+      return isHovered ? "#22d3ee" : "#5b8a72";
     }
-    return isHovered ? "#34d399" : "#10b981";
+    return isHovered ? "#4a9e8f" : "#2d7a6f";
   };
 
   return (
@@ -206,17 +206,17 @@ function WorldMap() {
         </filter>
         {/* Radial glow for dots */}
         <radialGradient id="dotGlow-green" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#10b981" stopOpacity="0.4" />
-          <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
+          <stop offset="0%" stopColor="#2d7a6f" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="#2d7a6f" stopOpacity="0" />
         </radialGradient>
         <radialGradient id="dotGlow-cyan" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.4" />
-          <stop offset="100%" stopColor="#06b6d4" stopOpacity="0" />
+          <stop offset="0%" stopColor="#5b8a72" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="#5b8a72" stopOpacity="0" />
         </radialGradient>
         {/* HQ glow - stronger */}
         <radialGradient id="hqGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#10b981" stopOpacity="0.6" />
-          <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
+          <stop offset="0%" stopColor="#2d7a6f" stopOpacity="0.6" />
+          <stop offset="100%" stopColor="#2d7a6f" stopOpacity="0" />
         </radialGradient>
       </defs>
 
@@ -258,14 +258,14 @@ function WorldMap() {
             <path
               d={`M ${arc.from.x} ${arc.from.y} Q ${midX} ${midY} ${arc.to.x} ${arc.to.y}`}
               fill="none"
-              stroke="#10b981"
+              stroke="#2d7a6f"
               strokeWidth="1"
               strokeOpacity="0.3"
               strokeDasharray="6 4"
               className="animate-[dash-flow_3s_linear_infinite]"
             />
             {/* Animated dot traveling along the arc */}
-            <circle r="2" fill="#10b981" opacity="0.7">
+            <circle r="2" fill="#2d7a6f" opacity="0.7">
               <animateMotion
                 dur="4s"
                 repeatCount="indefinite"
@@ -306,7 +306,7 @@ function WorldMap() {
                   cy={loc.y}
                   r={r + 4}
                   fill="none"
-                  stroke="#10b981"
+                  stroke="#2d7a6f"
                   strokeWidth="1"
                   opacity="0.4"
                 >
@@ -330,7 +330,7 @@ function WorldMap() {
                   cy={loc.y}
                   r={r + 4}
                   fill="none"
-                  stroke="#10b981"
+                  stroke="#2d7a6f"
                   strokeWidth="0.8"
                   opacity="0.3"
                 >
@@ -436,7 +436,7 @@ export default function GlobalImpact() {
 
       {/* Ambient glow orbs */}
       <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-safeglobal/5 rounded-full blur-[180px] pointer-events-none" />
-      <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-teal-500/5 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -484,7 +484,7 @@ export default function GlobalImpact() {
                 Americas &amp; Europe
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-cyan-400" />
+                <span className="w-2.5 h-2.5 rounded-full bg-teal-400" />
                 Asia-Pacific &amp; Middle East
               </div>
               <div className="flex items-center gap-1.5">
@@ -554,8 +554,8 @@ export default function GlobalImpact() {
               className="text-center text-xs text-muted-foreground mt-5 flex items-center justify-center gap-1.5"
             >
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-500 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500" />
               </span>
               All data centers connected with real-time redundancy
             </motion.p>

@@ -110,13 +110,13 @@ const colorConfig: Record<
   }
 > = {
   cyan: {
-    dotColor: "bg-cyan-400",
-    dotBg: "bg-cyan-400/20",
-    dotRing: "ring-cyan-400/40",
-    badgeBg: "bg-cyan-400/10",
-    badgeBorder: "border-cyan-400/30",
-    badgeText: "text-cyan-400",
-    glowColor: "shadow-[0_0_12px_rgba(6,182,212,0.5)]",
+    dotColor: "bg-teal-400",
+    dotBg: "bg-teal-400/20",
+    dotRing: "ring-teal-400/40",
+    badgeBg: "bg-teal-400/10",
+    badgeBorder: "border-teal-400/30",
+    badgeText: "text-teal-400",
+    glowColor: "shadow-[0_0_12px_rgba(91,138,114,0.5)]",
   },
   violet: {
     dotColor: "bg-violet-400",
@@ -143,7 +143,7 @@ const colorConfig: Record<
     badgeBg: "bg-safeglobal/10",
     badgeBorder: "border-safeglobal/30",
     badgeText: "text-safeglobal",
-    glowColor: "shadow-[0_0_12px_rgba(16,185,129,0.5)]",
+    glowColor: "shadow-[0_0_12px_rgba(45,122,111,0.5)]",
   },
 };
 
@@ -240,7 +240,7 @@ export default function SafetyTimeline() {
       <div className="absolute inset-0 bg-noise" />
 
       {/* Ambient glow orbs */}
-      <div className="absolute top-1/3 left-[10%] w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[180px] pointer-events-none" />
+      <div className="absolute top-1/3 left-[10%] w-[500px] h-[500px] bg-teal-500/5 rounded-full blur-[180px] pointer-events-none" />
       <div className="absolute bottom-1/3 right-[10%] w-[400px] h-[400px] bg-safeglobal/5 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -277,7 +277,7 @@ export default function SafetyTimeline() {
               className="w-full h-full"
               style={{
                 background:
-                  "linear-gradient(to bottom, #06b6d4, #10b981 50%, #10b981)",
+                  "linear-gradient(to bottom, #5b8a72, #2d7a6f 50%, #2d7a6f)",
               }}
             />
           </div>
@@ -288,7 +288,7 @@ export default function SafetyTimeline() {
               className="w-full h-full"
               style={{
                 background:
-                  "linear-gradient(to bottom, #06b6d4, #10b981 50%, #10b981)",
+                  "linear-gradient(to bottom, #5b8a72, #2d7a6f 50%, #2d7a6f)",
               }}
             />
           </div>
@@ -408,7 +408,7 @@ export default function SafetyTimeline() {
               {/* Count-up visualization */}
               <div className="mt-8 grid grid-cols-3 gap-4 text-center">
                 <div className="space-y-1">
-                  <div className="text-2xl sm:text-3xl font-bold text-cyan-400">
+                  <div className="text-2xl sm:text-3xl font-bold text-teal-400">
                     <CountUpText target={5} suffix="s" />
                   </div>
                   <div className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-wider">

@@ -3,10 +3,12 @@
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { caseStudyImages } from "@/data/real-images";
 import { ArrowRight, TrendingUp, TrendingDown, BarChart3 } from "lucide-react";
 
 const caseStudies = [
   {
+    slug: "globalmfg-corp-manufacturing",
     company: "GlobalMfg Corp",
     industry: "Manufacturing",
     image: "/images/smart-factory.png",
@@ -26,6 +28,7 @@ const caseStudies = [
     color: "from-safeglobal/10",
   },
   {
+    slug: "petrochem-industries-oil-gas",
     company: "PetroChem Industries",
     industry: "Oil & Gas",
     image: "/images/ai-safety.png",
@@ -42,9 +45,10 @@ const caseStudies = [
     quote:
       "The ROI was undeniable, but the real value is knowing our people go home safe every single day.",
     quoteAuthor: "HSE Director",
-    color: "from-cyan-500/10",
+    color: "from-teal-500/10",
   },
   {
+    slug: "buildright-construction",
     company: "BuildRight Construction",
     industry: "Construction",
     image: "/images/hero-dashboard.png",
@@ -103,6 +107,9 @@ export default function CaseStudiesSection() {
         {/* Case Studies */}
         <div className="space-y-12">
           {caseStudies.map((study, idx) => (
+            (() => {
+              const image = caseStudyImages[study.slug];
+              return (
             <motion.div
               key={study.company}
               initial={{ opacity: 0, y: 30 }}
@@ -121,8 +128,8 @@ export default function CaseStudiesSection() {
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent to-background/80 z-10 lg:block hidden" />
                   <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent z-10 lg:hidden" />
                   <img
-                    src={study.image}
-                    alt={study.company}
+                    src={image?.src || study.image}
+                    alt={image?.alt || study.company}
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute top-4 left-4 z-20">
@@ -215,6 +222,8 @@ export default function CaseStudiesSection() {
                 </div>
               </div>
             </motion.div>
+              );
+            })()
           ))}
         </div>
 

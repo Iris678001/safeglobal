@@ -57,10 +57,10 @@ const severityConfig: Record<
     icon: Info,
     label: "INFO",
     badgeClass:
-      "bg-cyan-500/15 text-cyan-400 border-cyan-500/30",
+      "bg-teal-500/15 text-teal-400 border-teal-500/30",
     borderGlow:
-      "hover:shadow-[0_0_24px_rgba(6,182,212,0.2)] hover:border-cyan-500/30",
-    dotColor: "bg-cyan-400",
+      "hover:shadow-[0_0_24px_rgba(91,138,114,0.2)] hover:border-teal-500/30",
+    dotColor: "bg-teal-400",
   },
 };
 
@@ -75,9 +75,9 @@ const statusConfig: Record<
 > = {
   RESOLVED: {
     label: "Resolved",
-    dotColor: "bg-emerald-400",
-    badgeClass: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
-    pingClass: "bg-emerald-400",
+    dotColor: "bg-teal-500",
+    badgeClass: "bg-teal-600/15 text-teal-500 border-teal-600/30",
+    pingClass: "bg-teal-500",
   },
   ACTIVE: {
     label: "Active",
@@ -160,10 +160,10 @@ const tickerItems = [
 ];
 
 const tickerDotColors: Record<string, string> = {
-  green: "bg-emerald-400",
+  green: "bg-teal-500",
   amber: "bg-amber-400",
   red: "bg-red-400",
-  cyan: "bg-cyan-400",
+  cyan: "bg-teal-400",
 };
 
 /* ─────────────── Framer Motion Variants ─────────────── */
@@ -237,10 +237,10 @@ export default function SafetyNewsTicker() {
           {/* Live indicator */}
           <div className="flex items-center justify-center gap-2 mt-6">
             <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-500 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-teal-500 shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
             </span>
-            <span className="text-sm font-semibold text-emerald-400 tracking-wide">
+            <span className="text-sm font-semibold text-teal-500 tracking-wide">
               MONITORING 500K+ WORKERS
             </span>
           </div>
@@ -329,8 +329,8 @@ export default function SafetyNewsTicker() {
         >
           <div className="flex items-center gap-2 mb-4">
             <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-500 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-teal-500" />
             </span>
             <span className="text-sm font-semibold tracking-wide uppercase text-muted-foreground">
               Safety Updates

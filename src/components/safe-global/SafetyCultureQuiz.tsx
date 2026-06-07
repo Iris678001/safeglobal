@@ -45,8 +45,8 @@ interface Question {
 // ── Data ───────────────────────────────────────────────────────────────────
 
 const dimensions: Dimension[] = [
-  { id: "leadership", label: "Leadership", icon: <Shield className="w-4 h-4" />, color: "#10b981" },
-  { id: "training", label: "Training", icon: <GraduationCap className="w-4 h-4" />, color: "#06b6d4" },
+  { id: "leadership", label: "Leadership", icon: <Shield className="w-4 h-4" />, color: "#2d7a6f" },
+  { id: "training", label: "Training", icon: <GraduationCap className="w-4 h-4" />, color: "#5b8a72" },
   { id: "reporting", label: "Reporting", icon: <FileWarning className="w-4 h-4" />, color: "#f59e0b" },
   { id: "equipment", label: "Equipment", icon: <Wrench className="w-4 h-4" />, color: "#8b5cf6" },
   { id: "culture", label: "Culture", icon: <Heart className="w-4 h-4" />, color: "#ec4899" },
@@ -165,13 +165,13 @@ const questions: Question[] = [
 function getScoreClassification(score: number) {
   if (score <= 10) return { label: "Reactive", color: "#ef4444", glow: "rgba(239, 68, 68, 0.3)" };
   if (score <= 20) return { label: "Developing", color: "#f59e0b", glow: "rgba(245, 158, 11, 0.3)" };
-  if (score <= 30) return { label: "Proactive", color: "#10b981", glow: "rgba(16, 185, 129, 0.3)" };
-  return { label: "World-Class", color: "#06b6d4", glow: "rgba(6, 182, 212, 0.4)" };
+  if (score <= 30) return { label: "Proactive", color: "#2d7a6f", glow: "rgba(45, 122, 111, 0.3)" };
+  return { label: "World-Class", color: "#5b8a72", glow: "rgba(91, 138, 114, 0.4)" };
 }
 
 function getDimensionColor(dimId: string): string {
   const dim = dimensions.find((d) => d.id === dimId);
-  return dim?.color ?? "#10b981";
+  return dim?.color ?? "#2d7a6f";
 }
 
 function getRecommendations(dimensionScores: Record<string, number>): string[] {
@@ -298,7 +298,7 @@ export default function SafetyCultureQuiz() {
 
       {/* Ambient glow orbs */}
       <div className="absolute top-1/4 -left-32 w-80 h-80 bg-safeglobal/5 rounded-full blur-[120px]" />
-      <div className="absolute bottom-1/3 -right-32 w-72 h-72 bg-cyan-500/5 rounded-full blur-[100px]" />
+      <div className="absolute bottom-1/3 -right-32 w-72 h-72 bg-teal-500/5 rounded-full blur-[100px]" />
 
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatePresence mode="wait">
@@ -394,7 +394,7 @@ export default function SafetyCultureQuiz() {
                 </div>
                 <div className="h-2 rounded-full bg-muted/50 overflow-hidden">
                   <motion.div
-                    className="h-full rounded-full bg-gradient-to-r from-safeglobal to-cyan-500"
+                    className="h-full rounded-full bg-gradient-to-r from-safeglobal to-teal-500"
                     initial={{ width: 0 }}
                     animate={{
                       width: `${((currentQ + 1) / questions.length) * 100}%`,
@@ -442,7 +442,7 @@ export default function SafetyCultureQuiz() {
                         w-full text-left p-4 sm:p-5 rounded-xl border transition-all duration-200 cursor-pointer
                         ${
                           isSelected
-                            ? "border-safeglobal bg-safeglobal/10 shadow-[0_0_20px_rgba(16,185,129,0.12)]"
+                            ? "border-safeglobal bg-safeglobal/10 shadow-[0_0_20px_rgba(45,122,111,0.12)]"
                             : "border-border bg-card/50 hover:border-safeglobal/30 hover:bg-safeglobal/5"
                         }
                       `}
@@ -495,7 +495,7 @@ export default function SafetyCultureQuiz() {
                                   ? "bg-amber-500/10 text-amber-400"
                                   : answer.score === 3
                                     ? "bg-safeglobal/10 text-safeglobal"
-                                    : "bg-cyan-500/10 text-cyan-400"
+                                    : "bg-teal-500/10 text-teal-400"
                             }
                           `}
                         >

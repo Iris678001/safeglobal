@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { industriesData, industrySlugs } from "@/data/industries";
+import { industryImages } from "@/data/real-images";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Breadcrumb from "@/components/safe-global/Breadcrumb";
@@ -124,6 +125,7 @@ export default function IndustriesPage() {
             {industries.map((industry) => {
               const colors = colorMap[industry.color] || colorMap.safeglobal;
               const Icon = industry.icon;
+              const image = industryImages[industry.slug];
 
               return (
                 <Link
@@ -134,6 +136,17 @@ export default function IndustriesPage() {
                   <div
                     className={`relative h-full p-6 rounded-2xl border bg-card/50 ${colors.border} card-hover-premium transition-all duration-300 overflow-hidden`}
                   >
+                    {image && (
+                      <div className="-m-6 mb-5 relative h-44 overflow-hidden">
+                        <img
+                          src={image.src}
+                          alt={image.alt}
+                          loading="lazy"
+                          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
+                      </div>
+                    )}
                     {/* Gradient overlay on hover */}
                     <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-safeglobal/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 

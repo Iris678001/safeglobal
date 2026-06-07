@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import MagneticButton from "@/components/safe-global/MagneticButton";
@@ -102,7 +103,7 @@ function AnimatedGrid() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Draw grid lines
-      ctx.strokeStyle = "rgba(16, 185, 129, 0.03)";
+      ctx.strokeStyle = "rgba(45, 122, 111, 0.03)";
       ctx.lineWidth = 0.5;
       const gridSize = 60;
       for (
@@ -141,9 +142,9 @@ function AnimatedGrid() {
               particles[j].x,
               particles[j].y
             );
-            gradient.addColorStop(0, `rgba(16, 185, 129, ${alpha})`);
-            gradient.addColorStop(0.5, `rgba(6, 182, 212, ${alpha * 1.2})`);
-            gradient.addColorStop(1, `rgba(16, 185, 129, ${alpha})`);
+            gradient.addColorStop(0, `rgba(45, 122, 111, ${alpha})`);
+            gradient.addColorStop(0.5, `rgba(91, 138, 114, ${alpha * 1.2})`);
+            gradient.addColorStop(1, `rgba(45, 122, 111, ${alpha})`);
 
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
@@ -167,10 +168,10 @@ function AnimatedGrid() {
 
         ctx.save();
         ctx.shadowBlur = 12;
-        ctx.shadowColor = `rgba(16, 185, 129, ${p.opacity * 0.6})`;
+        ctx.shadowColor = `rgba(45, 122, 111, ${p.opacity * 0.6})`;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(16, 185, 129, ${p.opacity})`;
+        ctx.fillStyle = `rgba(45, 122, 111, ${p.opacity})`;
         ctx.fill();
         ctx.restore();
 
@@ -295,59 +296,95 @@ function FloatingParticles() {
   );
 }
 
+// ─── Dynamic Hero Background Slideshow ──────────────────────────────────────
+const HERO_IMAGES = [
+  "/images/hero/1dyn.jpg",
+  "/images/hero/2dyn.jpg",
+  "/images/hero/3dyn.jpg",
+];
+
+function HeroBgSlideshow() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="absolute inset-0 z-0 overflow-hidden">
+      {/* Preload all images so transitions are instant */}
+      {HERO_IMAGES.map((src) => (
+        <Image
+          key={`preload-${src}`}
+          src={src}
+          alt=""
+          fill
+          priority
+          className="opacity-0 pointer-events-none"
+          style={{ objectFit: "cover" }}
+          sizes="100vw"
+        />
+      ))}
+
+      {/* Sliding image layer */}
+      <AnimatePresence initial={false}>
+        <motion.div
+          key={currentIndex}
+          className="absolute inset-0"
+          initial={{ x: "100%", opacity: 0.6 }}
+          animate={{ x: "0%", opacity: 1 }}
+          exit={{ x: "-100%", opacity: 0.6 }}
+          transition={{
+            x: { duration: 1, ease: [0.25, 0.46, 0.45, 0.94] },
+            opacity: { duration: 0.8, ease: "easeInOut" },
+          }}
+        >
+          <motion.div
+            className="absolute inset-0"
+            animate={{ scale: [1, 1.05] }}
+            transition={{ duration: 4, ease: "easeOut" }}
+          >
+            <Image
+              src={HERO_IMAGES[currentIndex]}
+              alt="SafeGlobal workplace environment"
+              fill
+              priority
+              className="object-cover"
+              sizes="100vw"
+              quality={85}
+            />
+          </motion.div>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Dark overlay for text legibility */}
+      <div className="absolute inset-0 bg-background/30" />
+      <div className="absolute inset-0 bg-safeglobal/5 mix-blend-overlay" />
+    </div>
+  );
+}
+
 // Trusted by industry leaders logos
 const trustedLogos = [
-  { initials: "3M", color: "from-red-500 to-red-600" },
-  { initials: "GE", color: "from-blue-500 to-blue-600" },
-  { initials: "SI", color: "from-cyan-500 to-teal-500" },
-  { initials: "BA", color: "from-amber-500 to-orange-500" },
-  { initials: "DU", color: "from-violet-500 to-purple-500" },
+  { initials: "3M", name: "3M", src: "/logos/3m.png", color: "from-red-500 to-red-600" },
+  { initials: "GE", name: "GE", src: "/logos/ge.png", color: "from-blue-500 to-blue-600" },
+  { initials: "SI", name: "Siemens", src: "/logos/siemens.png", color: "from-teal-500 to-teal-500" },
+  { initials: "BA", name: "BASF", src: "/logos/basf.png", color: "from-amber-500 to-orange-500" },
 ];
 
 export default function HeroSection() {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
-  const [glarePos, setGlarePos] = useState({ x: 50, y: 50 });
-  const [isHovering, setIsHovering] = useState(false);
   const [scrollY, setScrollY] = useState(0);
 
-  // Parallax scroll listener for floating badge elements
+  // Parallax scroll listener
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-
-    const normalizedX = (e.clientX - centerX) / (rect.width / 2);
-    const normalizedY = (e.clientY - centerY) / (rect.height / 2);
-
-    const maxRotation = 8;
-    const rotateY = normalizedX * maxRotation;
-    const rotateX = -normalizedY * maxRotation;
-
-    setTilt({ rotateX, rotateY });
-
-    const glareX = ((e.clientX - rect.left) / rect.width) * 100;
-    const glareY = ((e.clientY - rect.top) / rect.height) * 100;
-    setGlarePos({ x: glareX, y: glareY });
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    setIsHovering(false);
-    setTilt({ rotateX: 0, rotateY: 0 });
-    setGlarePos({ x: 50, y: 50 });
-  }, []);
-
-  const handleMouseEnter = useCallback(() => {
-    setIsHovering(true);
   }, []);
 
   const handleScrollTo = (id: string) => {
@@ -360,23 +397,38 @@ export default function HeroSection() {
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Animated Grid Background */}
-      <AnimatedGrid />
+      {/* Dynamic Background Image Slideshow */}
+      <HeroBgSlideshow />
 
-      {/* Floating Particles - CSS dots rising upward */}
-      <FloatingParticles />
+      <motion.div
+        className="absolute inset-0 z-0 bg-grid-pattern opacity-70"
+        animate={{ backgroundPosition: ["0px 0px", "60px 60px"] }}
+        transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+      />
+      <motion.div
+        className="absolute left-[8%] top-[18%] z-0 h-64 w-64 rounded-full border border-safeglobal/20"
+        animate={{ scale: [0.88, 1.18, 0.88], opacity: [0.22, 0.06, 0.22] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        style={{ marginTop: scrollY * 0.06 }}
+      />
+      <motion.div
+        className="absolute right-[10%] top-[10%] z-0 h-80 w-80 rounded-full border border-safeglobal/20"
+        animate={{ scale: [1.08, 0.86, 1.08], opacity: [0.08, 0.2, 0.08] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+        style={{ marginTop: scrollY * 0.1 }}
+      />
 
-      {/* Gradient Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background z-[1]" />
+      {/* Gradient Overlays - softened to let hero slideshow images show through */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/15 to-background/40 z-[1]" />
       <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-safeglobal/5 rounded-full blur-[120px] z-[1]" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-[100px] z-[1]" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-safeglobal/5 rounded-full blur-[100px] z-[1]" />
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-safeglobal/3 rounded-full blur-[150px] z-[1]" />
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-40">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left - Text Content */}
-          <div className="space-y-8">
+        <div className="flex justify-center">
+          {/* Text Content - Centered */}
+          <div className="space-y-8 max-w-3xl text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -391,28 +443,20 @@ export default function HeroSection() {
                 NEXT-GEN AI SAFETY PLATFORM
               </Badge>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1]">
-                <span className="inline-flex items-center gap-2">
-                  <span className="text-gradient">AI-Powered</span>
-                  {/* AI-POWERED micro-badge */}
-                  <Badge className="bg-safeglobal/15 text-safeglobal border border-safeglobal/30 text-[10px] px-2 py-0.5 font-semibold tracking-wider gap-1">
-                    <Sparkles className="w-3 h-3" />
-                    AI-POWERED
-                  </Badge>
-                </span>
+                <span className="text-gradient">Customised</span>{" "}
+                Intelligence,
                 <br />
-                Safety.{" "}
-                <span className="text-gradient-animated">Zero</span>
-                <br />
-                Compromise.
+                Total Digital{" "}
+                <span className="text-gradient-animated">Transformation</span>
               </h1>
-              <div className="text-lg sm:text-xl text-muted-foreground max-w-lg leading-relaxed min-h-[3.5rem]">
+              <div className="text-lg sm:text-xl text-muted-foreground max-w-lg mx-auto leading-relaxed min-h-[3.5rem]">
                 Enterprise-grade AI that{" "}
                 <TypingText
                   words={["monitors hazards in real-time", "predicts risks before they occur", "prevents incidents automatically", "automates compliance 24/7"]}
                   className="text-safeglobal font-semibold"
                 />
               </div>
-              <p className="text-sm text-muted-foreground max-w-lg">
+              <p className="text-sm text-muted-foreground max-w-lg mx-auto">
                 Protecting{" "}
                 <span className="text-safeglobal font-semibold">500,000+</span>{" "}
                 workers across{" "}
@@ -426,7 +470,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-4 justify-center"
             >
               <MagneticButton strength={0.3} distance={150}>
                 <motion.div
@@ -434,11 +478,10 @@ export default function HeroSection() {
                   whileTap={{ scale: 0.98 }}
                   className="relative"
                 >
-                  {/* Glow ring on hover */}
                   <div className="absolute inset-0 rounded-md bg-safeglobal/0 group-hover:bg-safeglobal/10 transition-all duration-300 -m-2" />
                   <Button
                     size="lg"
-                    className="bg-safeglobal hover:bg-safeglobal-dark text-white shadow-xl shadow-safeglobal/25 hover:shadow-[0_0_30px_rgba(16,185,129,0.35)] transition-all text-base px-8 h-13 gap-2 relative"
+                    className="bg-safeglobal hover:bg-safeglobal-dark text-white shadow-xl shadow-safeglobal/25 hover:shadow-[0_0_30px_rgba(45,122,111,0.35)] transition-all text-base px-8 h-13 gap-2 relative"
                     onClick={() => handleScrollTo("contact")}
                   >
                     Request Demo
@@ -457,25 +500,48 @@ export default function HeroSection() {
               </Button>
             </motion.div>
 
-            {/* Trusted by industry leaders - company logo circles */}
+            {/* Trusted by industry leaders */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.5 }}
-              className="pt-2"
+              className="pt-6"
             >
-              <p className="text-xs text-muted-foreground/60 mb-3 tracking-wide">Trusted by industry leaders</p>
-              <div className="flex items-center gap-3">
+              <div className="inline-flex items-center justify-center gap-4 mb-5">
+                <div className="h-[2px] w-12 bg-gradient-to-r from-transparent to-safeglobal/60" />
+                <p className="text-xs sm:text-sm text-foreground/90 uppercase tracking-[0.25em] font-bold drop-shadow-md">
+                  Trusted by industry leaders
+                </p>
+                <div className="h-[2px] w-12 bg-gradient-to-l from-transparent to-safeglobal/60" />
+              </div>
+              <div className="flex flex-wrap items-center gap-x-10 gap-y-6 justify-center">
                 {trustedLogos.map((logo) => (
                   <div
                     key={logo.initials}
-                    className={`w-10 h-10 rounded-full bg-gradient-to-br ${logo.color} flex items-center justify-center text-white text-[11px] font-bold shadow-lg hover:scale-110 transition-transform cursor-default`}
-                    title={logo.initials}
+                    className="group relative flex items-center justify-center transition-all duration-300"
+                    title={logo.name}
                   >
-                    {logo.initials}
+                    <div className="absolute inset-0 bg-safeglobal/40 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <img
+                      src={logo.src}
+                      alt={`${logo.name} logo`}
+                      className="relative z-10 max-h-8 sm:max-h-10 max-w-[100px] object-contain invert grayscale mix-blend-screen opacity-70 transition-all duration-500 group-hover:opacity-100 group-hover:scale-110"
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        target.style.display = 'none';
+                        const fallback = target.nextElementSibling as HTMLElement | null;
+                        if (fallback) fallback.style.display = 'flex';
+                      }}
+                    />
+                    <div
+                      className={`relative z-10 w-10 h-10 rounded-full bg-gradient-to-br ${logo.color} items-center justify-center text-white text-[13px] font-bold transition-all duration-500 group-hover:scale-110 shadow-lg`}
+                      style={{ display: 'none' }}
+                    >
+                      {logo.initials}
+                    </div>
                   </div>
                 ))}
-                <span className="text-xs text-muted-foreground/50 ml-1">+200 more</span>
+                <span className="text-xs sm:text-sm text-foreground/80 ml-2 font-bold tracking-widest uppercase drop-shadow-md">+200 more</span>
               </div>
             </motion.div>
 
@@ -484,43 +550,23 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
-              className="flex flex-wrap gap-8 pt-4"
+              className="flex flex-wrap gap-8 pt-4 justify-center"
             >
               {[
-                {
-                  icon: Shield,
-                  value: 99.7,
-                  suffix: "%",
-                  label: "Detection Rate",
-                },
-                {
-                  icon: BarChart3,
-                  value: 73,
-                  suffix: "%",
-                  label: "Risk Reduction",
-                },
-                {
-                  icon: Globe,
-                  value: 30,
-                  suffix: "+",
-                  label: "Countries",
-                },
+                { icon: Shield, value: 99.7, suffix: "%", label: "Detection Rate" },
+                { icon: BarChart3, value: 73, suffix: "%", label: "Risk Reduction" },
+                { icon: Globe, value: 30, suffix: "+", label: "Countries" },
               ].map((stat) => (
                 <div key={stat.label} className="space-y-1">
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex items-center gap-1.5 justify-center">
                     <stat.icon className="w-4 h-4 text-safeglobal/60" />
-                    {/* LIVE pulsing green dot */}
                     <span className="relative flex h-2 w-2">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-safeglobal opacity-75" />
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-safeglobal" />
                     </span>
                   </div>
                   <div className="text-2xl sm:text-3xl font-bold text-safeglobal">
-                    <AnimatedCounter
-                      target={stat.value}
-                      suffix={stat.suffix}
-                      duration={2000}
-                    />
+                    <AnimatedCounter target={stat.value} suffix={stat.suffix} duration={2000} />
                   </div>
                   <div className="text-xs text-muted-foreground uppercase tracking-wider">
                     {stat.label}
@@ -529,242 +575,6 @@ export default function HeroSection() {
               ))}
             </motion.div>
           </div>
-
-          {/* Right - Dashboard Preview with 3D Tilt */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative lg:ml-8 perspective-[1000px]"
-          >
-            <div className="relative">
-              {/* Animated gradient border wrapper around dashboard card */}
-              <div className="gradient-border-always">
-                {/* Main Dashboard Card - 3D Tilt */}
-                <div
-                  ref={cardRef}
-                  className="relative rounded-2xl overflow-hidden border border-border bg-card/80 backdrop-blur-sm shadow-2xl shadow-black/30 glow-emerald card-premium"
-                  style={{
-                    transform: `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
-                    transformStyle: "preserve-3d",
-                    transition: isHovering
-                      ? "transform 0.1s ease-out"
-                      : "transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)",
-                  }}
-                  onMouseMove={handleMouseMove}
-                  onMouseLeave={handleMouseLeave}
-                  onMouseEnter={handleMouseEnter}
-                >
-                  {/* Holographic Shine/Glare Overlay */}
-                  <div
-                    className="absolute inset-0 z-10 pointer-events-none rounded-2xl"
-                    style={{
-                      background: isHovering
-                        ? `radial-gradient(circle at ${glarePos.x}% ${glarePos.y}%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 20%, transparent 60%)`
-                        : "transparent",
-                      transition: isHovering ? "background 0.1s ease-out" : "background 0.6s ease-out",
-                      mixBlendMode: "overlay",
-                    }}
-                  />
-
-                  {/* Secondary rainbow/holographic glare layer */}
-                  <div
-                    className="absolute inset-0 z-10 pointer-events-none rounded-2xl"
-                    style={{
-                      background: isHovering
-                        ? `radial-gradient(ellipse at ${glarePos.x}% ${glarePos.y}%, rgba(16,185,129,0.08) 0%, rgba(6,182,212,0.06) 25%, transparent 55%)`
-                        : "transparent",
-                      transition: isHovering ? "background 0.1s ease-out" : "background 0.6s ease-out",
-                    }}
-                  />
-
-                  <div className="bg-gradient-to-br from-safeglobal/10 to-cyan-500/5 p-6">
-                    {/* Dashboard Header */}
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="flex items-center gap-2">
-                        <Shield className="w-5 h-5 text-safeglobal" />
-                        <span className="text-sm font-semibold">
-                          SafeGlobal Command Center
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-safeglobal animate-pulse" />
-                        <span className="text-xs text-safeglobal">LIVE</span>
-                      </div>
-                    </div>
-
-                    {/* Safety Score */}
-                    <div className="flex items-center gap-6 mb-6">
-                      <div className="relative w-28 h-28">
-                        <svg
-                          className="w-full h-full -rotate-90"
-                          viewBox="0 0 100 100"
-                        >
-                          <circle
-                            cx="50"
-                            cy="50"
-                            r="42"
-                            fill="none"
-                            stroke="rgba(16,185,129,0.1)"
-                            strokeWidth="8"
-                          />
-                          <circle
-                            cx="50"
-                            cy="50"
-                            r="42"
-                            fill="none"
-                            stroke="#10b981"
-                            strokeWidth="8"
-                            strokeLinecap="round"
-                            strokeDasharray={`${0.94 * 2 * Math.PI * 42} ${2 * Math.PI * 42}`}
-                          />
-                        </svg>
-                        <div className="absolute inset-0 flex flex-col items-center justify-center">
-                          <span className="text-3xl font-bold text-safeglobal">
-                            94
-                          </span>
-                          <span className="text-[10px] text-muted-foreground">
-                            SAFETY SCORE
-                          </span>
-                        </div>
-                      </div>
-                      <div className="space-y-3 flex-1">
-                        {[
-                          {
-                            label: "Compliance",
-                            value: 98,
-                            color: "bg-safeglobal",
-                          },
-                          {
-                            label: "Risk Level",
-                            value: 12,
-                            color: "bg-cyan-500",
-                          },
-                          {
-                            label: "Incidents",
-                            value: 3,
-                            color: "bg-amber-500",
-                          },
-                        ].map((item) => (
-                          <div key={item.label} className="space-y-1">
-                            <div className="flex justify-between text-xs">
-                              <span className="text-muted-foreground">
-                                {item.label}
-                              </span>
-                              <span className="font-medium">
-                                {item.value}
-                                {item.label === "Risk Level" ? "%" : ""}
-                              </span>
-                            </div>
-                            <div className="h-1.5 bg-muted rounded-full overflow-hidden">
-                              <div
-                                className={`h-full ${item.color} rounded-full transition-all duration-1000`}
-                                style={{
-                                  width:
-                                    item.label === "Risk Level"
-                                      ? `${item.value}%`
-                                      : `${item.value}%`,
-                                }}
-                              />
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Alert Feed */}
-                    <div className="space-y-2">
-                      <div className="text-xs font-medium text-muted-foreground mb-2">
-                        RECENT ALERTS
-                      </div>
-                      {[
-                        {
-                          icon: AlertTriangle,
-                          text: "Zone B-7: Temperature threshold exceeded",
-                          time: "2m ago",
-                          type: "warning",
-                        },
-                        {
-                          icon: Shield,
-                          text: "PPE compliance verified - Floor 3",
-                          time: "5m ago",
-                          type: "success",
-                        },
-                        {
-                          icon: Activity,
-                          text: "Risk prediction updated for Assembly Line",
-                          time: "8m ago",
-                          type: "info",
-                        },
-                      ].map((alert, i) => (
-                        <div
-                          key={i}
-                          className="flex items-center gap-3 p-2.5 rounded-lg bg-background/50 border border-border/50"
-                        >
-                          <alert.icon
-                            className={`w-4 h-4 flex-shrink-0 ${
-                              alert.type === "warning"
-                                ? "text-amber-500"
-                                : alert.type === "success"
-                                  ? "text-safeglobal"
-                                  : "text-cyan-500"
-                            }`}
-                          />
-                          <span className="text-xs flex-1 truncate">
-                            {alert.text}
-                          </span>
-                          <span className="text-[10px] text-muted-foreground flex-shrink-0">
-                            {alert.time}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating Elements with parallax scroll effect and bobbing animation */}
-              <motion.div
-                className="absolute -top-4 -right-4 bg-safeglobal/10 border border-safeglobal/20 rounded-xl p-3 backdrop-blur-sm shadow-lg shadow-safeglobal/10 hover-ring cursor-default z-20"
-                animate={{ y: [0, -8, 0], rotate: [0, 1, -1, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                style={{ marginTop: scrollY * 0.08 }}
-              >
-                <div className="flex items-center gap-2">
-                  <Shield className="w-4 h-4 text-safeglobal" />
-                  <span className="text-xs font-medium text-safeglobal">
-                    0 Incidents Today
-                  </span>
-                </div>
-              </motion.div>
-              <motion.div
-                className="absolute -bottom-3 -left-3 bg-card border border-border rounded-xl p-3 shadow-xl hover-ring cursor-default z-20"
-                animate={{ y: [0, -6, 0], rotate: [0, -1, 1, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                style={{ marginTop: scrollY * 0.05 }}
-              >
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-safeglobal animate-pulse" />
-                  <span className="text-xs font-medium">
-                    AI Model v4.2 Active
-                  </span>
-                </div>
-              </motion.div>
-              <motion.div
-                className="absolute top-1/2 -right-6 bg-cyan-500/10 border border-cyan-500/20 rounded-xl p-2.5 backdrop-blur-sm shadow-lg hover-ring cursor-default z-20"
-                animate={{ y: [0, -10, 0], rotate: [0, 1, -1, 0] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                style={{ marginTop: scrollY * 0.12 }}
-              >
-                <div className="flex items-center gap-2">
-                  <Users className="w-3.5 h-3.5 text-cyan-400" />
-                  <span className="text-[11px] font-medium text-cyan-400">
-                    285 Workers Online
-                  </span>
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
         </div>
       </div>
 

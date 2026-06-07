@@ -139,7 +139,7 @@ export default function FAQSection() {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       {/* Background glows */}
       <div className="absolute top-1/3 -left-32 w-64 h-64 bg-safeglobal/5 rounded-full blur-[100px]" />
-      <div className="absolute bottom-1/4 right-0 w-80 h-80 bg-cyan-500/3 rounded-full blur-[120px]" />
+      <div className="absolute bottom-1/4 right-0 w-80 h-80 bg-teal-500/3 rounded-full blur-[120px]" />
 
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -416,7 +416,7 @@ export default function FAQSection() {
           className="mt-14 text-center"
         >
           <div className="relative inline-flex flex-col items-center gap-4 p-8 rounded-2xl border border-border bg-card/50">
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-safeglobal/5 via-transparent to-cyan-500/5" />
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-safeglobal/5 via-transparent to-teal-500/5" />
             <div className="relative">
               <div className="w-12 h-12 rounded-full bg-safeglobal/10 flex items-center justify-center mx-auto mb-3">
                 <MessageCircle className="w-6 h-6 text-safeglobal" />

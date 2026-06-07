@@ -88,17 +88,17 @@ const stats = [
     colorClass: "text-safeglobal",
     bgClass: "bg-safeglobal/15",
     ringClass: "ring-safeglobal/30",
-    glowClass: "group-hover:shadow-[0_0_30px_rgba(16,185,129,0.15)]",
+    glowClass: "group-hover:shadow-[0_0_30px_rgba(45,122,111,0.15)]",
   },
   {
     value: 99.7,
     suffix: "%",
     label: "Hazard Detection Rate",
     icon: Eye,
-    colorClass: "text-cyan-400",
-    bgClass: "bg-cyan-400/15",
-    ringClass: "ring-cyan-400/30",
-    glowClass: "group-hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]",
+    colorClass: "text-teal-400",
+    bgClass: "bg-teal-400/15",
+    ringClass: "ring-teal-400/30",
+    glowClass: "group-hover:shadow-[0_0_30px_rgba(91,138,114,0.15)]",
     decimals: 1,
   },
   {
@@ -106,9 +106,9 @@ const stats = [
     suffix: "%",
     label: "Average Risk Reduction",
     icon: TrendingDown,
-    colorClass: "text-emerald-400",
-    bgClass: "bg-emerald-400/15",
-    ringClass: "ring-emerald-400/30",
+    colorClass: "text-teal-500",
+    bgClass: "bg-teal-500/15",
+    ringClass: "ring-teal-500/30",
     glowClass: "group-hover:shadow-[0_0_30px_rgba(52,211,153,0.15)]",
   },
   {
@@ -140,17 +140,17 @@ const stats = [
     colorClass: "text-safeglobal",
     bgClass: "bg-safeglobal/15",
     ringClass: "ring-safeglobal/30",
-    glowClass: "group-hover:shadow-[0_0_30px_rgba(16,185,129,0.15)]",
+    glowClass: "group-hover:shadow-[0_0_30px_rgba(45,122,111,0.15)]",
   },
   {
     value: 98.5,
     suffix: "%",
     label: "Compliance Score Average",
     icon: ShieldCheck,
-    colorClass: "text-cyan-400",
-    bgClass: "bg-cyan-400/15",
-    ringClass: "ring-cyan-400/30",
-    glowClass: "group-hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]",
+    colorClass: "text-teal-400",
+    bgClass: "bg-teal-400/15",
+    ringClass: "ring-teal-400/30",
+    glowClass: "group-hover:shadow-[0_0_30px_rgba(91,138,114,0.15)]",
     decimals: 1,
   },
   {
@@ -159,9 +159,9 @@ const stats = [
     suffix: "B",
     label: "Client Savings Delivered",
     icon: DollarSign,
-    colorClass: "text-emerald-400",
-    bgClass: "bg-emerald-400/15",
-    ringClass: "ring-emerald-400/30",
+    colorClass: "text-teal-500",
+    bgClass: "bg-teal-500/15",
+    ringClass: "ring-teal-500/30",
     glowClass: "group-hover:shadow-[0_0_30px_rgba(52,211,153,0.15)]",
     decimals: 1,
   },
@@ -203,14 +203,14 @@ const liveEvents = [
 ];
 
 const statusColors: Record<string, string> = {
-  green: "bg-emerald-400",
-  cyan: "bg-cyan-400",
+  green: "bg-teal-500",
+  cyan: "bg-teal-400",
   amber: "bg-amber-400",
 };
 
 const statusRingColors: Record<string, string> = {
   green: "shadow-[0_0_6px_rgba(52,211,153,0.6)]",
-  cyan: "shadow-[0_0_6px_rgba(6,182,212,0.6)]",
+  cyan: "shadow-[0_0_6px_rgba(91,138,114,0.6)]",
   amber: "shadow-[0_0_6px_rgba(251,191,36,0.6)]",
 };
 
@@ -226,7 +226,7 @@ export default function AnimatedStatsSection() {
 
       {/* Ambient glow orbs */}
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-safeglobal/5 rounded-full blur-[180px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-teal-500/5 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* ── Section Header ── */}
@@ -303,8 +303,8 @@ export default function AnimatedStatsSection() {
         >
           <div className="flex items-center gap-2 mb-4">
             <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-500 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-teal-500" />
             </span>
             <span className="text-sm font-semibold tracking-wide uppercase text-muted-foreground">
               Live Data Feed

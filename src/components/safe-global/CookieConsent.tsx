@@ -52,7 +52,7 @@ export default function CookieConsent() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
             {/* Content */}
             <div className="flex items-center gap-3 flex-1 min-w-0">
-              <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-safeglobal/20 to-cyan-500/10 flex items-center justify-center border border-safeglobal/15">
+              <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-safeglobal/20 to-teal-500/10 flex items-center justify-center border border-safeglobal/15">
                 <Shield className="w-4 h-4 text-safeglobal" />
               </div>
               <div className="flex-1 min-w-0">

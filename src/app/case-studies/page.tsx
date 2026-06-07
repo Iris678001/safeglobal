@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Breadcrumb from "@/components/safe-global/Breadcrumb";
 import { caseStudies } from "@/data/case-studies";
+import { caseStudyImages } from "@/data/real-images";
 import {
   ArrowRight,
   TrendingUp,
@@ -92,17 +93,31 @@ export default function CaseStudiesPage() {
                 href={`/case-studies/${study.slug}`}
                 className="group"
               >
+                {(() => {
+                  const image = caseStudyImages[study.slug];
+                  return (
                 <article className="relative h-full rounded-2xl border border-border bg-card/50 hover:border-safeglobal/30 transition-all duration-300 overflow-hidden card-hover-premium">
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-safeglobal/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                  {/* Image Placeholder */}
+                  {/* Case study image */}
                   <div
                     className={`relative h-40 sm:h-48 bg-gradient-to-br ${study.image} overflow-hidden`}
                   >
+                    {image && (
+                      <img
+                        src={image.src}
+                        alt={image.alt}
+                        loading="lazy"
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/75 via-background/10 to-transparent" />
                     <div className="absolute inset-0 bg-grid-pattern opacity-30" />
+                    {!image && (
                     <div className="absolute inset-0 flex items-center justify-center transform transition-transform duration-700 ease-out group-hover:scale-105">
                       <Building2 className="w-10 h-10 text-safeglobal/25" />
                     </div>
+                    )}
                     {/* Industry Badge */}
                     <div className="absolute top-4 left-4">
                       <Badge
@@ -157,6 +172,8 @@ export default function CaseStudiesPage() {
                     </div>
                   </div>
                 </article>
+                  );
+                })()}
               </Link>
             ))}
           </div>

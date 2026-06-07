@@ -17,7 +17,7 @@ const testimonials = [
     role: "VP Safety",
     company: "GlobalMfg Corp",
     initials: "SC",
-    companyColor: "from-safeglobal/30 to-emerald-500/20",
+    companyColor: "from-safeglobal/30 to-teal-600/20",
     content:
       "SafeGlobal transformed our safety culture. We've seen a 78% reduction in workplace incidents in just 18 months.",
   },
@@ -26,7 +26,7 @@ const testimonials = [
     role: "COO",
     company: "PetroChem Industries",
     initials: "MR",
-    companyColor: "from-cyan-500/30 to-cyan-400/20",
+    companyColor: "from-teal-500/30 to-teal-400/20",
     content:
       "The predictive analytics alone saved us $4.2M in potential incident costs last year.",
   },
@@ -130,7 +130,7 @@ export default function TestimonialSlider() {
 
       {/* Gradient orbs for depth */}
       <div className="absolute top-1/4 -left-32 w-96 h-96 bg-safeglobal/5 rounded-full blur-[120px]" />
-      <div className="absolute bottom-1/4 -right-32 w-80 h-80 bg-cyan-500/5 rounded-full blur-[100px] animate-pulse-glow" />
+      <div className="absolute bottom-1/4 -right-32 w-80 h-80 bg-teal-500/5 rounded-full blur-[100px] animate-pulse-glow" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-safeglobal/[0.03] rounded-full blur-[150px]" />
 
       <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -209,7 +209,7 @@ export default function TestimonialSlider() {
                     className="absolute inset-0 rounded-2xl"
                     style={{
                       boxShadow:
-                        "inset 0 0 0 1px rgba(16, 185, 129, 0.15), 0 0 40px rgba(16, 185, 129, 0.08)",
+                        "inset 0 0 0 1px rgba(45, 122, 111, 0.15), 0 0 40px rgba(45, 122, 111, 0.08)",
                     }}
                   />
                 </div>

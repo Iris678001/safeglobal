@@ -35,7 +35,7 @@ function MetricItem({
   return (
     <div className="flex items-center gap-3 px-6 whitespace-nowrap">
       <Icon className="w-4 h-4 text-safeglobal/70 flex-shrink-0" />
-      <span className="text-emerald-400 font-bold text-sm tracking-tight">
+      <span className="text-teal-500 font-bold text-sm tracking-tight">
         {value}
       </span>
       <span className="text-muted-foreground text-sm">{label}</span>

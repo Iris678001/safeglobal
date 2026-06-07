@@ -47,13 +47,13 @@ const metrics = [
     icon: Shield,
     color: "cyan",
     colorClasses: {
-      iconBg: "bg-cyan-500/15",
-      iconText: "text-cyan-400",
-      afterText: "text-cyan-400",
-      badgeBg: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
-      progressBg: "bg-cyan-500/20",
-      progressFill: "bg-cyan-500",
-      glowShadow: "group-hover:shadow-cyan-500/10",
+      iconBg: "bg-teal-500/15",
+      iconText: "text-teal-400",
+      afterText: "text-teal-400",
+      badgeBg: "bg-teal-500/10 text-teal-400 border-teal-500/20",
+      progressBg: "bg-teal-500/20",
+      progressFill: "bg-teal-500",
+      glowShadow: "group-hover:shadow-teal-500/10",
     },
     progressPercent: 36.8,
   },
@@ -67,13 +67,13 @@ const metrics = [
     icon: TrendingDown,
     color: "emerald",
     colorClasses: {
-      iconBg: "bg-emerald-500/15",
-      iconText: "text-emerald-400",
-      afterText: "text-emerald-400",
-      badgeBg: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
-      progressBg: "bg-emerald-500/20",
-      progressFill: "bg-emerald-500",
-      glowShadow: "group-hover:shadow-emerald-500/10",
+      iconBg: "bg-teal-600/15",
+      iconText: "text-teal-500",
+      afterText: "text-teal-500",
+      badgeBg: "bg-teal-600/10 text-teal-500 border-teal-600/20",
+      progressBg: "bg-teal-600/20",
+      progressFill: "bg-teal-600",
+      glowShadow: "group-hover:shadow-teal-600/10",
     },
     progressPercent: 75,
   },
@@ -228,7 +228,7 @@ export default function ComparisonSection() {
 
       {/* Ambient glow orbs */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-safeglobal/5 rounded-full blur-[128px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-500/5 rounded-full blur-[128px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-teal-500/5 rounded-full blur-[128px] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -468,7 +468,7 @@ export default function ComparisonSection() {
         >
           {/* ROI Card */}
           <div className="relative p-6 rounded-2xl border border-border overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-safeglobal/10 via-transparent to-emerald-600/5 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-br from-safeglobal/10 via-transparent to-teal-700/5 pointer-events-none" />
             <div className="relative flex items-center gap-4">
               <div className="w-14 h-14 rounded-xl bg-safeglobal/15 flex items-center justify-center flex-shrink-0">
                 <TrendingDown className="w-7 h-7 text-safeglobal" />
@@ -486,13 +486,13 @@ export default function ComparisonSection() {
 
           {/* Payback Period Card */}
           <div className="relative p-6 rounded-2xl border border-border overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-cyan-600/5 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 via-transparent to-teal-600/5 pointer-events-none" />
             <div className="relative flex items-center gap-4">
-              <div className="w-14 h-14 rounded-xl bg-cyan-500/15 flex items-center justify-center flex-shrink-0">
-                <Clock className="w-7 h-7 text-cyan-400" />
+              <div className="w-14 h-14 rounded-xl bg-teal-500/15 flex items-center justify-center flex-shrink-0">
+                <Clock className="w-7 h-7 text-teal-400" />
               </div>
               <div>
-                <div className="text-3xl font-bold text-cyan-400">
+                <div className="text-3xl font-bold text-teal-400">
                   3-6 months
                 </div>
                 <div className="text-sm text-muted-foreground">

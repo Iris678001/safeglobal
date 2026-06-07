@@ -5,6 +5,7 @@ import {
   HeartPulse,
   Warehouse,
   Mountain,
+  FlaskConical,
   type LucideIcon,
 } from "lucide-react";
 
@@ -55,6 +56,39 @@ export const industriesData: Record<string, IndustryPageData> = {
       result: "Achieved 73% reduction in recordable incidents and $4.2M annual savings in insurance and workers' compensation costs within 8 months of deployment.",
     },
     cta: { title: "Transform Your Factory Safety", description: "Get a customized manufacturing safety assessment and deployment plan." },
+  },
+  "chemical-processing": {
+    slug: "chemical-processing",
+    title: "Chemical Processing",
+    subtitle: "Advanced Hazard Management & Regulatory Compliance",
+    icon: FlaskConical,
+    color: "amber",
+    heroDescription:
+      "State-of-the-art safety infrastructure tailored for chemical manufacturing and processing. Our AI-driven platform monitors toxic exposures, prevents material mishandling, and automates compliance reporting in real-time.",
+    challenges: [
+      { title: "Toxic Exposure", description: "Inhalation and skin contact with hazardous chemicals lead to severe acute and chronic health issues." },
+      { title: "Material Mishandling", description: "Improper storage and transport of reactive substances can cause catastrophic fires and explosions." },
+      { title: "Regulatory Complexity", description: "Maintaining up-to-date compliance with OSHA, EPA, and international chemical handling standards is error-prone." },
+      { title: "Spill Containment", description: "Undetected leaks and spills cause massive environmental damage and pose immediate threats to worker safety." },
+    ],
+    solutions: [
+      { title: "Real-Time Toxicity Monitoring", description: "Advanced IoT sensors detect airborne contaminants instantly, automatically adjusting ventilation and warning personnel." },
+      { title: "Automated Inventory Tracking", description: "Computer vision verifies the safe storage and segregation of reactive materials to prevent accidental mixing." },
+      { title: "Dynamic Compliance Dashboards", description: "AI continuously logs safety data and automatically generates audit-ready reports, ensuring 100% regulatory compliance." },
+      { title: "Instant Spill Detection", description: "Thermal and optical sensors identify chemical leaks within seconds, automatically triggering containment protocols." },
+    ],
+    stats: [
+      { label: "Exposure Reduction", value: "85%", description: "Decrease in hazardous exposure incidents" },
+      { label: "Audit Readiness", value: "100%", description: "Automated compliance logging accuracy" },
+      { label: "Spill Response", value: "<10s", description: "Time to identify and initiate containment" },
+      { label: "Facilities Secured", value: "250+", description: "Global chemical processing plants" },
+    ],
+    caseStudy: {
+      title: "Chemical Safety Overhaul",
+      company: "Leading Global Chemical Producer",
+      result: "Achieved an 85% drop in exposure incidents and eliminated all OSHA compliance fines within the first year of deployment.",
+    },
+    cta: { title: "Secure Your Chemical Operations", description: "Request a specialized chemical hazard assessment and AI integration strategy." },
   },
   construction: {
     slug: "construction",

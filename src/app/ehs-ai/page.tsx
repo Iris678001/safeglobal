@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { servicesData, serviceSlugs } from "@/data/services";
+import { serviceImages } from "@/data/real-images";
 import { colorMap } from "@/components/safe-global/navConfig";
 import Breadcrumb from "@/components/safe-global/Breadcrumb";
 import { ArrowRight, ChevronRight, Shield, Sparkles } from "lucide-react";
@@ -94,6 +95,7 @@ export default function EHSAIPage() {
             {services.map((service) => {
               const colors = colorMap[service.color] || colorMap.safeglobal;
               const Icon = service.icon;
+              const image = serviceImages[service.slug];
 
               return (
                 <Link
@@ -102,6 +104,17 @@ export default function EHSAIPage() {
                   className="group block"
                 >
                   <Card className="h-full border-border bg-card/50 hover:border-safeglobal/30 hover:shadow-xl hover:shadow-safeglobal/5 transition-all duration-300 overflow-hidden">
+                    {image && (
+                      <div className="relative h-36 overflow-hidden">
+                        <img
+                          src={image.src}
+                          alt={image.alt}
+                          loading="lazy"
+                          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
+                      </div>
+                    )}
                     <CardContent className="p-6">
                       <div className="flex items-start justify-between mb-4">
                         <div

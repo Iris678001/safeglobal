@@ -37,8 +37,8 @@ const categories: ChecklistCategory[] = [
     id: "ppe",
     title: "PPE & Equipment",
     icon: <HardHat className="w-5 h-5" />,
-    color: "#10b981",
-    colorLight: "rgba(16, 185, 129, 0.15)",
+    color: "#2d7a6f",
+    colorLight: "rgba(45, 122, 111, 0.15)",
     items: [
       { id: "ppe-1", label: "Hard hat inspection & certification" },
       { id: "ppe-2", label: "Safety goggles compliance" },
@@ -50,8 +50,8 @@ const categories: ChecklistCategory[] = [
     id: "emergency",
     title: "Emergency Procedures",
     icon: <AlertTriangle className="w-5 h-5" />,
-    color: "#06b6d4",
-    colorLight: "rgba(6, 182, 212, 0.15)",
+    color: "#5b8a72",
+    colorLight: "rgba(91, 138, 114, 0.15)",
     items: [
       { id: "em-1", label: "Fire exits clearly marked & unobstructed" },
       { id: "em-2", label: "First aid kits stocked & accessible" },
@@ -75,7 +75,7 @@ const categories: ChecklistCategory[] = [
 ];
 
 function getScoreColor(percentage: number): string {
-  if (percentage >= 70) return "#10b981";
+  if (percentage >= 70) return "#2d7a6f";
   if (percentage >= 40) return "#f59e0b";
   return "#ef4444";
 }
@@ -148,7 +148,7 @@ export default function SafetyChecklist() {
 
       {/* Ambient glow orbs */}
       <div className="absolute top-1/4 -left-32 w-80 h-80 bg-safeglobal/5 rounded-full blur-[120px]" />
-      <div className="absolute bottom-1/3 -right-32 w-72 h-72 bg-cyan-500/5 rounded-full blur-[100px]" />
+      <div className="absolute bottom-1/3 -right-32 w-72 h-72 bg-teal-500/5 rounded-full blur-[100px]" />
       <div className="absolute top-2/3 left-1/3 w-60 h-60 bg-violet-500/3 rounded-full blur-[100px]" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -186,7 +186,7 @@ export default function SafetyChecklist() {
         >
           <div className="relative inline-flex flex-col sm:flex-row items-center gap-6 sm:gap-10 mx-auto p-6 sm:p-8 rounded-2xl border border-border bg-card/50 backdrop-blur-sm">
             {/* Gradient overlay */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-safeglobal/5 via-transparent to-cyan-500/5" />
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-safeglobal/5 via-transparent to-teal-500/5" />
 
             {/* Circle Progress Indicator */}
             <div className="relative w-36 h-36 sm:w-40 sm:h-40 flex-shrink-0">
@@ -274,7 +274,7 @@ export default function SafetyChecklist() {
                   40–70%
                 </span>
                 <span className="flex items-center gap-1">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                  <span className="w-2 h-2 rounded-full bg-teal-600" />
                   70%+
                 </span>
               </div>
@@ -422,7 +422,7 @@ export default function SafetyChecklist() {
           className="mt-14 text-center"
         >
           <div className="relative inline-flex flex-col items-center gap-4 p-8 rounded-2xl border border-border bg-card/50">
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-safeglobal/5 via-transparent to-cyan-500/5" />
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-safeglobal/5 via-transparent to-teal-500/5" />
 
             <div className="relative">
               <div className="w-12 h-12 rounded-full bg-safeglobal/10 flex items-center justify-center mx-auto mb-3">

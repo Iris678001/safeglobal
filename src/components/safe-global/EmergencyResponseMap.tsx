@@ -158,11 +158,11 @@ const zones: ZoneData[] = [
 
 const hazardColors: Record<HazardLevel, { bg: string; text: string; border: string; glow: string; fill: string }> = {
   low: {
-    bg: "bg-emerald-500/15",
-    text: "text-emerald-400",
-    border: "border-emerald-500/30",
-    glow: "rgba(16,185,129,0.2)",
-    fill: "#10b981",
+    bg: "bg-teal-600/15",
+    text: "text-teal-500",
+    border: "border-teal-600/30",
+    glow: "rgba(45,122,111,0.2)",
+    fill: "#2d7a6f",
   },
   medium: {
     bg: "bg-amber-500/15",
@@ -269,8 +269,8 @@ const exitMarkers = [
 const statsBarData = [
   { icon: Activity, label: "Active Zones Monitored", value: "6 / 6", color: "text-safeglobal" },
   { icon: Clock, label: "Emergency Response Time", value: "< 2 min", color: "text-amber-400" },
-  { icon: CheckCircle2, label: "Evacuation Routes Clear", value: "6 / 6", color: "text-emerald-400" },
-  { icon: Shield, label: "Last Drill Date", value: "Feb 28, 2025", color: "text-cyan-400" },
+  { icon: CheckCircle2, label: "Evacuation Routes Clear", value: "6 / 6", color: "text-teal-500" },
+  { icon: Shield, label: "Last Drill Date", value: "Feb 28, 2025", color: "text-teal-400" },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -339,7 +339,7 @@ export default function EmergencyResponseMap() {
 
   const getZoneFill = (zoneId: string) => {
     const zone = zones.find((z) => z.id === zoneId);
-    if (!zone) return "rgba(16,185,129,0.05)";
+    if (!zone) return "rgba(45,122,111,0.05)";
 
     const base = hazardColors[zone.hazardLevel].fill;
 
@@ -353,12 +353,12 @@ export default function EmergencyResponseMap() {
     if (zone.hazardLevel === "critical") return `rgba(239,68,68,${opacity})`;
     if (zone.hazardLevel === "high") return `rgba(249,115,22,${opacity})`;
     if (zone.hazardLevel === "medium") return `rgba(245,158,11,${opacity})`;
-    return `rgba(16,185,129,${opacity})`;
+    return `rgba(45,122,111,${opacity})`;
   };
 
   const getZoneStroke = (zoneId: string) => {
     const zone = zones.find((z) => z.id === zoneId);
-    if (!zone) return "rgba(16,185,129,0.2)";
+    if (!zone) return "rgba(45,122,111,0.2)";
 
     if (simulating && selectedZone === zoneId && simPhase <= 2) return "rgba(239,68,68,0.8)";
     if (selectedZone === zoneId) return hazardColors[zone.hazardLevel].fill;
@@ -366,15 +366,15 @@ export default function EmergencyResponseMap() {
     if (zone.hazardLevel === "critical") return "rgba(239,68,68,0.3)";
     if (zone.hazardLevel === "high") return "rgba(249,115,22,0.3)";
     if (zone.hazardLevel === "medium") return "rgba(245,158,11,0.3)";
-    return "rgba(16,185,129,0.2)";
+    return "rgba(45,122,111,0.2)";
   };
 
   /* Equipment icon SVG */
   const EquipmentIcon = ({ type, x, y, label }: { type: string; x: number; y: number; label: string }) => {
     const color =
-      type === "fire" ? "#ef4444" : type === "firstaid" ? "#10b981" : "#06b6d4";
+      type === "fire" ? "#ef4444" : type === "firstaid" ? "#2d7a6f" : "#5b8a72";
     const bgColor =
-      type === "fire" ? "rgba(239,68,68,0.15)" : type === "firstaid" ? "rgba(16,185,129,0.15)" : "rgba(6,182,212,0.15)";
+      type === "fire" ? "rgba(239,68,68,0.15)" : type === "firstaid" ? "rgba(45,122,111,0.15)" : "rgba(91,138,114,0.15)";
 
     return (
       <g className="cursor-pointer" opacity={0.9}>
@@ -459,10 +459,10 @@ export default function EmergencyResponseMap() {
                   <span className="w-2.5 h-2.5 rounded-full bg-red-500" /> Fire Ext.
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" /> First Aid
+                  <span className="w-2.5 h-2.5 rounded-full bg-teal-600" /> First Aid
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-cyan-500" /> AED
+                  <span className="w-2.5 h-2.5 rounded-full bg-teal-500" /> AED
                 </span>
               </div>
             </div>
@@ -509,8 +509,8 @@ export default function EmergencyResponseMap() {
 
                   {/* Radial glow for assembly points */}
                   <radialGradient id="assemblyGlow" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stopColor="#10b981" stopOpacity="0.3" />
-                    <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
+                    <stop offset="0%" stopColor="#2d7a6f" stopOpacity="0.3" />
+                    <stop offset="100%" stopColor="#2d7a6f" stopOpacity="0" />
                   </radialGradient>
 
                   <radialGradient id="alertGlow" cx="50%" cy="50%" r="50%">
@@ -521,7 +521,7 @@ export default function EmergencyResponseMap() {
 
                 {/* Background grid */}
                 <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(16,185,129,0.06)" strokeWidth="0.5" />
+                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(45,122,111,0.06)" strokeWidth="0.5" />
                 </pattern>
                 <rect width="800" height="510" fill="url(#grid)" />
 
@@ -641,15 +641,15 @@ export default function EmergencyResponseMap() {
                       width={24}
                       height={16}
                       rx={3}
-                      fill="rgba(16,185,129,0.15)"
-                      stroke="rgba(16,185,129,0.4)"
+                      fill="rgba(45,122,111,0.15)"
+                      stroke="rgba(45,122,111,0.4)"
                       strokeWidth={1}
                     />
                     <text
                       x={exit.x}
                       y={exit.y + 3}
                       textAnchor="middle"
-                      fill="#10b981"
+                      fill="#2d7a6f"
                       fontSize="7"
                       fontWeight="bold"
                       fontFamily="monospace"
@@ -670,7 +670,7 @@ export default function EmergencyResponseMap() {
                       key={route.zoneId}
                       d={route.points}
                       fill="none"
-                      stroke={isActive ? "#10b981" : "rgba(16,185,129,0.15)"}
+                      stroke={isActive ? "#2d7a6f" : "rgba(45,122,111,0.15)"}
                       strokeWidth={isActive ? 2.5 : 1}
                       className={isActive ? "evac-route" : "evac-route-inactive"}
                       filter={isActive ? "url(#glow)" : undefined}
@@ -691,12 +691,12 @@ export default function EmergencyResponseMap() {
                         cx={ap.x}
                         cy={ap.y}
                         r={12}
-                        fill="rgba(16,185,129,0.1)"
-                        stroke="#10b981"
+                        fill="rgba(45,122,111,0.1)"
+                        stroke="#2d7a6f"
                         strokeWidth={1.5}
                       />
                       {/* Inner dot */}
-                      <circle cx={ap.x} cy={ap.y} r={5} fill="#10b981" />
+                      <circle cx={ap.x} cy={ap.y} r={5} fill="#2d7a6f" />
                       {/* Pulsing ring during assembly phase */}
                       {showPulse && (
                         <circle
@@ -704,7 +704,7 @@ export default function EmergencyResponseMap() {
                           cy={ap.y}
                           r={12}
                           fill="none"
-                          stroke="#10b981"
+                          stroke="#2d7a6f"
                           strokeWidth={2}
                           opacity={0.6}
                         >
@@ -717,7 +717,7 @@ export default function EmergencyResponseMap() {
                         x={ap.x}
                         y={ap.y + 28}
                         textAnchor="middle"
-                        fill="#10b981"
+                        fill="#2d7a6f"
                         fontSize="8"
                         fontWeight="bold"
                         fontFamily="monospace"
@@ -812,12 +812,12 @@ export default function EmergencyResponseMap() {
                     {/* Workers */}
                     <div className="p-4 rounded-xl border border-border bg-card/30">
                       <div className="flex items-center gap-2 mb-2">
-                        <Users className="w-4 h-4 text-cyan-400" />
+                        <Users className="w-4 h-4 text-teal-400" />
                         <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                           Active Workers
                         </span>
                       </div>
-                      <p className="text-2xl font-bold text-cyan-400">{selectedZoneData.workers}</p>
+                      <p className="text-2xl font-bold text-teal-400">{selectedZoneData.workers}</p>
                     </div>
 
                     {/* Emergency Contacts */}
@@ -863,10 +863,10 @@ export default function EmergencyResponseMap() {
                                 <Flame className="w-3.5 h-3.5 text-red-400" />
                               )}
                               {eq.icon === "heart" && (
-                                <Heart className="w-3.5 h-3.5 text-emerald-400" />
+                                <Heart className="w-3.5 h-3.5 text-teal-500" />
                               )}
                               {eq.icon === "cross" && (
-                                <Cross className="w-3.5 h-3.5 text-cyan-400" />
+                                <Cross className="w-3.5 h-3.5 text-teal-400" />
                               )}
                               {eq.icon === "shield" && (
                                 <Shield className="w-3.5 h-3.5 text-amber-400" />
@@ -914,7 +914,7 @@ export default function EmergencyResponseMap() {
                           ? "bg-orange-500/15 text-orange-400 border border-orange-500/30"
                           : simPhase === 3
                             ? "bg-amber-500/15 text-amber-400 border border-amber-500/30"
-                            : "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30"
+                            : "bg-teal-600/15 text-teal-500 border border-teal-600/30"
                     }`}
                   >
                     {simStatusText[simPhase]}

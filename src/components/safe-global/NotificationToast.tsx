@@ -63,9 +63,9 @@ const TOAST_COLORS: Record<
   { border: string; icon: string; iconBg: string }
 > = {
   success: {
-    border: "border-l-emerald-500",
-    icon: "text-emerald-500",
-    iconBg: "bg-emerald-500/15",
+    border: "border-l-teal-600",
+    icon: "text-teal-600",
+    iconBg: "bg-teal-600/15",
   },
   warning: {
     border: "border-l-amber-500",
@@ -73,9 +73,9 @@ const TOAST_COLORS: Record<
     iconBg: "bg-amber-500/15",
   },
   info: {
-    border: "border-l-cyan-500",
-    icon: "text-cyan-500",
-    iconBg: "bg-cyan-500/15",
+    border: "border-l-teal-500",
+    icon: "text-teal-500",
+    iconBg: "bg-teal-500/15",
   },
 };
 
@@ -165,10 +165,10 @@ export default function NotificationToast() {
             className="flex items-center gap-2 pointer-events-auto"
           >
             <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-500 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-teal-600" />
             </span>
-            <span className="text-xs font-semibold text-emerald-400 tracking-wider uppercase">
+            <span className="text-xs font-semibold text-teal-500 tracking-wider uppercase">
               Live Alerts
             </span>
           </motion.div>

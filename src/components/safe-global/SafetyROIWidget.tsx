@@ -189,9 +189,9 @@ function SliderInput({
       bg: "bg-amber-400/10",
     },
     cyan: {
-      text: "text-cyan-400",
-      border: "border-cyan-400/30",
-      bg: "bg-cyan-400/10",
+      text: "text-teal-400",
+      border: "border-teal-400/30",
+      bg: "bg-teal-400/10",
     },
     rose: {
       text: "text-rose-400",
@@ -347,7 +347,7 @@ export default function SafetyROIWidget() {
       {/* Background decorations */}
       <div className="absolute inset-0 bg-dot-pattern opacity-30" />
       <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-safeglobal/5 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] bg-cyan-500/3 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] bg-teal-500/3 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -504,7 +504,7 @@ export default function SafetyROIWidget() {
                   <div className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">
                     3-Year ROI
                   </div>
-                  <div className="text-lg font-bold text-emerald-400">
+                  <div className="text-lg font-bold text-teal-500">
                     <AnimatedCounter
                       value={result.threeYearROI}
                       suffix="%"
@@ -516,7 +516,7 @@ export default function SafetyROIWidget() {
                   <div className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">
                     Payback Period
                   </div>
-                  <div className="text-lg font-bold text-cyan-400">
+                  <div className="text-lg font-bold text-teal-400">
                     <AnimatedCounter
                       value={result.paybackMonths}
                       suffix=" mo"
@@ -527,7 +527,7 @@ export default function SafetyROIWidget() {
               </div>
 
               {/* Annual Savings Highlight */}
-              <div className="p-5 rounded-xl border border-safeglobal/30 bg-gradient-to-r from-safeglobal/10 to-emerald-500/5 text-center">
+              <div className="p-5 rounded-xl border border-safeglobal/30 bg-gradient-to-r from-safeglobal/10 to-teal-600/5 text-center">
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <DollarSign className="w-5 h-5 text-safeglobal" />
                   <span className="text-sm font-medium text-safeglobal">
@@ -606,7 +606,7 @@ export default function SafetyROIWidget() {
             {/* With SafeGlobal Bar */}
             <div className="flex flex-col items-center gap-3 flex-1 max-w-[200px]">
               <motion.div
-                className="w-full rounded-t-xl bg-gradient-to-t from-emerald-600 to-safeglobal relative overflow-hidden"
+                className="w-full rounded-t-xl bg-gradient-to-t from-teal-700 to-safeglobal relative overflow-hidden"
                 initial={{ height: 0 }}
                 animate={inView ? { height: `${projectedBarH}%` } : { height: 0 }}
                 transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
@@ -686,7 +686,7 @@ export default function SafetyROIWidget() {
                     : 0
                 }
                 icon={FileCheck}
-                color="text-cyan-400"
+                color="text-teal-400"
               />
               <BreakdownBar
                 label="Insurance Premium Reduction"

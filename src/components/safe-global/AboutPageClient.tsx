@@ -7,16 +7,10 @@ const AboutSection = dynamic(
   { ssr: true }
 );
 
-const TeamSection = dynamic(
-  () => import("@/components/safe-global/TeamSection"),
-  { ssr: true }
-);
-
 export default function AboutPageClient() {
   return (
     <>
       <AboutSection />
-      <TeamSection />
     </>
   );
 }

@@ -60,7 +60,7 @@ const videoCards: VideoCard[] = [
     categoryColor: "cyan",
     views: "3.1K views",
     icon: TrendingUp,
-    gradientFrom: "from-cyan-600/30",
+    gradientFrom: "from-teal-600/30",
     gradientTo: "to-blue-900/40",
   },
 ];
@@ -78,9 +78,9 @@ const statsData = [
     icon: Eye,
     label: "Total Views",
     value: "2M+",
-    color: "text-cyan-400",
-    bg: "bg-cyan-400/10",
-    border: "border-cyan-400/20",
+    color: "text-teal-400",
+    bg: "bg-teal-400/10",
+    border: "border-teal-400/20",
   },
   {
     icon: Calendar,
@@ -162,7 +162,7 @@ function FeaturedVideoPlayer() {
 
           {/* Ambient glow orbs inside player */}
           <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] bg-safeglobal/5 rounded-full blur-[100px] pointer-events-none" />
-          <div className="absolute bottom-1/4 right-1/4 w-[200px] h-[200px] bg-cyan-500/5 rounded-full blur-[80px] pointer-events-none" />
+          <div className="absolute bottom-1/4 right-1/4 w-[200px] h-[200px] bg-teal-500/5 rounded-full blur-[80px] pointer-events-none" />
 
           {/* Simulated dashboard content in player */}
           <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
@@ -170,7 +170,7 @@ function FeaturedVideoPlayer() {
               <div className="h-3 bg-safeglobal/30 rounded-full w-2/3" />
               <div className="flex gap-3">
                 <div className="h-20 flex-1 bg-safeglobal/20 rounded-lg" />
-                <div className="h-20 flex-1 bg-cyan-400/20 rounded-lg" />
+                <div className="h-20 flex-1 bg-teal-400/20 rounded-lg" />
                 <div className="h-20 flex-1 bg-amber-400/20 rounded-lg" />
               </div>
               <div className="h-12 bg-safeglobal/15 rounded-lg" />
@@ -271,7 +271,7 @@ function FeaturedVideoPlayer() {
           {/* Progress bar at bottom */}
           <div className="absolute bottom-0 inset-x-0 h-1 bg-white/10 z-20 pointer-events-none">
             <div
-              className="h-full bg-gradient-to-r from-safeglobal via-safeglobal-light to-cyan-400 transition-all duration-100"
+              className="h-full bg-gradient-to-r from-safeglobal via-safeglobal-light to-teal-400 transition-all duration-100"
               style={{ width: `${progress}%` }}
             />
             {/* Progress dot */}
@@ -295,7 +295,7 @@ function VideoGridCard({ video, index }: { video: VideoCard; index: number }) {
     safeglobal:
       "bg-safeglobal/20 border-safeglobal/30 text-safeglobal",
     amber: "bg-amber-500/20 border-amber-500/30 text-amber-400",
-    cyan: "bg-cyan-500/20 border-cyan-500/30 text-cyan-400",
+    cyan: "bg-teal-500/20 border-teal-500/30 text-teal-400",
   };
 
   return (
@@ -416,7 +416,7 @@ export default function VideoShowcase() {
 
       {/* Ambient glow orbs */}
       <div className="absolute top-1/4 left-[5%] w-[500px] h-[500px] bg-safeglobal/5 rounded-full blur-[180px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-[5%] w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-[5%] w-[400px] h-[400px] bg-teal-500/5 rounded-full blur-[160px] pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-safeglobal/3 rounded-full blur-[200px] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

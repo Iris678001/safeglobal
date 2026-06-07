@@ -31,20 +31,20 @@ const contactInfo = [
   {
     icon: Phone,
     label: "Phone",
-    value: "+1 (888) SAFE-AI1",
-    subtext: "Mon-Fri 8am-8pm EST",
+    value: "+971 569 891 213",
+    subtext: "Available during business hours (GST)",
   },
   {
     icon: Mail,
     label: "Email",
-    value: "enterprise@safeglobal.ai",
+    value: "chand.mohamed@safeglobal.world (CBO)",
     subtext: "We respond within 2 hours",
   },
   {
     icon: MapPin,
-    label: "Headquarters",
-    value: "San Francisco, CA",
-    subtext: "450 Mission Street, Suite 2800",
+    label: "Office",
+    value: "Ajman, UAE",
+    subtext: "United Arab Emirates",
   },
   {
     icon: Clock,
@@ -55,9 +55,7 @@ const contactInfo = [
 ];
 
 const officeLocations = [
-  { name: "San Francisco HQ", x: 52, y: 42, isHQ: true },
-  { name: "New York Office", x: 80, y: 38, isHQ: false },
-  { name: "London Office", x: 46, y: 28, isHQ: false },
+  { name: "Ajman, UAE (HQ)", x: 56, y: 38, isHQ: true },
 ];
 
 export default function ContactSection() {
@@ -131,7 +129,7 @@ export default function ContactSection() {
             <span className="text-gradient">Safety Culture?</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Get a personalized demo, free safety audit, or consultation with our
+            Get a personalized demo, free assessment, or consultation with our
             enterprise safety experts.
           </p>
         </motion.div>
@@ -148,14 +146,14 @@ export default function ContactSection() {
             {/* Free Audit Card - Enhanced with animated border */}
             <div className="relative p-[1px] rounded-2xl overflow-hidden">
               {/* Animated gradient border */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-safeglobal via-emerald-400 to-safeglobal animate-gradient-shift" style={{ backgroundSize: '200% 100%' }} />
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-safeglobal via-teal-500 to-safeglobal animate-gradient-shift" style={{ backgroundSize: '200% 100%' }} />
               <div className="relative p-6 rounded-2xl bg-card">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 rounded-lg bg-safeglobal/20 flex items-center justify-center">
                     <Shield className="w-5 h-5 text-safeglobal" />
                   </div>
                   <div>
-                    <h3 className="font-semibold">Free Safety Audit</h3>
+                    <h3 className="font-semibold">Free Assessment</h3>
                     <p className="text-xs text-muted-foreground">
                       No obligation, real insights
                     </p>
@@ -213,15 +211,15 @@ export default function ContactSection() {
                     <path d="M 5 0 L 0 0 0 5" fill="none" stroke="currentColor" strokeWidth="0.1" opacity="0.08" />
                   </pattern>
                   <radialGradient id="dotGlow" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stopColor="#10b981" stopOpacity="0.6" />
-                    <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
+                    <stop offset="0%" stopColor="#2d7a6f" stopOpacity="0.6" />
+                    <stop offset="100%" stopColor="#2d7a6f" stopOpacity="0" />
                   </radialGradient>
                 </defs>
                 <rect width="100" height="60" fill="url(#mapGrid)" />
 
-                {/* Simplified US outline */}
+                {/* Simplified Middle East / UAE region outline */}
                 <path
-                  d="M 15 20 L 20 16 L 30 14 L 40 13 L 50 14 L 55 16 L 60 15 L 65 13 L 72 14 L 78 17 L 82 22 L 85 28 L 84 33 L 82 38 L 78 42 L 72 44 L 65 43 L 58 40 L 52 42 L 48 45 L 42 44 L 36 42 L 30 40 L 25 38 L 20 34 L 16 30 L 14 25 Z"
+                  d="M 30 20 L 38 18 L 45 20 L 50 22 L 55 20 L 62 22 L 68 25 L 72 30 L 70 35 L 65 38 L 60 42 L 55 45 L 50 44 L 45 40 L 40 38 L 35 35 L 32 30 L 30 25 Z"
                   fill="currentColor"
                   fillOpacity="0.04"
                   stroke="currentColor"
@@ -229,37 +227,14 @@ export default function ContactSection() {
                   strokeOpacity="0.15"
                 />
 
-                {/* Simplified UK outline */}
+                {/* Arabian Peninsula */}
                 <path
-                  d="M 44 24 L 46 22 L 48 23 L 48 27 L 46 28 L 44 27 Z"
+                  d="M 48 32 L 52 30 L 58 32 L 62 36 L 60 42 L 56 46 L 52 48 L 48 46 L 46 42 L 46 38 L 48 34 Z"
                   fill="currentColor"
-                  fillOpacity="0.04"
+                  fillOpacity="0.06"
                   stroke="currentColor"
-                  strokeWidth="0.3"
-                  strokeOpacity="0.15"
-                />
-
-                {/* Connecting lines between offices */}
-                <line
-                  x1="52" y1="42" x2="80" y2="38"
-                  stroke="#10b981"
-                  strokeWidth="0.3"
-                  strokeOpacity="0.3"
-                  strokeDasharray="1.5 1"
-                />
-                <line
-                  x1="52" y1="42" x2="46" y2="28"
-                  stroke="#10b981"
-                  strokeWidth="0.3"
-                  strokeOpacity="0.3"
-                  strokeDasharray="1.5 1"
-                />
-                <line
-                  x1="80" y1="38" x2="46" y2="28"
-                  stroke="#10b981"
                   strokeWidth="0.3"
                   strokeOpacity="0.2"
-                  strokeDasharray="1.5 1"
                 />
 
                 {/* Office dots */}
@@ -279,7 +254,7 @@ export default function ContactSection() {
                         cy={office.y}
                         r="1.5"
                         fill="none"
-                        stroke="#10b981"
+                        stroke="#2d7a6f"
                         strokeWidth="0.3"
                         opacity="0.6"
                       >
@@ -304,14 +279,14 @@ export default function ContactSection() {
                       cx={office.x}
                       cy={office.y}
                       r={office.isHQ ? 1.2 : 0.8}
-                      fill="#10b981"
+                      fill="#2d7a6f"
                     />
                     {/* Label */}
                     <text
                       x={office.x}
                       y={office.y - 2.5}
                       textAnchor="middle"
-                      fill="#10b981"
+                      fill="#2d7a6f"
                       fontSize="1.8"
                       fontWeight={office.isHQ ? "600" : "400"}
                       opacity={office.isHQ ? 1 : 0.7}
@@ -338,7 +313,7 @@ export default function ContactSection() {
                 {[0,1,2,3,4].map((i) => (
                   <div
                     key={i}
-                    className="w-6 h-6 rounded-full border-2 border-card bg-gradient-to-br from-safeglobal/60 to-emerald-600/60 flex items-center justify-center"
+                    className="w-6 h-6 rounded-full border-2 border-card bg-gradient-to-br from-safeglobal/60 to-teal-700/60 flex items-center justify-center"
                   >
                     <span className="text-[7px] text-white font-bold">
                       {String.fromCharCode(65 + i * 3)}
@@ -360,7 +335,7 @@ export default function ContactSection() {
                   <h3 className="text-2xl font-bold">Thank You!</h3>
                   <p className="text-muted-foreground">
                     Our team will reach out within 2 hours to schedule your
-                    personalized demo and safety audit.
+                    personalized demo and assessment.
                   </p>
                 </div>
               ) : (
@@ -439,6 +414,9 @@ export default function ContactSection() {
                           <SelectItem value="manufacturing">
                             Manufacturing
                           </SelectItem>
+                          <SelectItem value="chemical-processing">
+                            Chemical Processing
+                          </SelectItem>
                           <SelectItem value="construction">
                             Construction
                           </SelectItem>
@@ -506,7 +484,7 @@ export default function ContactSection() {
                         </>
                       ) : (
                         <>
-                          Request Demo & Free Audit
+                          Request a Callback
                           <Send className="w-4 h-4" />
                         </>
                       )}

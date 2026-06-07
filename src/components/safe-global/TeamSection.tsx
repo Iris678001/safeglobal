@@ -23,7 +23,7 @@ const teamMembers = [
     initials: "EV",
     icon: Shield,
     isCoFounder: true,
-    gradient: "from-safeglobal/40 to-emerald-700/40",
+    gradient: "from-safeglobal/40 to-teal-800/40",
     ringColor: "group-hover:ring-safeglobal/50",
   },
   {
@@ -33,8 +33,8 @@ const teamMembers = [
     initials: "MC",
     icon: Cpu,
     isCoFounder: true,
-    gradient: "from-cyan-500/40 to-safeglobal/40",
-    ringColor: "group-hover:ring-cyan-500/50",
+    gradient: "from-teal-500/40 to-safeglobal/40",
+    ringColor: "group-hover:ring-teal-500/50",
   },
   {
     name: "Sarah Okonkwo",
@@ -90,7 +90,7 @@ export default function TeamSection() {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       {/* Background glows */}
       <div className="absolute top-1/3 -left-32 w-80 h-80 bg-safeglobal/5 rounded-full blur-[120px]" />
-      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-cyan-500/3 rounded-full blur-[140px]" />
+      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-teal-500/3 rounded-full blur-[140px]" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}

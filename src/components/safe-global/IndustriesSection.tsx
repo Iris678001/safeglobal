@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { industryImages } from "@/data/real-images";
 import {
   Factory,
   HardHat,
@@ -40,10 +41,10 @@ const industries = [
     ],
     stat: "68%",
     statLabel: "incident reduction",
-    color: "from-safeglobal/20 to-emerald-600/5",
+    color: "from-safeglobal/20 to-teal-700/5",
     accent: "text-safeglobal",
     border: "border-safeglobal/20 hover:border-safeglobal/40",
-    gradientBg: "from-safeglobal to-emerald-600",
+    gradientBg: "from-safeglobal to-teal-700",
     riskBadge: "bg-red-500/10 text-red-400 border-red-500/20",
     solutionBadge: "bg-safeglobal/10 text-safeglobal border-safeglobal/20",
   },
@@ -118,11 +119,11 @@ const industries = [
     ],
     stat: "74%",
     statLabel: "injury reduction",
-    color: "from-cyan-500/20 to-cyan-600/5",
-    accent: "text-cyan-400",
-    border: "border-cyan-500/20 hover:border-cyan-500/40",
-    gradientBg: "from-cyan-500 to-cyan-600",
-    riskBadge: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
+    color: "from-teal-500/20 to-teal-600/5",
+    accent: "text-teal-400",
+    border: "border-teal-500/20 hover:border-teal-500/40",
+    gradientBg: "from-teal-500 to-teal-600",
+    riskBadge: "bg-teal-500/10 text-teal-400 border-teal-500/20",
     solutionBadge: "bg-safeglobal/10 text-safeglobal border-safeglobal/20",
   },
   {
@@ -153,6 +154,14 @@ const industries = [
   },
 ];
 
+const industryImageSlugs = [
+  "manufacturing",
+  "construction",
+  "oil-gas",
+  "logistics-warehousing",
+  "healthcare",
+] as const;
+
 export default function IndustriesSection() {
   const [activeTab, setActiveTab] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
@@ -164,6 +173,7 @@ export default function IndustriesSection() {
   };
 
   const activeIndustry = industries[activeTab];
+  const activeImage = industryImages[industryImageSlugs[activeTab]];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -179,7 +189,7 @@ export default function IndustriesSection() {
   // Industry-specific metrics for the floating stat cards
   const industryMetrics = [
     { icon: Users, label: "Workers Protected", value: "2.4M+", color: "text-safeglobal" },
-    { icon: TrendingUp, label: "Avg Risk Reduction", value: "73%", color: "text-cyan-400" },
+    { icon: TrendingUp, label: "Avg Risk Reduction", value: "73%", color: "text-teal-400" },
     { icon: Globe, label: "Countries Active", value: "42+", color: "text-amber-400" },
   ];
 
@@ -190,9 +200,9 @@ export default function IndustriesSection() {
       {/* Background effects */}
       <div className="absolute inset-0 bg-dot-pattern opacity-20" />
       <div className="absolute top-1/3 -right-32 w-72 h-72 bg-safeglobal/3 rounded-full blur-[120px]" />
-      <div className="absolute bottom-1/4 -left-32 w-64 h-64 bg-cyan-500/3 rounded-full blur-[100px]" />
+      <div className="absolute bottom-1/4 -left-32 w-64 h-64 bg-teal-500/3 rounded-full blur-[100px]" />
       {/* New: Ambient animated gradient orb */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-r from-safeglobal/5 via-cyan-500/5 to-amber-500/5 rounded-full blur-[100px] animate-breathe" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-r from-safeglobal/5 via-teal-500/5 to-amber-500/5 rounded-full blur-[100px] animate-breathe" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -296,12 +306,29 @@ export default function IndustriesSection() {
             <div className="grid lg:grid-cols-5 gap-8 items-start">
               {/* Left: Icon & Description */}
               <div className="lg:col-span-2 space-y-6">
-                {/* Large icon with gradient background */}
-                <div
-                  className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${activeIndustry.gradientBg} flex items-center justify-center shadow-lg`}
-                >
-                  <activeIndustry.icon className="w-10 h-10 text-white" />
-                </div>
+                {/* Industry image */}
+                {activeImage ? (
+                  <div className="relative h-64 rounded-3xl overflow-hidden border border-border bg-card/50 shadow-xl shadow-black/10">
+                    <img
+                      src={activeImage.src}
+                      alt={activeImage.alt}
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/15 to-transparent" />
+                    <div
+                      className={`absolute bottom-4 left-4 w-14 h-14 rounded-2xl bg-gradient-to-br ${activeIndustry.gradientBg} flex items-center justify-center shadow-lg`}
+                    >
+                      <activeIndustry.icon className="w-7 h-7 text-white" />
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${activeIndustry.gradientBg} flex items-center justify-center shadow-lg`}
+                  >
+                    <activeIndustry.icon className="w-10 h-10 text-white" />
+                  </div>
+                )}
 
                 <div>
                   <h3 className="text-2xl sm:text-3xl font-bold mb-3">

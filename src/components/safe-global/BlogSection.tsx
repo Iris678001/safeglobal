@@ -3,14 +3,15 @@
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { homepageBlogImages } from "@/data/real-images";
 import { ArrowRight, Clock, User, TrendingUp, Flame, Tag } from "lucide-react";
 
 // Author data with avatar colors
 const authorData: Record<string, { initials: string; color: string }> = {
-  "Dr. Sarah Chen": { initials: "SC", color: "from-emerald-400 to-cyan-400" },
+  "Dr. Sarah Chen": { initials: "SC", color: "from-teal-500 to-teal-400" },
   "Marcus Rodriguez": { initials: "MR", color: "from-violet-400 to-purple-400" },
   "Lisa Yamamoto": { initials: "LY", color: "from-amber-400 to-orange-400" },
-  "Robert Klein": { initials: "RK", color: "from-blue-400 to-cyan-400" },
+  "Robert Klein": { initials: "RK", color: "from-blue-400 to-teal-400" },
 };
 
 const blogPosts = [
@@ -63,19 +64,21 @@ const blogPosts = [
 // Tag color mapping
 const tagColors: Record<string, string> = {
   "AI Safety": "bg-safeglobal/15 text-safeglobal border-safeglobal/20",
-  "Predictive Analytics": "bg-cyan-500/15 text-cyan-400 border-cyan-500/20",
-  "ROI": "bg-emerald-500/15 text-emerald-400 border-emerald-500/20",
+  "Predictive Analytics": "bg-teal-500/15 text-teal-400 border-teal-500/20",
+  "ROI": "bg-teal-600/15 text-teal-500 border-teal-600/20",
   "Compliance": "bg-violet-500/15 text-violet-400 border-violet-500/20",
   "ISO 45001": "bg-blue-500/15 text-blue-400 border-blue-500/20",
   "Automation": "bg-amber-500/15 text-amber-400 border-amber-500/20",
   "IoT": "bg-teal-500/15 text-teal-400 border-teal-500/20",
-  "Edge Computing": "bg-cyan-500/15 text-cyan-400 border-cyan-500/20",
+  "Edge Computing": "bg-teal-500/15 text-teal-400 border-teal-500/20",
   "Industry": "bg-orange-500/15 text-orange-400 border-orange-500/20",
   "Trends": "bg-rose-500/15 text-rose-400 border-rose-500/20",
   "EHS": "bg-safeglobal/15 text-safeglobal border-safeglobal/20",
 };
 
 export default function BlogSection() {
+  const featuredImage = homepageBlogImages[blogPosts[0].title];
+
   return (
     <section id="blog" className="relative py-20 lg:py-28">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
@@ -118,15 +121,26 @@ export default function BlogSection() {
             <div className="relative rounded-2xl border border-border bg-card/50 hover:border-safeglobal/30 overflow-hidden h-full">
               <div className="absolute inset-0 bg-gradient-to-b from-safeglobal/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-              {/* Image placeholder with hover shift animation */}
-              <div className="relative h-48 sm:h-56 bg-gradient-to-br from-safeglobal/20 via-cyan-500/10 to-safeglobal/5 overflow-hidden">
+              {/* Article image */}
+              <div className="relative h-48 sm:h-56 bg-gradient-to-br from-safeglobal/20 via-teal-500/10 to-safeglobal/5 overflow-hidden">
+                {featuredImage && (
+                  <img
+                    src={featuredImage.src}
+                    alt={featuredImage.alt}
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-card/90 via-card/20 to-transparent" />
                 <div className="absolute inset-0 bg-grid-pattern opacity-30" />
+                {!featuredImage && (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center transform transition-transform duration-700 ease-out group-hover:scale-105 group-hover:translate-x-1">
                     <TrendingUp className="w-12 h-12 text-safeglobal/40 mx-auto mb-2" />
                     <span className="text-xs text-safeglobal/50 font-medium tracking-wider">FEATURED ARTICLE</span>
                   </div>
                 </div>
+                )}
               </div>
 
               <div className="relative p-8 h-full flex flex-col">
@@ -195,6 +209,9 @@ export default function BlogSection() {
 
           {/* Other Posts */}
           {blogPosts.slice(1).map((post, idx) => (
+            (() => {
+              const postImage = homepageBlogImages[post.title];
+              return (
             <motion.div
               key={post.title}
               initial={{ opacity: 0, y: 20 }}
@@ -205,12 +222,23 @@ export default function BlogSection() {
             >
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-safeglobal/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-              {/* Image placeholder with hover shift animation */}
-              <div className="relative h-32 bg-gradient-to-br from-safeglobal/10 via-background to-cyan-500/5 overflow-hidden">
+              {/* Article image */}
+              <div className="relative h-32 bg-gradient-to-br from-safeglobal/10 via-background to-teal-500/5 overflow-hidden">
+                {postImage && (
+                  <img
+                    src={postImage.src}
+                    alt={postImage.alt}
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-card/10 to-transparent" />
                 <div className="absolute inset-0 bg-dot-pattern opacity-40" />
+                {!postImage && (
                 <div className="absolute inset-0 flex items-center justify-center transform transition-transform duration-700 ease-out group-hover:scale-105 group-hover:translate-x-1">
                   <TrendingUp className="w-8 h-8 text-safeglobal/20" />
                 </div>
+                )}
               </div>
 
               <div className="relative p-6">
@@ -269,6 +297,8 @@ export default function BlogSection() {
                 </div>
               </div>
             </motion.div>
+              );
+            })()
           ))}
         </div>
 
@@ -277,7 +307,7 @@ export default function BlogSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-12 p-8 rounded-2xl border border-safeglobal/20 bg-gradient-to-r from-safeglobal/5 to-cyan-500/5 flex flex-col sm:flex-row items-center justify-between gap-6"
+          className="mt-12 p-8 rounded-2xl border border-safeglobal/20 bg-gradient-to-r from-safeglobal/5 to-teal-500/5 flex flex-col sm:flex-row items-center justify-between gap-6"
         >
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-xl bg-safeglobal/10 flex items-center justify-center flex-shrink-0">

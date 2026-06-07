@@ -33,8 +33,8 @@ const steps = [
       "Baseline risk assessment within first 48 hours",
       "Historical data ingestion from existing systems",
     ],
-    color: "from-safeglobal/20 to-emerald-600/5",
-    gradientBg: "from-safeglobal to-emerald-600",
+    color: "from-safeglobal/20 to-teal-700/5",
+    gradientBg: "from-safeglobal to-teal-700",
     accentColor: "text-safeglobal",
     bgColor: "bg-safeglobal/10",
     borderColor: "border-safeglobal/20",
@@ -55,12 +55,12 @@ const steps = [
       "Risk scoring & prioritization for every zone",
       "Predictive alert generation with confidence scores",
     ],
-    color: "from-cyan-500/20 to-cyan-600/5",
-    gradientBg: "from-cyan-500 to-cyan-600",
-    accentColor: "text-cyan-400",
-    bgColor: "bg-cyan-500/10",
-    borderColor: "border-cyan-500/20",
-    dotColor: "bg-cyan-400",
+    color: "from-teal-500/20 to-teal-600/5",
+    gradientBg: "from-teal-500 to-teal-600",
+    accentColor: "text-teal-400",
+    bgColor: "bg-teal-500/10",
+    borderColor: "border-teal-500/20",
+    dotColor: "bg-teal-400",
     phase: "Week 2-3",
   },
   {
@@ -111,7 +111,7 @@ const steps = [
 
 const deploymentPhases = [
   { label: "Assessment", width: "25%", color: "bg-safeglobal" },
-  { label: "Integration", width: "25%", color: "bg-cyan-500" },
+  { label: "Integration", width: "25%", color: "bg-teal-500" },
   { label: "Deployment", width: "25%", color: "bg-amber-500" },
   { label: "Optimization", width: "25%", color: "bg-violet-500" },
 ];
@@ -152,7 +152,7 @@ export default function HowItWorks() {
           {/* Connecting Line - animated gradient that fills as you progress */}
           <div className="hidden lg:block absolute top-6 left-0 right-0 h-1 rounded-full bg-muted/50 overflow-hidden">
             <motion.div
-              className="h-full rounded-full bg-gradient-to-r from-safeglobal via-cyan-500 via-amber-500 to-violet-500"
+              className="h-full rounded-full bg-gradient-to-r from-safeglobal via-teal-500 via-amber-500 to-violet-500"
               initial={{ width: "0%" }}
               animate={{
                 width: `${((activeStep + 1) / steps.length) * 100}%`,
@@ -359,7 +359,7 @@ export default function HowItWorks() {
         >
           {[
             { value: "99.7%", label: "Detection Rate", icon: Shield, color: "text-safeglobal" },
-            { value: "45ms", label: "Alert Speed", icon: Zap, color: "text-cyan-400" },
+            { value: "45ms", label: "Alert Speed", icon: Zap, color: "text-teal-400" },
             { value: "73%", label: "Risk Reduction", icon: BarChart3, color: "text-amber-400" },
             { value: "4-6 wk", label: "Deployment Time", icon: Clock, color: "text-violet-400" },
           ].map((metric, idx) => (
@@ -455,7 +455,7 @@ export default function HowItWorks() {
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <BarChart3 className="w-4 h-4 text-cyan-500/60" />
+              <BarChart3 className="w-4 h-4 text-teal-500/60" />
               <span className="text-xs text-muted-foreground">
                 <span className="text-foreground font-semibold">73%</span> avg
                 risk reduction

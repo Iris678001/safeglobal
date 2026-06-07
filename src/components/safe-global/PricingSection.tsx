@@ -129,7 +129,7 @@ export default function PricingSection() {
 
       {/* Background decorations */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-safeglobal/5 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500/3 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-teal-500/3 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -178,7 +178,7 @@ export default function PricingSection() {
               className="relative inline-flex h-7 w-14 shrink-0 cursor-pointer items-center rounded-full border border-border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-safeglobal/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50"
               style={{
                 backgroundColor: isAnnual
-                  ? "rgba(16, 185, 129, 0.25)"
+                  ? "rgba(45, 122, 111, 0.25)"
                   : "rgba(255, 255, 255, 0.05)",
               }}
               role="switch"
@@ -239,7 +239,7 @@ export default function PricingSection() {
               <motion.div key={tier.name} variants={item} className="flex">
                 {/* Enterprise card with animated gradient border wrapper */}
                 {isEnterprise ? (
-                  <div className="w-full rounded-2xl p-[2px] bg-gradient-to-r from-safeglobal via-emerald-400 to-cyan-400 bg-[length:200%_100%] animate-[gradient-shift_4s_ease_infinite]">
+                  <div className="w-full rounded-2xl p-[2px] bg-gradient-to-r from-safeglobal via-teal-500 to-teal-400 bg-[length:200%_100%] animate-[gradient-shift_4s_ease_infinite]">
                     <div className="relative flex flex-col w-full rounded-[14px] border border-border bg-card/80 backdrop-blur-sm p-6 lg:p-8 transition-all duration-300 group hover:-translate-y-1">
                       {/* Enterprise shimmer overlay */}
                       <div className="absolute inset-0 rounded-[14px] shimmer pointer-events-none" />
@@ -314,7 +314,7 @@ export default function PricingSection() {
                   <div
                     className={`group relative flex flex-col w-full rounded-2xl border p-6 lg:p-8 transition-all duration-300 ${
                       tier.highlighted
-                        ? "border-safeglobal/40 bg-gradient-to-b from-safeglobal/10 via-card/80 to-card/50 shadow-[0_0_40px_rgba(16,185,129,0.12)] hover:shadow-[0_0_60px_rgba(16,185,129,0.2)] hover:border-safeglobal/60 hover:-translate-y-2"
+                        ? "border-safeglobal/40 bg-gradient-to-b from-safeglobal/10 via-card/80 to-card/50 shadow-[0_0_40px_rgba(45,122,111,0.12)] hover:shadow-[0_0_60px_rgba(45,122,111,0.2)] hover:border-safeglobal/60 hover:-translate-y-2"
                         : "border-border bg-card/50 hover:border-safeglobal/25 hover:shadow-xl hover:shadow-black/20 hover:-translate-y-1"
                     }`}
                   >

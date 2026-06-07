@@ -286,7 +286,7 @@ export default function AIDemoSection() {
                       <div className="text-[10px] text-muted-foreground">Open Alerts</div>
                     </div>
                     <div>
-                      <div className="text-lg font-bold text-cyan-400">92%</div>
+                      <div className="text-lg font-bold text-teal-400">92%</div>
                       <div className="text-[10px] text-muted-foreground">Compliance</div>
                     </div>
                     <div>
@@ -311,7 +311,7 @@ export default function AIDemoSection() {
                         cy="50"
                         r="42"
                         fill="none"
-                        stroke="rgba(16,185,129,0.1)"
+                        stroke="rgba(45,122,111,0.1)"
                         strokeWidth="6"
                       />
                       <circle
@@ -321,7 +321,7 @@ export default function AIDemoSection() {
                         fill="none"
                         stroke={
                           currentZone.safetyScore >= 90
-                            ? "#10b981"
+                            ? "#2d7a6f"
                             : currentZone.safetyScore >= 75
                               ? "#f59e0b"
                               : "#ef4444"
@@ -376,7 +376,7 @@ export default function AIDemoSection() {
                           icon: Activity,
                           label: "Active Workers",
                           value: currentZone.workers.toString(),
-                          color: "text-cyan-400",
+                          color: "text-teal-400",
                         },
                       ].map((metric) => (
                         <div
@@ -420,8 +420,8 @@ export default function AIDemoSection() {
                       <AreaChart data={currentChartData}>
                         <defs>
                           <linearGradient id="riskGradient" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#10b981" stopOpacity={0.3} />
-                            <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
+                            <stop offset="5%" stopColor="#2d7a6f" stopOpacity={0.3} />
+                            <stop offset="95%" stopColor="#2d7a6f" stopOpacity={0} />
                           </linearGradient>
                           <linearGradient id="predictedGradient" x1="0" y1="0" x2="0" y2="1">
                             <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.15} />
@@ -454,7 +454,7 @@ export default function AIDemoSection() {
                         <Area
                           type="monotone"
                           dataKey="risk"
-                          stroke="#10b981"
+                          stroke="#2d7a6f"
                           strokeWidth={2}
                           fill="url(#riskGradient)"
                         />

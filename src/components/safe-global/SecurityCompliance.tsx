@@ -20,12 +20,12 @@ const certifications = [
     category: "Occupational Health & Safety",
     status: "Certified",
     colorTheme: "green",
-    iconBg: "bg-emerald-500/10",
-    iconColor: "text-emerald-400",
-    borderHover: "hover:border-emerald-500/40",
-    statusBg: "bg-emerald-500/15",
-    statusColor: "text-emerald-400",
-    glowColor: "rgba(16,185,129,0.15)",
+    iconBg: "bg-teal-600/10",
+    iconColor: "text-teal-500",
+    borderHover: "hover:border-teal-600/40",
+    statusBg: "bg-teal-600/15",
+    statusColor: "text-teal-500",
+    glowColor: "rgba(45,122,111,0.15)",
   },
   {
     icon: Lock,
@@ -33,12 +33,12 @@ const certifications = [
     category: "Information Security",
     status: "Certified",
     colorTheme: "cyan",
-    iconBg: "bg-cyan-500/10",
-    iconColor: "text-cyan-400",
-    borderHover: "hover:border-cyan-500/40",
-    statusBg: "bg-cyan-500/15",
-    statusColor: "text-cyan-400",
-    glowColor: "rgba(6,182,212,0.15)",
+    iconBg: "bg-teal-500/10",
+    iconColor: "text-teal-400",
+    borderHover: "hover:border-teal-500/40",
+    statusBg: "bg-teal-500/15",
+    statusColor: "text-teal-400",
+    glowColor: "rgba(91,138,114,0.15)",
   },
   {
     icon: Award,
@@ -72,12 +72,12 @@ const certifications = [
     category: "Data Protection",
     status: "Compliant",
     colorTheme: "green",
-    iconBg: "bg-emerald-500/10",
-    iconColor: "text-emerald-400",
-    borderHover: "hover:border-emerald-500/40",
-    statusBg: "bg-emerald-500/15",
-    statusColor: "text-emerald-400",
-    glowColor: "rgba(16,185,129,0.15)",
+    iconBg: "bg-teal-600/10",
+    iconColor: "text-teal-500",
+    borderHover: "hover:border-teal-600/40",
+    statusBg: "bg-teal-600/15",
+    statusColor: "text-teal-500",
+    glowColor: "rgba(45,122,111,0.15)",
   },
   {
     icon: Shield,
@@ -85,12 +85,12 @@ const certifications = [
     category: "Workplace Safety Standards",
     status: "Compliant",
     colorTheme: "cyan",
-    iconBg: "bg-cyan-500/10",
-    iconColor: "text-cyan-400",
-    borderHover: "hover:border-cyan-500/40",
-    statusBg: "bg-cyan-500/15",
-    statusColor: "text-cyan-400",
-    glowColor: "rgba(6,182,212,0.15)",
+    iconBg: "bg-teal-500/10",
+    iconColor: "text-teal-400",
+    borderHover: "hover:border-teal-500/40",
+    statusBg: "bg-teal-500/15",
+    statusColor: "text-teal-400",
+    glowColor: "rgba(91,138,114,0.15)",
   },
   {
     icon: Lock,
@@ -254,7 +254,7 @@ export default function SecurityCompliance() {
 
       {/* Gradient orbs */}
       <div className="absolute top-1/4 -left-32 w-96 h-96 bg-safeglobal/5 rounded-full blur-[120px] animate-pulse-glow" />
-      <div className="absolute bottom-1/4 -right-32 w-80 h-80 bg-cyan-500/5 rounded-full blur-[100px]" />
+      <div className="absolute bottom-1/4 -right-32 w-80 h-80 bg-teal-500/5 rounded-full blur-[100px]" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-violet-500/[0.02] rounded-full blur-[150px]" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

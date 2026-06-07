@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { serviceImages } from "@/data/real-images";
 import {
   Eye,
   BarChart3,
@@ -27,11 +28,11 @@ const services = [
       "Zone-based safety alerts",
       "Real-time dashboard & reporting",
     ],
-    color: "from-safeglobal/20 to-emerald-600/5",
+    color: "from-safeglobal/20 to-teal-700/5",
     accentColor: "text-safeglobal",
     borderColor: "border-safeglobal/20",
     hoverBorder: "hover:border-safeglobal/40",
-    gradientLine: "from-safeglobal via-emerald-400 to-cyan-400",
+    gradientLine: "from-safeglobal via-teal-500 to-teal-400",
     glowColor: "bg-safeglobal",
     pricing: "Starting at $499/mo",
   },
@@ -47,12 +48,12 @@ const services = [
       "Automated risk scoring",
       "Preventive action recommendations",
     ],
-    color: "from-cyan-500/20 to-cyan-600/5",
-    accentColor: "text-cyan-400",
-    borderColor: "border-cyan-500/20",
-    hoverBorder: "hover:border-cyan-500/40",
-    gradientLine: "from-cyan-400 via-cyan-300 to-blue-400",
-    glowColor: "bg-cyan-400",
+    color: "from-teal-500/20 to-teal-600/5",
+    accentColor: "text-teal-400",
+    borderColor: "border-teal-500/20",
+    hoverBorder: "hover:border-teal-500/40",
+    gradientLine: "from-teal-400 via-cyan-300 to-blue-400",
+    glowColor: "bg-teal-400",
     pricing: "Starting at $799/mo",
   },
   {
@@ -117,6 +118,14 @@ const services = [
   },
 ];
 
+const serviceImageSlugs = [
+  "ai-safety-monitoring",
+  "predictive-risk-analytics",
+  "compliance-automation",
+  "safety-training-vr",
+  "iot-integration",
+] as const;
+
 const container = {
   hidden: { opacity: 0 },
   show: {
@@ -176,9 +185,23 @@ export default function ServicesSection() {
         >
           {services.map((service, index) => (
             <motion.div key={service.title} variants={item}>
+              {(() => {
+                const image = serviceImages[serviceImageSlugs[index]];
+                return (
               <Card
                 className={`group relative overflow-hidden bg-card/50 ${service.borderColor} ${service.hoverBorder} transition-all duration-300 hover:shadow-xl hover:shadow-black/20 hover:-translate-y-1 h-full shimmer`}
               >
+                {image && (
+                  <div className="relative h-36 overflow-hidden">
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
+                  </div>
+                )}
                 {/* Background gradient on hover */}
                 <div
                   className={`absolute inset-0 bg-gradient-to-b ${service.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
@@ -260,6 +283,8 @@ export default function ServicesSection() {
                   />
                 </div>
               </Card>
+                );
+              })()}
             </motion.div>
           ))}
         </motion.div>

@@ -34,8 +34,8 @@ const resources: Resource[] = [
       "Comprehensive analysis of workplace safety trends across 30+ countries",
     cta: "Download PDF",
     featured: true,
-    iconGradient: "from-emerald-500/20 to-cyan-500/20",
-    iconColor: "text-emerald-400",
+    iconGradient: "from-teal-600/20 to-teal-500/20",
+    iconColor: "text-teal-500",
   },
   {
     title: "AI in Safety: The Complete Guide",
@@ -44,8 +44,8 @@ const resources: Resource[] = [
     description:
       "Deep dive into AI-powered safety monitoring, predictive analytics, and compliance automation",
     cta: "Download PDF",
-    iconGradient: "from-cyan-500/20 to-blue-500/20",
-    iconColor: "text-cyan-400",
+    iconGradient: "from-teal-500/20 to-blue-500/20",
+    iconColor: "text-teal-400",
   },
   {
     title: "ROI Calculator Template",
@@ -74,7 +74,7 @@ const resources: Resource[] = [
     description:
       "How GlobalMfg Corp achieved 73% risk reduction in 12 months with SafeGlobal",
     cta: "Download Case Study",
-    iconGradient: "from-emerald-500/20 to-teal-500/20",
+    iconGradient: "from-teal-600/20 to-teal-500/20",
     iconColor: "text-teal-400",
   },
   {
@@ -119,7 +119,7 @@ export default function ResourceLibrary() {
 
       {/* Background decorations */}
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-safeglobal/5 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-cyan-500/3 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-teal-500/3 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -162,7 +162,7 @@ export default function ResourceLibrary() {
                 <div
                   className={`group relative flex flex-col w-full rounded-2xl border p-6 transition-all duration-300 ${
                     resource.featured
-                      ? "border-safeglobal/40 bg-gradient-to-b from-safeglobal/10 via-card/80 to-card/50 shadow-[0_0_40px_rgba(16,185,129,0.12)] hover:shadow-[0_0_60px_rgba(16,185,129,0.2)] hover:border-safeglobal/60 hover:-translate-y-2"
+                      ? "border-safeglobal/40 bg-gradient-to-b from-safeglobal/10 via-card/80 to-card/50 shadow-[0_0_40px_rgba(45,122,111,0.12)] hover:shadow-[0_0_60px_rgba(45,122,111,0.2)] hover:border-safeglobal/60 hover:-translate-y-2"
                       : "border-border bg-card/50 hover:border-safeglobal/25 hover:shadow-xl hover:shadow-black/20 hover:-translate-y-1"
                   }`}
                 >

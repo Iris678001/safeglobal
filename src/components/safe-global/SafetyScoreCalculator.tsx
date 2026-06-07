@@ -38,10 +38,10 @@ function calculateScore(
   let level: string, color: string;
   if (score >= 85) {
     level = "Excellent";
-    color = "#10b981";
+    color = "#2d7a6f";
   } else if (score >= 70) {
     level = "Good";
-    color = "#06b6d4";
+    color = "#5b8a72";
   } else if (score >= 50) {
     level = "Needs Improvement";
     color = "#f59e0b";
