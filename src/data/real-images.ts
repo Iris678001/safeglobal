@@ -71,16 +71,16 @@ export const industryImages: Record<string, RealImage> = {
     alt: "Construction site with workers and heavy equipment",
   },
   "oil-gas": {
-    src: "/images/oil_gas_facility.png",
-    alt: "Oil and gas processing facility with industrial pipework",
+    src: "/images/ppe_detection_oil_gas.png",
+    alt: "AI computer vision identifying PPE compliance on workers in an oil and gas refinery",
   },
   healthcare: {
     src: unsplash("photo-1586773860418-d37222d8fce3", "entropy"),
     alt: "Healthcare workers in a clinical facility",
   },
   "logistics-warehousing": {
-    src: unsplash("photo-1586528116311-ad8dd3c8310d", "entropy"),
-    alt: "Warehouse logistics operation with shelves and material handling equipment",
+    src: "/images/iot_fleet_smart_containers.png",
+    alt: "AI dashboard displaying global IoT fleet tracking and smart container monitoring",
   },
   "mining-extraction": {
     src: unsplash("photo-1516026672322-bc52d61a55d5", "entropy"),

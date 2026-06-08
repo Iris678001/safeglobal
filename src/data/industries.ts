@@ -136,12 +136,16 @@ export const industriesData: Record<string, IndustryPageData> = {
       { title: "Toxic Gas Leaks", description: "H2S, CO, and other toxic gases can be lethal in minutes; rapid detection and response is literally life or death." },
       { title: "Confined Space Entry", description: "Tank and vessel entry procedures are high-risk operations with 2.5x the fatality rate of general industrial work." },
       { title: "Hot Work Hazards", description: "Welding and cutting near hydrocarbon systems causes 15% of refinery incidents, often with catastrophic outcomes." },
+      { title: "PPE Non-Compliance", description: "Workers operating without proper protective equipment face severe risks from chemical splashes and mechanical impacts." },
+      { title: "Protocol Deviations", description: "Failure to adhere to strict operational protocols can rapidly escalate into severe incidents and emergency scenarios." },
     ],
     solutions: [
       { title: "Gas Detection Networks", description: "Dense IoT sensor grids monitor LEL, H2S, CO, and O2 levels with sub-second alert propagation across facilities." },
       { title: "Hot Work Monitoring", description: "AI validates atmospheric conditions and permit compliance before hot work begins, with continuous monitoring during operations." },
       { title: "Confined Space Tracking", description: "Real-time tracking of all personnel in confined spaces with atmospheric monitoring and automatic rescue alerts." },
       { title: "Permit-to-Work Automation", description: "Digital PTW system with AI-verified prerequisites, real-time condition checks, and automatic permit suspension on hazard detection." },
+      { title: "PPE Detection", description: "Computer vision monitors PPE compliance in real-time, instantly identifying missing hard hats, FR clothing, and safety glasses." },
+      { title: "Breach of Protocol", description: "Automated alert systems detect protocol deviations immediately, triggering instant interventions before accidents occur." },
     ],
     stats: [
       { label: "Compliance Improvement", value: "91%", description: "Increase in regulatory compliance scores" },
@@ -175,6 +179,7 @@ export const industriesData: Record<string, IndustryPageData> = {
       { title: "Biohazard Zone Monitoring", description: "Automated tracking of contamination zones, PPE compliance, and proper biohazard disposal procedures." },
       { title: "Safe Lift Compliance AI", description: "Computer vision ensures proper lift equipment usage and body mechanics during patient transfers." },
       { title: "Radiation Boundary Alerts", description: "Real-time dosimetry tracking with automated alerts when staff approach cumulative exposure thresholds." },
+      { title: "Conversational AI for Appointment Booking", description: "AI-powered voice and text assistants that handle patient scheduling, reduce wait times, and integrate seamlessly with existing EMR systems." },
     ],
     stats: [
       { label: "Claim Reduction", value: "56%", description: "Decrease in workers' compensation claims" },
@@ -202,12 +207,16 @@ export const industriesData: Record<string, IndustryPageData> = {
       { title: "Manual Handling Injuries", description: "Lifting, carrying, and repetitive motion injuries account for 45% of all warehouse worker compensation claims." },
       { title: "Slips, Trips & Falls", description: "Wet floors, uneven surfaces, and misplaced inventory cause 25% of warehouse injuries, many resulting in lost work days." },
       { title: "Racking Collapses", description: "Overloaded or damaged storage racking systems can collapse catastrophically, endangering multiple workers simultaneously." },
+      { title: "Fleet Blind Spots", description: "Lack of real-time visibility into transit conditions and vehicle telemetry creates significant risks for drivers and cargo during transport." },
+      { title: "Cargo Integrity", description: "Environmental fluctuations and unauthorized access during shipping compromise cargo safety and regulatory compliance." },
     ],
     solutions: [
       { title: "Forklift Collision Avoidance", description: "AI-powered proximity detection with automatic speed limiting and braking when pedestrians are detected near forklifts." },
       { title: "Load Monitoring AI", description: "Computer vision verifies proper load securing, weight distribution, and stacking procedures in real-time." },
       { title: "Floor Hazard Detection", description: "Automated detection of spills, debris, and obstructions with instant alert dispatch to nearby workers and cleaning crews." },
       { title: "Structural Integrity Alerts", description: "IoT sensors monitor racking alignment, load distribution, and impact damage with automated area exclusion on detection." },
+      { title: "IoT Fleet Monitoring", description: "Real-time tracking and telematics for transport fleets, monitoring driver behavior, vehicle health, and route safety to prevent accidents." },
+      { title: "Smart Containers", description: "IoT-enabled shipping containers with continuous environmental monitoring, intrusion detection, and automated compliance logging." },
     ],
     stats: [
       { label: "Injury Reduction", value: "74%", description: "Decrease in recordable injuries" },

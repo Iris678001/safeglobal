@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import MagneticButton from "@/components/safe-global/MagneticButton";
@@ -481,22 +482,26 @@ export default function HeroSection() {
                   <div className="absolute inset-0 rounded-md bg-safeglobal/0 group-hover:bg-safeglobal/10 transition-all duration-300 -m-2" />
                   <Button
                     size="lg"
+                    asChild
                     className="bg-safeglobal hover:bg-safeglobal-dark text-white shadow-xl shadow-safeglobal/25 hover:shadow-[0_0_30px_rgba(45,122,111,0.35)] transition-all text-base px-8 h-13 gap-2 relative"
-                    onClick={() => handleScrollTo("contact")}
                   >
-                    Request Demo
-                    <ChevronRight className="w-4 h-4" />
+                    <Link href="/contact">
+                      Request Demo
+                      <ChevronRight className="w-4 h-4" />
+                    </Link>
                   </Button>
                 </motion.div>
               </MagneticButton>
               <Button
                 variant="outline"
                 size="lg"
+                asChild
                 className="border-border hover:border-safeglobal/50 hover:bg-safeglobal/5 text-base px-8 h-13 gap-2 hover-ring"
-                onClick={() => handleScrollTo("services")}
               >
-                <Play className="w-4 h-4" />
-                See How It Works
+                <Link href="/blog">
+                  <Play className="w-4 h-4" />
+                  See How It Works
+                </Link>
               </Button>
             </motion.div>
 

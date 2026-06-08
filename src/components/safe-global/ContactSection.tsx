@@ -43,7 +43,7 @@ const contactInfo = [
   {
     icon: MapPin,
     label: "Office",
-    value: "Ajman, UAE",
+    value: "UAE",
     subtext: "United Arab Emirates",
   },
   {
@@ -55,7 +55,7 @@ const contactInfo = [
 ];
 
 const officeLocations = [
-  { name: "Ajman, UAE (HQ)", x: 56, y: 38, isHQ: true },
+  { name: "UAE (HQ)", x: 56, y: 38, isHQ: true },
 ];
 
 export default function ContactSection() {

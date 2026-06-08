@@ -374,8 +374,8 @@ export default function Header() {
       ref={headerRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border shadow-lg shadow-black/10"
-          : "bg-transparent"
+          ? "bg-white/75 backdrop-blur-xl border-b border-gray-200 shadow-lg shadow-black/5"
+          : "bg-white"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -386,7 +386,7 @@ export default function Header() {
               <img
                 src="/logo.png"
                 alt="Company Logo"
-                className="h-16 w-auto object-contain scale-[1.35] origin-left invert grayscale mix-blend-screen opacity-90"
+                className="h-16 w-auto object-contain scale-[1.35] origin-left"
                 onError={(e) => {
                   // Fallback: hide the broken image and show the placeholder icon
                   const target = e.currentTarget;
@@ -424,7 +424,7 @@ export default function Header() {
                       className={`flex items-center gap-1 px-3.5 py-2 text-sm font-medium rounded-lg transition-all duration-200 cursor-pointer ${
                         isActive || isMenuOpen
                           ? "text-safeglobal bg-safeglobal/10"
-                          : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                          : "text-gray-600 hover:text-black hover:bg-gray-100"
                       }`}
                     >
                       {link.label}
@@ -441,7 +441,7 @@ export default function Header() {
                       className={`flex items-center px-3.5 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
                         isActive
                           ? "text-safeglobal bg-safeglobal/10"
-                          : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                          : "text-gray-600 hover:text-black hover:bg-gray-100"
                       }`}
                     >
                       {link.label}
@@ -461,7 +461,7 @@ export default function Header() {
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
             <ThemeToggle />
-            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground gap-1.5" asChild>
+            <Button variant="ghost" size="sm" className="text-gray-600 hover:text-black hover:bg-gray-100 gap-1.5" asChild>
               <Link href="/contact">
                 <Phone className="w-3.5 h-3.5" />
                 <span>Sales</span>
@@ -482,7 +482,7 @@ export default function Header() {
           {/* Mobile Menu */}
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild className="lg:hidden">
-              <Button variant="ghost" size="icon" className="text-foreground">
+              <Button variant="ghost" size="icon" className="text-black hover:bg-gray-100">
                 <Menu className="w-5 h-5" />
               </Button>
             </SheetTrigger>

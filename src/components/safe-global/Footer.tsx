@@ -57,7 +57,7 @@ const footerLinks = {
 };
 
 const officeLocations = [
-  { name: "Ajman, UAE", shortName: "AJM", x: "56%", y: "45%" },
+  { name: "UAE", shortName: "UAE", x: "56%", y: "45%" },
 ];
 
 // Partner logos
@@ -335,7 +335,7 @@ export default function Footer() {
               <div className="flex flex-col gap-1.5">
                 <span className="flex items-center gap-1 text-[11px] text-muted-foreground/70">
                   <MapPin className="w-2.5 h-2.5 text-safeglobal/60" />
-                  Ajman, UAE
+                  UAE
                 </span>
                 <span className="flex items-center gap-1 text-[11px] text-muted-foreground/70">
                   <Mail className="w-2.5 h-2.5 text-safeglobal/60" />

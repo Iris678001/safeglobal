@@ -29,6 +29,8 @@ export const servicesData: Record<string, ServicePageData> = {
       { title: "Behavioral Analytics", description: "AI models learn normal worker behavior patterns and flag anomalies that indicate potential safety risks." },
       { title: "Zone Risk Scoring", description: "Dynamic risk scores for every facility zone updated every 30 seconds based on live conditions." },
       { title: "Incident Prediction", description: "Machine learning models predict likely incident scenarios 2-4 hours before they occur." },
+      { title: "Machine Hierarchy Access", description: "Enforce strict, role-based access controls and permissions across the machine hierarchy." },
+      { title: "Breach of Protocol", description: "Instant detection and automated alerting for any deviations from established safety protocols." },
     ],
     stats: [{ label: "Detection Rate", value: "99.7%", description: "Hazard identification accuracy" }, { label: "Response Time", value: "<50ms", description: "Alert to notification delivery" }, { label: "False Positive Rate", value: "0.3%", description: "Industry-leading precision" }, { label: "Workers Protected", value: "500K+", description: "Across global facilities" }],
     benefits: [{ title: "Reduce Incident Rate", description: "73% average reduction in workplace incidents within 6 months." }, { title: "Lower Insurance Costs", description: "15-30% reduction in insurance premiums." }, { title: "Regulatory Compliance", description: "Automatic compliance documentation keeps you ahead of OSHA and ISO requirements." }, { title: "Operational Efficiency", description: "Reduce manual safety inspections by 80% while improving coverage." }],
