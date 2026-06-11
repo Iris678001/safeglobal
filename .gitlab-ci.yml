@@ -1,0 +1,32 @@
+stages:
+  - lint
+  - build
+
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+default:
+  image: node:22
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - .npm/
+  before_script:
+    # npm install (not ci) because package-lock.json may lag behind package.json;
+    # switch to `npm ci` once the lockfile is regenerated locally.
+    - npm install --cache .npm --prefer-offline
+
+lint:
+  stage: lint
+  script:
+    - npm run lint
+
+build:
+  stage: build
+  script:
+    # Run next build directly to skip the standalone copy steps from package.json
+    - npx next build
