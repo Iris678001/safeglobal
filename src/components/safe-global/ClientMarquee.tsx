@@ -35,7 +35,7 @@ export default function ClientMarquee() {
         </div>
       </div>
 
-      <div className="flex w-max animate-marquee hover:pause pt-6">
+      <div className="flex w-max animate-marquee pt-6">
         {[...LOGOS, ...LOGOS].map((logo, idx) => (
           <div
             key={idx}
