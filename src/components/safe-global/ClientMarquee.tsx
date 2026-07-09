@@ -48,7 +48,13 @@ export default function ClientMarquee() {
                 width={150}
                 unoptimized={true}
                 height={80}
-                className="max-h-12 sm:max-h-16 w-auto object-contain grayscale opacity-60 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 drop-shadow-sm group-hover:drop-shadow-xl"
+                className={`w-auto object-contain grayscale opacity-60 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100 drop-shadow-sm group-hover:drop-shadow-xl ${
+                  logo.name === 'Picture7'
+                    ? 'max-h-20 sm:max-h-24 scale-[1.7] group-hover:scale-[1.85]'
+                    : ['Picture2', 'Picture4', 'Picture5', 'Picture6'].includes(logo.name)
+                    ? 'max-h-16 sm:max-h-20 scale-[1.35] group-hover:scale-[1.5]'
+                    : 'max-h-12 sm:max-h-16 group-hover:scale-110'
+                }`}
               />
             </div>
           </div>
