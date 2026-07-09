@@ -332,7 +332,7 @@ function HeroBgSlideshow() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % HERO_IMAGES.length);
-    }, 6000);
+    }, 8000);
     return () => clearInterval(interval);
   }, []);
 
@@ -352,23 +352,22 @@ function HeroBgSlideshow() {
         />
       ))}
 
-      {/* Sliding image layer */}
+      {/* Cross-fade image layer */}
       <AnimatePresence initial={false}>
         <motion.div
           key={currentIndex}
           className="absolute inset-0"
-          initial={{ x: "100%", opacity: 0.6 }}
-          animate={{ x: "0%", opacity: 1 }}
-          exit={{ x: "-100%", opacity: 0.6 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           transition={{
-            x: { duration: 1, ease: [0.25, 0.46, 0.45, 0.94] },
-            opacity: { duration: 0.8, ease: "easeInOut" },
+            opacity: { duration: 1.5, ease: "easeInOut" },
           }}
         >
           <motion.div
             className="absolute inset-0"
             animate={{ scale: [1, 1.05] }}
-            transition={{ duration: 4, ease: "easeOut" }}
+            transition={{ duration: 7, ease: "easeOut" }}
           >
             <Image
               src={HERO_IMAGES[currentIndex]}
@@ -395,7 +394,6 @@ const trustedLogos = [
   { initials: "3M", name: "3M", src: "/logos/3m.png", color: "from-red-500 to-red-600" },
   { initials: "GE", name: "GE", src: "/logos/ge.png", color: "from-blue-500 to-blue-600" },
   { initials: "SI", name: "Siemens", src: "/logos/siemens.png", color: "from-teal-500 to-teal-500" },
-  { initials: "BA", name: "BASF", src: "/logos/basf.png", color: "from-amber-500 to-orange-500" },
 ];
 
 export default function HeroSection() {

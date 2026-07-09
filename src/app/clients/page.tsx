@@ -10,7 +10,6 @@ const logos = [
   "Picture6.png",
   "Picture7.png",
   "Picture8.png",
-  "basf.png",
   "ge.png",
   "siemens.png",
 ];
