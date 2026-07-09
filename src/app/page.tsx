@@ -24,6 +24,7 @@ import {
 import HeroSection from "@/components/safe-global/HeroSection";
 import TrustIndicators from "@/components/safe-global/TrustIndicators";
 import PartnersSection from "@/components/safe-global/PartnersSection";
+import ClientMarquee from "@/components/safe-global/ClientMarquee";
 
 // ─── Skeleton for dynamic sections ──────────────────────────────────────────
 function SectionSkeleton() {
@@ -134,9 +135,11 @@ export default function Home() {
   return (
     <>
       <HeroSection />
+      <ClientMarquee />
       <TrustIndicators />
       <PartnersSection />
       <CTASection />
     </>
   );
 }
+

@@ -389,13 +389,6 @@ function HeroBgSlideshow() {
   );
 }
 
-// Trusted by industry leaders logos
-const trustedLogos = [
-  { initials: "3M", name: "3M", src: "/logos/3m.png", color: "from-red-500 to-red-600" },
-  { initials: "GE", name: "GE", src: "/logos/ge.png", color: "from-blue-500 to-blue-600" },
-  { initials: "SI", name: "Siemens", src: "/logos/siemens.png", color: "from-teal-500 to-teal-500" },
-];
-
 export default function HeroSection() {
   const [scrollY, setScrollY] = useState(0);
 
@@ -518,54 +511,6 @@ export default function HeroSection() {
                 </Link>
               </Button>
             </motion.div>
-
-            {/* Trusted by industry leaders */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.5 }}
-              className="pt-6"
-            >
-              <div className="inline-flex items-center justify-center gap-4 mb-5">
-                <div className="h-[2px] w-12 bg-gradient-to-r from-transparent to-sky-500/60" />
-                <p className="text-xs sm:text-sm text-foreground/90 uppercase tracking-[0.25em] font-bold drop-shadow-md">
-                  Trusted by industry leaders
-                </p>
-                <div className="h-[2px] w-12 bg-gradient-to-l from-transparent to-sky-500/60" />
-              </div>
-              <div className="flex flex-wrap items-center gap-x-10 gap-y-6 justify-center">
-                {trustedLogos.map((logo) => (
-                  <div
-                    key={logo.initials}
-                    className="group relative flex items-center justify-center transition-all duration-300"
-                    title={logo.name}
-                  >
-                    <div className="absolute inset-0 bg-safeglobal/40 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <img
-                      src={logo.src}
-                      alt={`${logo.name} logo`}
-                      className="relative z-10 max-h-8 sm:max-h-10 max-w-[100px] object-contain invert grayscale mix-blend-screen opacity-70 transition-all duration-500 group-hover:opacity-100 group-hover:scale-110"
-                      onError={(e) => {
-                        const target = e.currentTarget;
-                        target.style.display = 'none';
-                        const fallback = target.nextElementSibling as HTMLElement | null;
-                        if (fallback) fallback.style.display = 'flex';
-                      }}
-                    />
-                    <div
-                      className={`relative z-10 w-10 h-10 rounded-full bg-gradient-to-br ${logo.color} items-center justify-center text-white text-[13px] font-bold transition-all duration-500 group-hover:scale-110 shadow-lg`}
-                      style={{ display: 'none' }}
-                    >
-                      {logo.initials}
-                    </div>
-                  </div>
-                ))}
-                <Link href="/clients" className="text-sky-500 hover:text-sky-400 text-xs sm:text-sm font-bold tracking-widest uppercase drop-shadow-md ml-2 transition-colors duration-300">
-                  View All Clients &rarr;
-                </Link>
-              </div>
-            </motion.div>
-
 
           </div>
         </div>
