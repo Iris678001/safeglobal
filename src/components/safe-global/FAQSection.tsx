@@ -152,7 +152,7 @@ export default function FAQSection() {
         >
           <Badge
             variant="outline"
-            className="border-safeglobal/30 text-safeglobal bg-safeglobal/10 px-4 py-1.5 text-xs font-medium tracking-wide mb-4"
+            className="border-sky-500/30 text-sky-500 bg-sky-500/10 px-4 py-1.5 text-xs font-medium tracking-wide mb-4"
           >
             <HelpCircle className="w-3.5 h-3.5 mr-1" />
             FAQ
@@ -206,8 +206,8 @@ export default function FAQSection() {
                 }}
                 className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
                   activeCategory === tab.value
-                    ? "bg-safeglobal/15 text-safeglobal border border-safeglobal/30"
-                    : "bg-card/50 text-muted-foreground border border-border hover:border-safeglobal/20 hover:text-foreground"
+                    ? "bg-safeglobal/15 text-sky-500 border border-sky-500/30"
+                    : "bg-card/50 text-muted-foreground border border-border hover:border-sky-500/20 hover:text-foreground"
                 }`}
               >
                 {tab.label}
@@ -216,7 +216,7 @@ export default function FAQSection() {
           </div>
           <button
             onClick={handleExpandAll}
-            className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-safeglobal transition-colors"
+            className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-sky-500 transition-colors"
           >
             {allExpanded ? (
               <>
@@ -250,7 +250,7 @@ export default function FAQSection() {
                     setSearchQuery("");
                     setActiveCategory("All");
                   }}
-                  className="text-safeglobal text-sm mt-2 hover:underline underline-offset-2"
+                  className="text-sky-500 text-sm mt-2 hover:underline underline-offset-2"
                 >
                   Clear filters
                 </button>
@@ -274,7 +274,7 @@ export default function FAQSection() {
                       ${
                         isOpen
                           ? "border-safeglobal/40 bg-safeglobal/5 shadow-lg shadow-safeglobal/5"
-                          : "border-border bg-card/50 hover:border-safeglobal/20 hover:bg-card/80"
+                          : "border-border bg-card/50 hover:border-sky-500/20 hover:bg-card/80"
                       }
                     `}
                   >
@@ -291,8 +291,8 @@ export default function FAQSection() {
                             flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-sm font-semibold transition-colors duration-300
                             ${
                               isOpen
-                                ? "bg-safeglobal/20 text-safeglobal"
-                                : "bg-muted text-muted-foreground group-hover:bg-safeglobal/10 group-hover:text-safeglobal"
+                                ? "bg-sky-500/20 text-sky-500"
+                                : "bg-muted text-muted-foreground group-hover:bg-sky-500/10 group-hover:text-sky-500"
                             }
                           `}
                         >
@@ -303,8 +303,8 @@ export default function FAQSection() {
                             text-base sm:text-lg font-semibold transition-colors duration-300
                             ${
                               isOpen
-                                ? "text-safeglobal"
-                                : "text-foreground group-hover:text-safeglobal/90"
+                                ? "text-sky-500"
+                                : "text-foreground group-hover:text-sky-500/90"
                             }
                           `}
                         >
@@ -325,8 +325,8 @@ export default function FAQSection() {
                             w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-300
                             ${
                               isOpen
-                                ? "bg-safeglobal/20 text-safeglobal"
-                                : "bg-muted/50 text-muted-foreground group-hover:bg-safeglobal/10 group-hover:text-safeglobal"
+                                ? "bg-sky-500/20 text-sky-500"
+                                : "bg-muted/50 text-muted-foreground group-hover:bg-sky-500/10 group-hover:text-sky-500"
                             }
                           `}
                         >
@@ -358,7 +358,7 @@ export default function FAQSection() {
                           className="overflow-hidden"
                         >
                           <div className="px-5 sm:px-6 pb-5 sm:pb-6 pt-0">
-                            <div className="pl-11 border-l-2 border-safeglobal/20 ml-1">
+                            <div className="pl-11 border-l-2 border-sky-500/20 ml-1">
                               <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">
                                 {item.answer}
                               </p>
@@ -374,7 +374,7 @@ export default function FAQSection() {
                                   }
                                   className={`flex items-center gap-1 px-2 py-1 rounded-md text-xs transition-all duration-200 ${
                                     helpfulVotes[item.originalIndex] === "up"
-                                      ? "bg-safeglobal/15 text-safeglobal"
+                                      ? "bg-safeglobal/15 text-sky-500"
                                       : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
                                   }`}
                                   aria-label="Mark as helpful"
@@ -418,8 +418,8 @@ export default function FAQSection() {
           <div className="relative inline-flex flex-col items-center gap-4 p-8 rounded-2xl border border-border bg-card/50">
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-safeglobal/5 via-transparent to-teal-500/5" />
             <div className="relative">
-              <div className="w-12 h-12 rounded-full bg-safeglobal/10 flex items-center justify-center mx-auto mb-3">
-                <MessageCircle className="w-6 h-6 text-safeglobal" />
+              <div className="w-12 h-12 rounded-full bg-sky-500/10 flex items-center justify-center mx-auto mb-3">
+                <MessageCircle className="w-6 h-6 text-sky-500" />
               </div>
               <p className="text-lg font-semibold mb-1">
                 Still have questions?
@@ -442,3 +442,4 @@ export default function FAQSection() {
     </section>
   );
 }
+

@@ -162,7 +162,7 @@ export default function SafetyChecklist() {
         >
           <Badge
             variant="outline"
-            className="border-safeglobal/30 text-safeglobal bg-safeglobal/10 px-4 py-1.5 text-xs font-medium tracking-wide mb-4"
+            className="border-sky-500/30 text-sky-500 bg-sky-500/10 px-4 py-1.5 text-xs font-medium tracking-wide mb-4"
           >
             <ClipboardCheck className="w-3.5 h-3.5 mr-1" />
             COMPLIANCE CHECK
@@ -297,7 +297,7 @@ export default function SafetyChecklist() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: catIdx * 0.12 }}
-                className="group relative rounded-2xl border border-border bg-card/50 overflow-hidden transition-all duration-300 hover:border-safeglobal/20"
+                className="group relative rounded-2xl border border-border bg-card/50 overflow-hidden transition-all duration-300 hover:border-sky-500/20"
               >
                 {/* Card gradient overlay */}
                 <div
@@ -425,8 +425,8 @@ export default function SafetyChecklist() {
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-safeglobal/5 via-transparent to-teal-500/5" />
 
             <div className="relative">
-              <div className="w-12 h-12 rounded-full bg-safeglobal/10 flex items-center justify-center mx-auto mb-3">
-                <Shield className="w-6 h-6 text-safeglobal" />
+              <div className="w-12 h-12 rounded-full bg-sky-500/10 flex items-center justify-center mx-auto mb-3">
+                <Shield className="w-6 h-6 text-sky-500" />
               </div>
               <p className="text-lg font-semibold mb-1">
                 Get a detailed compliance report
@@ -453,3 +453,4 @@ export default function SafetyChecklist() {
     </section>
   );
 }
+

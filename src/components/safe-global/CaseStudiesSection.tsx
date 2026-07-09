@@ -90,7 +90,7 @@ export default function CaseStudiesSection() {
         >
           <Badge
             variant="outline"
-            className="border-safeglobal/30 text-safeglobal bg-safeglobal/10 px-4 py-1.5 text-xs font-medium tracking-wide mb-4"
+            className="border-sky-500/30 text-sky-500 bg-sky-500/10 px-4 py-1.5 text-xs font-medium tracking-wide mb-4"
           >
             PROVEN RESULTS
           </Badge>
@@ -116,7 +116,7 @@ export default function CaseStudiesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
-              className="relative rounded-2xl border border-border bg-card/50 overflow-hidden hover:border-safeglobal/20 transition-all"
+              className="relative rounded-2xl border border-border bg-card/50 overflow-hidden hover:border-sky-500/20 transition-all"
             >
               <div
                 className={`absolute inset-0 bg-gradient-to-r ${study.color} to-transparent opacity-50`}
@@ -156,7 +156,7 @@ export default function CaseStudiesSection() {
                       </p>
                     </div>
                     <div>
-                      <span className="text-xs font-medium text-safeglobal uppercase tracking-wider">
+                      <span className="text-xs font-medium text-sky-500 uppercase tracking-wider">
                         SafeGlobal Solution
                       </span>
                       <p className="text-sm text-muted-foreground mt-1">
@@ -181,14 +181,14 @@ export default function CaseStudiesSection() {
                         {study.results.incidents.label}
                       </div>
                     </div>
-                    <div className="p-3 rounded-lg border border-safeglobal/20 bg-safeglobal/5">
+                    <div className="p-3 rounded-lg border border-sky-500/20 bg-safeglobal/5">
                       <div className="flex items-center gap-1 mb-1">
-                        <TrendingUp className="w-3 h-3 text-safeglobal" />
-                        <span className="text-[10px] text-safeglobal uppercase tracking-wider">
+                        <TrendingUp className="w-3 h-3 text-sky-500" />
+                        <span className="text-[10px] text-sky-500 uppercase tracking-wider">
                           After
                         </span>
                       </div>
-                      <div className="text-xl font-bold text-safeglobal">
+                      <div className="text-xl font-bold text-sky-500">
                         {study.results.incidents.after}
                       </div>
                       <div className="text-[10px] text-muted-foreground">
@@ -200,7 +200,7 @@ export default function CaseStudiesSection() {
                   {/* ROI Bar */}
                   <div className="flex items-center gap-4 p-3 rounded-lg bg-background/50 border border-border">
                     <div className="flex items-center gap-2">
-                      <BarChart3 className="w-4 h-4 text-safeglobal" />
+                      <BarChart3 className="w-4 h-4 text-sky-500" />
                       <div>
                         <div className="text-sm font-semibold">
                           {study.results.roi} ROI
@@ -213,9 +213,9 @@ export default function CaseStudiesSection() {
                   </div>
 
                   {/* Quote */}
-                  <blockquote className="text-sm italic text-muted-foreground border-l-2 border-safeglobal/30 pl-4">
+                  <blockquote className="text-sm italic text-muted-foreground border-l-2 border-sky-500/30 pl-4">
                     &ldquo;{study.quote}&rdquo;
-                    <span className="block text-xs mt-1 not-italic text-safeglobal">
+                    <span className="block text-xs mt-1 not-italic text-sky-500">
                       — {study.quoteAuthor}, {study.company}
                     </span>
                   </blockquote>
@@ -237,7 +237,7 @@ export default function CaseStudiesSection() {
           <Button
             size="lg"
             variant="outline"
-            className="border-safeglobal/30 hover:border-safeglobal/60 hover:bg-safeglobal/5 gap-2"
+            className="border-sky-500/30 hover:border-safeglobal/60 hover:bg-safeglobal/5 gap-2"
             onClick={() => handleScrollTo("contact")}
           >
             Get Your Free Safety Audit
@@ -248,3 +248,4 @@ export default function CaseStudiesSection() {
     </section>
   );
 }
+

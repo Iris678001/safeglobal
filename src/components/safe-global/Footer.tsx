@@ -25,7 +25,6 @@ import { Input } from "@/components/ui/input";
 const footerLinks = {
   "Solutions": [
     { label: "AI Safety Monitoring", href: "/ehs-ai/ai-safety-monitoring" },
-    { label: "Predictive Risk Analytics", href: "/ehs-ai/predictive-risk-analytics" },
     { label: "Compliance Automation", href: "/ehs-ai/compliance-automation" },
     { label: "IoT Safety Integration", href: "/ehs-ai/iot-integration" },
     { label: "Safety Dashboards", href: "/ehs-ai/safety-dashboards" },
@@ -359,7 +358,7 @@ export default function Footer() {
                 <button
                   key={label}
                   aria-label={label}
-                  className="w-10 h-10 rounded-lg border border-border flex items-center justify-center text-muted-foreground hover:text-safeglobal hover:border-safeglobal/30 hover:bg-safeglobal/5 hover:scale-110 transition-all cursor-pointer"
+                  className="w-10 h-10 rounded-lg border border-border flex items-center justify-center text-muted-foreground hover:text-sky-600 hover:border-sky-600/30 hover:bg-sky-600/5 hover:scale-110 transition-all cursor-pointer"
                 >
                   <Icon className="w-4.5 h-4.5" />
                 </button>
@@ -392,7 +391,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-muted-foreground hover:text-safeglobal transition-colors"
+                      className="text-sm text-muted-foreground hover:text-sky-600 transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -427,13 +426,13 @@ export default function Footer() {
                 &copy; {new Date().getFullYear()} SafeGlobal. All rights
                 reserved.
               </span>
-              <button className="hover:text-safeglobal transition-colors cursor-pointer">
+              <button className="hover:text-sky-600 transition-colors cursor-pointer">
                 Privacy Policy
               </button>
-              <button className="hover:text-safeglobal transition-colors cursor-pointer">
+              <button className="hover:text-sky-600 transition-colors cursor-pointer">
                 Terms of Service
               </button>
-              <button className="hover:text-safeglobal transition-colors cursor-pointer">
+              <button className="hover:text-sky-600 transition-colors cursor-pointer">
                 Cookie Policy
               </button>
             </div>
@@ -474,7 +473,7 @@ export default function Footer() {
                   <button
                     key={label}
                     aria-label={label}
-                    className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground/40 hover:text-safeglobal hover:bg-safeglobal/5 transition-all cursor-pointer"
+                    className="w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground/40 hover:text-sky-600 hover:bg-sky-600/5 transition-all cursor-pointer"
                   >
                     <Icon className="w-3.5 h-3.5" />
                   </button>
@@ -485,7 +484,7 @@ export default function Footer() {
                 variant="ghost"
                 size="sm"
                 onClick={scrollToTop}
-                className="text-muted-foreground hover:text-safeglobal gap-1"
+                className="text-muted-foreground hover:text-sky-600 gap-1"
               >
                 Back to top
                 <ArrowUp className="w-3.5 h-3.5" />

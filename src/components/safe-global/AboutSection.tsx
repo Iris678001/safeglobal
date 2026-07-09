@@ -41,23 +41,7 @@ const values = [
   },
 ];
 
-const teamMembers = [
-  {
-    name: "Lorem Ipsum",
-    role: "Chief Executive Officer",
-    image: "/images/team_1.png",
-  },
-  {
-    name: "Dolor Sit Amet",
-    role: "Chief Technology Officer",
-    image: "/images/team_2.png",
-  },
-  {
-    name: "Consectetur Adipiscing",
-    role: "Chief Operations Officer",
-    image: "/images/team_3.png",
-  },
-];
+
 
 const differentiators = [
   {
@@ -90,13 +74,13 @@ export default function AboutSection() {
               transition={{ duration: 0.7 }}
             >
               <div className="flex items-center gap-4 mb-6">
-                <div className="h-px w-12 bg-safeglobal" />
-                <span className="text-sm font-semibold tracking-widest text-safeglobal uppercase">Our Story</span>
+                <div className="h-px w-12 bg-sky-500" />
+                <span className="text-sm font-semibold tracking-widest text-sky-500 uppercase">Our Story</span>
               </div>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-8 leading-[1.1]">
                 Redefining <br className="hidden lg:block" />
                 Workplace <br className="hidden lg:block" />
-                <span className="text-safeglobal">Safety.</span>
+                <span className="text-sky-500">Safety.</span>
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed mb-8">
                 Founded on the belief that every worker deserves to go home safely. We aren't just building software; we are building the future infrastructure of industrial risk management.
@@ -148,10 +132,10 @@ export default function AboutSection() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
-                <Target className="w-6 h-6 text-safeglobal" />
+                <Target className="w-6 h-6 text-sky-500" />
                 The Mission
               </h2>
-              <div className="h-0.5 w-12 bg-safeglobal mb-6" />
+              <div className="h-0.5 w-12 bg-sky-500 mb-6" />
               <p className="text-lg text-muted-foreground leading-relaxed">
                 To eliminate preventable workplace injuries and fatalities
                 worldwide by deploying AI-driven safety intelligence that
@@ -167,10 +151,10 @@ export default function AboutSection() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
-                <Eye className="w-6 h-6 text-teal-500" />
+                <Eye className="w-6 h-6 text-sky-500" />
                 The Vision
               </h2>
-              <div className="h-0.5 w-12 bg-teal-500 mb-6" />
+              <div className="h-0.5 w-12 bg-sky-500 mb-6" />
               <p className="text-lg text-muted-foreground leading-relaxed">
                 A world where AI-powered safety systems are as fundamental as fire
                 alarms — where every workplace, from construction sites to
@@ -181,54 +165,7 @@ export default function AboutSection() {
           </div>
         </div>
 
-        {/* ─── Staggered Team Section ─── */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="mb-32"
-        >
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-            <div className="max-w-2xl">
-              <h2 className="text-4xl font-bold tracking-tight mb-4">
-                Meet the Leadership
-              </h2>
-              <p className="text-lg text-muted-foreground">
-                Decades of combined experience in artificial intelligence, industrial safety, and enterprise scale.
-              </p>
-            </div>
-          </div>
 
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
-            {teamMembers.map((member, idx) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.15 }}
-                className={`group flex flex-col ${idx === 1 ? 'md:mt-12' : ''}`} // Staggered layout
-              >
-                <div className="aspect-[3/4] overflow-hidden rounded-xl mb-6 bg-muted">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover grayscale opacity-90 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105"
-                  />
-                </div>
-                <div>
-                  <h4 className="text-xl font-bold text-foreground mb-1">
-                    {member.name}
-                  </h4>
-                  <p className="text-muted-foreground font-medium">
-                    {member.role}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
 
         {/* ─── Clean Values List ─── */}
         <div className="grid lg:grid-cols-12 gap-16 items-start mb-32">
@@ -299,7 +236,7 @@ export default function AboutSection() {
             <div className="space-y-8">
               {differentiators.map((d) => (
                 <div key={d.label} className="flex gap-4">
-                  <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-safeglobal shrink-0" />
+                  <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-sky-500 shrink-0" />
                   <div>
                     <h4 className="font-bold text-lg mb-2">{d.label}</h4>
                     <p className="text-muted-foreground leading-relaxed">{d.desc}</p>

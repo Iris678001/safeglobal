@@ -11,10 +11,6 @@ export const serviceImages: Record<string, RealImage> = {
     src: unsplash("photo-1581091226825-a6a2a5aee158"),
     alt: "Safety engineer reviewing industrial monitoring equipment on a factory floor",
   },
-  "predictive-risk-analytics": {
-    src: unsplash("photo-1551288049-bebda4e38f71", "entropy"),
-    alt: "Analytics dashboard used for operational risk forecasting",
-  },
   "compliance-automation": {
     src: unsplash("photo-1450101499163-c8848c66ca85", "entropy"),
     alt: "Compliance documents and audit records on a desk",
@@ -38,10 +34,6 @@ export const serviceImages: Record<string, RealImage> = {
   "safety-training-vr": {
     src: unsplash("photo-1593508512255-86ab42a8e620", "entropy"),
     alt: "Worker using immersive training technology",
-  },
-  "predictive-maintenance": {
-    src: unsplash("photo-1581092160562-40aa08e78837", "entropy"),
-    alt: "Technician inspecting industrial machinery for maintenance",
   },
   "hazard-mapping": {
     src: unsplash("photo-1497366754035-f200968a6e72", "entropy"),

@@ -267,7 +267,7 @@ const exitMarkers = [
 ];
 
 const statsBarData = [
-  { icon: Activity, label: "Active Zones Monitored", value: "6 / 6", color: "text-safeglobal" },
+  { icon: Activity, label: "Active Zones Monitored", value: "6 / 6", color: "text-sky-500" },
   { icon: Clock, label: "Emergency Response Time", value: "< 2 min", color: "text-amber-400" },
   { icon: CheckCircle2, label: "Evacuation Routes Clear", value: "6 / 6", color: "text-teal-500" },
   { icon: Shield, label: "Last Drill Date", value: "Feb 28, 2025", color: "text-teal-400" },
@@ -448,9 +448,9 @@ export default function EmergencyResponseMap() {
             {/* Map Header */}
             <div className="flex items-center justify-between px-5 py-3 border-b border-border bg-card/50">
               <div className="flex items-center gap-3">
-                <MapPin className="w-4 h-4 text-safeglobal" />
+                <MapPin className="w-4 h-4 text-sky-500" />
                 <span className="text-sm font-semibold">Facility Floor Plan</span>
-                <Badge className="bg-safeglobal/20 text-safeglobal text-[10px] border-safeglobal/30">
+                <Badge className="bg-sky-500/20 text-sky-500 text-[10px] border-sky-500/30">
                   LIVE
                 </Badge>
               </div>
@@ -741,7 +741,7 @@ export default function EmergencyResponseMap() {
             {/* Sidebar Header */}
             <div className="px-5 py-3 border-b border-border bg-card/50">
               <div className="flex items-center gap-2">
-                <Radio className="w-4 h-4 text-safeglobal" />
+                <Radio className="w-4 h-4 text-sky-500" />
                 <span className="text-sm font-semibold">Zone Details</span>
               </div>
             </div>
@@ -798,7 +798,7 @@ export default function EmergencyResponseMap() {
                     {/* Nearest Exit */}
                     <div className="p-4 rounded-xl border border-border bg-card/30">
                       <div className="flex items-center gap-2 mb-2">
-                        <DoorOpen className="w-4 h-4 text-safeglobal" />
+                        <DoorOpen className="w-4 h-4 text-sky-500" />
                         <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                           Nearest Exit
                         </span>
@@ -838,7 +838,7 @@ export default function EmergencyResponseMap() {
                               <p className="text-sm font-medium">{contact.name}</p>
                               <p className="text-[10px] text-muted-foreground">{contact.role}</p>
                             </div>
-                            <span className="text-[10px] font-mono text-safeglobal">{contact.phone}</span>
+                            <span className="text-[10px] font-mono text-sky-500">{contact.phone}</span>
                           </div>
                         ))}
                       </div>
@@ -847,7 +847,7 @@ export default function EmergencyResponseMap() {
                     {/* Equipment */}
                     <div className="p-4 rounded-xl border border-border bg-card/30">
                       <div className="flex items-center gap-2 mb-3">
-                        <Shield className="w-4 h-4 text-safeglobal" />
+                        <Shield className="w-4 h-4 text-sky-500" />
                         <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                           Equipment Available
                         </span>
@@ -890,8 +890,8 @@ export default function EmergencyResponseMap() {
                     animate={{ opacity: 1 }}
                     className="flex flex-col items-center justify-center h-full py-12 text-center"
                   >
-                    <div className="w-16 h-16 rounded-2xl bg-safeglobal/10 flex items-center justify-center mb-4">
-                      <MapPin className="w-8 h-8 text-safeglobal/40" />
+                    <div className="w-16 h-16 rounded-2xl bg-sky-500/10 flex items-center justify-center mb-4">
+                      <MapPin className="w-8 h-8 text-sky-500/40" />
                     </div>
                     <p className="text-sm text-muted-foreground">
                       Select a zone on the map to view emergency details
@@ -935,7 +935,7 @@ export default function EmergencyResponseMap() {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="w-full border-border hover:border-safeglobal/30 text-xs"
+                    className="w-full border-border hover:border-sky-500/30 text-xs"
                     onClick={resetSimulation}
                   >
                     Reset Simulation
@@ -970,7 +970,7 @@ export default function EmergencyResponseMap() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.4 + idx * 0.1 }}
-              className="glass-card p-4 rounded-xl border border-border text-center group hover:border-safeglobal/30 transition-all duration-300"
+              className="glass-card p-4 rounded-xl border border-border text-center group hover:border-sky-500/30 transition-all duration-300"
             >
               <stat.icon className={`w-5 h-5 ${stat.color} mx-auto mb-2 group-hover:scale-110 transition-transform duration-300`} />
               <div className={`text-lg sm:text-xl font-bold ${stat.color} mb-0.5`}>
@@ -984,3 +984,4 @@ export default function EmergencyResponseMap() {
     </section>
   );
 }
+

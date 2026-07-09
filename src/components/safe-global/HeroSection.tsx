@@ -17,6 +17,8 @@ import {
   Users,
   BarChart3,
   Sparkles,
+  AlertCircle,
+  ArrowRight,
 } from "lucide-react";
 
 function TypingText({ words, className }: { words: string[]; className?: string }) {
@@ -297,6 +299,26 @@ function FloatingParticles() {
   );
 }
 
+function DynamicNewsBanner() {
+  return (
+    <Link 
+      href="/contact" 
+      className="group inline-flex items-center gap-3 px-8 py-3.5 rounded-full border border-sky-200 dark:border-sky-700/50 bg-white/95 dark:bg-slate-800/95 backdrop-blur-md text-sky-900 dark:text-sky-50 text-base font-medium shadow-xl transition-all hover:bg-white dark:hover:bg-slate-800 hover:shadow-2xl hover:-translate-y-0.5"
+    >
+      <div className="flex items-center gap-2">
+        <AlertCircle className="w-5 h-5 text-sky-600 dark:text-sky-400" />
+        <span className="font-bold tracking-widest text-xs uppercase border-r border-sky-300 dark:border-sky-600 pr-3 mr-1 text-sky-700 dark:text-sky-300">
+          Update
+        </span>
+        <span className="font-semibold">
+          Phase 1 UAE E-Invoicing Mandate Approaching. Ensure compliance today.
+        </span>
+        <ArrowRight className="w-5 h-5 ml-1 group-hover:translate-x-1 transition-transform text-sky-600 dark:text-sky-400" />
+      </div>
+    </Link>
+  );
+}
+
 // ─── Dynamic Hero Background Slideshow ──────────────────────────────────────
 const HERO_IMAGES = [
   "/images/hero/1dyn.jpg",
@@ -422,8 +444,8 @@ export default function HeroSection() {
       {/* Gradient Overlays - softened to let hero slideshow images show through */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/15 to-background/40 z-[1]" />
       <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-safeglobal/5 rounded-full blur-[120px] z-[1]" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-safeglobal/5 rounded-full blur-[100px] z-[1]" />
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-safeglobal/3 rounded-full blur-[150px] z-[1]" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-sky-500/10 rounded-full blur-[100px] z-[1]" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-sky-500/20 to-transparent rounded-full blur-[150px] z-[1]" />
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-40">
@@ -436,13 +458,7 @@ export default function HeroSection() {
               transition={{ duration: 0.7 }}
               className="space-y-4"
             >
-              <Badge
-                variant="outline"
-                className="border-safeglobal/30 text-safeglobal bg-safeglobal/10 px-4 py-1.5 text-xs font-medium tracking-wide"
-              >
-                <Activity className="w-3 h-3 mr-1.5" />
-                NEXT-GEN AI SAFETY PLATFORM
-              </Badge>
+              <DynamicNewsBanner />
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1]">
                 <span className="text-gradient">Customised</span>{" "}
                 Intelligence,
@@ -496,7 +512,7 @@ export default function HeroSection() {
                 variant="outline"
                 size="lg"
                 asChild
-                className="border-border hover:border-safeglobal/50 hover:bg-safeglobal/5 text-base px-8 h-13 gap-2 hover-ring"
+                className="border-border hover:border-sky-500/50 hover:bg-sky-500/5 text-base px-8 h-13 gap-2 hover-ring"
               >
                 <Link href="/blog">
                   <Play className="w-4 h-4" />
@@ -513,11 +529,11 @@ export default function HeroSection() {
               className="pt-6"
             >
               <div className="inline-flex items-center justify-center gap-4 mb-5">
-                <div className="h-[2px] w-12 bg-gradient-to-r from-transparent to-safeglobal/60" />
+                <div className="h-[2px] w-12 bg-gradient-to-r from-transparent to-sky-500/60" />
                 <p className="text-xs sm:text-sm text-foreground/90 uppercase tracking-[0.25em] font-bold drop-shadow-md">
                   Trusted by industry leaders
                 </p>
-                <div className="h-[2px] w-12 bg-gradient-to-l from-transparent to-safeglobal/60" />
+                <div className="h-[2px] w-12 bg-gradient-to-l from-transparent to-sky-500/60" />
               </div>
               <div className="flex flex-wrap items-center gap-x-10 gap-y-6 justify-center">
                 {trustedLogos.map((logo) => (
@@ -546,39 +562,13 @@ export default function HeroSection() {
                     </div>
                   </div>
                 ))}
-                <span className="text-xs sm:text-sm text-foreground/80 ml-2 font-bold tracking-widest uppercase drop-shadow-md">+200 more</span>
+                <Link href="/clients" className="text-sky-500 hover:text-sky-400 text-xs sm:text-sm font-bold tracking-widest uppercase drop-shadow-md ml-2 transition-colors duration-300">
+                  View All Clients &rarr;
+                </Link>
               </div>
             </motion.div>
 
-            {/* Animated Stats */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.4 }}
-              className="flex flex-wrap gap-8 pt-4 justify-center"
-            >
-              {[
-                { icon: Shield, value: 99.7, suffix: "%", label: "Detection Rate" },
-                { icon: BarChart3, value: 73, suffix: "%", label: "Risk Reduction" },
-                { icon: Globe, value: 30, suffix: "+", label: "Countries" },
-              ].map((stat) => (
-                <div key={stat.label} className="space-y-1">
-                  <div className="flex items-center gap-1.5 justify-center">
-                    <stat.icon className="w-4 h-4 text-safeglobal/60" />
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-safeglobal opacity-75" />
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-safeglobal" />
-                    </span>
-                  </div>
-                  <div className="text-2xl sm:text-3xl font-bold text-safeglobal">
-                    <AnimatedCounter target={stat.value} suffix={stat.suffix} duration={2000} />
-                  </div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </motion.div>
+
           </div>
         </div>
       </div>

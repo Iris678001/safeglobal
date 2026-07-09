@@ -216,7 +216,7 @@ export default function SafetyNewsTicker() {
           {/* Badge */}
           <Badge
             variant="outline"
-            className="mb-4 px-3 py-1 text-xs font-semibold tracking-widest border-safeglobal/30 text-safeglobal bg-safeglobal/10"
+            className="mb-4 px-3 py-1 text-xs font-semibold tracking-widest border-sky-500/30 text-sky-500 bg-sky-500/10"
           >
             <Activity className="w-3 h-3 mr-1.5" />
             LIVE INTELLIGENCE
@@ -380,7 +380,7 @@ export default function SafetyNewsTicker() {
           </p>
           <Button
             variant="outline"
-            className="border-safeglobal/30 text-safeglobal hover:bg-safeglobal/10 hover:text-safeglobal-light transition-colors"
+            className="border-sky-500/30 text-sky-500 hover:bg-sky-500/10 hover:text-sky-500-light transition-colors"
             onClick={() => {
               document
                 .getElementById("contact")
@@ -395,3 +395,4 @@ export default function SafetyNewsTicker() {
     </section>
   );
 }
+

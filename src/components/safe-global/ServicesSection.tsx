@@ -37,26 +37,6 @@ const services = [
     pricing: "Starting at $499/mo",
   },
   {
-    icon: BarChart3,
-    title: "Predictive Risk Analytics",
-    badge: "AI Intelligence",
-    description:
-      "Machine learning models that predict potential risks before they manifest. Transform historical data into actionable safety intelligence.",
-    features: [
-      "ML-powered risk prediction",
-      "Trend analysis & forecasting",
-      "Automated risk scoring",
-      "Preventive action recommendations",
-    ],
-    color: "from-teal-500/20 to-teal-600/5",
-    accentColor: "text-teal-400",
-    borderColor: "border-teal-500/20",
-    hoverBorder: "hover:border-teal-500/40",
-    gradientLine: "from-teal-400 via-cyan-300 to-blue-400",
-    glowColor: "bg-teal-400",
-    pricing: "Starting at $799/mo",
-  },
-  {
     icon: FileCheck,
     title: "Compliance Automation",
     badge: "Regulatory",
@@ -88,12 +68,12 @@ const services = [
       "Certification management",
       "Progress tracking & analytics",
     ],
-    color: "from-amber-500/20 to-amber-600/5",
-    accentColor: "text-amber-400",
-    borderColor: "border-amber-500/20",
-    hoverBorder: "hover:border-amber-500/40",
-    gradientLine: "from-amber-400 via-amber-300 to-yellow-400",
-    glowColor: "bg-amber-400",
+    color: "from-sky-500/20 to-sky-600/5",
+    accentColor: "text-sky-400",
+    borderColor: "border-sky-500/20",
+    hoverBorder: "hover:border-sky-500/40",
+    gradientLine: "from-sky-400 via-sky-300 to-blue-400",
+    glowColor: "bg-sky-400",
     pricing: "Starting at $349/mo",
   },
   {
@@ -120,7 +100,7 @@ const services = [
 
 const serviceImageSlugs = [
   "ai-safety-monitoring",
-  "predictive-risk-analytics",
+
   "compliance-automation",
   "safety-training-vr",
   "iot-integration",

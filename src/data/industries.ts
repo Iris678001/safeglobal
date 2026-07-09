@@ -165,7 +165,7 @@ export const industriesData: Record<string, IndustryPageData> = {
     title: "Healthcare",
     subtitle: "Staff & Patient Safety Intelligence for Medical Facilities",
     icon: HeartPulse,
-    color: "cyan",
+    color: "sky",
     heroDescription:
       "Advanced safety and compliance solutions for healthcare facilities. Protect staff and patients with AI-powered monitoring of workplace violence, biohazards, patient handling risks, and regulatory compliance across all care settings.",
     challenges: [

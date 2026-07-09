@@ -63,7 +63,7 @@ const blogPosts = [
 
 // Tag color mapping
 const tagColors: Record<string, string> = {
-  "AI Safety": "bg-safeglobal/15 text-safeglobal border-safeglobal/20",
+  "AI Safety": "bg-sky-500/15 text-sky-500 border-sky-500/20",
   "Predictive Analytics": "bg-teal-500/15 text-teal-400 border-teal-500/20",
   "ROI": "bg-teal-600/15 text-teal-500 border-teal-600/20",
   "Compliance": "bg-violet-500/15 text-violet-400 border-violet-500/20",
@@ -73,7 +73,7 @@ const tagColors: Record<string, string> = {
   "Edge Computing": "bg-teal-500/15 text-teal-400 border-teal-500/20",
   "Industry": "bg-orange-500/15 text-orange-400 border-orange-500/20",
   "Trends": "bg-rose-500/15 text-rose-400 border-rose-500/20",
-  "EHS": "bg-safeglobal/15 text-safeglobal border-safeglobal/20",
+  "EHS": "bg-sky-500/15 text-sky-500 border-sky-500/20",
 };
 
 export default function BlogSection() {
@@ -94,7 +94,7 @@ export default function BlogSection() {
         >
           <Badge
             variant="outline"
-            className="border-safeglobal/30 text-safeglobal bg-safeglobal/10 px-4 py-1.5 text-xs font-medium tracking-wide mb-4"
+            className="border-sky-500/30 text-sky-500 bg-sky-500/10 px-4 py-1.5 text-xs font-medium tracking-wide mb-4"
           >
             INSIGHTS & RESEARCH
           </Badge>
@@ -118,11 +118,11 @@ export default function BlogSection() {
             transition={{ duration: 0.6 }}
             className="gradient-border-always group relative rounded-2xl overflow-hidden transition-all duration-300 lg:row-span-2"
           >
-            <div className="relative rounded-2xl border border-border bg-card/50 hover:border-safeglobal/30 overflow-hidden h-full">
-              <div className="absolute inset-0 bg-gradient-to-b from-safeglobal/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="relative rounded-2xl border border-border bg-card/50 hover:border-sky-500/30 overflow-hidden h-full">
+              <div className="absolute inset-0 bg-gradient-to-b from-sky-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
               {/* Article image */}
-              <div className="relative h-48 sm:h-56 bg-gradient-to-br from-safeglobal/20 via-teal-500/10 to-safeglobal/5 overflow-hidden">
+              <div className="relative h-48 sm:h-56 bg-gradient-to-br from-sky-500/20 via-teal-500/10 to-sky-500/5 overflow-hidden">
                 {featuredImage && (
                   <img
                     src={featuredImage.src}
@@ -136,8 +136,8 @@ export default function BlogSection() {
                 {!featuredImage && (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center transform transition-transform duration-700 ease-out group-hover:scale-105 group-hover:translate-x-1">
-                    <TrendingUp className="w-12 h-12 text-safeglobal/40 mx-auto mb-2" />
-                    <span className="text-xs text-safeglobal/50 font-medium tracking-wider">FEATURED ARTICLE</span>
+                    <TrendingUp className="w-12 h-12 text-sky-500/40 mx-auto mb-2" />
+                    <span className="text-xs text-sky-500/50 font-medium tracking-wider">FEATURED ARTICLE</span>
                   </div>
                 </div>
                 )}
@@ -145,7 +145,7 @@ export default function BlogSection() {
 
               <div className="relative p-8 h-full flex flex-col">
                 <div className="flex items-center gap-2 mb-4 flex-wrap">
-                  <Badge className="bg-safeglobal/20 text-safeglobal border-safeglobal/30">
+                  <Badge className="bg-sky-500/20 text-sky-500 border-sky-500/30">
                     Featured
                   </Badge>
                   {blogPosts[0].trending && (
@@ -158,7 +158,7 @@ export default function BlogSection() {
                     {blogPosts[0].category}
                   </Badge>
                 </div>
-                <h3 className="text-2xl font-bold mb-4 group-hover:text-safeglobal transition-colors leading-tight">
+                <h3 className="text-2xl font-bold mb-4 group-hover:text-sky-500 transition-colors leading-tight">
                   {blogPosts[0].title}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed flex-1">
@@ -197,7 +197,7 @@ export default function BlogSection() {
                   </div>
                   <Button
                     variant="ghost"
-                    className="text-safeglobal hover:bg-safeglobal/5 gap-1 p-0 h-auto"
+                    className="text-sky-500 hover:bg-sky-500/5 gap-1 p-0 h-auto"
                   >
                     Read More
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -218,12 +218,12 @@ export default function BlogSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: (idx + 1) * 0.1 }}
-              className="group relative rounded-2xl border border-border bg-card/50 hover:border-safeglobal/20 transition-all duration-300 overflow-hidden"
+              className="group relative rounded-2xl border border-border bg-card/50 hover:border-sky-500/20 transition-all duration-300 overflow-hidden"
             >
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-safeglobal/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-sky-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
               {/* Article image */}
-              <div className="relative h-32 bg-gradient-to-br from-safeglobal/10 via-background to-teal-500/5 overflow-hidden">
+              <div className="relative h-32 bg-gradient-to-br from-sky-500/10 via-background to-teal-500/5 overflow-hidden">
                 {postImage && (
                   <img
                     src={postImage.src}
@@ -236,7 +236,7 @@ export default function BlogSection() {
                 <div className="absolute inset-0 bg-dot-pattern opacity-40" />
                 {!postImage && (
                 <div className="absolute inset-0 flex items-center justify-center transform transition-transform duration-700 ease-out group-hover:scale-105 group-hover:translate-x-1">
-                  <TrendingUp className="w-8 h-8 text-safeglobal/20" />
+                  <TrendingUp className="w-8 h-8 text-sky-500/20" />
                 </div>
                 )}
               </div>
@@ -257,7 +257,7 @@ export default function BlogSection() {
                     {post.readTime}
                   </span>
                 </div>
-                <h3 className="text-lg font-semibold mb-2 group-hover:text-safeglobal transition-colors leading-snug">
+                <h3 className="text-lg font-semibold mb-2 group-hover:text-sky-500 transition-colors leading-snug">
                   {post.title}
                 </h3>
                 <p className="text-sm text-muted-foreground line-clamp-2">
@@ -289,7 +289,7 @@ export default function BlogSection() {
                   </div>
                   <Button
                     variant="ghost"
-                    className="text-safeglobal hover:bg-safeglobal/5 gap-1 p-0 h-auto text-sm"
+                    className="text-sky-500 hover:bg-sky-500/5 gap-1 p-0 h-auto text-sm"
                   >
                     Read
                     <ArrowRight className="w-3 h-3" />
@@ -307,11 +307,11 @@ export default function BlogSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-12 p-8 rounded-2xl border border-safeglobal/20 bg-gradient-to-r from-safeglobal/5 to-teal-500/5 flex flex-col sm:flex-row items-center justify-between gap-6"
+          className="mt-12 p-8 rounded-2xl border border-sky-500/20 bg-gradient-to-r from-sky-500/5 to-teal-500/5 flex flex-col sm:flex-row items-center justify-between gap-6"
         >
           <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-safeglobal/10 flex items-center justify-center flex-shrink-0">
-              <TrendingUp className="w-6 h-6 text-safeglobal" />
+            <div className="w-12 h-12 rounded-xl bg-sky-500/10 flex items-center justify-center flex-shrink-0">
+              <TrendingUp className="w-6 h-6 text-sky-500" />
             </div>
             <div>
               <h3 className="text-lg font-semibold">
@@ -323,7 +323,7 @@ export default function BlogSection() {
               </p>
             </div>
           </div>
-          <Button className="bg-safeglobal hover:bg-safeglobal-dark text-white shadow-lg shadow-safeglobal/25 gap-2 flex-shrink-0">
+          <Button className="bg-sky-500 hover:bg-sky-600 text-white shadow-lg shadow-sky-500/25 gap-2 flex-shrink-0">
             Download Free Report
             <ArrowRight className="w-4 h-4" />
           </Button>

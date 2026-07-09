@@ -70,7 +70,7 @@ function MegaMenuDropdown({ category, onNavigate }: { category: MegaMenuCategory
                         )}
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2">
-                            <span className="text-sm font-medium text-foreground group-hover:text-safeglobal transition-colors">
+                            <span className="text-sm font-medium text-foreground group-hover:text-sky-600 transition-colors">
                               {item.label}
                             </span>
                             {item.badge && (
@@ -97,7 +97,7 @@ function MegaMenuDropdown({ category, onNavigate }: { category: MegaMenuCategory
                             </p>
                           )}
                         </div>
-                        <ArrowRight className="w-3.5 h-3.5 text-transparent group-hover:text-safeglobal group-hover:translate-x-0.5 transition-all duration-200 mt-1 flex-shrink-0" />
+                        <ArrowRight className="w-3.5 h-3.5 text-transparent group-hover:text-sky-600 group-hover:translate-x-0.5 transition-all duration-200 mt-1 flex-shrink-0" />
                       </Link>
                     );
                   })}
@@ -119,7 +119,7 @@ function MegaMenuDropdown({ category, onNavigate }: { category: MegaMenuCategory
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-semibold text-foreground group-hover:text-safeglobal transition-colors">
+                      <span className="text-sm font-semibold text-foreground group-hover:text-sky-600 transition-colors">
                         {category.featured.title}
                       </span>
                       {category.featured.badge && (
@@ -132,7 +132,7 @@ function MegaMenuDropdown({ category, onNavigate }: { category: MegaMenuCategory
                       {category.featured.description}
                     </p>
                   </div>
-                  <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-safeglobal transition-colors flex-shrink-0 mt-0.5" />
+                  <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-sky-600 transition-colors flex-shrink-0 mt-0.5" />
                 </Link>
               )}
 

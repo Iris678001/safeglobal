@@ -315,7 +315,7 @@ export default function SafetyCultureQuiz() {
               {/* Badge */}
               <Badge
                 variant="outline"
-                className="border-safeglobal/30 text-safeglobal bg-safeglobal/10 px-4 py-1.5 text-xs font-medium tracking-wide mb-6"
+                className="border-sky-500/30 text-sky-500 bg-sky-500/10 px-4 py-1.5 text-xs font-medium tracking-wide mb-6"
               >
                 ASSESSMENT
               </Badge>
@@ -388,7 +388,7 @@ export default function SafetyCultureQuiz() {
                   <span className="text-sm text-muted-foreground">
                     Question {currentQ + 1} of {questions.length}
                   </span>
-                  <span className="text-sm font-semibold text-safeglobal">
+                  <span className="text-sm font-semibold text-sky-500">
                     {Math.round(((currentQ + 1) / questions.length) * 100)}%
                   </span>
                 </div>
@@ -442,8 +442,8 @@ export default function SafetyCultureQuiz() {
                         w-full text-left p-4 sm:p-5 rounded-xl border transition-all duration-200 cursor-pointer
                         ${
                           isSelected
-                            ? "border-safeglobal bg-safeglobal/10 shadow-[0_0_20px_rgba(45,122,111,0.12)]"
-                            : "border-border bg-card/50 hover:border-safeglobal/30 hover:bg-safeglobal/5"
+                            ? "border-safeglobal bg-sky-500/10 shadow-[0_0_20px_rgba(45,122,111,0.12)]"
+                            : "border-border bg-card/50 hover:border-sky-500/30 hover:bg-safeglobal/5"
                         }
                       `}
                       aria-pressed={isSelected}
@@ -494,7 +494,7 @@ export default function SafetyCultureQuiz() {
                                 : answer.score === 2
                                   ? "bg-amber-500/10 text-amber-400"
                                   : answer.score === 3
-                                    ? "bg-safeglobal/10 text-safeglobal"
+                                    ? "bg-sky-500/10 text-sky-500"
                                     : "bg-teal-500/10 text-teal-400"
                             }
                           `}
@@ -519,7 +519,7 @@ export default function SafetyCultureQuiz() {
                   variant="outline"
                   onClick={goBack}
                   disabled={currentQ === 0}
-                  className="gap-2 border-border hover:border-safeglobal/30"
+                  className="gap-2 border-border hover:border-sky-500/30"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   Back
@@ -703,8 +703,8 @@ export default function SafetyCultureQuiz() {
                       }}
                       className="flex items-start gap-3 p-4 rounded-xl border border-border bg-card/50"
                     >
-                      <div className="mt-0.5 w-6 h-6 rounded-full bg-safeglobal/10 flex items-center justify-center flex-shrink-0">
-                        <span className="text-xs font-bold text-safeglobal">
+                      <div className="mt-0.5 w-6 h-6 rounded-full bg-sky-500/10 flex items-center justify-center flex-shrink-0">
+                        <span className="text-xs font-bold text-sky-500">
                           {idx + 1}
                         </span>
                       </div>
@@ -736,7 +736,7 @@ export default function SafetyCultureQuiz() {
                 <Button
                   variant="outline"
                   onClick={retake}
-                  className="gap-2 border-border hover:border-safeglobal/30 h-12 px-8"
+                  className="gap-2 border-border hover:border-sky-500/30 h-12 px-8"
                 >
                   <RotateCcw className="w-4 h-4" />
                   Retake Assessment
@@ -744,7 +744,7 @@ export default function SafetyCultureQuiz() {
                 <Button
                   variant="outline"
                   onClick={shareScore}
-                  className="gap-2 border-border hover:border-safeglobal/30 h-12 px-8"
+                  className="gap-2 border-border hover:border-sky-500/30 h-12 px-8"
                 >
                   <Copy className="w-4 h-4" />
                   {copied ? "Copied!" : "Share Score"}
@@ -757,3 +757,4 @@ export default function SafetyCultureQuiz() {
     </section>
   );
 }
+

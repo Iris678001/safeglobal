@@ -120,7 +120,7 @@ export default function ContactSection() {
         >
           <Badge
             variant="outline"
-            className="border-safeglobal/30 text-safeglobal bg-safeglobal/10 px-4 py-1.5 text-xs font-medium tracking-wide mb-4"
+            className="border-sky-500/30 text-sky-500 bg-sky-500/10 px-4 py-1.5 text-xs font-medium tracking-wide mb-4"
           >
             GET STARTED
           </Badge>
@@ -149,8 +149,8 @@ export default function ContactSection() {
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-safeglobal via-teal-500 to-safeglobal animate-gradient-shift" style={{ backgroundSize: '200% 100%' }} />
               <div className="relative p-6 rounded-2xl bg-card">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-safeglobal/20 flex items-center justify-center">
-                    <Shield className="w-5 h-5 text-safeglobal" />
+                  <div className="w-10 h-10 rounded-lg bg-sky-500/20 flex items-center justify-center">
+                    <Shield className="w-5 h-5 text-sky-500" />
                   </div>
                   <div>
                     <h3 className="font-semibold">Free Assessment</h3>
@@ -170,7 +170,7 @@ export default function ContactSection() {
                       key={item}
                       className="flex items-center gap-2 text-sm text-muted-foreground"
                     >
-                      <CheckCircle2 className="w-4 h-4 text-safeglobal flex-shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-sky-500 flex-shrink-0" />
                       {item}
                     </li>
                   ))}
@@ -183,10 +183,10 @@ export default function ContactSection() {
               {contactInfo.map((info) => (
                 <div
                   key={info.label}
-                  className="flex items-start gap-3 p-4 rounded-xl border border-border bg-card/30 hover:border-safeglobal/20 transition-all"
+                  className="flex items-start gap-3 p-4 rounded-xl border border-border bg-card/30 hover:border-sky-500/20 transition-all"
                 >
-                  <div className="w-9 h-9 rounded-lg bg-safeglobal/10 flex items-center justify-center flex-shrink-0">
-                    <info.icon className="w-4 h-4 text-safeglobal" />
+                  <div className="w-9 h-9 rounded-lg bg-sky-500/10 flex items-center justify-center flex-shrink-0">
+                    <info.icon className="w-4 h-4 text-sky-500" />
                   </div>
                   <div>
                     <div className="text-sm font-medium">{info.value}</div>
@@ -322,15 +322,15 @@ export default function ContactSection() {
                 ))}
               </div>
               <p className="text-sm text-muted-foreground">
-                Trusted by <span className="text-safeglobal font-semibold">200+</span> enterprises
+                Trusted by <span className="text-sky-500 font-semibold">200+</span> enterprises
               </p>
             </div>
 
             <div className="p-6 lg:p-8 rounded-2xl border border-border bg-card/50">
               {formState === "success" ? (
                 <div className="text-center py-12 space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-safeglobal/20 flex items-center justify-center mx-auto">
-                    <CheckCircle2 className="w-8 h-8 text-safeglobal" />
+                  <div className="w-16 h-16 rounded-full bg-sky-500/20 flex items-center justify-center mx-auto">
+                    <CheckCircle2 className="w-8 h-8 text-sky-500" />
                   </div>
                   <h3 className="text-2xl font-bold">Thank You!</h3>
                   <p className="text-muted-foreground">
@@ -493,9 +493,9 @@ export default function ContactSection() {
 
                   {/* Response Time Indicator */}
                   <div className="flex items-center justify-center gap-1.5 -mt-2">
-                    <Zap className="w-3.5 h-3.5 text-safeglobal" />
+                    <Zap className="w-3.5 h-3.5 text-sky-500" />
                     <span className="text-xs text-muted-foreground">
-                      Average response: <span className="text-safeglobal font-medium">under 2 hours</span>
+                      Average response: <span className="text-sky-500 font-medium">under 2 hours</span>
                     </span>
                   </div>
 
@@ -510,15 +510,15 @@ export default function ContactSection() {
             {/* Trust Signals */}
             <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
               <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                <Lock className="w-3.5 h-3.5 text-safeglobal" />
+                <Lock className="w-3.5 h-3.5 text-sky-500" />
                 <span>SOC 2 Compliant</span>
               </div>
               <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                <Shield className="w-3.5 h-3.5 text-safeglobal" />
+                <Shield className="w-3.5 h-3.5 text-sky-500" />
                 <span>GDPR Ready</span>
               </div>
               <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                <CheckCircle2 className="w-3.5 h-3.5 text-safeglobal" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-sky-500" />
                 <span>ISO 27001</span>
               </div>
             </div>
@@ -531,3 +531,4 @@ export default function ContactSection() {
     </section>
   );
 }
+
