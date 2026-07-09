@@ -61,10 +61,10 @@ const officeLocations = [
 
 // Partner logos
 const partnerLogos = [
-  { name: "Bosch", src: "/logos/Bosch.png" },
-  { name: "Honeywell", src: "/logos/Honeywell.png" },
-  { name: "ABB", src: "/logos/ABB.png" },
-  { name: "DuPont", src: "/logos/DuPont.png" },
+  { name: "Bosch", src: "/logos/partners/Bosch.png" },
+  { name: "Honeywell", src: "/logos/partners/Honeywell.png" },
+  { name: "ABB", src: "/logos/partners/ABB.png" },
+  { name: "DuPont", src: "/logos/partners/DuPont.png" },
 ];
 
 export default function Footer() {

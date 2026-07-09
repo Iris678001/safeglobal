@@ -2,10 +2,6 @@ import Image from "next/image";
 
 const logos = [
   "3m.png",
-  "ABB.png",
-  "Bosch.png",
-  "DuPont.png",
-  "Honeywell.png",
   "Picture1.png",
   "Picture2.png",
   "Picture3.png",
