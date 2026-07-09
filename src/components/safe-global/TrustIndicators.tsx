@@ -120,7 +120,7 @@ export default function TrustIndicators() {
                 <img
                   src={client.src}
                   alt={`${client.name} logo`}
-                  className="relative z-10 max-h-10 md:max-h-12 max-w-[140px] object-contain invert grayscale mix-blend-screen opacity-70 transition-all duration-500 group-hover:opacity-100 group-hover:scale-110"
+                  className={`relative z-10 max-h-10 md:max-h-12 max-w-[140px] object-contain invert grayscale mix-blend-screen opacity-70 transition-all duration-500 group-hover:opacity-100 ${['Bosch', 'Honeywell'].includes(client.name) ? 'scale-[1.35] md:scale-[1.45] group-hover:scale-[1.45] md:group-hover:scale-[1.55]' : 'group-hover:scale-110'}`}
                   onError={(e) => {
                     const target = e.currentTarget;
                     target.style.display = 'none';
