@@ -464,13 +464,7 @@ export default function HeroSection() {
                   className="text-safeglobal font-semibold"
                 />
               </div>
-              <p className="text-sm text-muted-foreground max-w-lg mx-auto">
-                Protecting{" "}
-                <span className="text-safeglobal font-semibold">500,000+</span>{" "}
-                workers across{" "}
-                <span className="text-safeglobal font-semibold">30+</span>{" "}
-                countries.
-              </p>
+
             </motion.div>
 
             {/* CTA Buttons */}
