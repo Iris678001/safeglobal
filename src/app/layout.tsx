@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/safe-global/ThemeProvider";
 import Header from "@/components/safe-global/Header";
 import Footer from "@/components/safe-global/Footer";
+import SmoothScroll from "@/components/safe-global/SmoothScroll";
 import ChatBot from "@/components/safe-global/ChatBot";
 import BackToTop from "@/components/safe-global/BackToTop";
 import CookieConsent from "@/components/safe-global/CookieConsent";
@@ -59,7 +60,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${interSans.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground relative`}
       >
@@ -69,15 +70,17 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="min-h-screen flex flex-col relative">
-            <Header />
-            <main className="flex-1 relative pt-16 lg:pt-20">{children}</main>
-            <Footer />
-            <ChatBot />
-            <BackToTop />
-            <CookieConsent />
-          </div>
-          <Toaster />
+          <SmoothScroll>
+            <div className="min-h-screen flex flex-col relative">
+              <Header />
+              <main className="flex-1 relative pt-16 lg:pt-20">{children}</main>
+              <Footer />
+              <ChatBot />
+              <BackToTop />
+              <CookieConsent />
+            </div>
+            <Toaster />
+          </SmoothScroll>
         </ThemeProvider>
         <Script id="cursor-glow" strategy="afterInteractive">
           {`(function(){if(window.innerWidth<=768)return;var g=document.createElement('div');g.style.cssText='position:fixed;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(45,122,111,0.04) 0%,transparent 70%);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:left 0.3s ease,top 0.3s ease;left:-500px;top:-500px;';document.body.appendChild(g);document.addEventListener('mousemove',function(e){g.style.left=e.clientX+'px';g.style.top=e.clientY+'px';});})();`}
