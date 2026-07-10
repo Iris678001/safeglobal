@@ -1,5 +1,5 @@
 import {
-  Eye, Brain, FileCheck, Cpu, Activity, Monitor, Bell, Layers, TrendingUp, Radar, Lock, ShieldAlert,
+  Eye, Brain, FileCheck, Cpu, Activity, Monitor, Bell, Layers, TrendingUp, Radar, Lock, ShieldAlert, Shield,
   type LucideIcon,
 } from "lucide-react";
 
@@ -62,16 +62,37 @@ export const servicesData: Record<string, ServicePageData> = {
     stats: [{ label: "Data Sources", value: "50+", description: "Integrated data pipelines" }, { label: "Insights Generated", value: "10K+", description: "Per month per client" }, { label: "ROI Improvement", value: "340%", description: "Average client ROI" }, { label: "Decision Speed", value: "5x", description: "Faster safety decisions" }],
     benefits: [{ title: "Data-Driven Strategy", description: "Replace intuition with evidence-based safety investment decisions." }, { title: "Measure Impact", description: "Prove the value of safety programs with clear ROI calculations." }, { title: "Continuous Improvement", description: "AI recommendations ensure your safety program keeps evolving." }, { title: "Board Visibility", description: "Executive dashboards make safety performance transparent at every level." }],
     cta: { title: "Unlock Your Safety Intelligence", description: "Get a workplace intelligence assessment and roadmap." },
-    relatedServices: [{ title: "Safety Dashboards", href: "/ehs-ai/safety-dashboards", color: "sky" }, { title: "Compliance Automation", href: "/ehs-ai/compliance-automation", color: "violet" }],
+    relatedServices: [{ title: "EHS Management Platform", href: "/ehs-ai/ehs-management-overview", color: "sky" }, { title: "Compliance Automation", href: "/ehs-ai/compliance-automation", color: "violet" }],
   },
-  "safety-dashboards": {
-    slug: "safety-dashboards", title: "Safety Dashboards", subtitle: "Real-Time KPI Tracking with Customizable Views", icon: Monitor, color: "sky",
-    heroDescription: "Monitor every safety metric that matters with customizable real-time dashboards. From zone-level risk scores to enterprise-wide compliance, get instant visibility into your safety performance.",
-    features: [{ title: "Custom Dashboard Builder", description: "Drag-and-drop dashboard creation with 50+ widget types and unlimited customization." }, { title: "Real-Time KPI Tracking", description: "Live metrics updated every 30 seconds for incidents, compliance, and risk scores." }, { title: "Role-Based Views", description: "Tailored dashboard views for executives, safety managers, and field workers." }, { title: "Mobile-First Design", description: "Responsive dashboards optimized for tablets and phones used on the floor." }, { title: "Alert Integration", description: "Visual alerts embedded directly in dashboards with drill-down capability." }, { title: "Export & Sharing", description: "One-click PDF/Excel export and scheduled email reports for stakeholders." }],
-    stats: [{ label: "Widget Types", value: "50+", description: "Customizable components" }, { label: "Refresh Rate", value: "30s", description: "Real-time data updates" }, { label: "Active Dashboards", value: "5K+", description: "Across client base" }, { label: "User Satisfaction", value: "98%", description: "Dashboard usability score" }],
-    benefits: [{ title: "Instant Visibility", description: "See your entire safety posture at a glance, from any device." }, { title: "Faster Decisions", description: "Real-time data enables immediate response to emerging situations." }, { title: "Team Alignment", description: "Everyone sees the same truth with role-appropriate detail levels." }, { title: "Audit Readiness", description: "Always-current dashboards mean you're always audit-ready." }],
-    cta: { title: "Build Your Dashboard", description: "Start with a pre-built template or create a custom safety dashboard." },
-    relatedServices: [{ title: "IoT Safety Integration", href: "/ehs-ai/iot-integration", color: "amber" }, { title: "Workplace Intelligence", href: "/ehs-ai/workplace-intelligence", color: "safeglobal" }, { title: "AI Safety Monitoring", href: "/ehs-ai/ai-safety-monitoring", color: "safeglobal" }],
+  "ehs-management-overview": {
+    slug: "ehs-management-overview",
+    title: "EHS Management Platform",
+    subtitle: "Centralize your Environment, Health, and Safety workflows.",
+    icon: Shield,
+    color: "sky",
+    badge: "Platform Overview",
+    heroDescription: "Our comprehensive EHS Management Platform centralizes your environmental, health, and safety workflows into a single, unified hub. By integrating specialized tools, we empower organizations to dramatically reduce operational risk, effortlessly ensure regulatory compliance, and build a proactive safety culture.",
+    features: [
+      { title: "Centralized Workflows", description: "Manage all your EHS initiatives from a single hub, eliminating data silos and streamlining processes across your entire organization." },
+      { title: "Proactive Risk Mitigation", description: "Identify, assess, and address workplace hazards before they escalate into incidents, protecting your most valuable assets." },
+      { title: "Assured Compliance", description: "Stay ahead of local, national, and international regulations with built-in compliance guardrails and centralized documentation." }
+    ],
+    stats: [
+      { label: "Incident Reduction", value: "45%", description: "Average decrease in workplace safety incidents." },
+      { label: "Compliance Achieved", value: "100%", description: "Consistent regulatory compliance maintained by our partners." },
+      { label: "Admin Time Saved", value: "30h+", description: "Hours saved per month on manual safety tracking and reporting." }
+    ],
+    benefits: [
+      { title: "Unified EHS Visibility", description: "Gain a complete picture of your safety and environmental performance without jumping between disjointed systems." },
+      { title: "Audit Readiness", description: "Maintain a constant state of audit-readiness with automated record-keeping and easy access to historical safety data." },
+      { title: "Empowered Workforce", description: "Foster a culture of safety where every employee is equipped to participate in EHS protocols and hazard reporting." }
+    ],
+    cta: { title: "Transform Your EHS Strategy", description: "Discover how centralizing your safety operations can protect your team and streamline your compliance efforts." },
+    relatedServices: [
+      { title: "Compliance Automation", href: "/ehs-ai/compliance-automation", color: "violet" },
+      { title: "Safety Audit Manager", href: "/ehs-ai/safety-audit-manager", color: "amber" },
+      { title: "Hazard Mapping", href: "/ehs-ai/hazard-mapping", color: "cyan" }
+    ]
   },
   "emergency-response-ai": {
     slug: "emergency-response-ai", title: "Emergency Response AI", subtitle: "Automated Incident Response & Evacuation Guidance", icon: Bell, color: "rose", badge: "AI",

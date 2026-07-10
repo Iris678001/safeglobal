@@ -126,6 +126,15 @@ export const navLinks: NavLink[] = [
           title: "EHS Management",
           items: [
             {
+              label: "EHS Management Platform",
+              description: "Comprehensive overview of our EHS modules",
+              href: "/ehs-ai/ehs-management-overview",
+              icon: Layers,
+              featured: true,
+              badge: "Platform",
+              color: "safeglobal",
+            },
+            {
               label: "Compliance Automation",
               description: "Auto-track 200+ regulations with smart alerts",
               href: "/ehs-ai/compliance-automation",
@@ -138,13 +147,6 @@ export const navLinks: NavLink[] = [
               href: "/ehs-ai/safety-audit-manager",
               icon: FileCheck,
               color: "amber",
-            },
-            {
-              label: "Safety Dashboards",
-              description: "Real-time KPI tracking with customizable views",
-              href: "/ehs-ai/safety-dashboards",
-              icon: Monitor,
-              color: "sky",
             },
             {
               label: "Hazard Mapping",
