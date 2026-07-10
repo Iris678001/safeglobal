@@ -23,35 +23,31 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 const footerLinks = {
-  "Solutions": [
-    { label: "AI Safety Monitoring", href: "/ehs-ai/ai-safety-monitoring" },
+  "Platform": [
+    { label: "EHS Overview", href: "/ehs-ai/ehs-management-overview" },
+    { label: "ERP Overview", href: "/erp/overview" },
+    { label: "Integration", href: "/ehs-ai/iot-integration" },
+    { label: "UAE E-Invoicing", href: "/uae-e-invoicing" },
+  ],
+  "EHS Modules": [
+    { label: "Incident Management", href: "/ehs-ai/incident-management" },
+    { label: "Risk Management", href: "/ehs-ai/risk-management" },
+    { label: "Permit to Work", href: "/ehs-ai/permit-to-work" },
     { label: "Compliance Automation", href: "/ehs-ai/compliance-automation" },
-    { label: "IoT Safety Integration", href: "/ehs-ai/iot-integration" },
-    { label: "Safety Dashboards", href: "/ehs-ai/safety-dashboards" },
-    { label: "Emergency Response AI", href: "/ehs-ai/emergency-response-ai" },
-    { label: "ERP Platform", href: "/erp" },
+    { label: "Safety Audit Manager", href: "/ehs-ai/safety-audit-manager" },
   ],
-  Industries: [
-    { label: "Manufacturing", href: "/industries/manufacturing" },
-    { label: "Construction", href: "/industries/construction" },
-    { label: "Oil & Gas", href: "/industries/oil-gas" },
-    { label: "Healthcare", href: "/industries/healthcare" },
-    { label: "Logistics & Warehousing", href: "/industries/logistics-warehousing" },
-    { label: "Mining & Extraction", href: "/industries/mining-extraction" },
+  "AI & Analytics": [
+    { label: "Computer Vision", href: "/ehs-ai/ai-safety-monitoring" },
+    { label: "Workplace Intelligence", href: "/ehs-ai/workplace-intelligence" },
+    { label: "IoT/IIoT Integration", href: "/ehs-ai/iot-integration" },
+    { label: "Process Safety Management", href: "/ehs-ai/process-safety-management" },
   ],
-  Resources: [
+  "Company": [
+    { label: "About Us", href: "/about" },
     { label: "Case Studies", href: "/case-studies" },
     { label: "Blog & Insights", href: "/blog" },
-    { label: "Resource Library", href: "/ehs-ai" },
-    { label: "FAQ", href: "/about" },
-    { label: "Pricing", href: "/contact" },
-  ],
-  Company: [
-    { label: "About Us", href: "/about" },
-    { label: "Our Team", href: "/about" },
-    { label: "Security & Compliance", href: "/about" },
-    { label: "Partners", href: "/about" },
     { label: "Contact", href: "/contact" },
+    { label: "Trust & Security", href: "/about#security" },
   ],
 };
 

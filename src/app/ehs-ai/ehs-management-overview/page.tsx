@@ -239,6 +239,48 @@ export default function EHSManagementOverview() {
                 </CardContent>
               </Card>
             </Link>
+
+            <Link href="/ehs-ai/incident-management" className="group block">
+              <Card className="h-full border-border/50 bg-card/50 backdrop-blur-sm group-hover:border-safeglobal/50 group-hover:shadow-2xl group-hover:shadow-safeglobal/10 transition-all duration-300 group-hover:-translate-y-1">
+                <CardContent className="p-8">
+                  <h3 className="text-xl font-bold mb-3 group-hover:text-safeglobal transition-colors">4. Incident Management</h3>
+                  <p className="text-muted-foreground mb-4">Streamline mobile reporting, RCA workflows, and CAPA tracking.</p>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li>• Mobile-First Offline Reporting</li>
+                    <li>• Root Cause Analysis (RCA)</li>
+                    <li>• Direct SAP EHS Integration</li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </Link>
+
+            <Link href="/ehs-ai/risk-management" className="group block">
+              <Card className="h-full border-border/50 bg-card/50 backdrop-blur-sm group-hover:border-safeglobal/50 group-hover:shadow-2xl group-hover:shadow-safeglobal/10 transition-all duration-300 group-hover:-translate-y-1">
+                <CardContent className="p-8">
+                  <h3 className="text-xl font-bold mb-3 group-hover:text-safeglobal transition-colors">5. Risk Management</h3>
+                  <p className="text-muted-foreground mb-4">Leverage dynamic risk matrices and predictive hazard modeling.</p>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li>• Dynamic 5x5 Risk Matrices</li>
+                    <li>• Job Safety Analysis (JSA)</li>
+                    <li>• Predictive Risk Modeling</li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </Link>
+
+            <Link href="/ehs-ai/permit-to-work" className="group block">
+              <Card className="h-full border-border/50 bg-card/50 backdrop-blur-sm group-hover:border-safeglobal/50 group-hover:shadow-2xl group-hover:shadow-safeglobal/10 transition-all duration-300 group-hover:-translate-y-1">
+                <CardContent className="p-8">
+                  <h3 className="text-xl font-bold mb-3 group-hover:text-safeglobal transition-colors">6. Permit to Work</h3>
+                  <p className="text-muted-foreground mb-4">Execute digital workflows, LOTO integration, and active clash detection.</p>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li>• Digital Permit Approvals</li>
+                    <li>• Lockout/Tagout (LOTO) Integration</li>
+                    <li>• Geo-fenced Clash Detection</li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </Link>
           </div>
         </div>
       </section>

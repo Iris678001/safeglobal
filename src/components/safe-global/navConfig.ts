@@ -27,6 +27,9 @@ import {
   Wrench,
   FolderKanban,
   Settings,
+  AlertTriangle,
+  ClipboardCheck,
+  Target,
   type LucideIcon,
 } from "lucide-react";
 
@@ -91,16 +94,6 @@ export const navLinks: NavLink[] = [
           title: "AI powered data capture and analytics",
           items: [
             {
-              label: "IoT Safety Integration",
-              description: "Connect 1000+ sensor types for unified monitoring",
-              href: "/ehs-ai/iot-integration",
-              icon: Cpu,
-              featured: true,
-              badge: "Popular",
-              color: "sky",
-            },
-
-            {
               label: "Computer Vision",
               description: "Real-time hazard detection using multi-camera AI analysis",
               href: "/ehs-ai/ai-safety-monitoring",
@@ -108,11 +101,27 @@ export const navLinks: NavLink[] = [
               color: "safeglobal",
             },
             {
+              label: "IoT/IIoT Safety Integration",
+              description: "Connect 1000+ sensor types for unified monitoring",
+              href: "/ehs-ai/iot-integration",
+              icon: Cpu,
+              featured: true,
+              badge: "Popular",
+              color: "sky",
+            },
+            {
               label: "Workplace Intelligence Systems",
               description: "Transform safety data into actionable insights",
               href: "/ehs-ai/workplace-intelligence",
               icon: Brain,
               color: "violet",
+            },
+            {
+              label: "Process Safety Management",
+              description: "Comprehensive safety protocols and hazard lifecycle tracking",
+              href: "/ehs-ai/process-safety-management",
+              icon: Activity,
+              color: "amber",
             },
           ],
         },
@@ -129,12 +138,27 @@ export const navLinks: NavLink[] = [
               color: "safeglobal",
             },
             {
-              label: "Process Safety Management",
-              description: "Comprehensive safety protocols and hazard lifecycle tracking",
-              href: "/ehs-ai/process-safety-management",
-              icon: Activity,
+              label: "Incident Management",
+              description: "Mobile reporting, RCA workflows, and CAPA tracking",
+              href: "/ehs-ai/incident-management",
+              icon: AlertTriangle,
+              color: "rose",
+            },
+            {
+              label: "Risk Management",
+              description: "Dynamic risk matrices and predictive hazard modeling",
+              href: "/ehs-ai/risk-management",
+              icon: Target,
               color: "amber",
             },
+            {
+              label: "Permit to Work",
+              description: "Digital workflows, LOTO integration, and clash detection",
+              href: "/ehs-ai/permit-to-work",
+              icon: ClipboardCheck,
+              color: "sky",
+            },
+
             {
               label: "Compliance Automation",
               description: "Auto-track 200+ regulations with smart alerts",
