@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "SafeGlobal" }],
   icons: {
-    icon: "/logo.svg",
+    icon: "/logo.png",
   },
   openGraph: {
     title: "SafeGlobal — AI-Powered Safety. Zero Compromise.",
