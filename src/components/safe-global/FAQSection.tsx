@@ -34,9 +34,9 @@ const categoryTabs: { label: Category; value: Category }[] = [
 
 const faqItems: FAQItem[] = [
   {
-    question: "How does SafeGlobal's AI safety monitoring work?",
+    question: "How does Safeglobal's AI safety monitoring work?",
     answer:
-      "SafeGlobal combines advanced computer vision with an extensive sensor network to deliver real-time hazard detection across your entire operation. Our AI models continuously analyze video feeds and IoT sensor data to identify unsafe conditions, PPE violations, proximity risks, and environmental hazards — all before incidents occur. The system learns from your site's unique patterns, reducing false alarms by over 90% compared to traditional monitoring, and delivers instant alerts to the right personnel through automated escalation workflows.",
+      "Safeglobal combines advanced computer vision with an extensive sensor network to deliver real-time hazard detection across your entire operation. Our AI models continuously analyze video feeds and IoT sensor data to identify unsafe conditions, PPE violations, proximity risks, and environmental hazards — all before incidents occur. The system learns from your site's unique patterns, reducing false alarms by over 90% compared to traditional monitoring, and delivers instant alerts to the right personnel through automated escalation workflows.",
     category: "Technical",
   },
   {
@@ -46,15 +46,15 @@ const faqItems: FAQItem[] = [
     category: "Technical",
   },
   {
-    question: "Is SafeGlobal compatible with our existing systems?",
+    question: "Is Safeglobal compatible with our existing systems?",
     answer:
-      "Absolutely. SafeGlobal integrates natively with 50+ enterprise platforms including SAP, Oracle, ServiceNow, Microsoft Dynamics, and all major SCADA and MES systems. Our open REST API and custom connector framework allow seamless data exchange with virtually any system in your technology stack. Our integration team works alongside your IT department to ensure a smooth, secure connection with zero disruption to existing workflows.",
+      "Absolutely. Safeglobal integrates natively with 50+ enterprise platforms including SAP, Oracle, ServiceNow, Microsoft Dynamics, and all major SCADA and MES systems. Our open REST API and custom connector framework allow seamless data exchange with virtually any system in your technology stack. Our integration team works alongside your IT department to ensure a smooth, secure connection with zero disruption to existing workflows.",
     category: "Technical",
   },
   {
-    question: "What compliance standards does SafeGlobal support?",
+    question: "What compliance standards does Safeglobal support?",
     answer:
-      "SafeGlobal's built-in compliance engine supports 200+ global safety and data standards, including ISO 45001, OSHA regulations, ISO 27001, IEC 61508, SOC 2 Type II, and GDPR. The platform automatically tracks regulatory updates across jurisdictions and maps your safety data to required compliance frameworks. Automated audit-ready documentation and gap analysis reports are generated on demand, reducing compliance overhead by up to 70%.",
+      "Safeglobal's built-in compliance engine supports 200+ global safety and data standards, including ISO 45001, OSHA regulations, ISO 27001, IEC 61508, SOC 2 Type II, and GDPR. The platform automatically tracks regulatory updates across jurisdictions and maps your safety data to required compliance frameworks. Automated audit-ready documentation and gap analysis reports are generated on demand, reducing compliance overhead by up to 70%.",
     category: "Compliance",
   },
   {
@@ -72,13 +72,13 @@ const faqItems: FAQItem[] = [
   {
     question: "Do you offer on-premise deployment?",
     answer:
-      "Yes, on-premise deployment is available for our Enterprise tier customers who require full data sovereignty and air-gapped environments. On-premise installations include the complete SafeGlobal platform — AI models, monitoring dashboards, compliance engine, and analytics — running entirely within your infrastructure. We also support hybrid configurations where sensitive data processing stays on-premise while leveraging cloud resources for model training and updates.",
+      "Yes, on-premise deployment is available for our Enterprise tier customers who require full data sovereignty and air-gapped environments. On-premise installations include the complete Safeglobal platform — AI models, monitoring dashboards, compliance engine, and analytics — running entirely within your infrastructure. We also support hybrid configurations where sensitive data processing stays on-premise while leveraging cloud resources for model training and updates.",
     category: "Security",
   },
   {
     question: "How is worker privacy protected?",
     answer:
-      "Privacy-by-design is foundational to SafeGlobal's architecture. All personal data undergoes automated anonymization at the edge before transmission, ensuring individual workers cannot be identified in dashboards or reports unless explicitly required by your safety protocols. Our system is fully GDPR and CCPA compliant, with configurable data retention policies, right-to-erasure capabilities, and role-based access controls. Regular third-party privacy audits and transparent data processing records provide ongoing assurance.",
+      "Privacy-by-design is foundational to Safeglobal's architecture. All personal data undergoes automated anonymization at the edge before transmission, ensuring individual workers cannot be identified in dashboards or reports unless explicitly required by your safety protocols. Our system is fully GDPR and CCPA compliant, with configurable data retention policies, right-to-erasure capabilities, and role-based access controls. Regular third-party privacy audits and transparent data processing records provide ongoing assurance.",
     category: "Security",
   },
 ];
@@ -164,7 +164,7 @@ export default function FAQSection() {
             </h2>
           </div>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Everything you need to know about SafeGlobal&apos;s AI safety
+            Everything you need to know about Safeglobal&apos;s AI safety
             platform. Can&apos;t find what you&apos;re looking for? Our team is
             here to help.
           </p>

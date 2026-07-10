@@ -325,7 +325,7 @@ export default function SafetyScoreCalculator() {
                     {result.potentialSavings}
                   </div>
                   <p className="text-xs text-muted-foreground mt-1">
-                    with SafeGlobal AI-powered safety platform
+                    with Safeglobal AI-powered safety platform
                   </p>
                 </div>
 

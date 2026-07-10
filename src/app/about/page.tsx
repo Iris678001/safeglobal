@@ -3,18 +3,18 @@ import Breadcrumb from "@/components/safe-global/Breadcrumb";
 import AboutPageClient from "@/components/safe-global/AboutPageClient";
 
 export const metadata: Metadata = {
-  title: "About SafeGlobal | AI-Powered Workplace Safety Vision & Team",
+  title: "About Safeglobal | AI-Powered Workplace Safety Vision & Team",
   description:
-    "Learn about SafeGlobal's mission to eliminate preventable workplace injuries worldwide. Meet the team of safety scientists, AI engineers, and industry veterans building the future of industrial risk management.",
+    "Learn about Safeglobal's mission to eliminate preventable workplace injuries worldwide. Meet the team of safety scientists, AI engineers, and industry veterans building the future of industrial risk management.",
   keywords: [
-    "about SafeGlobal",
+    "about Safeglobal",
     "workplace safety company",
     "AI safety company",
     "safety technology team",
     "industrial risk management",
   ],
   openGraph: {
-    title: "About SafeGlobal | AI-Powered Workplace Safety Vision & Team",
+    title: "About Safeglobal | AI-Powered Workplace Safety Vision & Team",
     description:
       "Founded on the belief that every worker deserves to go home safely. Meet the team redefining industrial safety with AI.",
   },

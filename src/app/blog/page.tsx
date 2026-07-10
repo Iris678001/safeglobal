@@ -9,13 +9,13 @@ import { blogImages } from "@/data/real-images";
 import { Clock, User, ArrowRight, Mail, TrendingUp } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Safety Intelligence Blog — SafeGlobal",
+  title: "Safety Intelligence Blog — Safeglobal",
   description:
-    "Expert analysis, research findings, and industry trends from the SafeGlobal AI safety research team. Stay informed on workplace safety innovation.",
+    "Expert analysis, research findings, and industry trends from the Safeglobal AI safety research team. Stay informed on workplace safety innovation.",
   openGraph: {
-    title: "Safety Intelligence Blog — SafeGlobal",
+    title: "Safety Intelligence Blog — Safeglobal",
     description:
-      "Expert analysis, research findings, and industry trends from the SafeGlobal AI safety research team.",
+      "Expert analysis, research findings, and industry trends from the Safeglobal AI safety research team.",
   },
 };
 

@@ -196,7 +196,7 @@ function AnimatedBar({
 }
 
 export default function ComparisonSection() {
-  const [showSafeGlobal, setShowSafeGlobal] = useState(true);
+  const [showSafeglobal, setShowSafeglobal] = useState(true);
   const [tableVisible, setTableVisible] = useState(false);
   const tableRef = useRef<HTMLDivElement>(null);
 
@@ -248,7 +248,7 @@ export default function ComparisonSection() {
           </Badge>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
             Before vs After{" "}
-            <span className="text-gradient">SafeGlobal</span>
+            <span className="text-gradient">Safeglobal</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Measurable impact across every safety metric that matters.
@@ -265,7 +265,7 @@ export default function ComparisonSection() {
         >
           <span
             className={`text-sm font-medium transition-colors duration-300 ${
-              !showSafeGlobal
+              !showSafeglobal
                 ? "text-foreground"
                 : "text-muted-foreground"
             }`}
@@ -273,19 +273,19 @@ export default function ComparisonSection() {
             Traditional Safety
           </span>
           <button
-            onClick={() => setShowSafeGlobal((prev) => !prev)}
+            onClick={() => setShowSafeglobal((prev) => !prev)}
             className="relative w-14 h-7 rounded-full transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-safeglobal/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             style={{
-              backgroundColor: showSafeGlobal
+              backgroundColor: showSafeglobal
                 ? "rgb(16, 185, 129)"
                 : "rgb(100, 116, 139)",
             }}
-            aria-label={`Toggle to ${showSafeGlobal ? "Traditional Safety" : "With SafeGlobal"} view`}
+            aria-label={`Toggle to ${showSafeglobal ? "Traditional Safety" : "With Safeglobal"} view`}
           >
             <motion.div
               className="absolute top-0.5 w-6 h-6 rounded-full bg-white shadow-md"
               animate={{
-                left: showSafeGlobal ? "calc(100% - 26px)" : "2px",
+                left: showSafeglobal ? "calc(100% - 26px)" : "2px",
               }}
               transition={{
                 type: "spring",
@@ -296,12 +296,12 @@ export default function ComparisonSection() {
           </button>
           <span
             className={`text-sm font-medium transition-colors duration-300 ${
-              showSafeGlobal
+              showSafeglobal
                 ? "text-safeglobal"
                 : "text-muted-foreground"
             }`}
           >
-            With SafeGlobal
+            With Safeglobal
           </span>
         </motion.div>
 
@@ -345,10 +345,10 @@ export default function ComparisonSection() {
                 </div>
                 <AnimatePresence mode="wait">
                   <motion.div
-                    key={showSafeGlobal ? "after" : "before-value"}
-                    initial={{ opacity: 0, x: showSafeGlobal ? 20 : -20 }}
+                    key={showSafeglobal ? "after" : "before-value"}
+                    initial={{ opacity: 0, x: showSafeglobal ? 20 : -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: showSafeGlobal ? -20 : 20 }}
+                    exit={{ opacity: 0, x: showSafeglobal ? -20 : 20 }}
                     transition={{ duration: 0.3, ease: "easeOut" }}
                     className="flex items-baseline gap-2"
                   >
@@ -404,7 +404,7 @@ export default function ComparisonSection() {
               <div className="p-4 sm:p-5 text-sm font-semibold text-center relative">
                 <div className="flex flex-col items-center gap-1.5">
                   <div className="flex items-center gap-1.5">
-                    <span className="text-safeglobal">SafeGlobal</span>
+                    <span className="text-safeglobal">Safeglobal</span>
                     {/* Winner badge */}
                     <Badge className="bg-safeglobal/15 text-safeglobal border border-safeglobal/30 text-[9px] px-1.5 py-0.5 font-bold tracking-wider gap-0.5">
                       <Trophy className="w-2.5 h-2.5" />

@@ -88,7 +88,7 @@
 }
 
 .dark {
-  /* Dark mode - the original SafeGlobal dark theme overridden to red/black */
+  /* Dark mode - the original Safeglobal dark theme overridden to red/black */
   --background: oklch(0.1 0 0);
   --foreground: oklch(0.98 0 0);
   --card: oklch(0.12 0 0);

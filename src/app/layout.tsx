@@ -22,9 +22,9 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://safeglobal.com"),
-  title: "SafeGlobal — AI-Powered Workplace Safety & Industrial Risk Management",
+  title: "Safeglobal — AI-Powered Workplace Safety & Industrial Risk Management",
   description:
-    "SafeGlobal delivers AI-driven safety monitoring, predictive risk analytics, compliance automation, and IoT integration for enterprises. Zero Compromise on Safety.",
+    "Safeglobal delivers AI-driven safety monitoring, predictive risk analytics, compliance automation, and IoT integration for enterprises. Zero Compromise on Safety.",
   keywords: [
     "AI safety",
     "workplace safety",
@@ -32,22 +32,22 @@ export const metadata: Metadata = {
     "predictive analytics",
     "compliance automation",
     "IoT safety",
-    "SafeGlobal",
+    "Safeglobal",
   ],
-  authors: [{ name: "SafeGlobal" }],
+  authors: [{ name: "Safeglobal" }],
   icons: {
     icon: "/logo.png",
   },
   openGraph: {
-    title: "SafeGlobal — AI-Powered Safety. Zero Compromise.",
+    title: "Safeglobal — AI-Powered Safety. Zero Compromise.",
     description:
       "Enterprise AI safety monitoring, predictive risk analytics, and compliance automation solutions.",
-    siteName: "SafeGlobal",
+    siteName: "Safeglobal",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "SafeGlobal — AI-Powered Safety. Zero Compromise.",
+    title: "Safeglobal — AI-Powered Safety. Zero Compromise.",
     description:
       "Enterprise AI safety monitoring, predictive risk analytics, and compliance automation solutions.",
   },

@@ -99,13 +99,7 @@ export const navLinks: NavLink[] = [
               badge: "Popular",
               color: "sky",
             },
-            {
-              label: "Process Safety Management",
-              description: "Comprehensive safety protocols and hazard lifecycle tracking",
-              href: "/ehs-ai/process-safety-management",
-              icon: Activity,
-              color: "amber",
-            },
+
             {
               label: "Computer Vision",
               description: "Real-time hazard detection using multi-camera AI analysis",
@@ -135,6 +129,13 @@ export const navLinks: NavLink[] = [
               color: "safeglobal",
             },
             {
+              label: "Process Safety Management",
+              description: "Comprehensive safety protocols and hazard lifecycle tracking",
+              href: "/ehs-ai/process-safety-management",
+              icon: Activity,
+              color: "amber",
+            },
+            {
               label: "Compliance Automation",
               description: "Auto-track 200+ regulations with smart alerts",
               href: "/ehs-ai/compliance-automation",
@@ -162,12 +163,12 @@ export const navLinks: NavLink[] = [
           title: "Enterprise ERP",
           items: [
             {
-              label: "Financial Management",
-              description: "General ledger, AP/AR, budgeting & cost center tracking",
-              href: "/erp#financial-management",
+              label: "Enterprise ERP Platform",
+              description: "Unified operations with SAP & Open Source ERP",
+              href: "/erp/overview",
               icon: DollarSign,
               featured: true,
-              badge: "New",
+              badge: "Overview",
               color: "safeglobal",
             },
             {

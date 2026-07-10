@@ -312,7 +312,7 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
               <span>
-                &copy; {new Date().getFullYear()} SafeGlobal. All rights
+                &copy; {new Date().getFullYear()} Safeglobal. All rights
                 reserved.
               </span>
               <button className="hover:text-sky-600 transition-colors cursor-pointer">

@@ -99,7 +99,7 @@ function CTASection() {
               <span className="text-gradient">Safer</span>?
             </h2>
             <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-8">
-              Join 500,000+ workers already protected by SafeGlobal. Get a
+              Join 500,000+ workers already protected by Safeglobal. Get a
               customized demo and see the platform in action.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

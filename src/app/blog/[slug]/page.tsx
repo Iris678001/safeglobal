@@ -30,11 +30,11 @@ export async function generateMetadata({
   const post = blogPosts.find((p) => p.slug === slug);
 
   if (!post) {
-    return { title: "Post Not Found — SafeGlobal" };
+    return { title: "Post Not Found — Safeglobal" };
   }
 
   return {
-    title: `${post.title} — SafeGlobal Blog`,
+    title: `${post.title} — Safeglobal Blog`,
     description: post.excerpt,
     openGraph: {
       title: post.title,
@@ -198,7 +198,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                       Ready to Transform Your Safety Program?
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      Get a free safety assessment and discover how SafeGlobal
+                      Get a free safety assessment and discover how Safeglobal
                       can protect your workforce.
                     </p>
                   </div>

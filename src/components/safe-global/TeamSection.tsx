@@ -110,7 +110,7 @@ export default function TeamSection() {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
             The People Behind
             <br />
-            <span className="text-gradient">SafeGlobal</span>
+            <span className="text-gradient">Safeglobal</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             A world-class team of safety scientists, AI engineers, and industry

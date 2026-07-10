@@ -51,7 +51,7 @@ function TypingText({ words, className }: { words: string[]; className?: string 
   return (
     <span className={className}>
       {displayText}
-      <span className="animate-pulse text-safeglobal">|</span>
+      <span className="animate-pulse text-sky-600 dark:text-sky-400">|</span>
     </span>
   );
 }
@@ -106,7 +106,7 @@ function AnimatedGrid() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Draw grid lines
-      ctx.strokeStyle = "rgba(45, 122, 111, 0.03)";
+      ctx.strokeStyle = "rgba(14, 165, 233, 0.03)";
       ctx.lineWidth = 0.5;
       const gridSize = 60;
       for (
@@ -145,9 +145,9 @@ function AnimatedGrid() {
               particles[j].x,
               particles[j].y
             );
-            gradient.addColorStop(0, `rgba(45, 122, 111, ${alpha})`);
-            gradient.addColorStop(0.5, `rgba(91, 138, 114, ${alpha * 1.2})`);
-            gradient.addColorStop(1, `rgba(45, 122, 111, ${alpha})`);
+            gradient.addColorStop(0, `rgba(14, 165, 233, ${alpha})`);
+            gradient.addColorStop(0.5, `rgba(2, 132, 199, ${alpha * 1.2})`);
+            gradient.addColorStop(1, `rgba(14, 165, 233, ${alpha})`);
 
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
@@ -171,16 +171,16 @@ function AnimatedGrid() {
 
         ctx.save();
         ctx.shadowBlur = 12;
-        ctx.shadowColor = `rgba(45, 122, 111, ${p.opacity * 0.6})`;
+        ctx.shadowColor = `rgba(14, 165, 233, ${p.opacity * 0.6})`;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(45, 122, 111, ${p.opacity})`;
+        ctx.fillStyle = `rgba(14, 165, 233, ${p.opacity})`;
         ctx.fill();
         ctx.restore();
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size * 0.4, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(52, 211, 153, ${p.opacity * 0.8})`;
+        ctx.fillStyle = `rgba(56, 189, 248, ${p.opacity * 0.8})`;
         ctx.fill();
       });
 
@@ -371,7 +371,7 @@ function HeroBgSlideshow() {
           >
             <Image
               src={HERO_IMAGES[currentIndex]}
-              alt="SafeGlobal workplace environment"
+              alt="Safeglobal workplace environment"
               fill
               priority
               className="object-cover"
@@ -382,7 +382,7 @@ function HeroBgSlideshow() {
         </motion.div>
       </AnimatePresence>
 
-      <div className="absolute inset-0 bg-safeglobal/5 mix-blend-overlay" />
+      <div className="absolute inset-0 bg-sky-900/10 mix-blend-overlay" />
     </div>
   );
 }
@@ -409,27 +409,30 @@ export default function HeroSection() {
       id="hero"
       className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-sky-50 via-white to-sky-100 dark:from-slate-950 dark:via-[#081524] dark:to-sky-950"
     >
+      <div className="absolute inset-0 z-0">
+        <HeroBgSlideshow />
+      </div>
       <motion.div
         className="absolute inset-0 z-0 bg-grid-pattern opacity-70"
         animate={{ backgroundPosition: ["0px 0px", "60px 60px"] }}
         transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
       />
       <motion.div
-        className="absolute left-[8%] top-[18%] z-0 h-64 w-64 rounded-full border border-safeglobal/20"
+        className="absolute left-[8%] top-[18%] z-0 h-64 w-64 rounded-full border border-sky-500/20"
         animate={{ scale: [0.88, 1.18, 0.88], opacity: [0.22, 0.06, 0.22] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         style={{ marginTop: scrollY * 0.06 }}
       />
       <motion.div
-        className="absolute right-[10%] top-[10%] z-0 h-80 w-80 rounded-full border border-safeglobal/20"
+        className="absolute right-[10%] top-[10%] z-0 h-80 w-80 rounded-full border border-sky-500/20"
         animate={{ scale: [1.08, 0.86, 1.08], opacity: [0.08, 0.2, 0.08] }}
         transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
         style={{ marginTop: scrollY * 0.1 }}
       />
 
       {/* Gradient Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/15 to-background/40 z-[1]" />
-      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-safeglobal/5 rounded-full blur-[120px] z-[1]" />
+      <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/40 to-background/20 z-[1]" />
+      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-sky-500/10 rounded-full blur-[120px] z-[1]" />
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-sky-500/10 rounded-full blur-[100px] z-[1]" />
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-sky-500/20 to-transparent rounded-full blur-[150px] z-[1]" />
 
@@ -449,18 +452,16 @@ export default function HeroSection() {
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1]">
                 <span className="whitespace-nowrap">
                   <span className="text-gradient">Customized</span>{" "}
-                  <span className="text-black font-extrabold drop-shadow-sm whitespace-nowrap">AI</span>
-                </span>{" "}
-                Solutions,
+                  <span className="text-black dark:text-white font-extrabold drop-shadow-sm whitespace-nowrap">AI Solutions,</span>
+                </span>
                 <br />
-                Total Digital{" "}
-                <span className="text-gradient-animated">Transformation</span>
+                <span className="text-[#0073CF] dark:text-[#3B82F6]">Total Digital Transformation</span>
               </h1>
               <div className="text-lg sm:text-xl text-muted-foreground max-w-lg leading-relaxed min-h-[3.5rem]">
                 Enterprise-grade AI that{" "}
                 <TypingText
                   words={["monitors hazards in real-time", "predicts risks before they occur", "prevents incidents automatically", "automates compliance 24/7"]}
-                  className="text-safeglobal font-semibold"
+                  className="text-sky-600 dark:text-sky-400 font-semibold"
                 />
               </div>
             </motion.div>
@@ -478,11 +479,11 @@ export default function HeroSection() {
                   whileTap={{ scale: 0.98 }}
                   className="relative inline-block w-full sm:w-auto"
                 >
-                  <div className="absolute inset-0 rounded-md bg-safeglobal/0 group-hover:bg-safeglobal/10 transition-all duration-300 -m-2" />
+                  <div className="absolute inset-0 rounded-md bg-sky-600/0 group-hover:bg-sky-600/10 transition-all duration-300 -m-2" />
                   <Button
                     size="lg"
                     asChild
-                    className="bg-safeglobal hover:bg-safeglobal-dark text-white shadow-xl shadow-safeglobal/25 hover:shadow-[0_0_30px_rgba(45,122,111,0.35)] transition-all text-base px-8 h-13 gap-2 relative w-full"
+                    className="bg-sky-600 hover:bg-sky-700 text-white shadow-xl shadow-sky-600/25 hover:shadow-[0_0_30px_rgba(2,132,199,0.35)] transition-all text-base px-8 h-13 gap-2 relative w-full"
                   >
                     <Link href="/contact">
                       Request Demo
@@ -505,18 +506,9 @@ export default function HeroSection() {
             </motion.div>
           </div>
 
-          {/* Mobile Right Column - Falls back to block on mobile, hidden on lg */}
-          <div className="w-full h-[400px] lg:hidden relative overflow-hidden">
-            <HeroBgSlideshow />
-          </div>
-
         </div>
       </div>
 
-      {/* Desktop Full-Bleed Right Half Image Background */}
-      <div className="hidden lg:block absolute inset-y-0 right-0 w-1/2 z-0">
-        <HeroBgSlideshow />
-      </div>
 
 
     </section>

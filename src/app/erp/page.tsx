@@ -28,9 +28,9 @@ import {
 
 // ─── Metadata ────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  title: "Enterprise ERP Platform — SafeGlobal | Cloud-Native ERP Solutions",
+  title: "Enterprise ERP Platform — Safeglobal | Cloud-Native ERP Solutions",
   description:
-    "SafeGlobal's cloud-native ERP platform unifies financial management, supply chain, HR, asset tracking, project management, and manufacturing operations in a single intelligent system.",
+    "Safeglobal's cloud-native ERP platform unifies financial management, supply chain, HR, asset tracking, project management, and manufacturing operations in a single intelligent system.",
   keywords: [
     "ERP platform",
     "enterprise resource planning",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     "manufacturing ERP",
   ],
   openGraph: {
-    title: "Enterprise ERP Platform — SafeGlobal",
+    title: "Enterprise ERP Platform — Safeglobal",
     description:
       "Unified cloud-native ERP with AI-powered automation. Financial management, supply chain, HR, and manufacturing in one platform.",
   },
@@ -463,7 +463,7 @@ export default function ERPPage() {
             </Badge>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
               Why Organizations Choose{" "}
-              <span className="text-gradient">SafeGlobal ERP</span>
+              <span className="text-gradient">Safeglobal ERP</span>
             </h2>
           </div>
 
@@ -512,7 +512,7 @@ export default function ERPPage() {
                 <span className="text-gradient">Operations</span>?
               </h2>
               <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-8">
-                See how SafeGlobal ERP can streamline your finance, supply
+                See how Safeglobal ERP can streamline your finance, supply
                 chain, HR, and manufacturing operations in a single platform.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

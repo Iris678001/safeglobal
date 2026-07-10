@@ -72,7 +72,7 @@ const resources: Resource[] = [
     icon: FileText,
     metadata: "8 pages",
     description:
-      "How GlobalMfg Corp achieved 73% risk reduction in 12 months with SafeGlobal",
+      "How GlobalMfg Corp achieved 73% risk reduction in 12 months with Safeglobal",
     cta: "Download Case Study",
     iconGradient: "from-teal-600/20 to-teal-500/20",
     iconColor: "text-teal-400",

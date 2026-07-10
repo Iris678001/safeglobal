@@ -28,11 +28,11 @@ export function generateMetadata({
   return params.then(({ slug }) => {
     const service = servicesData[slug];
     if (!service) {
-      return { title: "Service Not Found — SafeGlobal" };
+      return { title: "Service Not Found — Safeglobal" };
     }
 
     return {
-      title: `${service.title} — SafeGlobal | EHS AI Solutions`,
+      title: `${service.title} — Safeglobal | EHS AI Solutions`,
       description: service.heroDescription,
       keywords: [
         service.title,
@@ -42,7 +42,7 @@ export function generateMetadata({
         service.slug,
       ],
       openGraph: {
-        title: `${service.title} — SafeGlobal`,
+        title: `${service.title} — Safeglobal`,
         description: service.heroDescription,
       },
     };

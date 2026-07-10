@@ -370,7 +370,7 @@ export default function SafetyROIWidget() {
             <span className="text-gradient">ROI</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Quantify the return on your safety investment. See how SafeGlobal
+            Quantify the return on your safety investment. See how Safeglobal
             can reduce incidents, lower costs, and deliver measurable ROI for
             your organization.
           </p>
@@ -474,7 +474,7 @@ export default function SafetyROIWidget() {
                 </div>
                 <div className="p-4 rounded-xl border border-safeglobal/20 bg-safeglobal/5">
                   <div className="text-[11px] text-muted-foreground uppercase tracking-wider mb-1">
-                    With SafeGlobal
+                    With Safeglobal
                   </div>
                   <div className="text-xl sm:text-2xl font-bold text-safeglobal">
                     <AnimatedCounter
@@ -603,7 +603,7 @@ export default function SafetyROIWidget() {
               </div>
             </div>
 
-            {/* With SafeGlobal Bar */}
+            {/* With Safeglobal Bar */}
             <div className="flex flex-col items-center gap-3 flex-1 max-w-[200px]">
               <motion.div
                 className="w-full rounded-t-xl bg-gradient-to-t from-teal-700 to-safeglobal relative overflow-hidden"
@@ -631,7 +631,7 @@ export default function SafetyROIWidget() {
                       : result.annualIncidentCostProjected}
                 </div>
                 <div className="text-xs text-muted-foreground mt-1">
-                  With SafeGlobal
+                  With Safeglobal
                 </div>
               </div>
             </div>

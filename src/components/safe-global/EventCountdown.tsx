@@ -62,7 +62,7 @@ const featureCards = [
   },
   {
     title: "Live Demo: Real-Time Monitoring",
-    description: "See SafeGlobal in action",
+    description: "See Safeglobal in action",
     icon: Monitor,
     accentClass: "text-safeglobal",
     bgClass: "bg-safeglobal/15",

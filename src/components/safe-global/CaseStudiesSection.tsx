@@ -23,7 +23,7 @@ const caseStudies = [
       roi: "340%",
     },
     quote:
-      "SafeGlobal transformed our safety culture. What used to take weeks of manual audits now happens in real-time with AI precision.",
+      "Safeglobal transformed our safety culture. What used to take weeks of manual audits now happens in real-time with AI precision.",
     quoteAuthor: "VP of Operations",
     color: "from-safeglobal/10",
   },
@@ -100,7 +100,7 @@ export default function CaseStudiesSection() {
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             See how leading enterprises have transformed their safety outcomes
-            with SafeGlobal&apos;s AI-powered platform.
+            with Safeglobal&apos;s AI-powered platform.
           </p>
         </motion.div>
 
@@ -157,7 +157,7 @@ export default function CaseStudiesSection() {
                     </div>
                     <div>
                       <span className="text-xs font-medium text-sky-500 uppercase tracking-wider">
-                        SafeGlobal Solution
+                        Safeglobal Solution
                       </span>
                       <p className="text-sm text-muted-foreground mt-1">
                         {study.solution}

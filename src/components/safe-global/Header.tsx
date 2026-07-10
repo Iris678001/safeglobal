@@ -29,7 +29,7 @@ import { navLinks, colorMap, type NavLink, type MegaMenuCategory } from "./navCo
 
 function MegaMenuDropdown({ category, onNavigate }: { category: MegaMenuCategory; onNavigate: () => void }) {
   return (
-    <div className="fixed left-1/2 -translate-x-1/2 top-16 lg:top-20 pt-2 z-50 w-[90vw] max-w-6xl">
+    <div className="fixed left-1/2 -translate-x-1/2 top-16 lg:top-20 pt-2 z-50 w-[90vw] md:w-auto md:max-w-fit">
       <motion.div
         initial={{ opacity: 0, y: 8, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -40,7 +40,7 @@ function MegaMenuDropdown({ category, onNavigate }: { category: MegaMenuCategory
         <div className="h-[2px] bg-gradient-to-r from-transparent via-safeglobal to-transparent" />
 
         <div className="p-6 lg:p-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className={`grid grid-cols-1 md:grid-cols-2 ${category.columns.length === 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-4'} gap-8 lg:min-w-[800px]`}>
             {category.columns.map((column, colIdx) => (
               <div key={colIdx}>
                 <div className="flex items-center gap-2 mb-4">

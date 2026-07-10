@@ -12,11 +12,11 @@ const testimonials = [
     companyInitials: "GM",
     companyColor: "from-safeglobal/30 to-teal-600/20",
     content:
-      "SafeGlobal didn't just reduce our incidents — it fundamentally changed how we think about safety. The AI predictions have been remarkably accurate, giving us time to act before hazards become incidents. We've seen a 78% reduction in workplace incidents and our safety culture has completely transformed.",
+      "Safeglobal didn't just reduce our incidents — it fundamentally changed how we think about safety. The AI predictions have been remarkably accurate, giving us time to act before hazards become incidents. We've seen a 78% reduction in workplace incidents and our safety culture has completely transformed.",
     rating: 5,
     avatar: "SC",
     isVideo: true,
-    duration: "Using SafeGlobal for 3+ years",
+    duration: "Using Safeglobal for 3+ years",
   },
   {
     name: "Marcus Rodriguez",
@@ -25,11 +25,11 @@ const testimonials = [
     companyInitials: "PC",
     companyColor: "from-teal-500/30 to-teal-400/20",
     content:
-      "The ROI was undeniable from month one. But the real value? Knowing our people go home safe every single day. SafeGlobal's IoT integration with our existing systems was seamless.",
+      "The ROI was undeniable from month one. But the real value? Knowing our people go home safe every single day. Safeglobal's IoT integration with our existing systems was seamless.",
     rating: 5,
     avatar: "MR",
     isVideo: true,
-    duration: "Using SafeGlobal for 2+ years",
+    duration: "Using Safeglobal for 2+ years",
   },
   {
     name: "Dr. Aisha Patel",
@@ -42,7 +42,7 @@ const testimonials = [
     rating: 5,
     avatar: "AP",
     isVideo: false,
-    duration: "Using SafeGlobal for 2+ years",
+    duration: "Using Safeglobal for 2+ years",
   },
   {
     name: "James Mitchell",
@@ -51,11 +51,11 @@ const testimonials = [
     companyInitials: "AL",
     companyColor: "from-amber-500/30 to-amber-400/20",
     content:
-      "The compliance automation alone saved us 200+ hours per quarter. But the predictive analytics? That's what makes SafeGlobal a game-changer. We prevent incidents now, not just report them.",
+      "The compliance automation alone saved us 200+ hours per quarter. But the predictive analytics? That's what makes Safeglobal a game-changer. We prevent incidents now, not just report them.",
     rating: 5,
     avatar: "JM",
     isVideo: false,
-    duration: "Using SafeGlobal for 1.5+ years",
+    duration: "Using Safeglobal for 1.5+ years",
   },
   {
     name: "Lisa Yamamoto",
@@ -68,7 +68,7 @@ const testimonials = [
     rating: 5,
     avatar: "LY",
     isVideo: false,
-    duration: "Using SafeGlobal for 2+ years",
+    duration: "Using Safeglobal for 2+ years",
   },
   {
     name: "Robert Klein",
@@ -77,11 +77,11 @@ const testimonials = [
     companyInitials: "SW",
     companyColor: "from-safeglobal/30 to-teal-400/20",
     content:
-      "In healthcare, safety isn't just about compliance — it's about patient and staff wellbeing. SafeGlobal's behavioral analysis has helped us reduce workplace violence by 62%.",
+      "In healthcare, safety isn't just about compliance — it's about patient and staff wellbeing. Safeglobal's behavioral analysis has helped us reduce workplace violence by 62%.",
     rating: 5,
     avatar: "RK",
     isVideo: false,
-    duration: "Using SafeGlobal for 1+ year",
+    duration: "Using Safeglobal for 1+ year",
   },
 ];
 
@@ -112,7 +112,7 @@ export default function TestimonialsSection() {
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Hear directly from the executives and safety professionals who
-            transformed their organizations with SafeGlobal.
+            transformed their organizations with Safeglobal.
           </p>
         </motion.div>
 

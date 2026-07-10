@@ -10,9 +10,9 @@ import Breadcrumb from "@/components/safe-global/Breadcrumb";
 import { ArrowRight, ChevronRight, Shield, Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "EHS / AI Solutions — SafeGlobal | AI-Powered Safety Platform",
+  title: "EHS / AI Solutions — Safeglobal | AI-Powered Safety Platform",
   description:
-    "Explore 12 AI-powered EHS solutions: safety monitoring, predictive analytics, compliance automation, IoT integration, and more. Protect your workforce with SafeGlobal.",
+    "Explore 12 AI-powered EHS solutions: safety monitoring, predictive analytics, compliance automation, IoT integration, and more. Protect your workforce with Safeglobal.",
   keywords: [
     "EHS AI solutions",
     "AI safety monitoring",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     "workplace safety AI",
   ],
   openGraph: {
-    title: "EHS / AI Solutions — SafeGlobal",
+    title: "EHS / AI Solutions — Safeglobal",
     description:
       "12 AI-powered EHS solutions for enterprise safety. Real-time monitoring, predictive analytics, and compliance automation.",
   },

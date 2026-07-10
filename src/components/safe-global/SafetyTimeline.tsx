@@ -264,7 +264,7 @@ export default function SafetyTimeline() {
             <span className="text-gradient">Response Timeline</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg">
-            See how SafeGlobal&apos;s AI detects, alerts, and resolves safety
+            See how Safeglobal&apos;s AI detects, alerts, and resolves safety
             incidents in real-time.
           </p>
         </motion.div>

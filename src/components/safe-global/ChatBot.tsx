@@ -23,7 +23,7 @@ interface Message {
 }
 
 const quickReplies = [
-  "What does SafeGlobal do?",
+  "What does Safeglobal do?",
   "How does AI safety monitoring work?",
   "Request a demo",
   "Pricing information",
@@ -32,14 +32,14 @@ const quickReplies = [
 // Fallback responses when LLM API is unavailable
 const fallbackResponses: Record<string, string> = {
   default:
-    "Thank you for your interest in SafeGlobal! I can help you learn about our AI-powered safety solutions, request a demo, or connect you with our team. What would you like to know?",
-  demo: "Great choice! Our team would love to show you how SafeGlobal can transform your safety operations. Please fill out the contact form below, or I can connect you with our sales team directly. Would you like me to help schedule a demo?",
+    "Thank you for your interest in Safeglobal! I can help you learn about our AI-powered safety solutions, request a demo, or connect you with our team. What would you like to know?",
+  demo: "Great choice! Our team would love to show you how Safeglobal can transform your safety operations. Please fill out the contact form below, or I can connect you with our sales team directly. Would you like me to help schedule a demo?",
   pricing:
-    "SafeGlobal offers flexible enterprise pricing: Starter ($499/mo), Professional ($1,299/mo), and Enterprise (Custom). All plans include a 14-day free trial. Would you like to schedule a consultation for a custom quote?",
+    "Safeglobal offers flexible enterprise pricing: Starter ($499/mo), Professional ($1,299/mo), and Enterprise (Custom). All plans include a 14-day free trial. Would you like to schedule a consultation for a custom quote?",
   monitoring:
     "Our AI Safety Monitoring uses advanced computer vision and sensor networks to detect workplace hazards in real-time. The system processes millions of data points per second with sub-second alert latency, covering PPE compliance, zone monitoring, and hazard detection 24/7.",
   what:
-    "SafeGlobal is the leading AI-powered workplace safety platform. We provide: 🛡️ Real-time safety monitoring with computer vision, 📊 Predictive risk analytics using ML, 📋 Automated compliance management, 🎓 AI-personalized safety training, and 🔌 IoT hardware integration. We protect 500K+ workers across 30+ countries.",
+    "Safeglobal is the leading AI-powered workplace safety platform. We provide: 🛡️ Real-time safety monitoring with computer vision, 📊 Predictive risk analytics using ML, 📋 Automated compliance management, 🎓 AI-personalized safety training, and 🔌 IoT hardware integration. We protect 500K+ workers across 30+ countries.",
   predictive:
     "Our Predictive Risk Analytics uses machine learning to forecast potential safety incidents before they occur. By analyzing historical data, environmental conditions, and behavioral patterns, our AI models can predict risks with 99.7% accuracy and recommend preventive actions.",
   compliance:
@@ -70,7 +70,7 @@ export default function ChatBot() {
       id: "1",
       role: "assistant",
       content:
-        "Hello! I'm SafeGlobal's AI assistant powered by real AI. I can help you learn about our safety solutions, request a demo, or answer any questions. How can I help you today?",
+        "Hello! I'm Safeglobal's AI assistant powered by real AI. I can help you learn about our safety solutions, request a demo, or answer any questions. How can I help you today?",
       timestamp: new Date(),
     },
   ]);
@@ -191,7 +191,7 @@ export default function ChatBot() {
                   <Shield className="w-5 h-5 text-safeglobal" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold">SafeGlobal AI</h4>
+                  <h4 className="text-sm font-semibold">Safeglobal AI</h4>
                   <div className="flex items-center gap-1.5">
                     <div className="w-1.5 h-1.5 rounded-full bg-safeglobal animate-pulse" />
                     <span className="text-[10px] text-safeglobal">
@@ -300,7 +300,7 @@ export default function ChatBot() {
               <Input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask about SafeGlobal..."
+                placeholder="Ask about Safeglobal..."
                 className="bg-background/50 border-border text-sm"
                 disabled={isTyping}
               />

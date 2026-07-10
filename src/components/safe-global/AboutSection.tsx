@@ -217,7 +217,7 @@ export default function AboutSection() {
         >
           <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <h2 className="text-3xl font-bold mb-6">Why SafeGlobal?</h2>
+              <h2 className="text-3xl font-bold mb-6">Why Safeglobal?</h2>
               <p className="text-lg text-muted-foreground mb-8 max-w-md">
                 We aren't just another safety software wrapper. We provide a comprehensive, AI-native infrastructure designed to protect lives at scale.
               </p>

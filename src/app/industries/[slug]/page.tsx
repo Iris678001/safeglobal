@@ -32,20 +32,20 @@ export function generateMetadata({
   return params.then(({ slug }) => {
     const industry = industriesData[slug];
     if (!industry) {
-      return { title: "Industry Not Found — SafeGlobal" };
+      return { title: "Industry Not Found — Safeglobal" };
     }
     return {
-      title: `${industry.title} Safety Solutions — SafeGlobal | AI-Powered ${industry.title} Safety`,
+      title: `${industry.title} Safety Solutions — Safeglobal | AI-Powered ${industry.title} Safety`,
       description: industry.heroDescription,
       keywords: [
         `${industry.title.toLowerCase()} safety`,
         `${industry.title.toLowerCase()} AI safety`,
         `${industry.title.toLowerCase()} risk management`,
         "industrial safety",
-        "SafeGlobal",
+        "Safeglobal",
       ],
       openGraph: {
-        title: `${industry.title} Safety Solutions — SafeGlobal`,
+        title: `${industry.title} Safety Solutions — Safeglobal`,
         description: industry.heroDescription,
       },
     };

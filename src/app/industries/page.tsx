@@ -8,9 +8,9 @@ import Breadcrumb from "@/components/safe-global/Breadcrumb";
 import { ArrowRight, Shield, Globe, Users, TrendingUp } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Industries — SafeGlobal | Purpose-Built Safety for High-Risk Sectors",
+  title: "Industries — Safeglobal | Purpose-Built Safety for High-Risk Sectors",
   description:
-    "SafeGlobal delivers AI-powered safety solutions tailored to manufacturing, construction, oil & gas, healthcare, logistics, and mining. Deep domain expertise for every industry.",
+    "Safeglobal delivers AI-powered safety solutions tailored to manufacturing, construction, oil & gas, healthcare, logistics, and mining. Deep domain expertise for every industry.",
   keywords: [
     "industrial safety",
     "manufacturing safety",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     "AI safety solutions",
   ],
   openGraph: {
-    title: "Industries — SafeGlobal | Purpose-Built Safety for High-Risk Sectors",
+    title: "Industries — Safeglobal | Purpose-Built Safety for High-Risk Sectors",
     description:
       "AI-powered safety solutions tailored to your industry. 500K+ workers protected across 6 high-risk sectors worldwide.",
   },

@@ -19,7 +19,7 @@ const testimonials = [
     initials: "SC",
     companyColor: "from-safeglobal/30 to-teal-600/20",
     content:
-      "SafeGlobal transformed our safety culture. We've seen a 78% reduction in workplace incidents in just 18 months.",
+      "Safeglobal transformed our safety culture. We've seen a 78% reduction in workplace incidents in just 18 months.",
   },
   {
     name: "Marcus Rodriguez",
@@ -154,7 +154,7 @@ export default function TestimonialSlider() {
             <span className="text-gradient">Say About Us</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Discover how SafeGlobal is transforming workplace safety for
+            Discover how Safeglobal is transforming workplace safety for
             organizations worldwide.
           </p>
         </motion.div>

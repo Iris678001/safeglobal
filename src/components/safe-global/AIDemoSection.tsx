@@ -195,7 +195,7 @@ export default function AIDemoSection() {
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             An interactive preview of our real-time monitoring dashboard.
-            Experience how SafeGlobal detects, predicts, and prevents workplace
+            Experience how Safeglobal detects, predicts, and prevents workplace
             hazards.
           </p>
         </motion.div>
@@ -213,7 +213,7 @@ export default function AIDemoSection() {
             <div className="flex items-center gap-3">
               <Shield className="w-4 h-4 text-safeglobal" />
               <span className="text-sm font-semibold">
-                SafeGlobal Command Center
+                Safeglobal Command Center
               </span>
               <Badge className="bg-safeglobal/20 text-safeglobal text-[10px] border-safeglobal/30">
                 LIVE

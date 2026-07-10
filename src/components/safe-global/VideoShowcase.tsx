@@ -251,7 +251,7 @@ function FeaturedVideoPlayer() {
                   PLATFORM OVERVIEW
                 </Badge>
                 <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white">
-                  SafeGlobal Platform Walkthrough
+                  Safeglobal Platform Walkthrough
                 </h3>
                 <p className="text-white/60 text-xs sm:text-sm mt-1">
                   Complete platform tour — from setup to real-time monitoring
@@ -436,12 +436,12 @@ export default function VideoShowcase() {
             VIDEO SHOWCASE
           </Badge>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-            See SafeGlobal{" "}
+            See Safeglobal{" "}
             <span className="text-gradient">In Action</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg">
             Watch real-world implementations, product demos, and client success
-            stories. See how SafeGlobal transforms workplace safety from
+            stories. See how Safeglobal transforms workplace safety from
             detection to prevention.
           </p>
         </motion.div>

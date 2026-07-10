@@ -269,7 +269,7 @@ export default function SafetyCultureQuiz() {
   }, []);
 
   const shareScore = useCallback(() => {
-    const text = `I scored ${totalScore}/40 (${classification.label}) on the SafeGlobal Safety Culture Assessment! Assess your organization at safeglobal.com`;
+    const text = `I scored ${totalScore}/40 (${classification.label}) on the Safeglobal Safety Culture Assessment! Assess your organization at safeglobal.com`;
     navigator.clipboard.writeText(text).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);

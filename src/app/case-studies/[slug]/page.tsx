@@ -30,15 +30,15 @@ export async function generateMetadata({
   const study = caseStudies.find((s) => s.slug === slug);
 
   if (!study) {
-    return { title: "Case Study Not Found — SafeGlobal" };
+    return { title: "Case Study Not Found — Safeglobal" };
   }
 
   return {
-    title: `${study.client} Case Study — SafeGlobal`,
-    description: `How ${study.client} achieved ${study.results[0].value} ${study.results[0].metric.toLowerCase()} with SafeGlobal's AI-powered safety platform.`,
+    title: `${study.client} Case Study — Safeglobal`,
+    description: `How ${study.client} achieved ${study.results[0].value} ${study.results[0].metric.toLowerCase()} with Safeglobal's AI-powered safety platform.`,
     openGraph: {
-      title: `${study.client} Case Study — SafeGlobal`,
-      description: `How ${study.client} transformed safety with SafeGlobal.`,
+      title: `${study.client} Case Study — Safeglobal`,
+      description: `How ${study.client} transformed safety with Safeglobal.`,
     },
   };
 }
@@ -153,7 +153,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 <div className="flex items-center gap-2 mb-4">
                   <CheckCircle2 className="w-5 h-5 text-safeglobal" />
                   <h2 className="text-2xl font-bold">
-                    The SafeGlobal Solution
+                    The Safeglobal Solution
                   </h2>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
@@ -222,7 +222,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                       Want Results Like These?
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      Get a free safety assessment and discover how SafeGlobal
+                      Get a free safety assessment and discover how Safeglobal
                       can transform your safety outcomes.
                     </p>
                   </div>

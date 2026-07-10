@@ -139,7 +139,7 @@ export default function HowItWorks() {
             THE PROCESS
           </Badge>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-            How <span className="text-gradient">SafeGlobal</span> Works
+            How <span className="text-gradient">Safeglobal</span> Works
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Four powerful steps from hazard detection to safety culture

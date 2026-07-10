@@ -14,13 +14,13 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Case Studies — SafeGlobal",
+  title: "Case Studies — Safeglobal",
   description:
-    "See how leading enterprises have transformed their safety outcomes with SafeGlobal's AI-powered platform. Real impact, measurable ROI.",
+    "See how leading enterprises have transformed their safety outcomes with Safeglobal's AI-powered platform. Real impact, measurable ROI.",
   openGraph: {
-    title: "Case Studies — SafeGlobal",
+    title: "Case Studies — Safeglobal",
     description:
-      "Real impact, measurable ROI. See how enterprises transform safety with SafeGlobal.",
+      "Real impact, measurable ROI. See how enterprises transform safety with Safeglobal.",
   },
 };
 
@@ -55,7 +55,7 @@ export default function CaseStudiesPage() {
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               See how leading enterprises have transformed their safety outcomes
-              with SafeGlobal&apos;s AI-powered platform.
+              with Safeglobal&apos;s AI-powered platform.
             </p>
           </div>
 
@@ -191,7 +191,7 @@ export default function CaseStudiesPage() {
               </h2>
               <p className="text-muted-foreground max-w-xl mx-auto mb-8">
                 Join the growing list of enterprises that have transformed their
-                safety outcomes with SafeGlobal. Get a free safety assessment
+                safety outcomes with Safeglobal. Get a free safety assessment
                 today.
               </p>
               <div className="flex items-center justify-center gap-4 flex-wrap">
