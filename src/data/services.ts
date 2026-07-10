@@ -1,5 +1,5 @@
 import {
-  Eye, Brain, FileCheck, Cpu, Activity, Monitor, Bell, Layers, TrendingUp, Radar, Lock,
+  Eye, Brain, FileCheck, Cpu, Activity, Monitor, Bell, Layers, TrendingUp, Radar, Lock, ShieldAlert,
   type LucideIcon,
 } from "lucide-react";
 
@@ -117,6 +117,37 @@ export const servicesData: Record<string, ServicePageData> = {
     benefits: [{ title: "Enhanced Security", description: "99.9% accurate identification prevents unauthorized access to hazardous areas." }, { title: "Touchless Entry", description: "Facial recognition eliminates contact points and speeds up entry." }, { title: "Dynamic Safety", description: "Access adapts to real-time risk conditions for maximum protection." }, { title: "Emergency Ready", description: "Instant lockdown and mustering when every second counts." }],
     cta: { title: "Secure Your Facility", description: "Get an access control AI assessment for your site." },
     relatedServices: [{ title: "Emergency Response AI", href: "/ehs-ai/emergency-response-ai", color: "rose" }, { title: "IoT Safety Integration", href: "/ehs-ai/iot-integration", color: "amber" }, { title: "Safety Audit Manager", href: "/ehs-ai/safety-audit-manager", color: "amber" }],
+  },
+  "process-safety-management": {
+    slug: "process-safety-management",
+    title: "Process Safety Management",
+    subtitle: "Proactive Risk Mitigation and OSHA 1910.119 Compliance",
+    icon: ShieldAlert,
+    color: "amber",
+    badge: "Advanced PSM",
+    heroDescription: "Safeguard your critical operations with our comprehensive Process Safety Management solutions. We integrate digital twin technology and IoT sensors to monitor hazard lifecycles in real-time, ensuring stringent adherence to OSHA 1910.119 and minimizing catastrophic risks.",
+    features: [
+      { title: "Hazard Lifecycle Tracking", description: "Continuously monitor and manage hazards from identification through complete mitigation with advanced tracking, ensuring no safety gap goes unaddressed." },
+      { title: "Digital Management of Change (MOC)", description: "Streamline MOC processes with automated workflows, comprehensive impact assessments, and precise approval routing to safely implement operational changes." },
+      { title: "OSHA 1910.119 Protocol Adherence", description: "Ensure complete regulatory alignment with built-in protocols covering process hazard analysis (PHA), mechanical integrity, and systematic incident investigation." },
+      { title: "Digital Twin & IoT Integration", description: "Leverage real-time IoT telemetry and digital twin modeling to simulate risks, predict equipment failures, and visualize critical process safety metrics." }
+    ],
+    stats: [
+      { label: "Regulatory Compliance", value: "100%", description: "Audit-ready adherence to OSHA safety standards" },
+      { label: "Incident Reduction", value: "85%", description: "Decrease in process-related safety incidents" },
+      { label: "MOC Efficiency", value: "4x", description: "Faster processing and approval of MOC requests" }
+    ],
+    benefits: [
+      { title: "Proactive Risk Identification", description: "Anticipate potential process failures before they occur through predictive analytics and continuous asset monitoring." },
+      { title: "Operational Continuity", description: "Reduce costly downtime and production interruptions by maintaining optimal mechanical integrity and robust process controls." },
+      { title: "Unified Safety Intelligence", description: "Centralize your process safety information (PSI) into a single, accessible platform for streamlined auditing, compliance tracking, and training." }
+    ],
+    cta: { title: "Modernize Process Safety", description: "Connect with our EHS experts to implement a next-generation PSM framework." },
+    relatedServices: [
+      { title: "IoT Safety Integration", href: "/ehs-ai/iot-integration", color: "sky" },
+      { title: "AI Safety Monitoring", href: "/ehs-ai/ai-safety-monitoring", color: "safeglobal" },
+      { title: "Compliance Automation", href: "/ehs-ai/compliance-automation", color: "violet" }
+    ]
   },
 };
 

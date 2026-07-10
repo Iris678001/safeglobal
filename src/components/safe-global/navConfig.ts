@@ -91,49 +91,40 @@ export const navLinks: NavLink[] = [
           title: "AI powered data capture and analytics",
           items: [
             {
-              label: "AI Safety Monitoring",
-              description: "Real-time hazard detection using computer vision and sensor fusion",
-              href: "/ehs-ai/ai-safety-monitoring",
-              icon: Eye,
+              label: "IoT Safety Integration",
+              description: "Connect 1000+ sensor types for unified monitoring",
+              href: "/ehs-ai/iot-integration",
+              icon: Cpu,
               featured: true,
               badge: "Popular",
+              color: "sky",
+            },
+            {
+              label: "Process Safety Management",
+              description: "Comprehensive safety protocols and hazard lifecycle tracking",
+              href: "/ehs-ai/process-safety-management",
+              icon: Activity,
+              color: "amber",
+            },
+            {
+              label: "Computer Vision",
+              description: "Real-time hazard detection using multi-camera AI analysis",
+              href: "/ehs-ai/ai-safety-monitoring",
+              icon: Eye,
               color: "safeglobal",
             },
             {
               label: "Workplace Intelligence Systems",
               description: "Transform safety data into actionable insights",
               href: "/ehs-ai/workplace-intelligence",
-              icon: Activity,
-              color: "sky",
-            },
-            {
-              label: "Safety Dashboards",
-              description: "Real-time KPI tracking with customizable views",
-              href: "/ehs-ai/safety-dashboards",
-              icon: Monitor,
+              icon: Brain,
               color: "violet",
-            },
-            {
-              label: "Hazard Mapping",
-              description: "Spatial risk visualization with geospatial analytics",
-              href: "/ehs-ai/hazard-mapping",
-              icon: Radar,
-              color: "amber",
             },
           ],
         },
         {
-          title: "Integration & Intelligence",
+          title: "EHS Management",
           items: [
-            {
-              label: "IoT Safety Integration",
-              description: "Connect 1000+ sensor types for unified monitoring",
-              href: "/ehs-ai/iot-integration",
-              icon: Cpu,
-              featured: true,
-              badge: "New",
-              color: "sky",
-            },
             {
               label: "Compliance Automation",
               description: "Auto-track 200+ regulations with smart alerts",
@@ -148,29 +139,23 @@ export const navLinks: NavLink[] = [
               icon: FileCheck,
               color: "amber",
             },
+            {
+              label: "Safety Dashboards",
+              description: "Real-time KPI tracking with customizable views",
+              href: "/ehs-ai/safety-dashboards",
+              icon: Monitor,
+              color: "sky",
+            },
+            {
+              label: "Hazard Mapping",
+              description: "Spatial risk visualization with geospatial analytics",
+              href: "/ehs-ai/hazard-mapping",
+              icon: Radar,
+              color: "cyan",
+            },
           ],
         },
-        {
-          title: "Advanced Solutions",
-          items: [
-            {
-              label: "Emergency Response AI",
-              description: "Automated incident response and evacuation guidance",
-              href: "/ehs-ai/emergency-response-ai",
-              icon: Bell,
-              badge: "AI",
-              color: "rose",
-            },
 
-            {
-              label: "Access Control AI",
-              description: "Intelligent zone authorization and visitor management",
-              href: "/ehs-ai/access-control-ai",
-              icon: Lock,
-              color: "safeglobal",
-            },
-          ],
-        },
         {
           title: "Enterprise ERP",
           items: [
