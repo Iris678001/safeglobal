@@ -7,6 +7,18 @@ function sanitize(value: unknown, maxLength: number): string {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
 }
 
+import nodemailer from 'nodemailer';
+
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST || 'smtp.gmail.com',
+  port: parseInt(process.env.SMTP_PORT || '587'),
+  secure: process.env.SMTP_SECURE === 'true', // true for 465, false for other ports
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -34,19 +46,27 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // TODO: Wire up an email service (e.g., Resend or SendGrid) and/or persist
-    // submissions to a database so leads are not lost. Logging alone is not
-    // a reliable delivery mechanism.
-    console.log("New contact form submission:", {
-      firstName,
-      lastName,
-      email,
-      company,
-      industry,
-      employees,
-      message,
-      submittedAt: new Date().toISOString(),
-    });
+    // Send the email using Nodemailer
+    const mailOptions = {
+      from: process.env.SMTP_FROM_EMAIL || process.env.SMTP_USER || 'noreply@safeglobal.world',
+      to: 'chand.mohamed@safeglobal.world',
+      replyTo: email,
+      subject: `New Lead: ${firstName} ${lastName} from ${company}`,
+      html: `
+        <h2>New Contact Form Submission</h2>
+        <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Company:</strong> ${company}</p>
+        <p><strong>Industry:</strong> ${industry || 'N/A'}</p>
+        <p><strong>Employees:</strong> ${employees || 'N/A'}</p>
+        <h3>Message:</h3>
+        <p>${message.replace(/\n/g, '<br>') || 'No message provided.'}</p>
+        <hr />
+        <small>Submitted at: ${new Date().toISOString()}</small>
+      `,
+    };
+
+    await transporter.sendMail(mailOptions);
 
     return NextResponse.json(
       {
