@@ -161,13 +161,7 @@ export const navLinks: NavLink[] = [
               badge: "AI",
               color: "rose",
             },
-            {
-              label: "Safety Training VR",
-              description: "Immersive VR training simulations for high-risk scenarios",
-              href: "/ehs-ai/safety-training-vr",
-              icon: Layers,
-              color: "violet",
-            },
+
             {
               label: "Access Control AI",
               description: "Intelligent zone authorization and visitor management",
