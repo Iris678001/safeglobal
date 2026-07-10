@@ -302,7 +302,7 @@ function FloatingParticles() {
 function DynamicNewsBanner() {
   return (
     <Link 
-      href="/contact" 
+      href="/uae-e-invoicing" 
       className="group inline-flex items-center gap-3 px-8 py-3.5 rounded-full border border-sky-200 dark:border-sky-700/50 bg-white/95 dark:bg-slate-800/95 backdrop-blur-md text-sky-900 dark:text-sky-50 text-base font-medium shadow-xl transition-all hover:bg-white dark:hover:bg-slate-800 hover:shadow-2xl hover:-translate-y-0.5"
     >
       <div className="flex items-center gap-2">
