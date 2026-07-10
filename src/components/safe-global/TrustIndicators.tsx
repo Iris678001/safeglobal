@@ -5,10 +5,11 @@ import { motion } from "framer-motion";
 import { Shield, Award, Globe, Users, Activity, TrendingUp, BarChart3, Zap } from "lucide-react";
 
 const clients = [
-  { name: "Bosch", src: "/logos/partners/Bosch.png" },
-  { name: "Honeywell", src: "/logos/partners/Honeywell.png" },
+  { name: "IMG", src: "/logos/partners/img.png" },
   { name: "ABB", src: "/logos/partners/ABB.png" },
   { name: "DuPont", src: "/logos/partners/DuPont.png" },
+  { name: "Bosch", src: "/logos/partners/Bosch.png" },
+  { name: "Honeywell", src: "/logos/partners/Honeywell.png" },
 ];
 
 const certifications = [
@@ -101,7 +102,7 @@ export default function TrustIndicators() {
           <div className="inline-flex items-center justify-center gap-3 mb-10">
             <div className="h-px w-12 bg-gradient-to-r from-transparent to-safeglobal/50" />
             <p className="text-sm text-muted-foreground uppercase tracking-[0.2em] font-semibold">
-              Our Partners
+              Our Technology Alliances
             </p>
             <div className="h-px w-12 bg-gradient-to-l from-transparent to-safeglobal/50" />
           </div>
@@ -120,7 +121,7 @@ export default function TrustIndicators() {
                 <img
                   src={client.src}
                   alt={`${client.name} logo`}
-                  className={`relative z-10 max-h-10 md:max-h-12 max-w-[140px] object-contain invert grayscale mix-blend-screen opacity-70 transition-all duration-500 group-hover:opacity-100 ${['Bosch', 'Honeywell'].includes(client.name) ? 'scale-[1.35] md:scale-[1.45] group-hover:scale-[1.45] md:group-hover:scale-[1.55]' : 'group-hover:scale-110'}`}
+                  className={`relative z-10 max-h-16 md:max-h-20 max-w-[200px] object-contain invert grayscale mix-blend-screen opacity-70 transition-all duration-500 group-hover:opacity-100 ${['Bosch', 'Honeywell'].includes(client.name) ? 'scale-[1.35] md:scale-[1.45] group-hover:scale-[1.45] md:group-hover:scale-[1.55]' : 'group-hover:scale-110'}`}
                   onError={(e) => {
                     const target = e.currentTarget;
                     target.style.display = 'none';
@@ -139,29 +140,7 @@ export default function TrustIndicators() {
           </div>
         </motion.div>
 
-        {/* Certifications */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex flex-wrap items-center justify-center gap-4 mb-16"
-        >
-          {certifications.map((cert) => (
-            <div
-              key={cert.label}
-              className="group flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-border bg-card/50 hover:border-safeglobal/30 hover:bg-safeglobal/5 transition-all duration-300"
-            >
-              <cert.icon className="w-4 h-4 text-safeglobal group-hover:scale-110 transition-transform" />
-              <div className="flex items-center gap-1.5">
-                <span className="text-sm font-medium">{cert.label}</span>
-                <span className="text-xs text-muted-foreground">
-                  {cert.desc}
-                </span>
-              </div>
-            </div>
-          ))}
-        </motion.div>
+
 
 
       </div>

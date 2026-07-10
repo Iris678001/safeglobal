@@ -7,7 +7,6 @@ import { ThemeProvider } from "@/components/safe-global/ThemeProvider";
 import Header from "@/components/safe-global/Header";
 import Footer from "@/components/safe-global/Footer";
 import SmoothScroll from "@/components/safe-global/SmoothScroll";
-import ChatBot from "@/components/safe-global/ChatBot";
 import BackToTop from "@/components/safe-global/BackToTop";
 import CookieConsent from "@/components/safe-global/CookieConsent";
 
@@ -75,7 +74,6 @@ export default function RootLayout({
               <Header />
               <main className="flex-1 relative pt-16 lg:pt-20">{children}</main>
               <Footer />
-              <ChatBot />
               <BackToTop />
               <CookieConsent />
             </div>

@@ -337,7 +337,7 @@ function HeroBgSlideshow() {
   }, []);
 
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden">
+    <div className="relative w-full h-full z-0 overflow-hidden">
       {/* Preload all images so transitions are instant */}
       {HERO_IMAGES.map((src) => (
         <Image
@@ -348,7 +348,7 @@ function HeroBgSlideshow() {
           priority
           className="opacity-0 pointer-events-none"
           style={{ objectFit: "cover" }}
-          sizes="100vw"
+          sizes="(max-width: 1024px) 100vw, 50vw"
         />
       ))}
 
@@ -375,15 +375,13 @@ function HeroBgSlideshow() {
               fill
               priority
               className="object-cover"
-              sizes="100vw"
+              sizes="(max-width: 1024px) 100vw, 50vw"
               quality={85}
             />
           </motion.div>
         </motion.div>
       </AnimatePresence>
 
-      {/* Dark overlay for text legibility */}
-      <div className="absolute inset-0 bg-background/30" />
       <div className="absolute inset-0 bg-safeglobal/5 mix-blend-overlay" />
     </div>
   );
@@ -409,11 +407,8 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-sky-50 via-white to-sky-100 dark:from-slate-950 dark:via-[#081524] dark:to-sky-950"
     >
-      {/* Dynamic Background Image Slideshow */}
-      <HeroBgSlideshow />
-
       <motion.div
         className="absolute inset-0 z-0 bg-grid-pattern opacity-70"
         animate={{ backgroundPosition: ["0px 0px", "60px 60px"] }}
@@ -432,39 +427,42 @@ export default function HeroSection() {
         style={{ marginTop: scrollY * 0.1 }}
       />
 
-      {/* Gradient Overlays - softened to let hero slideshow images show through */}
+      {/* Gradient Overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/15 to-background/40 z-[1]" />
       <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-safeglobal/5 rounded-full blur-[120px] z-[1]" />
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-sky-500/10 rounded-full blur-[100px] z-[1]" />
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-sky-500/20 to-transparent rounded-full blur-[150px] z-[1]" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-40">
-        <div className="flex justify-center">
-          {/* Text Content - Centered */}
-          <div className="space-y-8 max-w-3xl text-center">
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40">
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+          
+          {/* Left Column - Text Content */}
+          <div className="w-full lg:w-1/2 flex flex-col justify-center items-start text-left space-y-8 lg:pr-16 xl:pr-24">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
-              className="space-y-4"
+              className="space-y-6 w-full"
             >
               <DynamicNewsBanner />
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1]">
-                <span className="text-gradient">Customised</span>{" "}
-                Intelligence,
+                <span className="whitespace-nowrap">
+                  <span className="text-gradient">Customized</span>{" "}
+                  <span className="text-black font-extrabold drop-shadow-sm whitespace-nowrap">AI</span>
+                </span>{" "}
+                Solutions,
                 <br />
                 Total Digital{" "}
                 <span className="text-gradient-animated">Transformation</span>
               </h1>
-              <div className="text-lg sm:text-xl text-muted-foreground max-w-lg mx-auto leading-relaxed min-h-[3.5rem]">
+              <div className="text-lg sm:text-xl text-muted-foreground max-w-lg leading-relaxed min-h-[3.5rem]">
                 Enterprise-grade AI that{" "}
                 <TypingText
                   words={["monitors hazards in real-time", "predicts risks before they occur", "prevents incidents automatically", "automates compliance 24/7"]}
                   className="text-safeglobal font-semibold"
                 />
               </div>
-
             </motion.div>
 
             {/* CTA Buttons */}
@@ -472,19 +470,19 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
+              className="flex flex-col sm:flex-row gap-4 justify-start w-full"
             >
               <MagneticButton strength={0.3} distance={150}>
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
-                  className="relative"
+                  className="relative inline-block w-full sm:w-auto"
                 >
                   <div className="absolute inset-0 rounded-md bg-safeglobal/0 group-hover:bg-safeglobal/10 transition-all duration-300 -m-2" />
                   <Button
                     size="lg"
                     asChild
-                    className="bg-safeglobal hover:bg-safeglobal-dark text-white shadow-xl shadow-safeglobal/25 hover:shadow-[0_0_30px_rgba(45,122,111,0.35)] transition-all text-base px-8 h-13 gap-2 relative"
+                    className="bg-safeglobal hover:bg-safeglobal-dark text-white shadow-xl shadow-safeglobal/25 hover:shadow-[0_0_30px_rgba(45,122,111,0.35)] transition-all text-base px-8 h-13 gap-2 relative w-full"
                   >
                     <Link href="/contact">
                       Request Demo
@@ -497,7 +495,7 @@ export default function HeroSection() {
                 variant="outline"
                 size="lg"
                 asChild
-                className="border-border hover:border-sky-500/50 hover:bg-sky-500/5 text-base px-8 h-13 gap-2 hover-ring"
+                className="border-border hover:border-sky-500/50 hover:bg-sky-500/5 text-base px-8 h-13 gap-2 hover-ring w-full sm:w-auto"
               >
                 <Link href="/blog">
                   <Play className="w-4 h-4" />
@@ -505,28 +503,22 @@ export default function HeroSection() {
                 </Link>
               </Button>
             </motion.div>
-
           </div>
+
+          {/* Mobile Right Column - Falls back to block on mobile, hidden on lg */}
+          <div className="w-full h-[400px] lg:hidden relative overflow-hidden">
+            <HeroBgSlideshow />
+          </div>
+
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
-      >
-        <span className="text-[10px] text-muted-foreground tracking-widest uppercase">
-          Explore
-        </span>
-        <button
-          onClick={() => handleScrollTo("trust")}
-          className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center p-1.5 hover:border-safeglobal/50 transition-colors cursor-pointer"
-        >
-          <div className="w-1 h-2.5 bg-safeglobal rounded-full animate-bounce" />
-        </button>
-      </motion.div>
+      {/* Desktop Full-Bleed Right Half Image Background */}
+      <div className="hidden lg:block absolute inset-y-0 right-0 w-1/2 z-0">
+        <HeroBgSlideshow />
+      </div>
+
+
     </section>
   );
 }

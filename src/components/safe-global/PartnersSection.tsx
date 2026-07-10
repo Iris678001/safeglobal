@@ -6,13 +6,14 @@ import { Database, Cloud, Cpu, Wifi, Monitor, Server } from "lucide-react";
 
 const partners = [
   { name: "SAP", category: "ERP", icon: Database },
+  { name: "Odoo", category: "ERP", icon: Database },
+  { name: "Microsoft Dynamics", category: "ERP", icon: Database },
   { name: "AWS", category: "Cloud", icon: Cloud },
   { name: "Azure", category: "Cloud", icon: Cloud },
   { name: "Siemens", category: "IoT", icon: Cpu },
   { name: "Honeywell", category: "IoT", icon: Wifi },
   { name: "Oracle", category: "ERP", icon: Database },
   { name: "ServiceNow", category: "ITSM", icon: Monitor },
-  { name: "Snowflake", category: "Data", icon: Server },
 ];
 
 export default function PartnersSection() {
@@ -68,7 +69,7 @@ export default function PartnersSection() {
             </div>
           ))}
           <div className="flex items-center justify-center px-4 py-3 rounded-xl border border-dashed border-border text-sm text-muted-foreground hover:border-safeglobal/30 hover:text-safeglobal transition-all duration-300">
-            +42 more
+            + more
           </div>
         </motion.div>
       </div>

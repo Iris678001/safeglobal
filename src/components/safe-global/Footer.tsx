@@ -91,91 +91,9 @@ export default function Footer() {
       {/* Animated gradient line at top */}
       <div className="divider-animated h-0" />
 
-      {/* Partners Row - above newsletter */}
-      <div className="border-b border-border/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <p className="text-xs text-muted-foreground/60 tracking-wide font-medium">Our Partners</p>
-            <div className="flex items-center gap-5">
-              {partnerLogos.map((logo) => (
-                <div
-                  key={logo.name}
-                  className="h-10 w-24 rounded-lg border border-border/50 bg-card/50 flex items-center justify-center hover:border-safeglobal/30 hover:bg-safeglobal/5 transition-all duration-300 cursor-default hover:scale-105 overflow-hidden"
-                  title={logo.name}
-                >
-                  <img
-                    src={logo.src}
-                    alt={`${logo.name} logo`}
-                    className="max-h-7 max-w-20 object-contain invert grayscale mix-blend-screen opacity-70 hover:opacity-100 transition-all duration-300"
-                    onError={(e) => {
-                      const target = e.currentTarget;
-                      target.style.display = 'none';
-                      const fallback = target.nextElementSibling as HTMLElement | null;
-                      if (fallback) fallback.style.display = 'block';
-                    }}
-                  />
-                  <span
-                    className="text-muted-foreground/50 text-xs font-semibold tracking-wide"
-                    style={{ display: 'none' }}
-                  >
-                    {logo.name}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
 
-      {/* Newsletter Bar - with prominent gradient background */}
-      <div className="relative border-b border-border overflow-hidden">
-        {/* Gradient background for newsletter */}
-        <div className="absolute inset-0 bg-gradient-to-r from-safeglobal/10 via-teal-500/5 to-safeglobal/10" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/30 to-background/50" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-            <div className="text-center lg:text-left">
-              <h3 className="text-lg font-semibold mb-1">
-                Stay Ahead of Safety Trends
-              </h3>
-              <p className="text-sm text-muted-foreground">
-                Get weekly AI safety insights, compliance updates, and industry
-                reports delivered to your inbox.
-              </p>
-            </div>
-            <form
-              onSubmit={handleNewsletterSubmit}
-              className="flex items-center gap-2 w-full lg:w-auto"
-            >
-              <div className="relative flex-1 lg:w-72">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <Input
-                  type="email"
-                  placeholder="Enter your work email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="pl-10 bg-background/50 border-border h-11"
-                />
-              </div>
-              <Button
-                type="submit"
-                disabled={status === "loading"}
-                className="bg-safeglobal hover:bg-safeglobal-dark text-white shadow-lg shadow-safeglobal/20 h-11 gap-2 flex-shrink-0"
-              >
-                {status === "loading" ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                ) : status === "success" ? (
-                  <CheckCircle2 className="w-4 h-4" />
-                ) : (
-                  <Send className="w-4 h-4" />
-                )}
-                {status === "success" ? "Subscribed!" : "Subscribe"}
-              </Button>
-            </form>
-          </div>
-        </div>
-      </div>
+
+
 
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -201,10 +119,7 @@ export default function Footer() {
                 <Shield className="w-6 h-6 text-white" />
               </div>
             </div>
-            <p className="text-sm text-muted-foreground max-w-xs leading-relaxed">
-              AI-powered workplace safety intelligence. Protecting 500,000+
-              workers across 30+ countries with zero compromise.
-            </p>
+
 
             {/* Decorative SVG World Map */}
             <div className="relative w-full h-20 rounded-lg overflow-hidden bg-background/30 border border-border/50">
@@ -365,21 +280,7 @@ export default function Footer() {
               ))}
             </div>
 
-            {/* Partners */}
-            <div className="flex items-center gap-3">
-              <span className="text-[10px] text-muted-foreground/40 font-medium">Our Partners</span>
-              <div className="flex items-center gap-2">
-                {partnerLogos.map((logo) => (
-                  <img
-                    key={logo.name}
-                    src={logo.src}
-                    alt={`${logo.name} logo`}
-                    className="h-5 w-auto object-contain invert grayscale mix-blend-screen opacity-70 hover:opacity-100 transition-opacity"
-                    title={logo.name}
-                  />
-                ))}
-              </div>
-            </div>
+
           </div>
 
           {/* Link Columns */}
@@ -403,19 +304,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Trusted by row */}
-      <div className="border-t border-border/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground/60">
-            <Globe className="w-3.5 h-3.5 text-safeglobal/50" />
-            <span>
-              Trusted by{" "}
-              <span className="text-safeglobal font-semibold">200+</span>{" "}
-              enterprises worldwide
-            </span>
-          </div>
-        </div>
-      </div>
+
 
       {/* Bottom Bar */}
       <div className="border-t border-border">
@@ -437,30 +326,7 @@ export default function Footer() {
               </button>
             </div>
             <div className="flex items-center gap-3">
-              {/* Security Badges */}
-              <div className="flex items-center gap-2 text-xs text-muted-foreground/60">
-                <div className="flex items-center gap-1 px-2 py-1 rounded border border-border/50">
-                  <Lock className="w-3 h-3 text-safeglobal/60" />
-                  <span>ISO 27001</span>
-                </div>
-                <div className="flex items-center gap-1 px-2 py-1 rounded border border-border/50">
-                  <Shield className="w-3 h-3 text-safeglobal/60" />
-                  <span>SOC 2</span>
-                </div>
-                <div className="flex items-center gap-1 px-2 py-1 rounded border border-border/50">
-                  <Award className="w-3 h-3 text-safeglobal/60" />
-                  <span>ISO 45001</span>
-                </div>
-              </div>
 
-              {/* System Status Indicator */}
-              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-teal-600/20 bg-teal-600/5">
-                <div className="relative flex items-center justify-center">
-                  <div className="w-2 h-2 rounded-full bg-teal-600" />
-                  <div className="absolute w-2 h-2 rounded-full bg-teal-600 animate-ping" />
-                </div>
-                <span className="text-[10px] text-teal-600 font-medium">All Systems Operational</span>
-              </div>
 
               {/* Social Icons in bottom bar */}
               <div className="hidden lg:flex items-center gap-1.5">
