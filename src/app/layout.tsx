@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Playfair_Display } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
@@ -17,6 +17,11 @@ const interSans = Inter({
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
 });
 
@@ -61,7 +66,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${interSans.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground relative`}
+        className={`${interSans.variable} ${jetbrainsMono.variable} ${playfair.variable} antialiased bg-background text-foreground relative`}
       >
         <ThemeProvider
           attribute="class"

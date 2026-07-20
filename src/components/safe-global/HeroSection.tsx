@@ -407,34 +407,19 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-sky-50 via-white to-sky-100 dark:from-slate-950 dark:via-[#081524] dark:to-sky-950"
+      className="relative min-h-screen flex items-center overflow-hidden bg-background"
     >
       <div className="absolute inset-0 z-0">
-        <HeroBgSlideshow />
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/videos/hero-background.mp4" type="video/mp4" />
+        </video>
       </div>
-      <motion.div
-        className="absolute inset-0 z-0 bg-grid-pattern opacity-70"
-        animate={{ backgroundPosition: ["0px 0px", "60px 60px"] }}
-        transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-      />
-      <motion.div
-        className="absolute left-[8%] top-[18%] z-0 h-64 w-64 rounded-full border border-sky-500/20"
-        animate={{ scale: [0.88, 1.18, 0.88], opacity: [0.22, 0.06, 0.22] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        style={{ marginTop: scrollY * 0.06 }}
-      />
-      <motion.div
-        className="absolute right-[10%] top-[10%] z-0 h-80 w-80 rounded-full border border-sky-500/20"
-        animate={{ scale: [1.08, 0.86, 1.08], opacity: [0.08, 0.2, 0.08] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
-        style={{ marginTop: scrollY * 0.1 }}
-      />
-
-      {/* Gradient Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/40 to-background/20 z-[1]" />
-      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-sky-500/10 rounded-full blur-[120px] z-[1]" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-sky-500/10 rounded-full blur-[100px] z-[1]" />
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-sky-500/20 to-transparent rounded-full blur-[150px] z-[1]" />
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40">
@@ -450,12 +435,12 @@ export default function HeroSection() {
             >
               <DynamicNewsBanner />
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1]">
-                <span className="whitespace-nowrap">
+                <span className="whitespace-nowrap" style={{ fontFamily: 'var(--font-playfair)' }}>
                   <span className="text-gradient">Customized</span>{" "}
-                  <span className="text-black dark:text-white font-extrabold drop-shadow-sm whitespace-nowrap">AI Solutions,</span>
+                  <span className="text-gray-500 dark:text-gray-400 font-extrabold drop-shadow-sm whitespace-nowrap">AI Solutions,</span>
                 </span>
                 <br />
-                <span className="text-[#0073CF] dark:text-[#3B82F6]">Total Digital Transformation</span>
+                <span className="text-[#0073CF] dark:text-[#3B82F6]" style={{ fontFamily: 'var(--font-playfair)' }}>Total Digital Transformation</span>
               </h1>
               <div className="text-lg sm:text-xl text-muted-foreground max-w-lg leading-relaxed min-h-[3.5rem]">
                 Enterprise-grade AI that{" "}
