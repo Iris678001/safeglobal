@@ -410,23 +410,15 @@ export default function HeroSection() {
       className="relative min-h-screen flex items-center overflow-hidden bg-background"
     >
       <div className="absolute inset-0 z-0">
-        <div
-          className="absolute inset-0 w-full h-full"
-          dangerouslySetInnerHTML={{
-            __html: `
-              <video 
-                autoplay 
-                loop 
-                muted 
-                playsinline 
-                preload="auto"
-                class="absolute inset-0 w-full h-full object-cover"
-              >
-                <source src="/videos/hero-background.mp4" type="video/mp4" />
-              </video>
-            `
-          }}
-        />
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/videos/hero-background.mp4" type="video/mp4" />
+        </video>
       </div>
 
       {/* Content */}
