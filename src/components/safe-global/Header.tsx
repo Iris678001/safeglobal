@@ -11,9 +11,6 @@ import {
   ChevronRight,
   Phone,
   ArrowRight,
-  Sparkles,
-  Zap,
-  ExternalLink,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,116 +20,88 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { ThemeToggle } from "@/components/safe-global/ThemeToggle";
-import { navLinks, colorMap, type NavLink, type MegaMenuCategory } from "./navConfig";
+import { navLinks, type NavLink, type MegaMenuCategory } from "./navConfig";
 
 // ─── MegaMenuDropdown (Desktop) ─────────────────────────────────────────────
 
 function MegaMenuDropdown({ category, onNavigate }: { category: MegaMenuCategory; onNavigate: () => void }) {
-  return (
-    <div className="fixed left-1/2 -translate-x-1/2 top-16 lg:top-20 pt-2 z-50 w-[90vw] md:w-auto md:max-w-fit">
-      <motion.div
-        initial={{ opacity: 0, y: 8, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 8, scale: 0.98 }}
-        transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
-        className="bg-background/95 backdrop-blur-2xl border border-border rounded-2xl shadow-2xl shadow-black/20 dark:shadow-black/40 overflow-hidden"
-      >
-        <div className="h-[2px] bg-gradient-to-r from-transparent via-safeglobal to-transparent" />
+  const colCount = category.columns.length;
 
-        <div className="p-6 lg:p-8">
-          <div className={`grid grid-cols-1 md:grid-cols-2 ${category.columns.length === 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-4'} gap-8 lg:min-w-[800px]`}>
+  return (
+    <div className={`fixed left-1/2 -translate-x-1/2 top-16 lg:top-20 pt-2 z-50 w-[95vw] ${colCount === 3 ? 'lg:w-[960px]' : 'lg:w-[1180px]'} max-w-[1240px]`}>
+      <motion.div
+        initial={{ opacity: 0, y: 6 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 6 }}
+        transition={{ duration: 0.15, ease: "easeOut" }}
+        className="bg-[#0e1117] border border-[#222730] shadow-2xl shadow-black/80 rounded-none overflow-hidden"
+      >
+        {/* Crisp solid brand accent line */}
+        <div className="h-[2px] bg-safeglobal w-full" />
+
+        <div className="p-6 lg:p-7">
+          <div className={`grid grid-cols-1 md:grid-cols-2 ${colCount === 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-4'} gap-6 lg:gap-0 lg:divide-x lg:divide-[#222730]`}>
             {category.columns.map((column, colIdx) => (
-              <div key={colIdx}>
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-1 h-4 rounded-full bg-gradient-to-b from-safeglobal to-teal-500" />
-                  <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider">
+              <div key={colIdx} className="lg:px-5 first:lg:pl-0 last:lg:pr-0">
+                <div className="flex items-center gap-2 mb-3.5 pb-2 border-b border-[#222730]">
+                  <span className="w-1.5 h-1.5 bg-safeglobal shrink-0" />
+                  <h3 className="text-xs font-mono font-semibold text-neutral-200 uppercase tracking-wider">
                     {column.title}
                   </h3>
                 </div>
 
                 <div className="space-y-1">
-                  {column.items.map((item, itemIdx) => {
-                    const colors = colorMap[item.color || "safeglobal"];
-                    const Icon = item.icon;
-                    return (
-                      <Link
-                        key={itemIdx}
-                        href={item.href}
-                        onClick={onNavigate}
-                        className="group flex items-start gap-3 p-2.5 rounded-xl transition-all duration-200 hover:bg-accent/50 relative"
-                      >
-                        {Icon && (
-                          <div
-                            className={`flex-shrink-0 w-9 h-9 rounded-lg ${colors.bg} ${colors.border} border flex items-center justify-center transition-all duration-200 group-hover:scale-110`}
-                          >
-                            <Icon className={`w-4 h-4 ${colors.text}`} />
-                          </div>
+                  {column.items.map((item, itemIdx) => (
+                    <Link
+                      key={itemIdx}
+                      href={item.href}
+                      onClick={onNavigate}
+                      className="group block p-2.5 -mx-1 border-l-2 border-transparent hover:border-safeglobal hover:bg-[#161a22] transition-colors duration-150 rounded-none"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-[13px] font-semibold text-neutral-100 group-hover:text-safeglobal transition-colors">
+                          {item.label}
+                        </span>
+                        {item.badge && (
+                          <span className="text-[9px] font-mono font-medium uppercase px-1.5 py-0.5 border border-[#2d3340] bg-[#1a1e27] text-neutral-300 rounded-none shrink-0">
+                            {item.badge}
+                          </span>
                         )}
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2">
-                            <span className="text-sm font-medium text-foreground group-hover:text-sky-600 transition-colors">
-                              {item.label}
-                            </span>
-                            {item.badge && (
-                              <span
-                                className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-semibold rounded-full ${
-                                  item.badge === "New"
-                                    ? "bg-safeglobal/15 text-safeglobal"
-                                    : item.badge === "AI"
-                                    ? "bg-violet-500/15 text-violet-500"
-                                    : item.badge === "Popular"
-                                    ? "bg-amber-500/15 text-amber-500"
-                                    : "bg-teal-500/15 text-teal-500"
-                                }`}
-                              >
-                                {item.badge === "New" && <Zap className="w-2.5 h-2.5" />}
-                                {item.badge === "AI" && <Sparkles className="w-2.5 h-2.5" />}
-                                {item.badge}
-                              </span>
-                            )}
-                          </div>
-                          {item.description && (
-                            <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2 leading-relaxed">
-                              {item.description}
-                            </p>
-                          )}
-                        </div>
-                        <ArrowRight className="w-3.5 h-3.5 text-transparent group-hover:text-sky-600 group-hover:translate-x-0.5 transition-all duration-200 mt-1 flex-shrink-0" />
-                      </Link>
-                    );
-                  })}
+                      </div>
+                      {item.description && (
+                        <p className="text-xs text-neutral-400 mt-1 line-clamp-2 leading-relaxed font-normal">
+                          {item.description}
+                        </p>
+                      )}
+                    </Link>
+                  ))}
                 </div>
               </div>
             ))}
           </div>
 
           {(category.featured || category.cta) && (
-            <div className="mt-6 pt-5 border-t border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="mt-6 pt-4 border-t border-[#222730] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
               {category.featured && (
                 <Link
                   href={category.featured.href}
                   onClick={onNavigate}
-                  className="group flex items-start gap-3 p-3 rounded-xl bg-gradient-to-r from-safeglobal/5 via-teal-500/5 to-safeglobal/5 border border-safeglobal/10 hover:border-safeglobal/25 transition-all duration-300 flex-1"
+                  className="group flex items-center justify-between gap-4 p-3.5 border border-[#222730] bg-[#12161f] hover:border-safeglobal/60 transition-colors flex-1 rounded-none"
                 >
-                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-safeglobal/20 to-teal-500/20 flex items-center justify-center">
-                    <Sparkles className="w-5 h-5 text-safeglobal" />
-                  </div>
-                  <div className="flex-1 min-w-0">
+                  <div className="min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-semibold text-foreground group-hover:text-sky-600 transition-colors">
+                      <span className="text-[10px] font-mono uppercase font-semibold text-safeglobal tracking-wider px-1.5 py-0.5 border border-safeglobal/30 bg-safeglobal/10">
+                        {category.featured.badge || "PLATFORM"}
+                      </span>
+                      <span className="text-xs font-semibold text-neutral-100 group-hover:text-safeglobal transition-colors truncate">
                         {category.featured.title}
                       </span>
-                      {category.featured.badge && (
-                        <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-safeglobal/15 text-safeglobal">
-                          {category.featured.badge}
-                        </span>
-                      )}
                     </div>
-                    <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">
+                    <p className="text-xs text-neutral-400 mt-1 line-clamp-1">
                       {category.featured.description}
                     </p>
                   </div>
-                  <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-sky-600 transition-colors flex-shrink-0 mt-0.5" />
+                  <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-safeglobal group-hover:translate-x-0.5 transition-all shrink-0" />
                 </Link>
               )}
 
@@ -140,10 +109,10 @@ function MegaMenuDropdown({ category, onNavigate }: { category: MegaMenuCategory
                 <Link
                   href={category.cta.href}
                   onClick={onNavigate}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-safeglobal hover:bg-safeglobal-dark text-white text-sm font-semibold shadow-lg shadow-safeglobal/25 hover:shadow-safeglobal/40 transition-all duration-200 flex-shrink-0"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-safeglobal hover:bg-safeglobal-dark text-white text-xs font-semibold tracking-wider uppercase transition-colors shrink-0 rounded-none border border-safeglobal"
                 >
-                  {category.cta.label}
-                  <ArrowRight className="w-4 h-4" />
+                  <span>{category.cta.label}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               )}
             </div>
@@ -170,10 +139,10 @@ function MobileAccordionItem({
       {link.megaMenu ? (
         <button
           onClick={onToggle}
-          className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all text-left cursor-pointer ${
+          className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-none transition-all text-left cursor-pointer border-l-2 ${
             isOpen
-              ? "text-safeglobal bg-safeglobal/10"
-              : "text-muted-foreground hover:text-foreground hover:bg-accent"
+              ? "text-safeglobal bg-safeglobal/10 border-safeglobal font-semibold"
+              : "text-neutral-300 hover:text-white hover:bg-[#161a22] border-transparent"
           }`}
         >
           <span>{link.label}</span>
@@ -187,7 +156,7 @@ function MobileAccordionItem({
       ) : (
         <Link
           href={link.href}
-          className="block px-4 py-3 text-sm font-medium rounded-lg transition-all text-muted-foreground hover:text-foreground hover:bg-accent"
+          className="block px-4 py-3 text-sm font-medium rounded-none transition-all text-neutral-300 hover:text-white hover:bg-[#161a22] border-l-2 border-transparent hover:border-safeglobal"
         >
           {link.label}
         </Link>
@@ -199,63 +168,42 @@ function MobileAccordionItem({
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
             className="overflow-hidden"
           >
-            <div className="pl-4 pb-2 space-y-3">
+            <div className="pl-3 pr-1 pb-3 space-y-4 pt-1">
               {link.megaMenu.columns.map((column, colIdx) => (
-                <div key={colIdx}>
-                  <div className="flex items-center gap-2 px-4 py-1.5">
-                    <div className="w-0.5 h-3 rounded-full bg-gradient-to-b from-safeglobal to-teal-500" />
-                    <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">
+                <div key={colIdx} className="space-y-1">
+                  <div className="flex items-center gap-2 px-3 py-1.5 border-b border-[#222730]">
+                    <span className="w-1.5 h-1.5 bg-safeglobal shrink-0" />
+                    <span className="text-[11px] font-mono font-semibold text-neutral-400 uppercase tracking-wider">
                       {column.title}
                     </span>
                   </div>
-                  <div className="space-y-0.5">
-                    {column.items.map((item, itemIdx) => {
-                      const colors = colorMap[item.color || "safeglobal"];
-                      const Icon = item.icon;
-                      return (
-                        <Link
-                          key={itemIdx}
-                          href={item.href}
-                          className="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-accent/50 transition-all text-left"
-                        >
-                          {Icon && (
-                            <div
-                              className={`flex-shrink-0 w-7 h-7 rounded-md ${colors.bg} ${colors.border} border flex items-center justify-center`}
-                            >
-                              <Icon className={`w-3.5 h-3.5 ${colors.text}`} />
-                            </div>
+                  <div className="space-y-0.5 pt-1">
+                    {column.items.map((item, itemIdx) => (
+                      <Link
+                        key={itemIdx}
+                        href={item.href}
+                        className="block px-3 py-2 border-l-2 border-transparent hover:border-safeglobal hover:bg-[#161a22] transition-colors text-left rounded-none"
+                      >
+                        <div className="flex items-center justify-between gap-1.5">
+                          <span className="text-xs font-semibold text-neutral-100">
+                            {item.label}
+                          </span>
+                          {item.badge && (
+                            <span className="px-1.5 py-0.5 text-[9px] font-mono uppercase border border-[#2d3340] bg-[#1a1e27] text-neutral-300 rounded-none">
+                              {item.badge}
+                            </span>
                           )}
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-1.5">
-                              <span className="text-xs font-medium text-foreground">
-                                {item.label}
-                              </span>
-                              {item.badge && (
-                                <span
-                                  className={`px-1 py-0.5 text-[9px] font-semibold rounded-full ${
-                                    item.badge === "New"
-                                      ? "bg-safeglobal/15 text-safeglobal"
-                                      : item.badge === "AI"
-                                      ? "bg-violet-500/15 text-violet-500"
-                                      : "bg-amber-500/15 text-amber-500"
-                                  }`}
-                                >
-                                  {item.badge}
-                                </span>
-                              )}
-                            </div>
-                            {item.description && (
-                              <p className="text-[10px] text-muted-foreground line-clamp-1 mt-0.5">
-                                {item.description}
-                              </p>
-                            )}
-                          </div>
-                        </Link>
-                      );
-                    })}
+                        </div>
+                        {item.description && (
+                          <p className="text-[11px] text-neutral-400 line-clamp-1 mt-0.5 font-normal">
+                            {item.description}
+                          </p>
+                        )}
+                      </Link>
+                    ))}
                   </div>
                 </div>
               ))}
@@ -263,26 +211,28 @@ function MobileAccordionItem({
               {link.megaMenu.featured && (
                 <Link
                   href={link.megaMenu.featured.href}
-                  className="flex items-center gap-3 p-3 mt-2 rounded-xl bg-gradient-to-r from-safeglobal/5 to-teal-500/5 border border-safeglobal/15"
+                  className="block p-3 mt-2 border border-[#222730] bg-[#12161f] rounded-none"
                 >
-                  <Sparkles className="w-4 h-4 text-safeglobal flex-shrink-0" />
-                  <div className="flex-1 min-w-0">
-                    <span className="text-xs font-semibold text-foreground">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-[9px] font-mono uppercase font-semibold text-safeglobal px-1.5 py-0.5 border border-safeglobal/30 bg-safeglobal/10">
+                      {link.megaMenu.featured.badge || "PLATFORM"}
+                    </span>
+                    <span className="text-xs font-semibold text-neutral-100">
                       {link.megaMenu.featured.title}
                     </span>
-                    <p className="text-[10px] text-muted-foreground line-clamp-1">
-                      {link.megaMenu.featured.description}
-                    </p>
                   </div>
+                  <p className="text-[11px] text-neutral-400 line-clamp-1">
+                    {link.megaMenu.featured.description}
+                  </p>
                 </Link>
               )}
 
               {link.megaMenu.cta && (
                 <Link
                   href={link.megaMenu.cta.href}
-                  className="flex items-center justify-center gap-2 mt-2 px-4 py-2.5 rounded-xl bg-safeglobal hover:bg-safeglobal-dark text-white text-xs font-semibold transition-all"
+                  className="flex items-center justify-center gap-2 mt-2 px-4 py-2.5 bg-safeglobal hover:bg-safeglobal-dark text-white text-xs font-semibold uppercase tracking-wider transition-all rounded-none border border-safeglobal"
                 >
-                  {link.megaMenu.cta.label}
+                  <span>{link.megaMenu.cta.label}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               )}
@@ -374,7 +324,7 @@ export default function Header() {
       ref={headerRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/80 backdrop-blur-md border-b border-gray-200 shadow-sm"
+          ? "bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm"
           : "bg-transparent border-transparent"
       }`}
     >
@@ -405,11 +355,17 @@ export default function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-0.5 relative">
+          <nav className="hidden lg:flex items-center gap-1 relative">
             {navLinks.map((link) => {
               const isActive = isActiveRoute(link.href);
               const isMenuOpen = openMenu === link.label;
               const hasMegaMenu = !!link.megaMenu;
+
+              const navLinkStyle = (isActive || isMenuOpen)
+                ? "text-safeglobal bg-safeglobal/10 font-semibold"
+                : scrolled
+                  ? "text-gray-700 hover:text-black hover:bg-gray-100"
+                  : "text-neutral-200 hover:text-white hover:bg-white/10";
 
               return (
                 <div
@@ -421,28 +377,20 @@ export default function Header() {
                   {hasMegaMenu ? (
                     <button
                       onClick={() => setOpenMenu(isMenuOpen ? null : link.label)}
-                      className={`flex items-center gap-1 px-3.5 py-2 text-sm font-medium rounded-lg transition-all duration-200 cursor-pointer ${
-                        isActive || isMenuOpen
-                          ? "text-safeglobal bg-safeglobal/10"
-                          : "text-gray-600 hover:text-black hover:bg-gray-100"
-                      }`}
+                      className={`flex items-center gap-1 px-3.5 py-2 text-sm font-medium transition-all duration-200 cursor-pointer ${navLinkStyle}`}
                     >
                       {link.label}
                       <motion.div
                         animate={{ rotate: isMenuOpen ? 180 : 0 }}
                         transition={{ duration: 0.2 }}
                       >
-                        <ChevronDown className="w-3.5 h-3.5 opacity-60" />
+                        <ChevronDown className="w-3.5 h-3.5 opacity-70" />
                       </motion.div>
                     </button>
                   ) : (
                     <Link
                       href={link.href}
-                      className={`flex items-center px-3.5 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
-                        isActive
-                          ? "text-safeglobal bg-safeglobal/10"
-                          : "text-gray-600 hover:text-black hover:bg-gray-100"
-                      }`}
+                      className={`flex items-center px-3.5 py-2 text-sm font-medium transition-all duration-200 ${navLinkStyle}`}
                     >
                       {link.label}
                     </Link>
@@ -461,7 +409,16 @@ export default function Header() {
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
             <ThemeToggle />
-            <Button variant="ghost" size="sm" className="text-gray-600 hover:text-black hover:bg-gray-100 gap-1.5" asChild>
+            <Button
+              variant="ghost"
+              size="sm"
+              className={`gap-1.5 transition-colors ${
+                scrolled
+                  ? "text-gray-700 hover:text-black hover:bg-gray-100"
+                  : "text-neutral-200 hover:text-white hover:bg-white/10"
+              }`}
+              asChild
+            >
               <Link href="/contact">
                 <Phone className="w-3.5 h-3.5" />
                 <span>Sales</span>
@@ -469,7 +426,7 @@ export default function Header() {
             </Button>
             <Button
               size="sm"
-              className="bg-safeglobal hover:bg-safeglobal-dark text-white shadow-lg shadow-safeglobal/25 hover:shadow-safeglobal/40 transition-all gap-1"
+              className="bg-safeglobal hover:bg-safeglobal-dark text-white shadow-lg shadow-safeglobal/25 hover:shadow-safeglobal/40 transition-all gap-1 rounded-none border border-safeglobal"
               asChild
             >
               <Link href="/contact">
@@ -482,11 +439,19 @@ export default function Header() {
           {/* Mobile Menu */}
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild className="lg:hidden">
-              <Button variant="ghost" size="icon" className="text-black hover:bg-gray-100">
+              <Button
+                variant="ghost"
+                size="icon"
+                className={`transition-colors ${
+                  scrolled
+                    ? "text-gray-800 hover:text-black hover:bg-gray-100"
+                    : "text-neutral-100 hover:text-white hover:bg-white/10"
+                }`}
+              >
                 <Menu className="w-5 h-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="bg-background border-border w-80">
+            <SheetContent side="right" className="bg-[#0e1117] border-[#222730] text-neutral-100 w-80">
               <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
               <div className="flex flex-col gap-1 mt-8 max-h-[calc(100vh-8rem)] overflow-y-auto scrollbar-thin">
                 {navLinks.map((link) => (
@@ -500,15 +465,15 @@ export default function Header() {
                   />
                 ))}
 
-                <div className="border-t border-border mt-4 pt-4 space-y-3">
+                <div className="border-t border-[#222730] mt-4 pt-4 space-y-3">
                   <div className="flex items-center justify-between px-4 py-2">
-                    <span className="text-sm text-muted-foreground">Appearance</span>
+                    <span className="text-sm text-neutral-400">Appearance</span>
                     <ThemeToggle />
                   </div>
-                  <Button className="w-full bg-safeglobal hover:bg-safeglobal-dark text-white" asChild>
+                  <Button className="w-full bg-safeglobal hover:bg-safeglobal-dark text-white rounded-none border border-safeglobal" asChild>
                     <Link href="/contact">Request Demo</Link>
                   </Button>
-                  <Button variant="outline" className="w-full border-border" asChild>
+                  <Button variant="outline" className="w-full border-[#222730] text-neutral-300 hover:bg-[#161a22] rounded-none" asChild>
                     <Link href="/contact">Get Consultation</Link>
                   </Button>
                 </div>
